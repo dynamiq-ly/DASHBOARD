@@ -14,7 +14,7 @@ export const getMeasure = createAsyncThunk(
 export const removeMeasure = createAsyncThunk(
   'measures/safety/removeMeasure',
   async (val, { dispatch, getState }) => {
-    const { id } = getState().eCommerceApp.product
+    const { id } = getState().measures.product
     await axios.delete(`/api/measures/${id}`)
     return id
   }
@@ -23,7 +23,7 @@ export const removeMeasure = createAsyncThunk(
 export const saveMeasure = createAsyncThunk(
   'measures/safety/saveMeasure',
   async (productData, { dispatch, getState }) => {
-    const { id } = getState().eCommerceApp
+    const { id } = getState().measures
 
     const response = await axios.put(`/api/measures/${id}`, productData)
 
@@ -33,7 +33,7 @@ export const saveMeasure = createAsyncThunk(
   }
 )
 
-const productSlice = createSlice({
+const measureSlice = createSlice({
   name: 'measures/safety',
   initialState: null,
   reducers: {
@@ -44,7 +44,7 @@ const productSlice = createSlice({
         payload: {
           measure_name: '',
           measure_content: '',
-          measure_icon: '',
+          measure_icon: 'ri-information-line',
         },
       }),
     },
@@ -56,8 +56,8 @@ const productSlice = createSlice({
   },
 })
 
-export const { newProduct, resetProduct } = productSlice.actions
+export const { newProduct, resetProduct } = measureSlice.actions
 
-export const selectProduct = ({ eCommerceApp }) => eCommerceApp.product
+export const selectProduct = ({ measures }) => measures.safety
 
-export default productSlice.reducer
+export default measureSlice.reducer
