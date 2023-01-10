@@ -3,7 +3,11 @@ import FuseLoading from '@fuse/core/FuseLoading'
 
 import { Navigate } from 'react-router-dom'
 
-import settingsConfig from 'app/configs/settingsConfig'
+/**
+ * @description disabled for auth and protected route
+ * @description to be back when auth routes are ready
+ */
+// import settingsConfig from 'app/configs/settingsConfig'
 import SignInConfig from '../main/sign-in/SignInConfig'
 import SignUpConfig from '../main/sign-up/SignUpConfig'
 import SignOutConfig from '../main/sign-out/SignOutConfig'
@@ -22,8 +26,8 @@ const routeConfigs = [
 
 const routes = [
   ...FuseUtils.generateRoutesFromConfigs(
-    routeConfigs,
-    settingsConfig.defaultAuth
+    routeConfigs
+    // settingsConfig.defaultAuth
   ),
   {
     path: '/',

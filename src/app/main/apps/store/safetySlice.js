@@ -8,11 +8,7 @@ import axios from 'axios'
 export const getMeasures = createAsyncThunk(
   'measures/safety/getMeasures',
   async () => {
-    const response = await axios.get('/api/measures', {
-      withCredentials: true,
-      baseURL: 'http://bassemb5.sg-host.com',
-    })
-
+    const response = await axios.get('/api/measures')
     const data = await response.data
     return data
   }

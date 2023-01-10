@@ -1,4 +1,3 @@
-import '@mock-api'
 import axios from 'axios'
 import BrowserRouter from '@fuse/core/BrowserRouter'
 import FuseLayout from '@fuse/core/FuseLayout'
@@ -20,11 +19,10 @@ import { AuthProvider } from './auth/AuthContext'
 /**
  * Axios HTTP Request defaults
  */
-// axios.defaults.baseURL = 'http://bassemb5.sg-host.com'
+axios.defaults.baseURL = 'http://bassemb5.sg-host.com'
 // axios.defaults.withCredentials = true
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
-// axios.defaults.headers.common['Content-Type'] =
-//   'application/x-www-form-urlencoded'
+// axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
 
 const emotionCacheOptions = {
   rtl: {

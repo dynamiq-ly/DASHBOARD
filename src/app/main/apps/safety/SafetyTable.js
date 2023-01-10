@@ -112,8 +112,6 @@ function SafetyTable(props) {
     setRowsPerPage(event.target.value)
   }
 
-  console.log('data=>', data)
-
   if (loading) {
     return (
       <div className='flex items-center justify-center h-full'>
@@ -205,17 +203,14 @@ function SafetyTable(props) {
                     <TableCell
                       className='p-4 md:p-16'
                       component='th'
-                      scope='row'
-                      align='right'>
-                      <span>$</span>
-                      {n.measure_content}
+                      scope='row'>
+                      {`${n.measure_content.slice(0, 200)}...`}
                     </TableCell>
 
                     <TableCell
                       className='p-4 md:p-16'
                       component='th'
-                      scope='row'
-                      align='right'>
+                      scope='row'>
                       {n.measure_icon}
                     </TableCell>
                   </TableRow>

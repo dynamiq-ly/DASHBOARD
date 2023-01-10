@@ -41,7 +41,7 @@ const rows = [
   },
   {
     id: 'measure_icon',
-    align: 'right',
+    align: 'left',
     disablePadding: false,
     label: 'Icon',
     sort: true,
