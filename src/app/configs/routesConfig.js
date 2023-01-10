@@ -10,14 +10,25 @@ import SignOutConfig from '../main/sign-out/SignOutConfig'
 import Error404Page from '../main/404/Error404Page'
 
 import SafetyConfig from '../main/apps/safety/SafetyConfig'
+import StatisticsConfig from '../main/apps/statistics/StatisticConfig'
 
-const routeConfigs = [SignOutConfig, SignInConfig, SignUpConfig, SafetyConfig]
+const routeConfigs = [
+  SignOutConfig,
+  SignInConfig,
+  SignUpConfig,
+  StatisticsConfig,
+  SafetyConfig,
+]
 
 const routes = [
   ...FuseUtils.generateRoutesFromConfigs(
     routeConfigs,
     settingsConfig.defaultAuth
   ),
+  {
+    path: '/',
+    element: <Navigate to='/' />,
+  },
   {
     path: 'safety',
     element: <Navigate to='/safety' />,

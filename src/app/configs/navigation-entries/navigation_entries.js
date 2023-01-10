@@ -8,7 +8,7 @@ export const analytics = [
     title: 'Statistics',
     type: 'item',
     icon: 'heroicons-outline:chart-pie',
-    url: 'statistic',
+    url: '',
   },
   {
     id: 'finance-component',
