@@ -34,6 +34,35 @@ export const restuarant = {
       type: 'item',
     },
     {
+      id: 'restaurant-collapse.menu',
+      title: 'Restaurant Menu',
+      type: 'collapse',
+      children: [
+        {
+          id: 'restaurant-collapse.menu.food',
+          title: 'Food Menu',
+          type: 'collapse',
+          children: [
+            {
+              id: 'restaurant-collapse.menu.food.category',
+              title: 'Food Category',
+              type: 'item',
+            },
+            {
+              id: 'restaurant-collapse.menu.food.list',
+              title: 'Food List',
+              type: 'item',
+            },
+          ],
+        },
+        {
+          id: 'restaurant-collapse.menu.drink',
+          title: 'Drinks Menu',
+          type: 'item',
+        },
+      ],
+    },
+    {
       id: 'restaurant-collapse.regulation',
       title: 'Restaurant Regulations',
       type: 'item',
@@ -59,7 +88,19 @@ export const bar = {
     {
       id: 'bar-collapse.drinks-menu',
       title: 'Drinks Menu',
-      type: 'item',
+      type: 'collapse',
+      children: [
+        {
+          id: 'bar-collapse.bar.category',
+          title: 'Menu Category',
+          type: 'item',
+        },
+        {
+          id: 'bar-collapse.bar.list',
+          title: 'Menu List',
+          type: 'item',
+        },
+      ],
     },
   ],
 }
