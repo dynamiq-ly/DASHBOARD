@@ -124,7 +124,7 @@ export const interestPoint = {
  * excursion
  */
 export const excursion = {
-  it: 'excursion',
+  id: 'excursion',
   title: 'Excursion & Activities',
   type: 'collapse',
   icon: 'heroicons-outline:emoji-happy',
@@ -140,4 +140,180 @@ export const excursion = {
       type: 'item',
     },
   ],
+}
+
+/**
+ * rooms
+ */
+export const rooms = {
+  id: 'rooms',
+  title: 'Rooms',
+  type: 'collapse',
+  icon: 'material-outline:bed',
+  children: [
+    {
+      id: 'rooms.category',
+      title: 'Category list',
+      type: 'item',
+    },
+    {
+      id: 'rooms.list',
+      title: 'Rooms List',
+      type: 'item',
+    },
+  ],
+}
+
+/**
+ * phone directory
+ */
+export const phone_directory = {
+  id: 'phone',
+  title: 'Phone Directory',
+  type: 'item',
+  icon: 'material-outline:local_phone',
+}
+
+/**
+ * Food,drink,mini bar services
+ */
+export const room_services = {
+  id: 'rooms_services',
+  title: 'Room Services',
+  type: 'collapse',
+  icon: 'material-outline:room_service',
+  children: [
+    {
+      id: 'food_service',
+      title: 'Food Service',
+      type: 'item',
+    },
+    {
+      id: 'drink_service',
+      title: 'Drink Service',
+      type: 'item',
+    },
+    {
+      id: 'mini_bar_service',
+      title: 'Mini Bar Service',
+      type: 'item',
+    },
+  ],
+}
+/**
+ * incidence report
+ */
+export const incidence_report = {
+  id: 'incidence_report',
+  title: 'Incidence Report',
+  type: 'item',
+  icon: 'material-outline:announcement',
+}
+/**
+ * room request
+ */
+export const room_requests = {
+  id: 'room_requests',
+  title: 'Room Requests',
+  type: 'item',
+  icon: 'material-outline:airline_seat_individual_suite',
+}
+/**
+ * room upgrade
+ */
+export const room_upgrade = {
+  id: 'room_upgrade',
+  title: 'Room Upgrade',
+  type: 'item',
+  icon: 'material-outline:bedroom_child',
+}
+/**
+ * Housekeeping
+ */
+export const housekeeping = {
+  id: 'housekeeping',
+  title: 'Housekeeping',
+  type: 'item',
+  icon: 'material-outline:cleaning_services',
+}
+/**
+ * laundry
+ */
+export const laundry = {
+  id: 'laundry',
+  title: 'Laundry',
+  type: 'item',
+  icon: 'material-outline:local_laundry_service',
+}
+/**
+ * towels
+ */
+export const towels = {
+  id: 'towels',
+  title: 'Towels',
+  type: 'item',
+  icon: 'material-outline:dry_cleaning',
+}
+/**
+ * television
+ */
+export const television = {
+  id: 'television',
+  title: 'Television',
+  type: 'item',
+  icon: 'material-outline:connected_tv',
+}
+/**
+ * safe deposit box
+ */
+export const safe_deposit_box = {
+  id: 'safe_deposit_box',
+  title: 'Safe deposit Box',
+  type: 'item',
+  icon: 'material-outline:lock',
+}
+/**
+ * electricity
+ */
+export const electricity = {
+  id: 'elecricity',
+  title: 'Electricity and Cables',
+  type: 'item',
+  icon: 'material-outline:bolt',
+}
+/**
+ * air conditioner
+ */
+export const air_conditioner = {
+  id: 'air_conditioner',
+  title: 'Air Conditioner',
+  type: 'item',
+  icon: 'material-outline:device_thermostat',
+}
+/**
+ * air conditioner
+ */
+export const hair_dryer = {
+  id: 'hair_dryer',
+  title: 'Hair Dryer',
+  type: 'item',
+  icon: 'material-outline:air',
+}
+/**
+ * check in and check out
+ */
+export const check_in_out = {
+  id: 'check_in_out',
+  title: 'Check In & Out',
+  type: 'item',
+  icon: 'material-outline:vpn_key',
+}
+/**
+ * connectivity
+ */
+export const connectivity = {
+  id: 'connectivity',
+  title: 'Connectivity',
+  type: 'item',
+  icon: 'material-outline:router ',
 }
