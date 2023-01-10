@@ -317,3 +317,66 @@ export const connectivity = {
   type: 'item',
   icon: 'material-outline:router ',
 }
+/**
+ * extend your stay
+ */
+export const extend_stay = {
+  id: 'extebd_stay',
+  title: 'Extend Your Stay',
+  type: 'item',
+  icon: 'material-outline:event',
+}
+/**
+ * alarm
+ */
+export const alarm = {
+  id: 'alarm',
+  title: 'Alarm Clock',
+  type: 'item',
+  icon: 'material-outline:access_alarm',
+}
+/**
+ * transportation
+ */
+export const transportation = {
+  id: 'transportation',
+  title: 'Transportations',
+  type: 'item',
+  icon: 'material-outline:local_taxi',
+}
+/**
+ * pool towels
+ */
+export const pool_towels = {
+  id: 'pool_towels',
+  title: 'Pool Towels',
+  type: 'item',
+  icon: 'material-outline:pool',
+}
+/**
+ * laugage vault
+ */
+export const laugage_vault = {
+  id: 'laugage_vault',
+  title: 'Laugage Vault',
+  type: 'item',
+  icon: 'material-outline:cases',
+}
+/**
+ * parking
+ */
+export const parking = {
+  id: 'parking',
+  title: 'Parking Lot',
+  type: 'item',
+  icon: 'material-outline:local_parking',
+}
+/**
+ *
+ */
+export const medical_assistance = {
+  id: 'medical_assistance',
+  title: 'Medical Assistance',
+  type: 'item',
+  icon: 'material-outline:medical_services',
+}

@@ -26,6 +26,13 @@ import {
   hair_dryer,
   check_in_out,
   connectivity,
+  extend_stay,
+  alarm,
+  transportation,
+  pool_towels,
+  parking,
+  laugage_vault,
+  medical_assistance,
 } from './navigation-entries/navigation_entries'
 
 i18next.addResourceBundle('en', 'navigation', en)
@@ -80,7 +87,18 @@ const navigationConfig = [
     title: 'How Can We Help',
     subtitle: 'All reception services',
     type: 'group',
-    children: [{ ...check_in_out }, { ...connectivity }],
+    children: [
+      { ...check_in_out },
+      { ...connectivity },
+      { ...room_upgrade },
+      { ...extend_stay },
+      { ...alarm },
+      { ...transportation },
+      { ...pool_towels },
+      { ...parking },
+      { ...laugage_vault },
+      { ...medical_assistance },
+    ],
   },
   {
     id: 'protocols',
