@@ -45,7 +45,7 @@ function SafetyTable(props) {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.name.toLowerCase().includes(searchText.toLowerCase())
+          item.measure_name.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)

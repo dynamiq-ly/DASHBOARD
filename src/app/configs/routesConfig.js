@@ -33,11 +33,7 @@ const routes = [
     path: '/',
     element: <Navigate to='/' />,
   },
-  {
-    path: 'safety',
-    element: <Navigate to='/safety' />,
-    // auth: settingsConfig.defaultAuth,
-  },
+  { ...SafetyConfig.routes },
   {
     path: 'loading',
     element: <FuseLoading />,
