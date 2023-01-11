@@ -255,6 +255,7 @@ export const incidence_report = {
   title: 'Incidence Report',
   type: 'item',
   icon: 'material-outline:announcement',
+  url: '/incidence-report',
 }
 /**
  * room request
