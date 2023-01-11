@@ -21,6 +21,7 @@ import InterestConfig from '../main/apps/interest-point/InterestConfig'
 import PhoneDirectoryConfig from '../main/apps/phone-directory/PhoneDirectoryConfig'
 import IncidenceConfig from '../main/apps/incidence-report/IncidenceConfig'
 import RoomRequestConfig from '../main/apps/room-request/RoomRequestConfig'
+import RoomUpgradeConfig from '../main/apps/room-upgrade/RoomUpgradeConfig'
 const routeConfigs = [
   SignOutConfig,
   SignInConfig,
@@ -33,6 +34,7 @@ const routeConfigs = [
   PhoneDirectoryConfig,
   IncidenceConfig,
   RoomRequestConfig,
+  RoomUpgradeConfig,
 ]
 
 const routes = [
@@ -51,6 +53,7 @@ const routes = [
   { ...PhoneDirectoryConfig.routes },
   { ...IncidenceConfig.routes },
   { ...RoomRequestConfig.routes },
+  { ...RoomUpgradeConfig.routes },
 
   {
     path: 'loading',

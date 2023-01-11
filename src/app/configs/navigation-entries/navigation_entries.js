@@ -298,6 +298,7 @@ export const room_upgrade = {
   title: 'Room Upgrade',
   type: 'item',
   icon: 'material-outline:bedroom_child',
+  url: '/room-upgrade',
 }
 /**
  * Housekeeping
