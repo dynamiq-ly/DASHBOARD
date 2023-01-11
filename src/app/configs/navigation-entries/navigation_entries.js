@@ -241,6 +241,7 @@ export const phone_directory = {
   title: 'Phone Directory',
   type: 'item',
   icon: 'material-outline:local_phone',
+  url: '/phone-directory',
 }
 
 /**
