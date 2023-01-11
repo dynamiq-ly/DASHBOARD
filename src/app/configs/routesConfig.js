@@ -15,6 +15,7 @@ import Error404Page from '../main/404/Error404Page'
 
 import SafetyConfig from '../main/apps/safety/SafetyConfig'
 import StatisticsConfig from '../main/apps/statistics/StatisticConfig'
+import RestaurantConfig from '../main/apps/restaurant/RestaurantConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -22,6 +23,7 @@ const routeConfigs = [
   SignUpConfig,
   StatisticsConfig,
   SafetyConfig,
+  RestaurantConfig,
 ]
 
 const routes = [
@@ -33,6 +35,7 @@ const routes = [
     path: '/',
     element: <Navigate to='/' />,
   },
+  { ...RestaurantConfig.routes },
   { ...SafetyConfig.routes },
   {
     path: 'loading',
