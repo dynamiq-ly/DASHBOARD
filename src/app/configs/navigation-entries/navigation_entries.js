@@ -308,6 +308,7 @@ export const housekeeping = {
   title: 'Housekeeping',
   type: 'item',
   icon: 'material-outline:cleaning_services',
+  url: './housekeeping',
 }
 /**
  * laundry

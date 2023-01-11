@@ -22,6 +22,7 @@ import PhoneDirectoryConfig from '../main/apps/phone-directory/PhoneDirectoryCon
 import IncidenceConfig from '../main/apps/incidence-report/IncidenceConfig'
 import RoomRequestConfig from '../main/apps/room-request/RoomRequestConfig'
 import RoomUpgradeConfig from '../main/apps/room-upgrade/RoomUpgradeConfig'
+import HousekeepingConfig from '../main/apps/housekeeping/HousekeepingConfig'
 const routeConfigs = [
   SignOutConfig,
   SignInConfig,
@@ -35,6 +36,7 @@ const routeConfigs = [
   IncidenceConfig,
   RoomRequestConfig,
   RoomUpgradeConfig,
+  HousekeepingConfig,
 ]
 
 const routes = [
@@ -54,6 +56,7 @@ const routes = [
   { ...IncidenceConfig.routes },
   { ...RoomRequestConfig.routes },
   { ...RoomUpgradeConfig.routes },
+  { ...HousekeepingConfig },
 
   {
     path: 'loading',
