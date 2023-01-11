@@ -29,6 +29,7 @@ const routeConfigs = [
   RestaurantConfig,
   BarConfig,
   InterestConfig,
+  ExcursionConfig,
 ]
 
 const routes = [
