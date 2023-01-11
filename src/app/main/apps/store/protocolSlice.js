@@ -24,8 +24,7 @@ export const saveMeasure = createAsyncThunk(
   'measures/safety/saveMeasure',
   async (productData, { dispatch, getState }) => {
     const { id } = getState().measures
-
-    const response = await axios.put(`/api/measures/${id}`, productData)
+    const response = await axios.post(`/api/measures`, productData)
 
     const data = await response.data
 
@@ -38,13 +37,13 @@ const measureSlice = createSlice({
   initialState: null,
   reducers: {
     resetProduct: () => null,
-    newProduct: {
+    newMeasure: {
       reducer: (state, action) => action.payload,
       prepare: (event) => ({
         payload: {
           measure_name: '',
           measure_content: '',
-          measure_icon: 'ri-information-line',
+          measure_icon: '',
         },
       }),
     },
@@ -56,7 +55,7 @@ const measureSlice = createSlice({
   },
 })
 
-export const { newProduct, resetProduct } = measureSlice.actions
+export const { newMeasure, resetProduct } = measureSlice.actions
 
 export const selectProduct = ({ measures }) => measures.safety
 

@@ -1,4 +1,27 @@
 /**
+ * safety
+ */
+export const safety = {
+  id: 'protocols.safety-measures-component',
+  title: 'Safety',
+  translate: 'SAFETY',
+  type: 'item',
+  icon: 'heroicons-outline:heart',
+  url: 'safety',
+}
+
+/**
+ * out hotel
+ */
+export const ourHotel = {
+  id: 'our_hotel',
+  title: 'Our Hotel',
+  type: 'item',
+  icon: 'material-outline:hotel_class',
+  url: 'our-hotel',
+}
+
+/**
  * analytics
  */
 
