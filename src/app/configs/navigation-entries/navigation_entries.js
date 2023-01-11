@@ -89,23 +89,19 @@ export const bar = {
       id: 'bar-collapse.bar',
       title: 'Bar List',
       type: 'item',
+      url: 'bar/list',
     },
     {
-      id: 'bar-collapse.drinks-menu',
-      title: 'Drinks Menu',
-      type: 'collapse',
-      children: [
-        {
-          id: 'bar-collapse.bar.category',
-          title: 'Menu Category',
-          type: 'item',
-        },
-        {
-          id: 'bar-collapse.bar.list',
-          title: 'Menu List',
-          type: 'item',
-        },
-      ],
+      id: 'bar-collapse.bar.list',
+      title: 'Bar Menu List',
+      type: 'item',
+      url: 'bar/menu/list',
+    },
+    {
+      id: 'bar-collapse.bar.category',
+      title: 'Bar Menu Category',
+      type: 'item',
+      url: 'bar/menu/category',
     },
   ],
 }
@@ -157,11 +153,13 @@ export const interestPoint = {
       id: 'point-interest.category',
       title: 'Category List',
       type: 'item',
+      url: 'interest/category',
     },
     {
       id: 'point-interest.items',
       title: 'Points List',
       type: 'item',
+      url: 'interest/list',
     },
   ],
 }
