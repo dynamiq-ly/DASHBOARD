@@ -174,14 +174,16 @@ export const excursion = {
   icon: 'heroicons-outline:emoji-happy',
   children: [
     {
-      id: 'excursion.category',
-      title: 'Category list',
-      type: 'item',
-    },
-    {
       id: 'excursion.list',
       title: 'Excursions List',
       type: 'item',
+      url: 'excursion/list',
+    },
+    {
+      id: 'excursion.category',
+      title: 'Category list',
+      type: 'item',
+      url: 'excursion/category',
     },
   ],
 }

@@ -18,6 +18,7 @@ import StatisticsConfig from '../main/apps/statistics/StatisticConfig'
 import RestaurantConfig from '../main/apps/restaurant/RestaurantConfig'
 import BarConfig from '../main/apps/bar/BarConfig'
 import InterestConfig from '../main/apps/interest-point/InterestConfig'
+import ExcursionConfig from '../main/apps/excursion/ExcursionConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -42,6 +43,7 @@ const routes = [
   { ...RestaurantConfig.routes },
   { ...BarConfig.routes },
   { ...InterestConfig.routes },
+  { ...ExcursionConfig.routes },
   { ...SafetyConfig.routes },
   {
     path: 'loading',
