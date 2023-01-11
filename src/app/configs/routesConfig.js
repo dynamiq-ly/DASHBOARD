@@ -20,6 +20,7 @@ import BarConfig from '../main/apps/bar/BarConfig'
 import InterestConfig from '../main/apps/interest-point/InterestConfig'
 import PhoneDirectoryConfig from '../main/apps/phone-directory/PhoneDirectoryConfig'
 import IncidenceConfig from '../main/apps/incidence-report/IncidenceConfig'
+import RoomRequestConfig from '../main/apps/room-request/RoomRequestConfig'
 const routeConfigs = [
   SignOutConfig,
   SignInConfig,
@@ -31,6 +32,7 @@ const routeConfigs = [
   InterestConfig,
   PhoneDirectoryConfig,
   IncidenceConfig,
+  RoomRequestConfig,
 ]
 
 const routes = [
@@ -48,6 +50,8 @@ const routes = [
   { ...SafetyConfig.routes },
   { ...PhoneDirectoryConfig.routes },
   { ...IncidenceConfig.routes },
+  { ...RoomRequestConfig.routes },
+
   {
     path: 'loading',
     element: <FuseLoading />,

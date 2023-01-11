@@ -288,6 +288,7 @@ export const room_requests = {
   title: 'Room Requests',
   type: 'item',
   icon: 'material-outline:airline_seat_individual_suite',
+  url: '/room-request',
 }
 /**
  * room upgrade
