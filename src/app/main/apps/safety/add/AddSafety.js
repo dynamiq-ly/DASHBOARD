@@ -18,7 +18,7 @@ import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
 
 import {
   getMeasure,
-  newProduct,
+  newMeasure,
   resetProduct,
   selectProduct,
 } from '../../store/protocolSlice'
@@ -61,7 +61,7 @@ function AddSafety(props) {
         /**
          * Create New Product data
          */
-        dispatch(newProduct())
+        dispatch(newMeasure())
       } else {
         /**
          * Get Product data
@@ -152,7 +152,7 @@ function AddSafety(props) {
               <Tab className='h-64' label='Basic Info' />
             </Tabs>
             <div className='p-16 sm:p-24 max-w-3xl'>
-              <div className='hidden'>
+              <div>
                 <BasicInfoTab />
               </div>
             </div>

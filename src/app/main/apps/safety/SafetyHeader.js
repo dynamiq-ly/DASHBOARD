@@ -52,7 +52,7 @@ function SafetyHeader() {
           <Button
             className=''
             component={Link}
-            to='add'
+            to='new'
             variant='contained'
             color='secondary'
             startIcon={<FuseSvgIcon>heroicons-outline:plus</FuseSvgIcon>}>

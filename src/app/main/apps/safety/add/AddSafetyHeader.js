@@ -12,18 +12,19 @@ import { saveMeasure, removeMeasure } from '../../store/protocolSlice'
 function AddSafetyHeader(props) {
   const dispatch = useDispatch()
   const methods = useFormContext()
-  const { formState, watch, getValues } = methods
+  const { formState, getValues } = methods
   const { isValid, dirtyFields } = formState
   const theme = useTheme()
   const navigate = useNavigate()
 
   function handlesaveMeasure() {
-    dispatch(saveMeasure(getValues()))
+    console.log(getValues())
+    // dispatch(saveMeasure(getValues()))
   }
 
   function handleremoveMeasure() {
     dispatch(removeMeasure()).then(() => {
-      navigate('/apps/e-commerce/products')
+      navigate('/safety')
     })
   }
 
@@ -37,7 +38,7 @@ function AddSafetyHeader(props) {
             className='flex items-center sm:mb-12'
             component={Link}
             role='button'
-            to='/'
+            to='/safety'
             color='inherit'>
             <FuseSvgIcon size={20}>
               {theme.direction === 'ltr'

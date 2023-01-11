@@ -15,7 +15,7 @@ const SafetyConfig = {
       element: <Safety />,
     },
     {
-      path: 'safety/:id',
+      path: 'safety/:productId',
       element: <SafetyAdd />,
     },
   ],

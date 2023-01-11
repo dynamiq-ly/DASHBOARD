@@ -81,7 +81,7 @@ function SafetyTable(props) {
   }
 
   function handleClick(item) {
-    props.navigate(`/apps/e-commerce/products/${item.id}/${item.handle}`)
+    props.navigate(`${item.id}/${item.handle}`)
   }
 
   function handleCheck(event, id) {

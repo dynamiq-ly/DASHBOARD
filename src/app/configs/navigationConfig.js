@@ -37,6 +37,8 @@ import {
   tour_operators,
   money_exchange,
   other_request,
+  ourHotel,
+  safety,
 } from './navigation-entries/navigation_entries'
 
 i18next.addResourceBundle('en', 'navigation', en)
@@ -113,16 +115,7 @@ const navigationConfig = [
     title: 'Protocols',
     subtitle: 'Protcolos & Terms of Use',
     type: 'group',
-    children: [
-      {
-        id: 'protocols.safety-measures-component',
-        title: 'Safety',
-        translate: 'SAFETY',
-        type: 'item',
-        icon: 'heroicons-outline:heart',
-        url: 'safety',
-      },
-    ],
+    children: [{ ...safety }, { ...ourHotel }],
   },
 ]
 
