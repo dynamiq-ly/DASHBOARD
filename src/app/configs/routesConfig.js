@@ -18,7 +18,7 @@ import StatisticsConfig from '../main/apps/statistics/StatisticConfig'
 import RestaurantConfig from '../main/apps/restaurant/RestaurantConfig'
 import BarConfig from '../main/apps/bar/BarConfig'
 import InterestConfig from '../main/apps/interest-point/InterestConfig'
-
+import PhoneDirectoryConfig from '../main/apps/phone-directory/PhoneDirectoryConfig'
 const routeConfigs = [
   SignOutConfig,
   SignInConfig,
@@ -28,6 +28,7 @@ const routeConfigs = [
   RestaurantConfig,
   BarConfig,
   InterestConfig,
+  PhoneDirectoryConfig,
 ]
 
 const routes = [
@@ -43,6 +44,7 @@ const routes = [
   { ...BarConfig.routes },
   { ...InterestConfig.routes },
   { ...SafetyConfig.routes },
+  { ...PhoneDirectoryConfig.routes },
   {
     path: 'loading',
     element: <FuseLoading />,
