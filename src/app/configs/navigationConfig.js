@@ -33,6 +33,10 @@ import {
   parking,
   laugage_vault,
   medical_assistance,
+  banks_atms,
+  tour_operators,
+  money_exchange,
+  other_request,
 } from './navigation-entries/navigation_entries'
 
 i18next.addResourceBundle('en', 'navigation', en)
@@ -98,6 +102,10 @@ const navigationConfig = [
       { ...parking },
       { ...laugage_vault },
       { ...medical_assistance },
+      { ...money_exchange },
+      { ...banks_atms },
+      { ...tour_operators },
+      { ...other_request },
     ],
   },
   {

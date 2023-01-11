@@ -372,11 +372,48 @@ export const parking = {
   icon: 'material-outline:local_parking',
 }
 /**
- *
+ * medical assistance
  */
 export const medical_assistance = {
   id: 'medical_assistance',
   title: 'Medical Assistance',
   type: 'item',
   icon: 'material-outline:medical_services',
+}
+/**
+ * money_exchange
+ */
+export const money_exchange = {
+  id: 'money_exchange',
+  title: 'Money Exchange',
+  type: 'item',
+  icon: 'material-outline:local_atm',
+}
+/**
+ * banks and ATMs
+ */
+export const banks_atms = {
+  id: 'banks_atms',
+  title: 'Banks & ATMs',
+  type: 'item',
+  icon: 'material-outline:atm',
+}
+/**
+ * Tour operator
+ */
+export const tour_operators = {
+  id: 'tour_operators',
+  title: 'Tour Operators',
+  type: 'item',
+  icon: 'material-outline:person',
+}
+
+/**
+ * other request
+ */
+export const other_request = {
+  id: 'other_request',
+  title: 'Other Request',
+  type: 'item',
+  icon: 'material-outline:drive_file_rename_outline',
 }
