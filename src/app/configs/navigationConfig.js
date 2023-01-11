@@ -59,8 +59,8 @@ const navigationConfig = [
     children: [
       { ...restuarant },
       { ...bar },
-      { ...entertainement },
       { ...interestPoint },
+      { ...entertainement },
       { ...excursion },
       { ...rooms },
     ],

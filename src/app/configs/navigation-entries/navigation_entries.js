@@ -8,7 +8,7 @@ export const analytics = [
     title: 'Statistics',
     type: 'item',
     icon: 'heroicons-outline:chart-pie',
-    url: 'statistic',
+    url: '',
   },
   {
     id: 'finance-component',
@@ -32,11 +32,45 @@ export const restuarant = {
       id: 'restaurant-collapse.resturant',
       title: 'Restaurant List',
       type: 'item',
+      url: '/restaurant/list',
+    },
+    {
+      id: 'restaurant-collapse.menu',
+      title: 'Restaurant Menu',
+      type: 'collapse',
+      children: [
+        {
+          id: 'restaurant-collapse.menu.food',
+          title: 'Food Menu',
+          type: 'collapse',
+          children: [
+            {
+              id: 'restaurant-collapse.menu.food.list',
+              title: 'Food List',
+              type: 'item',
+              url: 'restaurant/menu/food/list',
+            },
+            {
+              id: 'restaurant-collapse.menu.food.category',
+              title: 'Food Category',
+              type: 'item',
+              url: 'restaurant/menu/food/category',
+            },
+          ],
+        },
+        {
+          id: 'restaurant-collapse.menu.drink',
+          title: 'Drinks Menu',
+          type: 'item',
+          url: 'restaurant/menu/drinks',
+        },
+      ],
     },
     {
       id: 'restaurant-collapse.regulation',
       title: 'Restaurant Regulations',
       type: 'item',
+      url: 'restaurant/regulation',
     },
   ],
 }
@@ -55,11 +89,19 @@ export const bar = {
       id: 'bar-collapse.bar',
       title: 'Bar List',
       type: 'item',
+      url: 'bar/list',
     },
     {
-      id: 'bar-collapse.drinks-menu',
-      title: 'Drinks Menu',
+      id: 'bar-collapse.bar.list',
+      title: 'Bar Menu List',
       type: 'item',
+      url: 'bar/menu/list',
+    },
+    {
+      id: 'bar-collapse.bar.category',
+      title: 'Bar Menu Category',
+      type: 'item',
+      url: 'bar/menu/category',
     },
   ],
 }
@@ -111,11 +153,13 @@ export const interestPoint = {
       id: 'point-interest.category',
       title: 'Category List',
       type: 'item',
+      url: 'interest/category',
     },
     {
       id: 'point-interest.items',
       title: 'Points List',
       type: 'item',
+      url: 'interest/list',
     },
   ],
 }

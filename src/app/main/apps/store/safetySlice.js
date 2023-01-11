@@ -6,38 +6,37 @@ import {
 import axios from 'axios'
 
 export const getMeasures = createAsyncThunk(
-  'eCommerceApp/measures/getMeasures',
+  'measures/safety/getMeasures',
   async () => {
-    const response = await axios.get(`${process.env.REACT_APP_URL}api/measures`)
+    const response = await axios.get('/api/measures')
     const data = await response.data
-
     return data
   }
 )
 
 export const removeMeasures = createAsyncThunk(
-  'eCommerceApp/measures',
-  async (measureIds, { dispatch, getState }) => {
-    await axios.delete(`${process.env.REACT_APP_URL}api/measures`, {
-      data: measureIds,
-    })
-
-    return measureIds
+  'measures/safety',
+  async (productIds, { dispatch, getState }) => {
+    await axios.delete(
+      `http://bassemb5.sg-host.com/api/measures/${productIds}`,
+      { data: productIds }
+    )
+    return productIds
   }
 )
 
 const measuresAdapter = createEntityAdapter({})
 
-export const { selectAll: selectMeasures, selectById: selectMeasureById } =
-  measuresAdapter.getSelectors((state) => state.eCommerceApp.measures)
+export const { selectAll: selectProducts, selectById: selectProductById } =
+  measuresAdapter.getSelectors((state) => state.measures.safety)
 
-const measuresSlice = createSlice({
-  name: 'eCommerceApp/measures',
+const safetySlice = createSlice({
+  name: 'measures/safety',
   initialState: measuresAdapter.getInitialState({
     searchText: '',
   }),
   reducers: {
-    setMeasuresSearchText: {
+    setProductsSearchText: {
       reducer: (state, action) => {
         state.searchText = action.payload
       },
@@ -51,9 +50,9 @@ const measuresSlice = createSlice({
   },
 })
 
-export const { setMeasuresSearchText } = measuresSlice.actions
+export const { setProductsSearchText } = safetySlice.actions
 
-export const selectMeasuresSearchText = ({ eCommerceApp }) =>
-  eCommerceApp.measures.searchText
+export const selectProductsSearchText = ({ measures }) =>
+  measures.safety.searchText
 
-export default measuresSlice.reducer
+export default safetySlice.reducer
