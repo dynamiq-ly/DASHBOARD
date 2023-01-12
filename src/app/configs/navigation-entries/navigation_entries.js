@@ -371,13 +371,14 @@ export const air_conditioner = {
   url: 'air-conditioner',
 }
 /**
- * air conditioner
+ * hair dryer
  */
 export const hair_dryer = {
   id: 'hair_dryer',
   title: 'Hair Dryer',
   type: 'item',
   icon: 'material-outline:air',
+  url: 'hair-dryer',
 }
 /**
  * check in and check out

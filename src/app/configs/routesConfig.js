@@ -29,6 +29,7 @@ import TelevisionConfig from '../main/apps/television/TelevisionConfig'
 import DepositBoxConfig from '../safe-deposit-box/DepositBoxConfig'
 import ElectricityConfig from '../main/apps/electricity/ElectricityConfig'
 import AirConditionerConfig from '../main/apps/air-conditioner/AirConditionerConfig'
+import HairDryerConfig from '../main/apps/hair-dryer/HairDryerConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -50,6 +51,7 @@ const routeConfigs = [
   DepositBoxConfig,
   ElectricityConfig,
   AirConditionerConfig,
+  HairDryerConfig,
 ]
 
 const routes = [
@@ -69,13 +71,14 @@ const routes = [
   { ...IncidenceConfig.routes },
   { ...RoomRequestConfig.routes },
   { ...RoomUpgradeConfig.routes },
-  { ...HousekeepingConfig },
-  { ...LaundryConfig },
-  { ...TowelsConfig },
-  { ...TelevisionConfig },
-  { ...DepositBoxConfig },
-  { ...ElectricityConfig },
-  { ...AirConditionerConfig },
+  { ...HousekeepingConfig.routes },
+  { ...LaundryConfig.routes },
+  { ...TowelsConfig.routes },
+  { ...TelevisionConfig.routes },
+  { ...DepositBoxConfig.routes },
+  { ...ElectricityConfig.routes },
+  { ...AirConditionerConfig.routes },
+  { ...HairDryerConfig.routes },
 
   {
     path: 'loading',
