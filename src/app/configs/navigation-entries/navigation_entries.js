@@ -318,6 +318,7 @@ export const laundry = {
   title: 'Laundry',
   type: 'item',
   icon: 'material-outline:local_laundry_service',
+  url: './laundry',
 }
 /**
  * towels

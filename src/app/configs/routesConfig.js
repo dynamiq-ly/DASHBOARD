@@ -23,6 +23,7 @@ import IncidenceConfig from '../main/apps/incidence-report/IncidenceConfig'
 import RoomRequestConfig from '../main/apps/room-request/RoomRequestConfig'
 import RoomUpgradeConfig from '../main/apps/room-upgrade/RoomUpgradeConfig'
 import HousekeepingConfig from '../main/apps/housekeeping/HousekeepingConfig'
+import LaundryConfig from '../main/apps/laundry/LaundryConfig'
 const routeConfigs = [
   SignOutConfig,
   SignInConfig,
@@ -37,6 +38,7 @@ const routeConfigs = [
   RoomRequestConfig,
   RoomUpgradeConfig,
   HousekeepingConfig,
+  LaundryConfig,
 ]
 
 const routes = [
@@ -57,6 +59,7 @@ const routes = [
   { ...RoomRequestConfig.routes },
   { ...RoomUpgradeConfig.routes },
   { ...HousekeepingConfig },
+  { ...LaundryConfig },
 
   {
     path: 'loading',
