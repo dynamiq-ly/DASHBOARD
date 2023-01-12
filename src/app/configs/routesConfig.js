@@ -25,6 +25,8 @@ import RoomUpgradeConfig from '../main/apps/room-upgrade/RoomUpgradeConfig'
 import HousekeepingConfig from '../main/apps/housekeeping/HousekeepingConfig'
 import LaundryConfig from '../main/apps/laundry/LaundryConfig'
 import TowelsConfig from '../main/apps/towels/TowelsConfig'
+import TelevisionConfig from '../main/apps/television/TelevisionConfig'
+
 const routeConfigs = [
   SignOutConfig,
   SignInConfig,
@@ -41,6 +43,7 @@ const routeConfigs = [
   HousekeepingConfig,
   LaundryConfig,
   TowelsConfig,
+  TelevisionConfig,
 ]
 
 const routes = [
@@ -63,6 +66,7 @@ const routes = [
   { ...HousekeepingConfig },
   { ...LaundryConfig },
   { ...TowelsConfig },
+  { ...TelevisionConfig },
 
   {
     path: 'loading',

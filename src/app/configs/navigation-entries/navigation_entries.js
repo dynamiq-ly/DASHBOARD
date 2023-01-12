@@ -338,6 +338,7 @@ export const television = {
   title: 'Television',
   type: 'item',
   icon: 'material-outline:connected_tv',
+  url: './television',
 }
 /**
  * safe deposit box
