@@ -27,6 +27,7 @@ import LaundryConfig from '../main/apps/laundry/LaundryConfig'
 import TowelsConfig from '../main/apps/towels/TowelsConfig'
 import TelevisionConfig from '../main/apps/television/TelevisionConfig'
 import DepositBoxConfig from '../safe-deposit-box/DepositBoxConfig'
+import ElectricityConfig from '../main/apps/electricity/ElectricityConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -46,6 +47,7 @@ const routeConfigs = [
   TowelsConfig,
   TelevisionConfig,
   DepositBoxConfig,
+  ElectricityConfig,
 ]
 
 const routes = [
@@ -70,6 +72,7 @@ const routes = [
   { ...TowelsConfig },
   { ...TelevisionConfig },
   { ...DepositBoxConfig },
+  { ...ElectricityConfig },
 
   {
     path: 'loading',

@@ -358,6 +358,7 @@ export const electricity = {
   title: 'Electricity and Cables',
   type: 'item',
   icon: 'material-outline:bolt',
+  url: './electricity',
 }
 /**
  * air conditioner
