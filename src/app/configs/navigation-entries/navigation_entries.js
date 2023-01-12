@@ -368,6 +368,7 @@ export const air_conditioner = {
   title: 'Air Conditioner',
   type: 'item',
   icon: 'material-outline:device_thermostat',
+  url: 'air-conditioner',
 }
 /**
  * air conditioner
