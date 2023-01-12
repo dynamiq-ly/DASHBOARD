@@ -30,6 +30,7 @@ import DepositBoxConfig from '../safe-deposit-box/DepositBoxConfig'
 import ElectricityConfig from '../main/apps/electricity/ElectricityConfig'
 import AirConditionerConfig from '../main/apps/air-conditioner/AirConditionerConfig'
 import HairDryerConfig from '../main/apps/hair-dryer/HairDryerConfig'
+import CheckInOutConfig from '../main/apps/check-in-out/CheckInOutConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -52,6 +53,7 @@ const routeConfigs = [
   ElectricityConfig,
   AirConditionerConfig,
   HairDryerConfig,
+  CheckInOutConfig,
 ]
 
 const routes = [
@@ -79,6 +81,7 @@ const routes = [
   { ...ElectricityConfig.routes },
   { ...AirConditionerConfig.routes },
   { ...HairDryerConfig.routes },
+  { ...CheckInOutConfig.routes },
 
   {
     path: 'loading',

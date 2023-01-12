@@ -388,6 +388,7 @@ export const check_in_out = {
   title: 'Check In & Out',
   type: 'item',
   icon: 'material-outline:vpn_key',
+  url: './check-in-out',
 }
 /**
  * connectivity
