@@ -418,6 +418,7 @@ export const alarm = {
   title: 'Alarm Clock',
   type: 'item',
   icon: 'material-outline:access_alarm',
+  url: './alarm-clock',
 }
 /**
  * transportation

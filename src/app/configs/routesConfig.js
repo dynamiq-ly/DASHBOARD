@@ -33,6 +33,7 @@ import HairDryerConfig from '../main/apps/hair-dryer/HairDryerConfig'
 import CheckInOutConfig from '../main/apps/check-in-out/CheckInOutConfig'
 import ConnectivityConfig from '../main/apps/connectivity/ConnectivityConfig'
 import ExtendStayConfig from '../main/apps/extend-stay/ExtendStayConfig'
+import AlarmConfig from '../main/apps/alarm-clock/AlarmConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -58,6 +59,7 @@ const routeConfigs = [
   CheckInOutConfig,
   ConnectivityConfig,
   ExtendStayConfig,
+  AlarmConfig,
 ]
 
 const routes = [
@@ -88,6 +90,7 @@ const routes = [
   { ...CheckInOutConfig.routes },
   { ...ConnectivityConfig.routes },
   { ...ExtendStayConfig.routes },
+  { ...AlarmConfig.routes },
 
   {
     path: 'loading',
