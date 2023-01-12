@@ -328,6 +328,7 @@ export const towels = {
   title: 'Towels',
   type: 'item',
   icon: 'material-outline:dry_cleaning',
+  url: './towels',
 }
 /**
  * television
