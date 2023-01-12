@@ -457,6 +457,7 @@ export const parking = {
   title: 'Parking Lot',
   type: 'item',
   icon: 'material-outline:local_parking',
+  url: './parking-lots',
 }
 /**
  * medical assistance
