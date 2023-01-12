@@ -438,6 +438,7 @@ export const pool_towels = {
   title: 'Pool Towels',
   type: 'item',
   icon: 'material-outline:pool',
+  url: './pool-towels',
 }
 /**
  * laugage vault

@@ -35,6 +35,7 @@ import ConnectivityConfig from '../main/apps/connectivity/ConnectivityConfig'
 import ExtendStayConfig from '../main/apps/extend-stay/ExtendStayConfig'
 import AlarmConfig from '../main/apps/alarm-clock/AlarmConfig'
 import TransportationConfig from '../main/apps/transportation/TransportationConfig'
+import PoolTowelsConfig from '../main/apps/pool-towels/PoolTowelsConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -62,6 +63,7 @@ const routeConfigs = [
   ExtendStayConfig,
   AlarmConfig,
   TransportationConfig,
+  PoolTowelsConfig,
 ]
 
 const routes = [
@@ -94,6 +96,7 @@ const routes = [
   { ...ExtendStayConfig.routes },
   { ...AlarmConfig.routes },
   { ...TransportationConfig.routes },
+  { ...PoolTowelsConfig.routes },
 
   {
     path: 'loading',
