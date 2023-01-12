@@ -428,6 +428,7 @@ export const transportation = {
   title: 'Transportations',
   type: 'item',
   icon: 'material-outline:local_taxi',
+  url: './transportation',
 }
 /**
  * pool towels

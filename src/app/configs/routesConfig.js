@@ -34,6 +34,7 @@ import CheckInOutConfig from '../main/apps/check-in-out/CheckInOutConfig'
 import ConnectivityConfig from '../main/apps/connectivity/ConnectivityConfig'
 import ExtendStayConfig from '../main/apps/extend-stay/ExtendStayConfig'
 import AlarmConfig from '../main/apps/alarm-clock/AlarmConfig'
+import TransportationConfig from '../main/apps/transportation/TransportationConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -60,6 +61,7 @@ const routeConfigs = [
   ConnectivityConfig,
   ExtendStayConfig,
   AlarmConfig,
+  TransportationConfig,
 ]
 
 const routes = [
@@ -91,6 +93,7 @@ const routes = [
   { ...ConnectivityConfig.routes },
   { ...ExtendStayConfig.routes },
   { ...AlarmConfig.routes },
+  { ...TransportationConfig.routes },
 
   {
     path: 'loading',
