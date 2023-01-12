@@ -348,6 +348,7 @@ export const safe_deposit_box = {
   title: 'Safe deposit Box',
   type: 'item',
   icon: 'material-outline:lock',
+  url: './safe-deposit-box',
 }
 /**
  * electricity
