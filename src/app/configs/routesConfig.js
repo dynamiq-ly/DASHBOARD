@@ -31,6 +31,7 @@ import ElectricityConfig from '../main/apps/electricity/ElectricityConfig'
 import AirConditionerConfig from '../main/apps/air-conditioner/AirConditionerConfig'
 import HairDryerConfig from '../main/apps/hair-dryer/HairDryerConfig'
 import CheckInOutConfig from '../main/apps/check-in-out/CheckInOutConfig'
+import ConnectivityConfig from '../main/apps/connectivity/ConnectivityConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -54,6 +55,7 @@ const routeConfigs = [
   AirConditionerConfig,
   HairDryerConfig,
   CheckInOutConfig,
+  ConnectivityConfig,
 ]
 
 const routes = [
@@ -82,6 +84,7 @@ const routes = [
   { ...AirConditionerConfig.routes },
   { ...HairDryerConfig.routes },
   { ...CheckInOutConfig.routes },
+  { ...ConnectivityConfig.routes },
 
   {
     path: 'loading',

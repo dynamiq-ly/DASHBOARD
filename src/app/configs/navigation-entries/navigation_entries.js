@@ -398,6 +398,7 @@ export const connectivity = {
   title: 'Connectivity',
   type: 'item',
   icon: 'material-outline:router ',
+  url: './connectivity',
 }
 /**
  * extend your stay
