@@ -32,6 +32,7 @@ import AirConditionerConfig from '../main/apps/air-conditioner/AirConditionerCon
 import HairDryerConfig from '../main/apps/hair-dryer/HairDryerConfig'
 import CheckInOutConfig from '../main/apps/check-in-out/CheckInOutConfig'
 import ConnectivityConfig from '../main/apps/connectivity/ConnectivityConfig'
+import ExtendStayConfig from '../main/apps/extend-stay/ExtendStayConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -56,6 +57,7 @@ const routeConfigs = [
   HairDryerConfig,
   CheckInOutConfig,
   ConnectivityConfig,
+  ExtendStayConfig,
 ]
 
 const routes = [
@@ -85,6 +87,7 @@ const routes = [
   { ...HairDryerConfig.routes },
   { ...CheckInOutConfig.routes },
   { ...ConnectivityConfig.routes },
+  { ...ExtendStayConfig.routes },
 
   {
     path: 'loading',

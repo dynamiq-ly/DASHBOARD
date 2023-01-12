@@ -408,6 +408,7 @@ export const extend_stay = {
   title: 'Extend Your Stay',
   type: 'item',
   icon: 'material-outline:event',
+  url: './extend-stay',
 }
 /**
  * alarm
