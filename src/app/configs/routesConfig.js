@@ -37,6 +37,12 @@ import AlarmConfig from '../main/apps/alarm-clock/AlarmConfig'
 import TransportationConfig from '../main/apps/transportation/TransportationConfig'
 import PoolTowelsConfig from '../main/apps/pool-towels/PoolTowelsConfig'
 import ParkingConfig from '../main/apps/parking-lots/ParkingConfig'
+import LaugageConfig from '../main/apps/laugage-vault/LaugageConfig'
+import MedicalAssistanceConfig from '../main/apps/medical-assistance/MedicalAssistanceConfig'
+import MoneyExchangeConfig from '../main/apps/money-exchange/MoneyExchangeConfig'
+import BanksAtmsConfig from '../main/apps/banks-atms/BanksAtmsConfig'
+import TourOperatorConfig from '../main/apps/tour-operators/TourOperatorConfig'
+import OtherRequestConfig from '../main/apps/other-request/OtherRequestConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -66,6 +72,12 @@ const routeConfigs = [
   TransportationConfig,
   PoolTowelsConfig,
   ParkingConfig,
+  LaugageConfig,
+  MedicalAssistanceConfig,
+  MoneyExchangeConfig,
+  BanksAtmsConfig,
+  TourOperatorConfig,
+  OtherRequestConfig,
 ]
 
 const routes = [
@@ -100,6 +112,12 @@ const routes = [
   { ...TransportationConfig.routes },
   { ...PoolTowelsConfig.routes },
   { ...ParkingConfig.routes },
+  { ...LaugageConfig.routes },
+  { ...MedicalAssistanceConfig.routes },
+  { ...MoneyExchangeConfig.routes },
+  { ...BanksAtmsConfig.routes },
+  { ...TourOperatorConfig.routes },
+  { ...OtherRequestConfig.routes },
 
   {
     path: 'loading',

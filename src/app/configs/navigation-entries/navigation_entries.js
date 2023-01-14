@@ -448,6 +448,7 @@ export const laugage_vault = {
   title: 'Laugage Vault',
   type: 'item',
   icon: 'material-outline:cases',
+  url: './laugage-vault',
 }
 /**
  * parking
@@ -467,6 +468,7 @@ export const medical_assistance = {
   title: 'Medical Assistance',
   type: 'item',
   icon: 'material-outline:medical_services',
+  url: './medical-assistance',
 }
 /**
  * money_exchange
@@ -476,6 +478,7 @@ export const money_exchange = {
   title: 'Money Exchange',
   type: 'item',
   icon: 'material-outline:local_atm',
+  url: './money-exchange',
 }
 /**
  * banks and ATMs
@@ -485,6 +488,7 @@ export const banks_atms = {
   title: 'Banks & ATMs',
   type: 'item',
   icon: 'material-outline:atm',
+  url: './banks-atms',
 }
 /**
  * Tour operator
@@ -494,6 +498,7 @@ export const tour_operators = {
   title: 'Tour Operators',
   type: 'item',
   icon: 'material-outline:person',
+  url: './tour-operators',
 }
 
 /**
@@ -504,4 +509,5 @@ export const other_request = {
   title: 'Other Request',
   type: 'item',
   icon: 'material-outline:drive_file_rename_outline',
+  url: './other-request',
 }
