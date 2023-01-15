@@ -1,18 +1,22 @@
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
+import withReducer from 'app/store/withReducer'
 
-import RestaurantHeader from './ResturantHeader'
+import reducer from './store'
+
+import RestaurantsHeader from './RestaurantsHeader'
+import RestaurantsTable from './RestaurantsTable'
 
 function RestaurantScreen() {
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
 
   return (
     <FusePageCarded
-      header={<RestaurantHeader />}
-      //   content={<SafetyTable />}
+      header={<RestaurantsHeader />}
+      content={<RestaurantsTable />}
       scroll={isMobile ? 'normal' : 'content'}
     />
   )
 }
 
-export default RestaurantScreen
+export default withReducer('restaurants', reducer)(RestaurantScreen)

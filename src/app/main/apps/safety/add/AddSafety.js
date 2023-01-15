@@ -21,9 +21,9 @@ import {
   newMeasure,
   resetProduct,
   selectProduct,
-} from '../../store/protocolSlice'
+} from '../store/protocolSlice'
 
-import reducer from '../../store'
+import reducer from '../store'
 
 import AddSafetyHeader from './AddSafetyHeader'
 import BasicInfoTab from './BasicInfoTab'

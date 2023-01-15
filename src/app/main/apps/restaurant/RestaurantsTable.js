@@ -14,15 +14,15 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
-
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import {
   getMeasures,
   selectProducts,
   selectProductsSearchText,
 } from './store/safetySlice'
-import SafetyTableHead from './SafetyTableHead'
+import RestaurantsTableHead from './RestaurantsTableHead'
 
-function SafetyTable(props) {
+function RestaurantsTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -137,7 +137,7 @@ function SafetyTable(props) {
     <div className='w-full flex flex-col min-h-full'>
       <FuseScrollbars className='grow overflow-x-auto'>
         <Table stickyHeader className='min-w-xl' aria-labelledby='tableTitle'>
-          <SafetyTableHead
+          <RestaurantsTableHead
             selectedProductIds={selected}
             order={order}
             onSelectAllClick={handleSelectAllClick}
@@ -152,8 +152,8 @@ function SafetyTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'measure_name': {
-                      return o[order.measure_name]
+                    case 'restaurant_name': {
+                      return o[order.restaurant_name]
                     }
                     default: {
                       return o[order.id]
@@ -187,31 +187,74 @@ function SafetyTable(props) {
                     </TableCell>
 
                     <TableCell
-                      className='p-4 md:p-16'
+                      className='w-52 h-52 px-4 md:px-0'
                       component='th'
-                      scope='row'>
-                      {n.id}
+                      scope='row'
+                      padding='none'>
+                      {n.images.length > 0 && (
+                        <img
+                          className='w-full block rounded'
+                          alt={`${n.restaurant_name}-${n.restaurant_speciality}`}
+                          src={`${process.env.REACT_APP_URL}/storage/restaurants/${n.images[0].image}`}
+                        />
+                      )}
                     </TableCell>
 
                     <TableCell
                       className='p-4 md:p-16 truncate'
                       component='th'
                       scope='row'>
-                      {n.measure_name}
+                      {n.restaurant_name}
                     </TableCell>
 
                     <TableCell
-                      className='p-4 md:p-16'
+                      className='p-4 md:p-16 truncate'
                       component='th'
                       scope='row'>
-                      {`${n.measure_content.slice(0, 200)}...`}
+                      {n.restaurant_speciality}
                     </TableCell>
 
                     <TableCell
-                      className='p-4 md:p-16'
+                      className='p-4 md:p-16 truncate'
                       component='th'
                       scope='row'>
-                      {n.measure_icon}
+                      {`${n.restaurant_descripton.slice(0, 72)}...`}
+                    </TableCell>
+
+                    <TableCell
+                      className='p-4 md:p-16 truncate'
+                      component='th'
+                      scope='row'>
+                      {n.chefs.restaurant_chef_exec_name}
+                    </TableCell>
+
+                    <TableCell
+                      className='p-4 md:p-16 truncate'
+                      component='th'
+                      scope='row'>
+                      {n.restaurant_opens}
+                    </TableCell>
+
+                    <TableCell
+                      className='p-4 md:p-16 truncate'
+                      component='th'
+                      scope='row'>
+                      {n.restaurant_closes}
+                    </TableCell>
+
+                    <TableCell
+                      className='p-4 md:p-16 truncate'
+                      component='th'
+                      scope='row'>
+                      {n.restaurant_status ? (
+                        <FuseSvgIcon className='text-green' size={20}>
+                          heroicons-outline:check-circle
+                        </FuseSvgIcon>
+                      ) : (
+                        <FuseSvgIcon className='text-red' size={20}>
+                          heroicons-outline:minus-circle
+                        </FuseSvgIcon>
+                      )}
                     </TableCell>
                   </TableRow>
                 )
@@ -239,4 +282,4 @@ function SafetyTable(props) {
   )
 }
 
-export default withRouter(SafetyTable)
+export default withRouter(RestaurantsTable)

@@ -9,7 +9,7 @@ function IncidenceScreen() {
   return (
     <FusePageCarded
       header={<IncidenceHeader />}
-      content={<div></div>}
+      // content={<div></div>}
       scroll={isMobile ? 'normal' : 'content'}
     />
   )

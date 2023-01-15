@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { saveMeasure, removeMeasure } from '../../store/protocolSlice'
+import { saveMeasure, removeMeasure } from '../store/protocolSlice'
 
 function AddSafetyHeader(props) {
   const dispatch = useDispatch()
@@ -69,7 +69,7 @@ function AddSafetyHeader(props) {
           className='whitespace-nowrap mx-4'
           variant='contained'
           color='secondary'
-          disabled={_.isEmpty(dirtyFields) || !isValid}
+          // disabled={_.isEmpty(dirtyFields) || !isValid}
           onClick={handlesaveMeasure}>
           Save
         </Button>

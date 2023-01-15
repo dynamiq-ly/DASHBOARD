@@ -11,7 +11,7 @@ import {
   setProductsSearchText,
 } from './store/safetySlice'
 
-function SafetyHeader() {
+function RestaurantsHeader() {
   const dispatch = useDispatch()
   const searchText = useSelector(selectProductsSearchText)
 
@@ -23,7 +23,7 @@ function SafetyHeader() {
         animate={{ x: 0, transition: { delay: 0.2 } }}
         delay={300}
         className='text-24 md:text-32 font-extrabold tracking-tight'>
-        Safety Measures
+        Restaurants
       </Typography>
 
       <div className='flex flex-col w-full sm:w-auto sm:flex-row space-y-16 sm:space-y-0 flex-1 items-center justify-end space-x-8'>
@@ -64,4 +64,4 @@ function SafetyHeader() {
   )
 }
 
-export default SafetyHeader
+export default RestaurantsHeader

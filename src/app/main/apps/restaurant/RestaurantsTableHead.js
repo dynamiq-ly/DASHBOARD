@@ -19,36 +19,64 @@ import { removeMeasures } from './store/safetySlice'
 
 const rows = [
   {
-    id: 'id',
+    id: 'restaurant_image',
     align: 'left',
     disablePadding: true,
     label: '',
     sort: false,
   },
   {
-    id: 'measure_name',
+    id: 'restaurant_name',
     align: 'left',
     disablePadding: false,
     label: 'Name',
     sort: true,
   },
   {
-    id: 'measure_content',
+    id: 'restaurant_speciality',
     align: 'left',
     disablePadding: false,
-    label: 'Content',
+    label: 'Speciality',
     sort: true,
   },
   {
-    id: 'measure_icon',
+    id: 'restaurant_descripton',
     align: 'left',
     disablePadding: false,
-    label: 'Icon',
+    label: 'Descripton',
+    sort: true,
+  },
+  {
+    id: 'restaurant_head_chef',
+    align: 'left',
+    disablePadding: false,
+    label: 'Chef',
+    sort: true,
+  },
+  {
+    id: 'restaurant_opens',
+    align: 'left',
+    disablePadding: false,
+    label: 'Open',
+    sort: true,
+  },
+  {
+    id: 'restaurant_closes',
+    align: 'left',
+    disablePadding: false,
+    label: 'Close',
+    sort: true,
+  },
+  {
+    id: 'restaurant_status',
+    align: 'left',
+    disablePadding: false,
+    label: 'Status',
     sort: true,
   },
 ]
 
-const SafetyTableHead = (props) => {
+const RestaurantsTableHead = (props) => {
   const { selectedProductIds } = props
   const numSelected = selectedProductIds.length
 
@@ -160,4 +188,4 @@ const SafetyTableHead = (props) => {
   )
 }
 
-export default SafetyTableHead
+export default RestaurantsTableHead
