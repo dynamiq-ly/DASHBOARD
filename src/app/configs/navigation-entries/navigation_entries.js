@@ -149,6 +149,7 @@ export const entertainement = {
       id: 'entertainement-collapse.day-activities',
       title: 'Day Activities',
       type: 'item',
+      url: './entertainement/day-activities',
     },
     {
       id: 'entertainement-collapse.night-shows',
