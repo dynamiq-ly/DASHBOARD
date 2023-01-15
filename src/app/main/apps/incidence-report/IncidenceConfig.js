@@ -1,11 +1,7 @@
 import { lazy } from 'react'
-<<<<<<< Updated upstream
-const Incidence = lazy(() => import('./IncidenceScreen'))
-=======
 
 const Incidence = lazy(() => import('./IncidenceScreen'))
 
->>>>>>> Stashed changes
 const IncidenceConfig = {
   settings: {
     layout: {

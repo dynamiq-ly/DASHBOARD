@@ -1,5 +1,6 @@
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
+
 import NightShowsHeader from './NightShowsHeader'
 
 function NightShowsScreen() {
