@@ -155,11 +155,13 @@ export const entertainement = {
       id: 'entertainement-collapse.night-shows',
       title: 'Night Shows',
       type: 'item',
+      url: './entertainement/night-show',
     },
     {
       id: 'entertainement-collapse.sport-event',
       title: 'Sport Events',
       type: 'item',
+      url: './entertainement/spoty-event',
     },
   ],
 }

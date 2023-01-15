@@ -17,7 +17,7 @@ export default function OurHotelHeader() {
         delay={300}
         className='text-24 md:text-32 font-extrabold tracking-tight'
       >
-        Our Hotel
+        Our Hotels
       </Typography>
     </div>
   )
