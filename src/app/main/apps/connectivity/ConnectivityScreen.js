@@ -1,7 +1,7 @@
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
 import ConnectivityHeader from './ConnectivityHeader'
-function SafetyScreen() {
+function ConnectivityScreen() {
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
 
   return (
@@ -13,4 +13,4 @@ function SafetyScreen() {
   )
 }
 
-export default SafetyScreen
+export default ConnectivityScreen

@@ -1,5 +1,5 @@
 import { lazy } from 'react'
-const Incidence = lazy(() => import('./IncidenceHeader'))
+const Incidence = lazy(() => import('./IncidenceScreen'))
 const IncidenceConfig = {
   settings: {
     layout: {

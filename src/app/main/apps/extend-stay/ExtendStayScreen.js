@@ -3,7 +3,7 @@ import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
 
 import ExtendStayHeader from './ExtendStayHeader'
 
-function SafetyScreen() {
+function ExtendStayScreen() {
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
 
   return (
@@ -15,4 +15,4 @@ function SafetyScreen() {
   )
 }
 
-export default SafetyScreen
+export default ExtendStayScreen

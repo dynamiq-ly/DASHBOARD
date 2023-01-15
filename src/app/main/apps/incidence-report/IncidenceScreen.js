@@ -3,7 +3,7 @@ import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
 
 import IncidenceHeader from './IncidenceHeader'
 
-function SafetyScreen() {
+function IncidenceScreen() {
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
 
   return (
@@ -15,4 +15,4 @@ function SafetyScreen() {
   )
 }
 
-export default SafetyScreen
+export default IncidenceScreen

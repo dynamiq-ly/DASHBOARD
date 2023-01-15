@@ -2,7 +2,7 @@ import FusePageCarded from '@fuse/core/FusePageCarded'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
 import OurHotelHeader from './OurHotelHeader'
 
-function SafetyScreen() {
+function OurHotelScreen() {
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
 
   return (
@@ -14,4 +14,4 @@ function SafetyScreen() {
   )
 }
 
-export default SafetyScreen
+export default OurHotelScreen

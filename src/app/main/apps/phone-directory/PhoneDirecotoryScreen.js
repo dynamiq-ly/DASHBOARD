@@ -3,7 +3,7 @@ import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
 
 import PhoneDirectoryHeader from './PhoneDirectoryHeader'
 
-function SafetyScreen() {
+function PhoneDirectoryScreen() {
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
 
   return (
@@ -15,4 +15,4 @@ function SafetyScreen() {
   )
 }
 
-export default SafetyScreen
+export default PhoneDirectoryScreen
