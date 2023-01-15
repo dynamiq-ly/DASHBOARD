@@ -43,6 +43,7 @@ import MoneyExchangeConfig from '../main/apps/money-exchange/MoneyExchangeConfig
 import BanksAtmsConfig from '../main/apps/banks-atms/BanksAtmsConfig'
 import TourOperatorConfig from '../main/apps/tour-operators/TourOperatorConfig'
 import OtherRequestConfig from '../main/apps/other-request/OtherRequestConfig'
+import OurHotelConfig from '../main/apps/our-hotel/OurHotelConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -78,6 +79,7 @@ const routeConfigs = [
   BanksAtmsConfig,
   TourOperatorConfig,
   OtherRequestConfig,
+  OurHotelConfig,
 ]
 
 const routes = [
@@ -118,6 +120,7 @@ const routes = [
   { ...BanksAtmsConfig.routes },
   { ...TourOperatorConfig.routes },
   { ...OtherRequestConfig.routes },
+  { ...OurHotelConfig.routes },
 
   {
     path: 'loading',
