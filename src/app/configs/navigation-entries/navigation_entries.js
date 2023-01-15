@@ -141,8 +141,9 @@ export const entertainement = {
   children: [
     {
       id: 'entertainement-collapse.entertainement',
-      title: 'Entertainement',
+      title: 'Events Programs',
       type: 'item',
+      url: './entertainement',
     },
     {
       id: 'entertainement-collapse.day-activities',

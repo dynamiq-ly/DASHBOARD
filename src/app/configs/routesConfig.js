@@ -45,6 +45,7 @@ import TourOperatorConfig from '../main/apps/tour-operators/TourOperatorConfig'
 import OtherRequestConfig from '../main/apps/other-request/OtherRequestConfig'
 import OurHotelConfig from '../main/apps/our-hotel/OurHotelConfig'
 import FinanceConfig from '../main/apps/finance/FinanceConfig'
+import EntertainementConfig from '../main/apps/entertainement/EntertainementConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -82,6 +83,7 @@ const routeConfigs = [
   OtherRequestConfig,
   OurHotelConfig,
   FinanceConfig,
+  EntertainementConfig,
 ]
 
 const routes = [
@@ -124,6 +126,7 @@ const routes = [
   { ...OtherRequestConfig.routes },
   { ...OurHotelConfig.routes },
   { ...FinanceConfig.routes },
+  { ...EntertainementConfig.routes },
 
   {
     path: 'loading',
