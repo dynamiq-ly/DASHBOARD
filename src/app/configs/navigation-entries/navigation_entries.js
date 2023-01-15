@@ -161,7 +161,7 @@ export const entertainement = {
       id: 'entertainement-collapse.sport-event',
       title: 'Sport Events',
       type: 'item',
-      url: './entertainement/spoty-event',
+      url: './entertainement/sport-event',
     },
   ],
 }
