@@ -414,21 +414,25 @@ export const check_in_out = {
       id: 'pre_online_check_in',
       title: 'Pre Online Check In',
       type: 'item',
+      url: './check-in-out/pre-online-check-in',
     },
     {
       id: 'express_check_out',
       title: 'Express Check Out',
       type: 'item',
+      url: './check-in-out/express-check-out',
     },
     {
       id: 'late_check_out',
       title: 'Late check out ',
       type: 'item',
+      url: './check-in-out/late-check-out',
     },
     {
       id: ' get_hotel_reciept',
       title: ' Get Hotel Reciept',
       type: 'item',
+      url: './check-in-out/hotel-reciept',
     },
   ],
 }
