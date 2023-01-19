@@ -1,9 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import miniBar from './minibarSlice'
+import miniBars from './minibarSlice'
+import foods from './foodsSlice'
 
 const reducer = combineReducers({
-  miniBar,
+  miniBars,
+  foods,
 })
 
 export default reducer

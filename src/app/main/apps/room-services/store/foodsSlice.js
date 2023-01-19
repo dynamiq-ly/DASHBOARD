@@ -1,16 +1,16 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const getMeasures = createAsyncThunk('roomService/miniBars/getMeasures', async () => {
-  const response = await axios.get('api/room-service/mini-bar')
+export const getMeasures = createAsyncThunk('roomService/foods/getMeasures', async () => {
+  const response = await axios.get('api/room-service/food-service')
   const data = await response.data
   return data
 })
 
 export const removeMeasures = createAsyncThunk(
-  'roomService/miniBars',
+  'roomService/foods',
   async (productIds, { dispatch, getState }) => {
-    await axios.delete(`api/room-service/mini-bar/${productIds}`, { data: productIds })
+    await axios.delete(`api/room-service/food-service/${productIds}`, { data: productIds })
     return productIds
   }
 )
@@ -18,10 +18,10 @@ export const removeMeasures = createAsyncThunk(
 const measuresAdapter = createEntityAdapter({})
 
 export const { selectAll: selectProducts, selectById: selectProductById } =
-  measuresAdapter.getSelectors((state) => state.roomService.miniBars)
+  measuresAdapter.getSelectors((state) => state.roomService.foods)
 
 const safetySlice = createSlice({
-  name: 'roomService/miniBars',
+  name: 'roomService/foods',
   initialState: measuresAdapter.getInitialState({
     searchText: '',
   }),
@@ -42,6 +42,6 @@ const safetySlice = createSlice({
 
 export const { setProductsSearchText } = safetySlice.actions
 
-export const selectProductsSearchText = ({ roomService }) => roomService.miniBars.searchText
+export const selectProductsSearchText = ({ roomService }) => roomService.foods.searchText
 
 export default safetySlice.reducer
