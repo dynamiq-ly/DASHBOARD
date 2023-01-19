@@ -8,6 +8,7 @@ const ExpressCheckOut = lazy(() =>
   import('./express-check-out/ExpressCheckOutScreen')
 )
 const LateCheckOut = lazy(() => import('./late-check-out/LateCheckOutScreen'))
+const HotelReciept = lazy(() => import('./hotel-reciept/HotelRecieptScreen'))
 const CheckInOutConfig = {
   settings: {
     layout: {
@@ -34,6 +35,10 @@ const CheckInOutConfig = {
     {
       path: '/check-in-out/late-check-out',
       element: <LateCheckOut />,
+    },
+    {
+      path: '/check-in-out/hotel-reciept',
+      element: <HotelReciept />,
     },
   ],
 }

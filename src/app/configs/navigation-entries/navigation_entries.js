@@ -432,6 +432,7 @@ export const check_in_out = {
       id: ' get_hotel_reciept',
       title: ' Get Hotel Reciept',
       type: 'item',
+      url: './check-in-out/hotel-reciept',
     },
   ],
 }
