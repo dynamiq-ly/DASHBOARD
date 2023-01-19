@@ -6,7 +6,7 @@ const RestaurantFoodsMenu = lazy(() => import('./menu/food/FoodScreen'))
 const RestaurantFoodCategoryMenu = lazy(() =>
   import('./menu/food/category/FoodCategoryScreen')
 )
-const RestaurantRegulation = lazy(() => import('./regulation/RegulationHeader'))
+const RestaurantRegulation = lazy(() => import('./regulation/RegulationScreen'))
 
 const RestaurantConfig = {
   settings: {
