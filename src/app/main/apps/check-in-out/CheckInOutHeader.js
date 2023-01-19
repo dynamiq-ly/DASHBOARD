@@ -18,7 +18,7 @@ export default function CheckInOutHeader() {
         delay={300}
         className='text-24 md:text-32 font-extrabold tracking-tight'
       >
-        Check In & Out
+        Check In
       </Typography>
     </div>
   )

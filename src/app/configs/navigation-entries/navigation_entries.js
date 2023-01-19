@@ -402,6 +402,7 @@ export const check_in_out = {
       id: 'check_in',
       title: 'Check In',
       type: 'item',
+      url: '/check-in-out',
     },
     {
       id: 'check_out',
