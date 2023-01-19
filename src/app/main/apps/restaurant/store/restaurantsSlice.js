@@ -6,7 +6,7 @@ import {
 import axios from 'axios'
 
 export const getMeasures = createAsyncThunk(
-  'restaurants/safety/getMeasures',
+  'restaurants/restaurant/getMeasures',
   async () => {
     const response = await axios.get('/api/restaurant&status=0')
     const data = await response.data
@@ -15,7 +15,7 @@ export const getMeasures = createAsyncThunk(
 )
 
 export const removeMeasures = createAsyncThunk(
-  'restaurants/safety',
+  'restaurants/restaurant',
   async (productIds, { dispatch, getState }) => {
     await axios.delete(`/api/restaurant/${productIds}`, { data: productIds })
     return productIds
@@ -25,10 +25,10 @@ export const removeMeasures = createAsyncThunk(
 const measuresAdapter = createEntityAdapter({})
 
 export const { selectAll: selectProducts, selectById: selectProductById } =
-  measuresAdapter.getSelectors((state) => state.restaurants.safety)
+  measuresAdapter.getSelectors((state) => state.restaurants.restaurant)
 
 const safetySlice = createSlice({
-  name: 'restaurant/safety',
+  name: 'restaurants/restaurant',
   initialState: measuresAdapter.getInitialState({
     searchText: '',
   }),
@@ -50,6 +50,6 @@ const safetySlice = createSlice({
 export const { setProductsSearchText } = safetySlice.actions
 
 export const selectProductsSearchText = ({ restaurants }) =>
-  restaurants.safety.searchText
+  restaurants.restaurant.searchText
 
 export default safetySlice.reducer

@@ -1,9 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import safety from './barSlice'
+import bar from './barSlice'
 
 const reducer = combineReducers({
-  safety,
+  bar,
 })
 
 export default reducer

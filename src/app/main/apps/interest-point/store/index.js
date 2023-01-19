@@ -1,9 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import restaurant from './restaurantsSlice'
+import pointsCategory from './categorySlice'
 
 const reducer = combineReducers({
-  restaurant,
+  pointsCategory,
 })
 
 export default reducer

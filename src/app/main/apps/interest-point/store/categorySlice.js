@@ -6,18 +6,20 @@ import {
 import axios from 'axios'
 
 export const getMeasures = createAsyncThunk(
-  'bars/bar/getMeasures',
+  'pointsCategory/safety/getMeasures',
   async () => {
-    const response = await axios.get('/api/bar&status=0')
+    const response = await axios.get('/api/point-of-interest/type')
     const data = await response.data
     return data
   }
 )
 
 export const removeMeasures = createAsyncThunk(
-  'bars/bar',
+  'pointsCategory/safety',
   async (productIds, { dispatch, getState }) => {
-    await axios.delete(`/api/bar/${productIds}`, { data: productIds })
+    await axios.delete(`/api//point-of-interest/type/${productIds}`, {
+      data: productIds,
+    })
     return productIds
   }
 )
@@ -25,10 +27,10 @@ export const removeMeasures = createAsyncThunk(
 const measuresAdapter = createEntityAdapter({})
 
 export const { selectAll: selectProducts, selectById: selectProductById } =
-  measuresAdapter.getSelectors((state) => state.bars.bar)
+  measuresAdapter.getSelectors((state) => state.pointsCategory.safety)
 
 const safetySlice = createSlice({
-  name: 'bars/bar',
+  name: 'restaurant/safety',
   initialState: measuresAdapter.getInitialState({
     searchText: '',
   }),
@@ -49,6 +51,7 @@ const safetySlice = createSlice({
 
 export const { setProductsSearchText } = safetySlice.actions
 
-export const selectProductsSearchText = ({ bars }) => bars.bar.searchText
+export const selectProductsSearchText = ({ pointsCategory }) =>
+  pointsCategory.safety.searchText
 
 export default safetySlice.reducer
