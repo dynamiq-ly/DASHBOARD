@@ -181,7 +181,12 @@ function MiniBarTable(props) {
                       />
                     </TableCell>
 
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                    <TableCell
+                      className="w-52 h-52 px-4 md:px-0"
+                      component="th"
+                      scope="row"
+                      padding="none"
+                    >
                       {n.id}
                     </TableCell>
 
