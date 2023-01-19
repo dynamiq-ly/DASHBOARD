@@ -395,9 +395,40 @@ export const hair_dryer = {
 export const check_in_out = {
   id: 'check_in_out',
   title: 'Check In & Out',
-  type: 'item',
+  type: 'collapse',
   icon: 'material-outline:vpn_key',
-  url: './check-in-out',
+  children: [
+    {
+      id: 'check_in',
+      title: 'Check In',
+      type: 'item',
+    },
+    {
+      id: 'check_out',
+      title: 'Check Out',
+      type: 'item',
+    },
+    {
+      id: 'pre_online_check_in',
+      title: 'Pre Online Check In',
+      type: 'item',
+    },
+    {
+      id: 'express_check_out',
+      title: 'Express Check Out',
+      type: 'item',
+    },
+    {
+      id: 'late_check_out',
+      title: 'Late check out ',
+      type: 'item',
+    },
+    {
+      id: ' get_hotel_reciept',
+      title: ' Get Hotel Reciept',
+      type: 'item',
+    },
+  ],
 }
 /**
  * connectivity
