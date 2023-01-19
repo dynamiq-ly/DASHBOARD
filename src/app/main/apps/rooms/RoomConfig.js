@@ -11,7 +11,7 @@ const RoomConfig = {
   },
   routes: [
     {
-      path: 'rooms',
+      path: 'rooms/list',
       element: <Rooms />,
     },
     {

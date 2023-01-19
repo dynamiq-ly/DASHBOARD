@@ -228,13 +228,13 @@ export const rooms = {
       id: 'rooms.list',
       title: 'Rooms List',
       type: 'item',
-      url: './rooms/category',
+      url: './rooms/list',
     },
     {
       id: 'rooms.category',
       title: 'Category list',
       type: 'item',
-      url: './rooms',
+      url: './rooms/category',
     },
   ],
 }
@@ -263,11 +263,13 @@ export const room_services = {
       id: 'food_service',
       title: 'Food Service',
       type: 'item',
+      url: './rooms-services/list',
     },
     {
       id: 'drink_service',
       title: 'Drink Service',
       type: 'item',
+      url: './rooms-services/drinks',
     },
     {
       id: 'mini_bar_service',

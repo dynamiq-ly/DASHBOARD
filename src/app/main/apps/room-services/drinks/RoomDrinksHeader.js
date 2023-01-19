@@ -6,8 +6,7 @@ import { motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-
-export default function RoomCategoryHeader() {
+export default function RoomDrinksHeader() {
   return (
     <div className='flex flex-col sm:flex-row space-y-16 sm:space-y-0 flex-1 w-full items-center justify-between py-32 px-24 md:px-32'>
       <Typography
@@ -17,7 +16,7 @@ export default function RoomCategoryHeader() {
         delay={300}
         className='text-24 md:text-32 font-extrabold tracking-tight'
       >
-        Rooms Categories
+        Room Drinks Services
       </Typography>
     </div>
   )
