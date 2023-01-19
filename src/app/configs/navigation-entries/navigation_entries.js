@@ -228,11 +228,13 @@ export const rooms = {
       id: 'rooms.category',
       title: 'Category list',
       type: 'item',
+      url: './rooms',
     },
     {
       id: 'rooms.list',
       title: 'Rooms List',
       type: 'item',
+      url: './rooms/category',
     },
   ],
 }

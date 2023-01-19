@@ -47,6 +47,7 @@ import OurHotelConfig from '../main/apps/our-hotel/OurHotelConfig'
 import FinanceConfig from '../main/apps/finance/FinanceConfig'
 import EntertainementConfig from '../main/apps/entertainement/EntertainementConfig'
 import ExcursionConfig from '../main/apps/excursion/ExcursionConfig'
+import RoomConfig from '../main/apps/rooms/RoomConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -86,6 +87,7 @@ const routeConfigs = [
   FinanceConfig,
   EntertainementConfig,
   ExcursionConfig,
+  RoomConfig,
 ]
 
 const routes = [
@@ -130,6 +132,7 @@ const routes = [
   { ...FinanceConfig.routes },
   { ...EntertainementConfig.routes },
   { ...ExcursionConfig.routes },
+  { ...RoomConfig.routes },
 
   {
     path: 'loading',
