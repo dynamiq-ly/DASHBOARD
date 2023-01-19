@@ -269,6 +269,7 @@ export const room_services = {
       id: 'drink_service',
       title: 'Drink Service',
       type: 'item',
+      url: './rooms-services/drinks',
     },
     {
       id: 'mini_bar_service',
