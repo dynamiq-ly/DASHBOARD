@@ -275,6 +275,7 @@ export const room_services = {
       id: 'mini_bar_service',
       title: 'Mini Bar Service',
       type: 'item',
+      url: './rooms-services/mini-bar',
     },
   ],
 }
