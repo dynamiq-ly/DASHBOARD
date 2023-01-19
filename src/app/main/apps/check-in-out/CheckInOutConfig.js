@@ -9,7 +9,7 @@ const CheckInOutConfig = {
   },
   routes: [
     {
-      path: '/check-in-out',
+      path: '/check-in-out/check-in',
       element: <CheckInOut />,
     },
     {

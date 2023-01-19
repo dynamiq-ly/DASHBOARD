@@ -402,13 +402,13 @@ export const check_in_out = {
       id: 'check_in',
       title: 'Check In',
       type: 'item',
-      url: '/check-in-out',
+      url: '/check-in-out/check-in',
     },
     {
       id: 'check_out',
       title: 'Check Out',
       type: 'item',
-      url: '/check-in-out/check-out',
+      url: './check-in-out/check-out',
     },
     {
       id: 'pre_online_check_in',
