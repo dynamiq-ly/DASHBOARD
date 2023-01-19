@@ -263,7 +263,7 @@ export const room_services = {
       id: 'food_service',
       title: 'Food Service',
       type: 'item',
-      url: './rooms-services/list',
+      url: './rooms-services/food',
     },
     {
       id: 'drink_service',
