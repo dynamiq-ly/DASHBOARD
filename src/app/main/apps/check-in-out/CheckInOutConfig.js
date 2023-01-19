@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 const CheckInOut = lazy(() => import('./CheckInOutScreen'))
-
+const CheckOut = lazy(() => import('./check-out/CheckOutScreen'))
 const CheckInOutConfig = {
   settings: {
     layout: {
@@ -11,6 +11,10 @@ const CheckInOutConfig = {
     {
       path: '/check-in-out',
       element: <CheckInOut />,
+    },
+    {
+      path: '/check-in-out/check-out',
+      element: <CheckOut />,
     },
   ],
 }
