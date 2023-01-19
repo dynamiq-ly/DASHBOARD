@@ -17,7 +17,7 @@ export default function RoomCategoryHeader() {
         delay={300}
         className='text-24 md:text-32 font-extrabold tracking-tight'
       >
-        Rooms List
+        Rooms Categories
       </Typography>
     </div>
   )
