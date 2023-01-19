@@ -19,7 +19,7 @@ import {
   getMeasures,
   selectProducts,
   selectProductsSearchText,
-} from './store/safetySlice'
+} from './store/barSlice'
 
 import BarsTableHead from './BarsTableHead'
 
