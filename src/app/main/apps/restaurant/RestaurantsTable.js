@@ -45,7 +45,7 @@ function RestaurantsTable(props) {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.measure_name.toLowerCase().includes(searchText.toLowerCase())
+          item.restaurant_name.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -125,7 +125,8 @@ function RestaurantsTable(props) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { delay: 0.1 } }}
-        className='flex flex-1 items-center justify-center h-full'>
+        className='flex flex-1 items-center justify-center h-full'
+      >
         <Typography color='text.secondary' variant='h5'>
           There are no data!
         </Typography>
@@ -175,10 +176,12 @@ function RestaurantsTable(props) {
                     tabIndex={-1}
                     key={n.id}
                     selected={isSelected}
-                    onClick={(event) => handleClick(n)}>
+                    onClick={(event) => handleClick(n)}
+                  >
                     <TableCell
                       className='w-40 md:w-64 text-center'
-                      padding='none'>
+                      padding='none'
+                    >
                       <Checkbox
                         checked={isSelected}
                         onClick={(event) => event.stopPropagation()}
@@ -190,7 +193,8 @@ function RestaurantsTable(props) {
                       className='w-52 h-52 px-4 md:px-0'
                       component='th'
                       scope='row'
-                      padding='none'>
+                      padding='none'
+                    >
                       {n.images.length > 0 && (
                         <img
                           className='w-full block rounded'
@@ -203,49 +207,56 @@ function RestaurantsTable(props) {
                     <TableCell
                       className='p-4 md:p-16 truncate'
                       component='th'
-                      scope='row'>
+                      scope='row'
+                    >
                       {n.restaurant_name}
                     </TableCell>
 
                     <TableCell
                       className='p-4 md:p-16 truncate'
                       component='th'
-                      scope='row'>
+                      scope='row'
+                    >
                       {n.restaurant_speciality}
                     </TableCell>
 
                     <TableCell
                       className='p-4 md:p-16 truncate'
                       component='th'
-                      scope='row'>
+                      scope='row'
+                    >
                       {`${n.restaurant_descripton.slice(0, 72)}...`}
                     </TableCell>
 
                     <TableCell
                       className='p-4 md:p-16 truncate'
                       component='th'
-                      scope='row'>
+                      scope='row'
+                    >
                       {n.chefs.restaurant_chef_exec_name}
                     </TableCell>
 
                     <TableCell
                       className='p-4 md:p-16 truncate'
                       component='th'
-                      scope='row'>
+                      scope='row'
+                    >
                       {n.restaurant_opens}
                     </TableCell>
 
                     <TableCell
                       className='p-4 md:p-16 truncate'
                       component='th'
-                      scope='row'>
+                      scope='row'
+                    >
                       {n.restaurant_closes}
                     </TableCell>
 
                     <TableCell
                       className='p-4 md:p-16 truncate'
                       component='th'
-                      scope='row'>
+                      scope='row'
+                    >
                       {n.restaurant_status ? (
                         <FuseSvgIcon className='text-green' size={20}>
                           heroicons-outline:check-circle
