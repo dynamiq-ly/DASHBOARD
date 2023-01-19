@@ -15,8 +15,7 @@ export default function PhoneDirectoryHeader() {
         initial={{ x: -20 }}
         animate={{ x: 0, transition: { delay: 0.2 } }}
         delay={300}
-        className='text-24 md:text-32 font-extrabold tracking-tight'
-      >
+        className='text-24 md:text-32 font-extrabold tracking-tight'>
         Phone Directory
       </Typography>
     </div>

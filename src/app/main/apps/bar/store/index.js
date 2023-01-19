@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import safety from './safetySlice'
+import safety from './barSlice'
 
 const reducer = combineReducers({
   safety,

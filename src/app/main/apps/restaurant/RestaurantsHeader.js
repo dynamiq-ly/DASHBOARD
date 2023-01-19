@@ -9,7 +9,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import {
   selectProductsSearchText,
   setProductsSearchText,
-} from './store/safetySlice'
+} from './store/restaurantsSlice'
 
 function RestaurantsHeader() {
   const dispatch = useDispatch()

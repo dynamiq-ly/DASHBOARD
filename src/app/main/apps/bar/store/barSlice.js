@@ -17,7 +17,7 @@ export const getMeasures = createAsyncThunk(
 export const removeMeasures = createAsyncThunk(
   'bars/safety',
   async (productIds, { dispatch, getState }) => {
-    await axios.delete(`/api/measures/${productIds}`, { data: productIds })
+    await axios.delete(`/api/bar/${productIds}`, { data: productIds })
     return productIds
   }
 )

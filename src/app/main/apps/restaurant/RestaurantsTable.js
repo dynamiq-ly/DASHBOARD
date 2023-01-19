@@ -19,7 +19,7 @@ import {
   getMeasures,
   selectProducts,
   selectProductsSearchText,
-} from './store/safetySlice'
+} from './store/restaurantsSlice'
 import RestaurantsTableHead from './RestaurantsTableHead'
 
 function RestaurantsTable(props) {
