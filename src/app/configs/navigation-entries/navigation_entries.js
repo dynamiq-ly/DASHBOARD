@@ -414,6 +414,7 @@ export const check_in_out = {
       id: 'pre_online_check_in',
       title: 'Pre Online Check In',
       type: 'item',
+      url: './check-in-out/pre-online-check-in',
     },
     {
       id: 'express_check_out',
