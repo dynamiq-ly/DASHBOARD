@@ -7,6 +7,7 @@ const PreOnlineCheckIn = lazy(() =>
 const ExpressCheckOut = lazy(() =>
   import('./express-check-out/ExpressCheckOutScreen')
 )
+const LateCheckOut = lazy(() => import('./late-check-out/LateCheckOutScreen'))
 const CheckInOutConfig = {
   settings: {
     layout: {
@@ -29,6 +30,10 @@ const CheckInOutConfig = {
     {
       path: '/check-in-out/express-check-out',
       element: <ExpressCheckOut />,
+    },
+    {
+      path: '/check-in-out/late-check-out',
+      element: <LateCheckOut />,
     },
   ],
 }

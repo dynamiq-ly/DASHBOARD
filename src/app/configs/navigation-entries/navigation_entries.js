@@ -426,6 +426,7 @@ export const check_in_out = {
       id: 'late_check_out',
       title: 'Late check out ',
       type: 'item',
+      url: './check-in-out/late-check-out',
     },
     {
       id: ' get_hotel_reciept',
