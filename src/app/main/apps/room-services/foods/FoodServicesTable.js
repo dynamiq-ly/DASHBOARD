@@ -40,7 +40,7 @@ function FoodServicesTable(props) {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.measure_name.toLowerCase().includes(searchText.toLowerCase())
+          item.food_service_name.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)

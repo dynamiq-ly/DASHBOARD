@@ -5,7 +5,7 @@ import withReducer from 'app/store/withReducer'
 import reducer from '../store'
 
 import FoodServicesHeader from './FoodServicesHeader'
-import FoodServicesTable from './FoodServicesTable.js'
+import FoodServicesTable from './FoodServicesTable'
 
 function FoodServiceScreen() {
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
