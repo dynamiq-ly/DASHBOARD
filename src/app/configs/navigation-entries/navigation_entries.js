@@ -420,6 +420,7 @@ export const check_in_out = {
       id: 'express_check_out',
       title: 'Express Check Out',
       type: 'item',
+      url: './check-in-out/express-check-out',
     },
     {
       id: 'late_check_out',
