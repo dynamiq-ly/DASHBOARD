@@ -14,7 +14,11 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
-import { getMeasures, selectProducts, selectProductsSearchText } from '../store/categorySlice'
+import {
+  getMeasures,
+  selectProducts,
+  selectProductsSearchText,
+} from '../store/categorySlice'
 
 import CategoryTableHead from './CategoryTableHead'
 
@@ -41,7 +45,7 @@ function CategoryTable(props) {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.measure_name.toLowerCase().includes(searchText.toLowerCase())
+          item.point_type.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -110,7 +114,7 @@ function CategoryTable(props) {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-full">
+      <div className='flex items-center justify-center h-full'>
         <FuseLoading />
       </div>
     )
@@ -121,9 +125,9 @@ function CategoryTable(props) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { delay: 0.1 } }}
-        className="flex flex-1 items-center justify-center h-full"
+        className='flex flex-1 items-center justify-center h-full'
       >
-        <Typography color="text.secondary" variant="h5">
+        <Typography color='text.secondary' variant='h5'>
           There are no data!
         </Typography>
       </motion.div>
@@ -131,9 +135,9 @@ function CategoryTable(props) {
   }
 
   return (
-    <div className="w-full flex flex-col min-h-full">
-      <FuseScrollbars className="grow overflow-x-auto">
-        <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
+    <div className='w-full flex flex-col min-h-full'>
+      <FuseScrollbars className='grow overflow-x-auto'>
+        <Table stickyHeader className='min-w-xl' aria-labelledby='tableTitle'>
           <CategoryTableHead
             selectedProductIds={selected}
             order={order}
@@ -165,16 +169,19 @@ function CategoryTable(props) {
                 const isSelected = selected.indexOf(n.id) !== -1
                 return (
                   <TableRow
-                    className="h-72 cursor-pointer"
+                    className='h-72 cursor-pointer'
                     hover
-                    role="checkbox"
+                    role='checkbox'
                     aria-checked={isSelected}
                     tabIndex={-1}
                     key={n.id}
                     selected={isSelected}
                     onClick={(event) => handleClick(n)}
                   >
-                    <TableCell className="w-40 md:w-64 text-center" padding="none">
+                    <TableCell
+                      className='w-40 md:w-64 text-center'
+                      padding='none'
+                    >
                       <Checkbox
                         checked={isSelected}
                         onClick={(event) => event.stopPropagation()}
@@ -182,11 +189,19 @@ function CategoryTable(props) {
                       />
                     </TableCell>
 
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                    <TableCell
+                      className='p-4 md:p-16 truncate'
+                      component='th'
+                      scope='row'
+                    >
                       {n.id}
                     </TableCell>
 
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                    <TableCell
+                      className='p-4 md:p-16 truncate'
+                      component='th'
+                      scope='row'
+                    >
                       {n.point_type}
                     </TableCell>
                   </TableRow>
@@ -197,8 +212,8 @@ function CategoryTable(props) {
       </FuseScrollbars>
 
       <TablePagination
-        className="shrink-0 border-t-1"
-        component="div"
+        className='shrink-0 border-t-1'
+        component='div'
         count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
