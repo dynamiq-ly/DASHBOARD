@@ -15,11 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
 
-import {
-  getMeasures,
-  selectProducts,
-  selectProductsSearchText,
-} from './store/safetySlice'
+import { getMeasures, selectProducts, selectProductsSearchText } from './store/safetySlice'
 import SafetyTableHead from './SafetyTableHead'
 
 function SafetyTable(props) {
@@ -81,7 +77,7 @@ function SafetyTable(props) {
   }
 
   function handleClick(item) {
-    props.navigate(`${item.id}/${item.measure_name}`)
+    props.navigate(item.id)
   }
 
   function handleCheck(event, id) {
@@ -114,7 +110,7 @@ function SafetyTable(props) {
 
   if (loading) {
     return (
-      <div className='flex items-center justify-center h-full'>
+      <div className="flex items-center justify-center h-full">
         <FuseLoading />
       </div>
     )
@@ -125,8 +121,9 @@ function SafetyTable(props) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { delay: 0.1 } }}
-        className='flex flex-1 items-center justify-center h-full'>
-        <Typography color='text.secondary' variant='h5'>
+        className="flex flex-1 items-center justify-center h-full"
+      >
+        <Typography color="text.secondary" variant="h5">
           There are no data!
         </Typography>
       </motion.div>
@@ -134,9 +131,9 @@ function SafetyTable(props) {
   }
 
   return (
-    <div className='w-full flex flex-col min-h-full'>
-      <FuseScrollbars className='grow overflow-x-auto'>
-        <Table stickyHeader className='min-w-xl' aria-labelledby='tableTitle'>
+    <div className="w-full flex flex-col min-h-full">
+      <FuseScrollbars className="grow overflow-x-auto">
+        <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
           <SafetyTableHead
             selectedProductIds={selected}
             order={order}
@@ -168,17 +165,16 @@ function SafetyTable(props) {
                 const isSelected = selected.indexOf(n.id) !== -1
                 return (
                   <TableRow
-                    className='h-72 cursor-pointer'
+                    className="h-72 cursor-pointer"
                     hover
-                    role='checkbox'
+                    role="checkbox"
                     aria-checked={isSelected}
                     tabIndex={-1}
                     key={n.id}
                     selected={isSelected}
-                    onClick={(event) => handleClick(n)}>
-                    <TableCell
-                      className='w-40 md:w-64 text-center'
-                      padding='none'>
+                    onClick={(event) => handleClick(n)}
+                  >
+                    <TableCell className="w-40 md:w-64 text-center" padding="none">
                       <Checkbox
                         checked={isSelected}
                         onClick={(event) => event.stopPropagation()}
@@ -186,31 +182,19 @@ function SafetyTable(props) {
                       />
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16'
-                      component='th'
-                      scope='row'>
+                    <TableCell className="p-4 md:p-16" component="th" scope="row">
                       {n.id}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'>
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.measure_name}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16'
-                      component='th'
-                      scope='row'>
-                      {`${n.measure_content.slice(0, 200)}...`}
+                    <TableCell className="p-4 md:p-16" component="th" scope="row">
+                      {`${n.measure_content.slice(0, 100)}...`}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16'
-                      component='th'
-                      scope='row'>
+                    <TableCell className="p-4 md:p-16" component="th" scope="row">
                       {n.measure_icon}
                     </TableCell>
                   </TableRow>
@@ -221,8 +205,8 @@ function SafetyTable(props) {
       </FuseScrollbars>
 
       <TablePagination
-        className='shrink-0 border-t-1'
-        component='div'
+        className="shrink-0 border-t-1"
+        component="div"
         count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}

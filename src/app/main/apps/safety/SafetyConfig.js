@@ -12,11 +12,16 @@ const SafetyConfig = {
   routes: [
     {
       path: 'safety',
-      element: <Safety />,
-    },
-    {
-      path: 'safety/:productId',
-      element: <SafetyAdd />,
+      children: [
+        {
+          path: '',
+          element: <Safety />,
+        },
+        {
+          path: ':productId',
+          element: <SafetyAdd />,
+        },
+      ],
     },
   ],
 }

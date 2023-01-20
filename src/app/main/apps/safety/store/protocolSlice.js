@@ -1,46 +1,47 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const getMeasure = createAsyncThunk(
-  'measures/safety/getMeasure',
-  async (productId) => {
-    const response = await axios.get(`/api/measures/${productId}`)
-    const data = await response.data
+export const getProduct = createAsyncThunk('measures/protcol/getProduct', async (productId) => {
+  const response = await axios.get(`/api/measures/${productId}`)
+  const data = await response.data
 
-    return data === undefined ? null : data
-  }
-)
+  return data === undefined ? null : data
+})
 
-export const removeMeasure = createAsyncThunk(
-  'measures/safety/removeMeasure',
+export const removeProduct = createAsyncThunk(
+  'measures/protcol/removeProduct',
   async (val, { dispatch, getState }) => {
-    const { id } = getState().measures.product
+    const { id } = getState().eCommerceApp.product
     await axios.delete(`/api/measures/${id}`)
     return id
   }
 )
 
-export const saveMeasure = createAsyncThunk(
-  'measures/safety/saveMeasure',
+export const saveProduct = createAsyncThunk(
+  'measures/protcol/saveProduct',
   async (productData, { dispatch, getState }) => {
     const { id } = getState().measures
-    const response = await axios.post(`/api/measures`, productData)
-
+    if (id) {
+      const response = await axios.put(`/api/measures/${id}`, productData)
+      const data = await response.data
+      return data
+    }
+    const response = await axios.put('/api/measures', productData)
     const data = await response.data
-
     return data
   }
 )
 
-const measureSlice = createSlice({
-  name: 'measures/safety',
+const productSlice = createSlice({
+  name: 'measures/protcol',
   initialState: null,
   reducers: {
     resetProduct: () => null,
-    newMeasure: {
+    newProduct: {
       reducer: (state, action) => action.payload,
       prepare: (event) => ({
         payload: {
+          // id: FuseUtils.generateGUID(),
           measure_name: '',
           measure_content: '',
           measure_icon: '',
@@ -49,14 +50,14 @@ const measureSlice = createSlice({
     },
   },
   extraReducers: {
-    [getMeasure.fulfilled]: (state, action) => action.payload,
-    [saveMeasure.fulfilled]: (state, action) => action.payload,
-    [removeMeasure.fulfilled]: (state, action) => null,
+    [getProduct.fulfilled]: (state, action) => action.payload,
+    [saveProduct.fulfilled]: (state, action) => action.payload,
+    [removeProduct.fulfilled]: (state, action) => null,
   },
 })
 
-export const { newMeasure, resetProduct } = measureSlice.actions
+export const { newProduct, resetProduct } = productSlice.actions
 
-export const selectProduct = ({ measures }) => measures.safety
+export const selectProduct = ({ measures }) => measures.protcol
 
-export default measureSlice.reducer
+export default productSlice.reducer
