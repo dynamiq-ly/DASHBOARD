@@ -1,67 +1,60 @@
 import TextField from '@mui/material/TextField'
-import Autocomplete from '@mui/material/Autocomplete'
 import { Controller, useFormContext } from 'react-hook-form'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
-  const { control, formState } = methods
-  const { errors } = formState
+  const { control } = methods
 
   return (
     <div>
       <Controller
-        name='measure_name'
+        name="measure_name"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
-            className='mt-8 mb-16'
-            error={!!errors.name}
+            className="mt-8 mb-16"
             required
-            helperText={errors?.name?.message}
-            label='Name'
+            label="Name"
             autoFocus
-            id='measure_name'
-            variant='outlined'
+            id="measure_name"
+            variant="outlined"
             fullWidth
           />
         )}
       />
 
       <Controller
-        name='measure_content'
+        name="measure_content"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
-            className='mt-8 mb-16'
-            id='content'
-            label='Content'
-            type='text'
+            className="mt-8 mb-16"
+            id="measure_content"
+            label="Content"
+            type="text"
             multiline
             rows={5}
-            variant='outlined'
+            variant="outlined"
             fullWidth
           />
         )}
       />
 
       <Controller
-        name='measure_icon'
+        name="measure_icon"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
-            className='mt-8 mb-16'
-            placeholder='Type icon name'
-            label='Icon'
-            type='text'
-            id='icon'
-            variant='outlined'
+            className="mt-8 mb-16"
+            required
+            label="Icon"
+            autoFocus
+            id="measure_icon"
+            variant="outlined"
             fullWidth
-            InputLabelProps={{
-              shrink: true,
-            }}
           />
         )}
       />
