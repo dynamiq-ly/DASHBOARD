@@ -99,7 +99,7 @@ const routes = [
   ),
   {
     path: '/',
-    element: <Navigate to='/' />,
+    element: <Navigate to="/" />,
   },
   { ...RestaurantConfig.routes },
   { ...BarConfig.routes },
@@ -147,7 +147,7 @@ const routes = [
   },
   {
     path: '*',
-    element: <Navigate to='404' />,
+    element: <Navigate to="404" />,
   },
 ]
 

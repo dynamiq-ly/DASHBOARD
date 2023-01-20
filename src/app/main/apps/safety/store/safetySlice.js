@@ -1,47 +1,64 @@
-import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const getMeasures = createAsyncThunk('measures/safety/getMeasures', async () => {
-  const response = await axios.get('/api/measures')
+export const getProduct = createAsyncThunk('measures/safety/getProduct', async (productId) => {
+  const response = await axios.get(`/api/measures/${productId}`)
   const data = await response.data
-  return data
+
+  return data === undefined ? null : data
 })
 
-export const removeMeasures = createAsyncThunk(
-  'measures/safety',
-  async (productIds, { dispatch, getState }) => {
-    await axios.delete(`/api/measures/${productIds}`, { data: productIds })
-    return productIds
+export const removeProduct = createAsyncThunk(
+  'measures/safety/removeProduct',
+  async (val, { dispatch, getState }) => {
+    const { id } = getState().measures.safety
+    await axios.delete(`/api/measures/${id}`)
+    return id
   }
 )
 
-const measuresAdapter = createEntityAdapter({})
+export const saveProduct = createAsyncThunk(
+  'measures/safety/saveProduct',
+  async (productData, { dispatch, getState }) => {
+    const { id } = getState().measures
 
-export const { selectAll: selectProducts, selectById: selectProductById } =
-  measuresAdapter.getSelectors((state) => state.measures.safety)
+    if (id) {
+      const response = await axios.put(`/api/measures/${id}`, productData)
+      const data = await response.data
+      return data
+    }
+    const response = await axios.post('/api/measures', productData)
+    const data = await response.data
+    return data
+  }
+)
 
-const safetySlice = createSlice({
+const productSlice = createSlice({
   name: 'measures/safety',
-  initialState: measuresAdapter.getInitialState({
-    searchText: '',
-  }),
+  initialState: null,
   reducers: {
-    setProductsSearchText: {
-      reducer: (state, action) => {
-        state.searchText = action.payload
-      },
-      prepare: (event) => ({ payload: event.target.value || '' }),
+    resetProduct: () => null,
+    newProduct: {
+      reducer: (state, action) => action.payload,
+      prepare: (event) => ({
+        payload: {
+          //   id: FuseUtils.generateGUID(),
+          measure_name: '',
+          measure_content: '',
+          measure_icon: '',
+        },
+      }),
     },
   },
   extraReducers: {
-    [getMeasures.fulfilled]: measuresAdapter.setAll,
-    [removeMeasures.fulfilled]: (state, action) =>
-      measuresAdapter.removeMany(state, action.payload),
+    [getProduct.fulfilled]: (state, action) => action.payload,
+    [saveProduct.fulfilled]: (state, action) => action.payload,
+    [removeProduct.fulfilled]: (state, action) => null,
   },
 })
 
-export const { setProductsSearchText } = safetySlice.actions
+export const { newProduct, resetProduct } = productSlice.actions
 
-export const selectProductsSearchText = ({ measures }) => measures.safety.searchText
+export const selectProduct = ({ measures }) => measures.safety
 
-export default safetySlice.reducer
+export default productSlice.reducer

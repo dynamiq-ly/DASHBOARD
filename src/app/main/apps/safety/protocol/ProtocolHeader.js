@@ -5,24 +5,26 @@ import { motion } from 'framer-motion'
 import { useFormContext } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { saveProduct, removeProduct } from '../store/protocolSlice'
+import { removeProduct, saveProduct } from '../store/safetySlice'
 
-function AddSafetyHeader(props) {
+function ProtocolHeader(props) {
   const dispatch = useDispatch()
   const methods = useFormContext()
-  const { formState, getValues } = methods
-  // const { isValid, dirtyFields } = formState
+  const { formState, watch, getValues } = methods
+  const { isValid, dirtyFields } = formState
+  const name = watch('name')
   const theme = useTheme()
   const navigate = useNavigate()
 
-  function handlesaveMeasure() {
+  function handleSaveProduct() {
     dispatch(saveProduct(getValues()))
   }
 
-  function handleremoveMeasure() {
+  function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      navigate('/safety')
+      navigate('/apps/e-commerce/products')
     })
   }
 
@@ -48,6 +50,21 @@ function AddSafetyHeader(props) {
             <span className="flex mx-4 font-medium">Measures</span>
           </Typography>
         </motion.div>
+
+        <div className="flex items-center max-w-full">
+          <motion.div
+            className="flex flex-col items-center sm:items-start min-w-0 mx-8 sm:mx-16"
+            initial={{ x: -20 }}
+            animate={{ x: 0, transition: { delay: 0.3 } }}
+          >
+            <Typography className="text-16 sm:text-20 truncate font-semibold">
+              {name || 'New Measure'}
+            </Typography>
+            <Typography variant="caption" className="font-medium">
+              Measure Detail
+            </Typography>
+          </motion.div>
+        </div>
       </div>
       <motion.div
         className="flex"
@@ -58,7 +75,7 @@ function AddSafetyHeader(props) {
           className="whitespace-nowrap mx-4"
           variant="contained"
           color="secondary"
-          onClick={handleremoveMeasure}
+          onClick={handleRemoveProduct}
           startIcon={<FuseSvgIcon className="hidden sm:flex">heroicons-outline:trash</FuseSvgIcon>}
         >
           Remove
@@ -67,8 +84,9 @@ function AddSafetyHeader(props) {
           className="whitespace-nowrap mx-4"
           variant="contained"
           color="secondary"
+          disabled={_.isEmpty(dirtyFields)}
           // disabled={_.isEmpty(dirtyFields) || !isValid}
-          onClick={handlesaveMeasure}
+          onClick={handleSaveProduct}
         >
           Save
         </Button>
@@ -77,4 +95,4 @@ function AddSafetyHeader(props) {
   )
 }
 
-export default AddSafetyHeader
+export default ProtocolHeader

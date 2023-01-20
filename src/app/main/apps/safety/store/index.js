@@ -1,11 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
+import safeties from './safetiesSlice'
 import safety from './safetySlice'
-import protocol from './protocolSlice'
 
 const reducer = combineReducers({
+  safeties,
   safety,
-  protocol,
 })
 
 export default reducer

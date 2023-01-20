@@ -1,7 +1,7 @@
 import { lazy } from 'react'
 
 const Safety = lazy(() => import('./SafetyScreen'))
-const SafetyAdd = lazy(() => import('./add/AddSafety'))
+const Protocol = lazy(() => import('./protocol/Protocol'))
 
 const SafetyConfig = {
   settings: {
@@ -19,7 +19,7 @@ const SafetyConfig = {
         },
         {
           path: ':productId',
-          element: <SafetyAdd />,
+          element: <Protocol />,
         },
       ],
     },

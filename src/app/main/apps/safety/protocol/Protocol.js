@@ -1,3 +1,4 @@
+import FuseLoading from '@fuse/core/FuseLoading'
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import { useDeepCompareEffect } from '@fuse/hooks'
 import Button from '@mui/material/Button'
@@ -9,19 +10,16 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import FuseLoading from '@fuse/core/FuseLoading'
+import _ from '@lodash'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-
-import * as _ from 'lodash'
-import { getProduct, newProduct, resetProduct, selectProduct } from '../store/protocolSlice'
-
+import { getProduct, newProduct, resetProduct, selectProduct } from '../store/safetySlice'
 import reducer from '../store'
 
-import AddSafetyHeader from './AddSafetyHeader'
-import BasicInfoTab from './BasicInfoTab'
+import BasicInfoTab from './tabs/BasicInfo'
+import ProtocolHeader from './ProtocolHeader'
 
 /**
  * Form Validation Schema
@@ -33,12 +31,13 @@ const schema = yup.object().shape({
     .min(5, 'The product name must be at least 5 characters'),
 })
 
-function AddSafety(props) {
+function Product(props) {
   const dispatch = useDispatch()
   const product = useSelector(selectProduct)
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
 
   const routeParams = useParams()
+  const [tabValue, setTabValue] = useState(0)
   const [noProduct, setNoProduct] = useState(false)
   const methods = useForm({
     mode: 'onChange',
@@ -96,6 +95,13 @@ function AddSafety(props) {
   }, [dispatch])
 
   /**
+   * Tab Change
+   */
+  function handleTabChange(event, value) {
+    setTabValue(value)
+  }
+
+  /**
    * Show Message if the requested products is not exists
    */
   if (noProduct) {
@@ -106,10 +112,16 @@ function AddSafety(props) {
         className="flex flex-col flex-1 items-center justify-center h-full"
       >
         <Typography color="text.secondary" variant="h5">
-          There is Protocol
+          There is no such product!
         </Typography>
-        <Button className="mt-24" component={Link} variant="outlined" to="/safety" color="inherit">
-          Go to Back
+        <Button
+          className="mt-24"
+          component={Link}
+          variant="outlined"
+          to="/apps/e-commerce/products"
+          color="inherit"
+        >
+          Go to Products Page
         </Button>
       </motion.div>
     )
@@ -128,11 +140,12 @@ function AddSafety(props) {
   return (
     <FormProvider {...methods}>
       <FusePageCarded
-        header={<AddSafetyHeader />}
+        header={<ProtocolHeader />}
         content={
           <>
             <Tabs
-              value={0}
+              value={tabValue}
+              onChange={handleTabChange}
               indicatorColor="secondary"
               textColor="secondary"
               variant="scrollable"
@@ -154,4 +167,4 @@ function AddSafety(props) {
   )
 }
 
-export default withReducer('measures', reducer)(AddSafety)
+export default withReducer('measures', reducer)(Product)

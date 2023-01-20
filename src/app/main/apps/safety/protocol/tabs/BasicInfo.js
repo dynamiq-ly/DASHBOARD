@@ -49,7 +49,6 @@ function BasicInfoTab(props) {
           <TextField
             {...field}
             className="mt-8 mb-16"
-            required
             label="Icon"
             autoFocus
             id="measure_icon"

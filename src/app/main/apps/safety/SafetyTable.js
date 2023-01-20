@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
 
-import { getMeasures, selectProducts, selectProductsSearchText } from './store/safetySlice'
+import { getMeasures, selectProducts, selectProductsSearchText } from './store/safetiesSlice'
 import SafetyTableHead from './SafetyTableHead'
 
 function SafetyTable(props) {
@@ -77,7 +77,7 @@ function SafetyTable(props) {
   }
 
   function handleClick(item) {
-    props.navigate(item.id)
+    props.navigate(`${item.id}`)
   }
 
   function handleCheck(event, id) {
