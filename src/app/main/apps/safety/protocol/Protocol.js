@@ -114,14 +114,8 @@ function Product(props) {
         <Typography color="text.secondary" variant="h5">
           There is no such product!
         </Typography>
-        <Button
-          className="mt-24"
-          component={Link}
-          variant="outlined"
-          to="/apps/e-commerce/products"
-          color="inherit"
-        >
-          Go to Products Page
+        <Button className="mt-24" component={Link} variant="outlined" to="/safety" color="inherit">
+          Go to Safety Page
         </Button>
       </motion.div>
     )
@@ -132,7 +126,7 @@ function Product(props) {
    */
   if (
     _.isEmpty(form) ||
-    (product && routeParams.productId !== product.id && routeParams.productId !== 'new')
+    (product && routeParams.productId !== `${product.id}` && routeParams.productId !== 'new')
   ) {
     return <FuseLoading />
   }

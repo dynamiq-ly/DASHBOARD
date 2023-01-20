@@ -20,10 +20,13 @@ export const removeProduct = createAsyncThunk(
 export const saveProduct = createAsyncThunk(
   'measures/safety/saveProduct',
   async (productData, { dispatch, getState }) => {
-    const { id } = getState().measures
+    const { id } = getState().measures.safety
 
     if (id) {
-      const response = await axios.put(`/api/measures/${id}`, productData)
+      const response = await axios.post(`/api/measures/${id}`, {
+        ...productData,
+        _method: 'PATCH',
+      })
       const data = await response.data
       return data
     }

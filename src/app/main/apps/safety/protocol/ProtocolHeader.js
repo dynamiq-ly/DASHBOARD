@@ -14,17 +14,19 @@ function ProtocolHeader(props) {
   const methods = useFormContext()
   const { formState, watch, getValues } = methods
   const { isValid, dirtyFields } = formState
-  const name = watch('name')
+  const name = watch('measure_name')
   const theme = useTheme()
   const navigate = useNavigate()
 
   function handleSaveProduct() {
-    dispatch(saveProduct(getValues()))
+    dispatch(saveProduct(getValues())).then(() => {
+      navigate('/safety')
+    })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      navigate('/apps/e-commerce/products')
+      navigate('/safety')
     })
   }
 
