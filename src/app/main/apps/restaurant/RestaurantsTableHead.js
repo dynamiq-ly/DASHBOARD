@@ -98,7 +98,7 @@ const RestaurantsTableHead = (props) => {
 
   return (
     <TableHead>
-      <TableRow className='h-48 sm:h-64'>
+      <TableRow className="h-48 sm:h-64">
         <TableCell
           sx={{
             backgroundColor: (theme) =>
@@ -106,8 +106,9 @@ const RestaurantsTableHead = (props) => {
                 ? lighten(theme.palette.background.default, 0.4)
                 : lighten(theme.palette.background.default, 0.02),
           }}
-          padding='none'
-          className='w-40 md:w-64 text-center z-99'>
+          padding="none"
+          className="w-40 md:w-64 text-center z-99"
+        >
           <Checkbox
             indeterminate={numSelected > 0 && numSelected < props.rowCount}
             checked={props.rowCount !== 0 && numSelected === props.rowCount}
@@ -115,33 +116,37 @@ const RestaurantsTableHead = (props) => {
           />
           {numSelected > 0 && (
             <Box
-              className='flex items-center justify-center absolute w-64 top-0 ltr:left-0 rtl:right-0 mx-56 h-64 z-10 border-b-1'
+              className="flex items-center justify-center absolute w-64 top-0 ltr:left-0 rtl:right-0 mx-56 h-64 z-10 border-b-1"
               sx={{
                 background: (theme) => theme.palette.background.default,
-              }}>
+              }}
+            >
               <IconButton
                 aria-owns={selectedProductsMenu ? 'selectedProductsMenu' : null}
-                aria-haspopup='true'
+                aria-haspopup="true"
                 onClick={openSelectedProductsMenu}
-                size='large'>
+                size="large"
+              >
                 <FuseSvgIcon>heroicons-outline:dots-horizontal</FuseSvgIcon>
               </IconButton>
               <Menu
-                id='selectedProductsMenu'
+                id="selectedProductsMenu"
                 anchorEl={selectedProductsMenu}
                 open={Boolean(selectedProductsMenu)}
-                onClose={closeSelectedProductsMenu}>
+                onClose={closeSelectedProductsMenu}
+              >
                 <MenuList>
                   <MenuItem
                     onClick={() => {
                       dispatch(removeMeasures(selectedProductIds))
                       props.onMenuItemClick()
                       closeSelectedProductsMenu()
-                    }}>
-                    <ListItemIcon className='min-w-40'>
+                    }}
+                  >
+                    <ListItemIcon className="min-w-40">
                       <FuseSvgIcon>heroicons-outline:trash</FuseSvgIcon>
                     </ListItemIcon>
-                    <ListItemText primary='Remove' />
+                    <ListItemText primary="Remove" />
                   </MenuItem>
                 </MenuList>
               </Menu>
@@ -157,25 +162,24 @@ const RestaurantsTableHead = (props) => {
                     ? lighten(theme.palette.background.default, 0.4)
                     : lighten(theme.palette.background.default, 0.02),
               }}
-              className='p-4 md:p-16'
+              className="p-4 md:p-16"
               key={row.id}
               align={row.align}
               padding={row.disablePadding ? 'none' : 'normal'}
-              sortDirection={
-                props.order.id === row.id ? props.order.direction : false
-              }>
+              sortDirection={props.order.id === row.id ? props.order.direction : false}
+            >
               {row.sort && (
                 <Tooltip
-                  title='Sort'
-                  placement={
-                    row.align === 'right' ? 'bottom-end' : 'bottom-start'
-                  }
-                  enterDelay={300}>
+                  title="Sort"
+                  placement={row.align === 'right' ? 'bottom-end' : 'bottom-start'}
+                  enterDelay={300}
+                >
                   <TableSortLabel
                     active={props.order.id === row.id}
                     direction={props.order.direction}
                     onClick={createSortHandler(row.id)}
-                    className='font-semibold'>
+                    className="font-semibold"
+                  >
                     {row.label}
                   </TableSortLabel>
                 </Tooltip>

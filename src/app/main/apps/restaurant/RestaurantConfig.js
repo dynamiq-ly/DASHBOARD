@@ -3,9 +3,7 @@ import { lazy } from 'react'
 const Restaurant = lazy(() => import('./RestaurantScreen'))
 const RestaurantDrinkMenu = lazy(() => import('./menu/drink/DrinkScreen'))
 const RestaurantFoodsMenu = lazy(() => import('./menu/food/FoodScreen'))
-const RestaurantFoodCategoryMenu = lazy(() =>
-  import('./menu/food/category/FoodCategoryScreen')
-)
+const RestaurantFoodCategoryMenu = lazy(() => import('./menu/food/category/FoodCategoryScreen'))
 const RestaurantRegulation = lazy(() => import('./regulation/RegulationScreen'))
 
 const RestaurantConfig = {

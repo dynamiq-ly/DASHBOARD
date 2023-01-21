@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const Connectivity = lazy(() => import('./ConnectivityScreen'))
+const Connection = lazy(() => import('./cnx/Cnx'))
 
 const ConnectivityConfig = {
   settings: {
@@ -11,7 +12,16 @@ const ConnectivityConfig = {
   routes: [
     {
       path: '/connectivity',
-      element: <Connectivity />,
+      children: [
+        {
+          path: '',
+          element: <Connectivity />,
+        },
+        {
+          path: ':productId',
+          element: <Connection />,
+        },
+      ],
     },
   ],
 }
