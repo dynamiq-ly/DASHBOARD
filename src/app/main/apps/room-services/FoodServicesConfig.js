@@ -1,7 +1,9 @@
 import { lazy } from 'react'
 
 const FoodServices = lazy(() => import('./foods/FoodServicesScreen'))
+
 const DrinksServices = lazy(() => import('./drinks/RoomDrinksScreen'))
+
 const MiniBar = lazy(() => import('./mini-bar/MiniBarScreen'))
 
 const FoodServicesConfig = {
@@ -17,7 +19,16 @@ const FoodServicesConfig = {
     },
     {
       path: 'rooms-services/drinks',
-      element: <DrinksServices />,
+      children: [
+        {
+          path: '',
+          element: <DrinksServices />,
+        },
+        {
+          path: 'productId',
+          element: <></>,
+        },
+      ],
     },
     {
       path: 'rooms-services/mini-bar',
