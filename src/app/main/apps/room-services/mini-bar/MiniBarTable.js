@@ -14,11 +14,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
-import {
-  getMeasures,
-  selectProducts,
-  selectProductsSearchText,
-} from '../store/minibarSlice'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../store/minibarSlice'
 import MiniBarTableHead from './MiniBarTableHead'
 
 function MiniBarTable(props) {
@@ -44,9 +40,7 @@ function MiniBarTable(props) {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.mini_bar_item_name
-            .toLowerCase()
-            .includes(searchText.toLowerCase())
+          item.mini_bar_item_name.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -82,7 +76,7 @@ function MiniBarTable(props) {
   }
 
   function handleClick(item) {
-    props.navigate(`${item.id}/${item.measure_name}`)
+    props.navigate(`${item.id}`)
   }
 
   function handleCheck(event, id) {
@@ -115,7 +109,7 @@ function MiniBarTable(props) {
 
   if (loading) {
     return (
-      <div className='flex items-center justify-center h-full'>
+      <div className="flex items-center justify-center h-full">
         <FuseLoading />
       </div>
     )
@@ -126,9 +120,9 @@ function MiniBarTable(props) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { delay: 0.1 } }}
-        className='flex flex-1 items-center justify-center h-full'
+        className="flex flex-1 items-center justify-center h-full"
       >
-        <Typography color='text.secondary' variant='h5'>
+        <Typography color="text.secondary" variant="h5">
           There are no data!
         </Typography>
       </motion.div>
@@ -136,9 +130,9 @@ function MiniBarTable(props) {
   }
 
   return (
-    <div className='w-full flex flex-col min-h-full'>
-      <FuseScrollbars className='grow overflow-x-auto'>
-        <Table stickyHeader className='min-w-xl' aria-labelledby='tableTitle'>
+    <div className="w-full flex flex-col min-h-full">
+      <FuseScrollbars className="grow overflow-x-auto">
+        <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
           <MiniBarTableHead
             selectedProductIds={selected}
             order={order}
@@ -170,19 +164,16 @@ function MiniBarTable(props) {
                 const isSelected = selected.indexOf(n.id) !== -1
                 return (
                   <TableRow
-                    className='h-72 cursor-pointer'
+                    className="h-72 cursor-pointer"
                     hover
-                    role='checkbox'
+                    role="checkbox"
                     aria-checked={isSelected}
                     tabIndex={-1}
                     key={n.id}
                     selected={isSelected}
                     onClick={(event) => handleClick(n)}
                   >
-                    <TableCell
-                      className='w-40 md:w-64 text-center'
-                      padding='none'
-                    >
+                    <TableCell className="w-40 md:w-64 text-center" padding="none">
                       <Checkbox
                         checked={isSelected}
                         onClick={(event) => event.stopPropagation()}
@@ -191,38 +182,26 @@ function MiniBarTable(props) {
                     </TableCell>
 
                     <TableCell
-                      className='w-52 h-52 px-4 md:px-0'
-                      component='th'
-                      scope='row'
-                      padding='none'
+                      className="w-52 h-52 px-4 md:px-0"
+                      component="th"
+                      scope="row"
+                      padding="none"
                     >
                       {n.id}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.mini_bar_item_name}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {new Intl.NumberFormat('en-US', {
                         style: 'currency',
                         currency: 'USD',
                       }).format(n.mini_bar_item_price)}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.min_bar_item_type}
                     </TableCell>
                   </TableRow>
@@ -233,8 +212,8 @@ function MiniBarTable(props) {
       </FuseScrollbars>
 
       <TablePagination
-        className='shrink-0 border-t-1'
-        component='div'
+        className="shrink-0 border-t-1"
+        component="div"
         count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}

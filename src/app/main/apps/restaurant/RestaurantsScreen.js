@@ -7,7 +7,7 @@ import reducer from './store'
 import RestaurantsHeader from './RestaurantsHeader'
 import RestaurantsTable from './RestaurantsTable'
 
-function RestaurantScreen() {
+function RestaurantsScreen() {
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
 
   return (
@@ -19,4 +19,4 @@ function RestaurantScreen() {
   )
 }
 
-export default withReducer('restaurants', reducer)(RestaurantScreen)
+export default withReducer('restaurants', reducer)(RestaurantsScreen)

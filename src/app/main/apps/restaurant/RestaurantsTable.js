@@ -77,7 +77,7 @@ function RestaurantsTable(props) {
   }
 
   function handleClick(item) {
-    props.navigate(`${item.id}/${item.measure_name}`)
+    props.navigate(`${item.id}`)
   }
 
   function handleCheck(event, id) {

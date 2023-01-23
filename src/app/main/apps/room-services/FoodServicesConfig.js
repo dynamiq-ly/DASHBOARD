@@ -5,6 +5,7 @@ const FoodServices = lazy(() => import('./foods/FoodServicesScreen'))
 const DrinksServices = lazy(() => import('./drinks/RoomDrinksScreen'))
 
 const MiniBar = lazy(() => import('./mini-bar/MiniBarScreen'))
+const MiniBarBar = lazy(() => import('./mini-bar/bar/Bar'))
 
 const FoodServicesConfig = {
   settings: {
@@ -32,7 +33,16 @@ const FoodServicesConfig = {
     },
     {
       path: 'rooms-services/mini-bar',
-      element: <MiniBar />,
+      children: [
+        {
+          path: '',
+          element: <MiniBar />,
+        },
+        {
+          path: ':productId',
+          element: <MiniBarBar />,
+        },
+      ],
     },
   ],
 }
