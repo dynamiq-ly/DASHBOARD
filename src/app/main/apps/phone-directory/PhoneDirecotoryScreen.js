@@ -1,7 +1,11 @@
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
 
+import withReducer from 'app/store/withReducer'
+import reducer from './store'
+
 import PhoneDirectoryHeader from './PhoneDirectoryHeader'
+import PhoneDirectoryTable from './PhoneDirectoryTable'
 
 function PhoneDirectoryScreen() {
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
@@ -9,10 +13,10 @@ function PhoneDirectoryScreen() {
   return (
     <FusePageCarded
       header={<PhoneDirectoryHeader />}
-      //   content={<SafetyTable />}
+      content={<PhoneDirectoryTable />}
       scroll={isMobile ? 'normal' : 'content'}
     />
   )
 }
 
-export default PhoneDirectoryScreen
+export default withReducer('directories', reducer)(PhoneDirectoryScreen)
