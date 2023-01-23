@@ -10,16 +10,16 @@ function BasicInfoTab(props) {
   return (
     <div>
       <Controller
-        name="connectivity_name"
+        name="phone_title"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
             required
-            label="Wifi Name"
+            label="title"
             autoFocus
-            id="connectivity_name"
+            id="phone_title"
             variant="outlined"
             fullWidth
           />
@@ -27,14 +27,14 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="connectivity_password"
+        name="phone_instruction"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            id="connectivity_password"
-            label="Wifi Password"
+            id="phone_instruction"
+            label="Instruction"
             required
             type="text"
             variant="outlined"
@@ -44,15 +44,13 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="connectivity_state"
+        name="phone_urgent"
         control={control}
         render={({ field }) => {
           return (
             <FormControlLabel
-              label="Private Wifi"
-              control={
-                <Checkbox {...field} id="connectivity_state" defaultChecked={!!field.value} />
-              }
+              label="Urgency"
+              control={<Checkbox {...field} id="phone_urgent" defaultChecked={!!field.value} />}
             />
           )
         }}

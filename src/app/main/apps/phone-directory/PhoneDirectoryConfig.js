@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const PhoneDirectory = lazy(() => import('./PhoneDirecotoryScreen'))
+const Directory = lazy(() => import('./phone/Directory'))
 
 const PhoneDirectoryConfig = {
   settings: {
@@ -11,7 +12,16 @@ const PhoneDirectoryConfig = {
   routes: [
     {
       path: '/phone-directory',
-      element: <PhoneDirectory />,
+      children: [
+        {
+          path: '',
+          element: <PhoneDirectory />,
+        },
+        {
+          path: ':productId',
+          element: <Directory />,
+        },
+      ],
     },
   ],
 }
