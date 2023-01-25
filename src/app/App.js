@@ -19,7 +19,7 @@ import { AuthProvider } from './auth/AuthContext'
 /**
  * Axios HTTP Request defaults
  */
-axios.defaults.baseURL = 'http://bassemb5.sg-host.com'
+axios.defaults.baseURL = 'https://api.smarhotel.com'
 // axios.defaults.withCredentials = true
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 // axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
@@ -49,7 +49,8 @@ const App = () => {
           <BrowserRouter>
             <FuseAuthorization
               userRole={user.role}
-              loginRedirectUrl={settingsConfig.loginRedirectUrl}>
+              loginRedirectUrl={settingsConfig.loginRedirectUrl}
+            >
               <SnackbarProvider
                 maxSnack={5}
                 anchorOrigin={{
@@ -57,9 +58,9 @@ const App = () => {
                   horizontal: 'right',
                 }}
                 classes={{
-                  containerRoot:
-                    'bottom-0 right-0 mb-52 md:mb-68 mr-8 lg:mr-80 z-99',
-                }}>
+                  containerRoot: 'bottom-0 right-0 mb-52 md:mb-68 mr-8 lg:mr-80 z-99',
+                }}
+              >
                 <FuseLayout layouts={themeLayouts} />
               </SnackbarProvider>
             </FuseAuthorization>
