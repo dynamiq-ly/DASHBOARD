@@ -557,3 +557,14 @@ export const other_request = {
   icon: 'material-outline:drive_file_rename_outline',
   url: './other-request',
 }
+
+/**
+ * gym
+ */
+export const gym = {
+  id: 'gym',
+  title: 'Gym',
+  type: 'item',
+  icon: 'material-outline:sports_handball',
+  url: '/gym',
+}

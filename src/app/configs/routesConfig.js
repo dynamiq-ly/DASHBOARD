@@ -49,6 +49,7 @@ import EntertainementConfig from '../main/apps/entertainement/EntertainementConf
 import ExcursionConfig from '../main/apps/excursion/ExcursionConfig'
 import RoomConfig from '../main/apps/rooms/RoomConfig'
 import FoodServicesConfig from '../main/apps/room-services/FoodServicesConfig'
+import GymConfig from '../main/apps/gym/GymConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -90,6 +91,7 @@ const routeConfigs = [
   ExcursionConfig,
   RoomConfig,
   FoodServicesConfig,
+  GymConfig,
 ]
 
 const routes = [
@@ -136,6 +138,7 @@ const routes = [
   { ...ExcursionConfig.routes },
   { ...RoomConfig.routes },
   { ...FoodServicesConfig.routes },
+  { ...GymConfig.routes },
 
   {
     path: 'loading',
