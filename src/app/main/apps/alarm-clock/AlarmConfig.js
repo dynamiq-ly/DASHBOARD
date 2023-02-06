@@ -11,7 +11,15 @@ const AlarmConfig = {
   routes: [
     {
       path: '/alarm-clock',
-      element: <AlarmClock />,
+      children: [
+        {
+          path: '',
+          element: <AlarmClock />,
+        },
+        {
+          path: ':productId',
+        },
+      ],
     },
   ],
 }

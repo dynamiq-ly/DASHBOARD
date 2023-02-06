@@ -1,7 +1,11 @@
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
 
+import withReducer from 'app/store/withReducer'
+import reducer from './store'
+
 import AlarmHeader from './AlarmHeader'
+import AlarmTable from './AlarmTable'
 
 function AlarmScreen() {
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
@@ -9,10 +13,10 @@ function AlarmScreen() {
   return (
     <FusePageCarded
       header={<AlarmHeader />}
-      //   content={<SafetyTable />}
+      content={<AlarmTable />}
       scroll={isMobile ? 'normal' : 'content'}
     />
   )
 }
 
-export default AlarmScreen
+export default withReducer('reminders', reducer)(AlarmScreen)

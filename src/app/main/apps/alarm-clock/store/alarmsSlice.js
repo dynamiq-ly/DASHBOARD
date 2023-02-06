@@ -1,16 +1,16 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const getMeasures = createAsyncThunk('gyms/gym/getMeasures', async () => {
-  const response = await axios.get('/api/gym')
+export const getMeasures = createAsyncThunk('reminders/alarms/getMeasures', async () => {
+  const response = await axios.get('/api/reception/reminder')
   const data = await response.data
   return data
 })
 
 export const removeMeasures = createAsyncThunk(
-  'gyms/gym',
+  'reminders/alarms',
   async (productIds, { dispatch, getState }) => {
-    await axios.delete(`/api/gym/${productIds}`, { data: productIds })
+    await axios.delete(`/api/reception/reminder/${productIds}`, { data: productIds })
     return productIds
   }
 )
@@ -18,10 +18,10 @@ export const removeMeasures = createAsyncThunk(
 const measuresAdapter = createEntityAdapter({})
 
 export const { selectAll: selectProducts, selectById: selectProductById } =
-  measuresAdapter.getSelectors((state) => state.gyms.gym)
+  measuresAdapter.getSelectors((state) => state.reminders.alarms)
 
 const safetySlice = createSlice({
-  name: 'gyms/gym',
+  name: 'reminders/alarms',
   initialState: measuresAdapter.getInitialState({
     searchText: '',
   }),
@@ -42,6 +42,6 @@ const safetySlice = createSlice({
 
 export const { setProductsSearchText } = safetySlice.actions
 
-export const selectProductsSearchText = ({ gyms }) => gyms.gym.searchText
+export const selectProductsSearchText = ({ reminders }) => reminders.alarms.searchText
 
 export default safetySlice.reducer

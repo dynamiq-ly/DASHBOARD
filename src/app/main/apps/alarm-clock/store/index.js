@@ -1,9 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import gym from './gymSlice'
+import alarms from './alarmsSlice'
 
 const reducer = combineReducers({
-  gym,
+  alarms,
 })
 
 export default reducer
