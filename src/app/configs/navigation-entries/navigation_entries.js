@@ -225,16 +225,16 @@ export const rooms = {
   icon: 'material-outline:bed',
   children: [
     {
-      id: 'rooms.list',
-      title: 'Rooms List',
-      type: 'item',
-      url: './rooms/list',
-    },
-    {
       id: 'rooms.category',
       title: 'Category list',
       type: 'item',
       url: './rooms/category',
+    },
+    {
+      id: 'rooms.list',
+      title: 'Rooms List',
+      type: 'item',
+      url: './rooms/list',
     },
   ],
 }
