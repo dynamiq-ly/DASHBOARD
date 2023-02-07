@@ -1,11 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
 import categories from './categoriesSlice'
-// import roomListSlice from './roomListSlice'
+import roomList from './roomListSlice'
 
 const reducer = combineReducers({
   categories,
-  // roomListSlice,
+  roomList,
 })
 
 export default reducer
