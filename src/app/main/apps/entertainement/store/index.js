@@ -1,15 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import dayActivity from './dayActivitySlice'
-import eventProgram from './eventProgramSlice'
-import sportEvent from './sportEventSlice'
-import nightShow from './nightShowSlice'
+import nightShows from './nightsSlice'
 
 const reducer = combineReducers({
-  dayActivity,
-  eventProgram,
-  sportEvent,
-  nightShow,
+  nightShows,
 })
 
 export default reducer

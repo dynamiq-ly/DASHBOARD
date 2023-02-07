@@ -15,14 +15,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import {
-  getMeasures,
-  selectProducts,
-  selectProductsSearchText,
-} from '../store/nightShowSlice'
-import RestaurantsTableHead from './NightShowTableHead'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../store/nightsSlice'
 
-function RestaurantsTable(props) {
+import NightShowsTableHead from './NightShowTableHead'
+
+function NightShowsTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -45,9 +42,7 @@ function RestaurantsTable(props) {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.entertainements_title
-            .toLowerCase()
-            .includes(searchText.toLowerCase())
+          item.entertainement.entertainements_title.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -116,7 +111,7 @@ function RestaurantsTable(props) {
 
   if (loading) {
     return (
-      <div className='flex items-center justify-center h-full'>
+      <div className="flex items-center justify-center h-full">
         <FuseLoading />
       </div>
     )
@@ -127,9 +122,9 @@ function RestaurantsTable(props) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { delay: 0.1 } }}
-        className='flex flex-1 items-center justify-center h-full'
+        className="flex flex-1 items-center justify-center h-full"
       >
-        <Typography color='text.secondary' variant='h5'>
+        <Typography color="text.secondary" variant="h5">
           There are no data!
         </Typography>
       </motion.div>
@@ -137,10 +132,10 @@ function RestaurantsTable(props) {
   }
 
   return (
-    <div className='w-full flex flex-col min-h-full'>
-      <FuseScrollbars className='grow overflow-x-auto'>
-        <Table stickyHeader className='min-w-xl' aria-labelledby='tableTitle'>
-          <RestaurantsTableHead
+    <div className="w-full flex flex-col min-h-full">
+      <FuseScrollbars className="grow overflow-x-auto">
+        <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
+          <NightShowsTableHead
             selectedProductIds={selected}
             order={order}
             onSelectAllClick={handleSelectAllClick}
@@ -155,8 +150,8 @@ function RestaurantsTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'restaurant_name': {
-                      return o[order.entertainements_title]
+                    case 'entertainements_title': {
+                      return o[order.entertainement.entertainements_title]
                     }
                     default: {
                       return o[order.id]
@@ -171,19 +166,16 @@ function RestaurantsTable(props) {
                 const isSelected = selected.indexOf(n.id) !== -1
                 return (
                   <TableRow
-                    className='h-72 cursor-pointer'
+                    className="h-72 cursor-pointer"
                     hover
-                    role='checkbox'
+                    role="checkbox"
                     aria-checked={isSelected}
                     tabIndex={-1}
                     key={n.id}
                     selected={isSelected}
                     onClick={(event) => handleClick(n)}
                   >
-                    <TableCell
-                      className='w-40 md:w-64 text-center'
-                      padding='none'
-                    >
+                    <TableCell className="w-40 md:w-64 text-center" padding="none">
                       <Checkbox
                         checked={isSelected}
                         onClick={(event) => event.stopPropagation()}
@@ -192,79 +184,57 @@ function RestaurantsTable(props) {
                     </TableCell>
 
                     <TableCell
-                      className='w-52 h-52 px-4 md:px-0'
-                      component='th'
-                      scope='row'
-                      padding='none'
+                      className="w-52 h-52 px-4 md:px-0"
+                      component="th"
+                      scope="row"
+                      padding="none"
                     >
-                      {n.images.length > 0 && (
+                      {n.entertainement.images.length === 0 ? (
                         <img
-                          className='w-full block rounded'
-                          alt={`${n.entertainements_title}-${n.entertainements_type}`}
-                          src={`${process.env.REACT_APP_URL}/storage/restaurants/${n.images[0].image}`}
+                          className="w-full block rounded"
+                          alt={`${n.entertainement.entertainements_title}-${n.entertainement.entertainements_location}`}
+                          src="assets/images/apps/ecommerce/product-image-placeholder.png"
+                        />
+                      ) : (
+                        <img
+                          className="w-full block rounded"
+                          alt={`${n.entertainement.entertainements_title}-${n.entertainement.entertainements_location}`}
+                          src={`${process.env.REACT_APP_URL}/storage/entertainement/${n.entertainement.images[0].image}`}
                         />
                       )}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
-                      {n.entertainements_title}
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.entertainement.entertainements_title}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
-                      {n.restaurant_speciality}
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.night_show_leader}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
-                      {`${n.restaurant_descripton.slice(0, 72)}...`}
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.night_show_type}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
-                      {n.chefs.restaurant_chef_exec_name}
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.night_show_ticked_price}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
-                      {n.restaurant_opens}
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.entertainement.entertainements_location}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
-                      {n.restaurant_closes}
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.entertainement.entertainements_duration}h
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
-                      {n.restaurant_status ? (
-                        <FuseSvgIcon className='text-green' size={20}>
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.entertainement.entertainements_status ? (
+                        <FuseSvgIcon className="text-green" size={20}>
                           heroicons-outline:check-circle
                         </FuseSvgIcon>
                       ) : (
-                        <FuseSvgIcon className='text-red' size={20}>
+                        <FuseSvgIcon className="text-red" size={20}>
                           heroicons-outline:minus-circle
                         </FuseSvgIcon>
                       )}
@@ -277,8 +247,8 @@ function RestaurantsTable(props) {
       </FuseScrollbars>
 
       <TablePagination
-        className='shrink-0 border-t-1'
-        component='div'
+        className="shrink-0 border-t-1"
+        component="div"
         count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
@@ -295,4 +265,4 @@ function RestaurantsTable(props) {
   )
 }
 
-export default withRouter(RestaurantsTable)
+export default withRouter(NightShowsTable)

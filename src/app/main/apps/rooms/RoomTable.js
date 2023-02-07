@@ -15,11 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import {
-  getMeasures,
-  selectProducts,
-  selectProductsSearchText,
-} from './store/roomListSlice'
+import { getMeasures, selectProducts, selectProductsSearchText } from './store/roomListSlice'
 import RestaurantsTableHead from './RoomTableHead'
 
 function RoomTable(props) {
@@ -114,7 +110,7 @@ function RoomTable(props) {
 
   if (loading) {
     return (
-      <div className='flex items-center justify-center h-full'>
+      <div className="flex items-center justify-center h-full">
         <FuseLoading />
       </div>
     )
@@ -125,9 +121,9 @@ function RoomTable(props) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { delay: 0.1 } }}
-        className='flex flex-1 items-center justify-center h-full'
+        className="flex flex-1 items-center justify-center h-full"
       >
-        <Typography color='text.secondary' variant='h5'>
+        <Typography color="text.secondary" variant="h5">
           There are no data!
         </Typography>
       </motion.div>
@@ -135,9 +131,9 @@ function RoomTable(props) {
   }
 
   return (
-    <div className='w-full flex flex-col min-h-full'>
-      <FuseScrollbars className='grow overflow-x-auto'>
-        <Table stickyHeader className='min-w-xl' aria-labelledby='tableTitle'>
+    <div className="w-full flex flex-col min-h-full">
+      <FuseScrollbars className="grow overflow-x-auto">
+        <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
           <RestaurantsTableHead
             selectedProductIds={selected}
             order={order}
@@ -169,19 +165,16 @@ function RoomTable(props) {
                 const isSelected = selected.indexOf(n.id) !== -1
                 return (
                   <TableRow
-                    className='h-72 cursor-pointer'
+                    className="h-72 cursor-pointer"
                     hover
-                    role='checkbox'
+                    role="checkbox"
                     aria-checked={isSelected}
                     tabIndex={-1}
                     key={n.id}
                     selected={isSelected}
                     onClick={(event) => handleClick(n)}
                   >
-                    <TableCell
-                      className='w-40 md:w-64 text-center'
-                      padding='none'
-                    >
+                    <TableCell className="w-40 md:w-64 text-center" padding="none">
                       <Checkbox
                         checked={isSelected}
                         onClick={(event) => event.stopPropagation()}
@@ -190,83 +183,55 @@ function RoomTable(props) {
                     </TableCell>
 
                     <TableCell
-                      className='w-52 h-52 px-4 md:px-0'
-                      component='th'
-                      scope='row'
-                      padding='none'
+                      className="w-52 h-52 px-4 md:px-0"
+                      component="th"
+                      scope="row"
+                      padding="none"
                     >
                       {n.images.length === 0 ? (
                         <img
-                          className='w-full block rounded'
+                          className="w-full block rounded"
                           alt={`${n.room_name}-${n.room_price}`}
-                          src='assets/images/apps/ecommerce/product-image-placeholder.png'
+                          src="assets/images/apps/ecommerce/product-image-placeholder.png"
                         />
                       ) : (
                         <img
-                          className='w-full block rounded'
+                          className="w-full block rounded"
                           alt={`${n.room_name}-${n.room_price}`}
                           src={`${process.env.REACT_APP_URL}/storage/restaurants/${n.images[0].image}`}
                         />
                       )}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.room_name}
                     </TableCell>
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.room_price}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {`${n.room_descripton.slice(0, 72)}...`}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.room_floor}
                     </TableCell>
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.room_number}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.room_occupency_max}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.room_status ? (
-                        <FuseSvgIcon className='text-green' size={20}>
+                        <FuseSvgIcon className="text-green" size={20}>
                           heroicons-outline:check-circle
                         </FuseSvgIcon>
                       ) : (
-                        <FuseSvgIcon className='text-red' size={20}>
+                        <FuseSvgIcon className="text-red" size={20}>
                           heroicons-outline:minus-circle
                         </FuseSvgIcon>
                       )}
@@ -279,8 +244,8 @@ function RoomTable(props) {
       </FuseScrollbars>
 
       <TablePagination
-        className='shrink-0 border-t-1'
-        component='div'
+        className="shrink-0 border-t-1"
+        component="div"
         count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
