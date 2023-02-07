@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import categories from './roomCategorySlice'
+import categories from './categoriesSlice'
 // import roomListSlice from './roomListSlice'
 
 const reducer = combineReducers({

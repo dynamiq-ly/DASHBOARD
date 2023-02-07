@@ -1,21 +1,14 @@
-import {
-  createAsyncThunk,
-  createEntityAdapter,
-  createSlice,
-} from '@reduxjs/toolkit'
+import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const getMeasures = createAsyncThunk(
-  'roomCategories/categories/getMeasures',
-  async () => {
-    const response = await axios.get('/api/rooms/room-category')
-    const data = await response.data
-    return data
-  }
-)
+export const getMeasures = createAsyncThunk('rooms/categories/getMeasures', async () => {
+  const response = await axios.get('/api/rooms/room-category')
+  const data = await response.data
+  return data
+})
 
 export const removeMeasures = createAsyncThunk(
-  'roomCategories/categories',
+  'rooms/categories',
   async (productIds, { dispatch, getState }) => {
     await axios.delete(`/api/rooms/room-category/${productIds}`, {
       data: productIds,
@@ -27,10 +20,10 @@ export const removeMeasures = createAsyncThunk(
 const measuresAdapter = createEntityAdapter({})
 
 export const { selectAll: selectProducts, selectById: selectProductById } =
-  measuresAdapter.getSelectors((state) => state.roomCategories.categories)
+  measuresAdapter.getSelectors((state) => state.rooms.categories)
 
 const safetySlice = createSlice({
-  name: 'roomCategories/categories',
+  name: 'rooms/categories',
   initialState: measuresAdapter.getInitialState({
     searchText: '',
   }),
@@ -51,7 +44,6 @@ const safetySlice = createSlice({
 
 export const { setProductsSearchText } = safetySlice.actions
 
-export const selectProductsSearchText = ({ roomCategories }) =>
-  roomCategories.categories.searchText
+export const selectProductsSearchText = ({ rooms }) => rooms.categories.searchText
 
 export default safetySlice.reducer

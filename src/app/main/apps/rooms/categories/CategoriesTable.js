@@ -14,15 +14,11 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import {
-  getMeasures,
-  selectProducts,
-  selectProductsSearchText,
-} from '../store/roomCategorySlice'
-import RoomCategoryTableHead from './RoomCategoryTableHead'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../store/categoriesSlice'
 
-function RoomCategoryTable(props) {
+import CategoriesTableHead from './CategoriesTableHead'
+
+function CategoryTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -45,7 +41,7 @@ function RoomCategoryTable(props) {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.restaurant_name.toLowerCase().includes(searchText.toLowerCase())
+          item.room_type_name.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -114,7 +110,7 @@ function RoomCategoryTable(props) {
 
   if (loading) {
     return (
-      <div className='flex items-center justify-center h-full'>
+      <div className="flex items-center justify-center h-full">
         <FuseLoading />
       </div>
     )
@@ -125,9 +121,9 @@ function RoomCategoryTable(props) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { delay: 0.1 } }}
-        className='flex flex-1 items-center justify-center h-full'
+        className="flex flex-1 items-center justify-center h-full"
       >
-        <Typography color='text.secondary' variant='h5'>
+        <Typography color="text.secondary" variant="h5">
           There are no data!
         </Typography>
       </motion.div>
@@ -135,10 +131,10 @@ function RoomCategoryTable(props) {
   }
 
   return (
-    <div className='w-full flex flex-col min-h-full'>
-      <FuseScrollbars className='grow overflow-x-auto'>
-        <Table stickyHeader className='min-w-xl' aria-labelledby='tableTitle'>
-          <RoomCategoryTableHead
+    <div className="w-full flex flex-col min-h-full">
+      <FuseScrollbars className="grow overflow-x-auto">
+        <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
+          <CategoriesTableHead
             selectedProductIds={selected}
             order={order}
             onSelectAllClick={handleSelectAllClick}
@@ -153,8 +149,8 @@ function RoomCategoryTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'restaurant_name': {
-                      return o[order.restaurant_name]
+                    case 'room_type_name': {
+                      return o[order.room_type_name]
                     }
                     default: {
                       return o[order.id]
@@ -169,19 +165,16 @@ function RoomCategoryTable(props) {
                 const isSelected = selected.indexOf(n.id) !== -1
                 return (
                   <TableRow
-                    className='h-72 cursor-pointer'
+                    className="h-72 cursor-pointer"
                     hover
-                    role='checkbox'
+                    role="checkbox"
                     aria-checked={isSelected}
                     tabIndex={-1}
                     key={n.id}
                     selected={isSelected}
                     onClick={(event) => handleClick(n)}
                   >
-                    <TableCell
-                      className='w-40 md:w-64 text-center'
-                      padding='none'
-                    >
+                    <TableCell className="w-40 md:w-64 text-center" padding="none">
                       <Checkbox
                         checked={isSelected}
                         onClick={(event) => event.stopPropagation()}
@@ -189,12 +182,12 @@ function RoomCategoryTable(props) {
                       />
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.id}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.room_type_name}
                     </TableCell>
                   </TableRow>
                 )
@@ -204,8 +197,8 @@ function RoomCategoryTable(props) {
       </FuseScrollbars>
 
       <TablePagination
-        className='shrink-0 border-t-1'
-        component='div'
+        className="shrink-0 border-t-1"
+        component="div"
         count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
@@ -222,4 +215,4 @@ function RoomCategoryTable(props) {
   )
 }
 
-export default withRouter(RoomCategoryTable)
+export default withRouter(CategoryTable)
