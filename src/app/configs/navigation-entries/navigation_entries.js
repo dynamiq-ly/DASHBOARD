@@ -140,28 +140,28 @@ export const entertainement = {
   icon: 'material-outline:directions_run',
   children: [
     {
-      id: 'entertainement-collapse.entertainement',
-      title: 'Events Programs',
-      type: 'item',
-      url: './entertainement',
-    },
-    {
       id: 'entertainement-collapse.day-activities',
       title: 'Day Activities',
       type: 'item',
-      url: './entertainement/day-activities',
+      url: 'entertainement/day-activities',
     },
     {
       id: 'entertainement-collapse.night-shows',
       title: 'Night Shows',
       type: 'item',
-      url: './entertainement/night-show',
+      url: 'entertainement/night-show',
     },
     {
       id: 'entertainement-collapse.sport-event',
       title: 'Sport Events',
       type: 'item',
-      url: './entertainement/sport-event',
+      url: 'entertainement/sport-event',
+    },
+    {
+      id: 'entertainement-collapse.entertainement',
+      title: 'Events Programs',
+      type: 'item',
+      url: 'entertainement/event-programs',
     },
   ],
 }

@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 
-const Entertainement = lazy(() => import('./EntertainementScreen'))
+const EventProgram = lazy(() => import('./event-program/EventScreen'))
 const DayActivities = lazy(() => import('./day-activities/DayActivitiesScreen'))
 const NightShows = lazy(() => import('./night-show/NightShowsScreen'))
 const SportEvents = lazy(() => import('./sport-event/SportEventScreen'))
@@ -13,8 +13,8 @@ const EntertainementConfig = {
   },
   routes: [
     {
-      path: '/entertainement',
-      element: <Entertainement />,
+      path: 'entertainement/event-programs',
+      element: <EventProgram />,
     },
     {
       path: 'entertainement/day-activities',
