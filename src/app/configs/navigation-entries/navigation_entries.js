@@ -568,3 +568,27 @@ export const gym = {
   icon: 'material-outline:sports_handball',
   url: '/gym',
 }
+
+/**
+ * swimming pool
+ */
+export const pools = {
+  id: 'swimming_pool',
+  title: 'Swimming Pools',
+  type: 'collapse',
+  icon: 'material-solid:pool',
+  children: [
+    {
+      id: 'swimming_pool.category',
+      title: 'Pool Category',
+      type: 'item',
+      url: 'pools/category',
+    },
+    {
+      id: 'swimming_pool.list',
+      title: 'Pool List',
+      type: 'item',
+      url: 'pools/list',
+    },
+  ],
+}

@@ -40,6 +40,7 @@ import {
   ourHotel,
   safety,
   gym,
+  pools,
 } from './navigation-entries/navigation_entries'
 
 i18next.addResourceBundle('en', 'navigation', en)
@@ -67,6 +68,7 @@ const navigationConfig = [
       { ...excursion },
       { ...rooms },
       { ...gym },
+      { ...pools },
     ],
   },
   {
