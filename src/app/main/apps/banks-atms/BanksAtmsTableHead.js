@@ -15,7 +15,7 @@ import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { lighten } from '@mui/material/styles'
-import { removeMeasures } from './store/banksSlice'
+import { removeMeasures } from './store/listSlice'
 
 const rows = [
   {

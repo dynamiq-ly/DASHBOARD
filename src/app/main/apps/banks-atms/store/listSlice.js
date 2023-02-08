@@ -17,7 +17,7 @@ export const getMeasures = createAsyncThunk(
 export const removeMeasures = createAsyncThunk(
   'banks/bank',
   async (productIds, { dispatch, getState }) => {
-    await axios.delete(`/api/banks`, { data: productIds })
+    await axios.delete(`/api/banks/${productIds}`, { data: productIds })
     return productIds
   }
 )

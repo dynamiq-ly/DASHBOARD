@@ -18,7 +18,7 @@ import {
   getMeasures,
   selectProducts,
   selectProductsSearchText,
-} from './store/banksSlice'
+} from './store/listSlice'
 
 import BanksAtmTableHead from './BanksAtmsTableHead'
 

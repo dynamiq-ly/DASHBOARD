@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const BanksAndAtms = lazy(() => import('./BanksAtmsScreen'))
+const Banks = lazy(() => import('./banks/Banks'))
 
 const BanksAtmsConfig = {
   settings: {
@@ -11,7 +12,16 @@ const BanksAtmsConfig = {
   routes: [
     {
       path: '/banks-atms',
-      element: <BanksAndAtms />,
+      children: [
+        {
+          path: '',
+          element: <BanksAndAtms />,
+        },
+        {
+          path: ':productId',
+          element: <Banks />,
+        },
+      ],
     },
   ],
 }

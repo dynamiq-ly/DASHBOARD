@@ -9,7 +9,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import {
   selectProductsSearchText,
   setProductsSearchText,
-} from './store/banksSlice'
+} from './store/listSlice'
 
 export default function BanksAtmHeader() {
   const dispatch = useDispatch()

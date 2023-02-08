@@ -1,8 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import bank from './banksSlice'
+import list from './bankSlice'
+import bank from './listSlice'
 
 const reducer = combineReducers({
+  list,
   bank,
 })
 
