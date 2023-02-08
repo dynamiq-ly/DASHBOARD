@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
 import StatusBade from 'app/shared-components/StatusBadge'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { getMeasures, selectProducts, selectProductsSearchText } from './store/alarmsSlice'
 
 import AlarmTableHead from './AlarmTableHead'
@@ -208,7 +209,15 @@ function AlarmTable(props) {
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.reminder_status || 1}
+                      {n.isAnswered ? (
+                        <FuseSvgIcon className="text-green" size={20}>
+                          heroicons-outline:check-circle
+                        </FuseSvgIcon>
+                      ) : (
+                        <FuseSvgIcon className="text-red" size={20}>
+                          heroicons-outline:minus-circle
+                        </FuseSvgIcon>
+                      )}
                     </TableCell>
                   </TableRow>
                 )

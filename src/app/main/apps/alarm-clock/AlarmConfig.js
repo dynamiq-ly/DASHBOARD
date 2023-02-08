@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const AlarmClock = lazy(() => import('./AlarmScreen'))
+const AlarmEdit = lazy(() => import('./edit/Alarms'))
 
 const AlarmConfig = {
   settings: {
@@ -18,6 +19,7 @@ const AlarmConfig = {
         },
         {
           path: ':productId',
+          element: <AlarmEdit />,
         },
       ],
     },
