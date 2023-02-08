@@ -15,7 +15,7 @@ import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { lighten } from '@mui/material/styles'
-import { removeMeasures } from './store/connectivitySlice'
+import { removeMeasures } from './store/requestsSlice'
 
 const rows = [
   {
@@ -26,29 +26,43 @@ const rows = [
     sort: false,
   },
   {
-    id: 'connectivity_name',
+    id: 'request_name',
     align: 'left',
     disablePadding: false,
-    label: 'Name',
+    label: 'Title',
     sort: true,
   },
   {
-    id: 'connectivity_password',
+    id: 'request_email',
     align: 'left',
     disablePadding: false,
-    label: 'Password',
+    label: 'Email',
     sort: true,
   },
   {
-    id: 'connectivity_state',
+    id: 'request_content',
     align: 'left',
     disablePadding: false,
-    label: 'Privacy',
+    label: 'Content',
+    sort: true,
+  },
+  {
+    id: 'created_at',
+    align: 'left',
+    disablePadding: false,
+    label: 'Date',
+    sort: true,
+  },
+  {
+    id: 'request_status',
+    align: 'left',
+    disablePadding: false,
+    label: 'Status',
     sort: true,
   },
 ]
 
-const ConnectivitiesTableHead = (props) => {
+const OtherRequestTableHead = (props) => {
   const { selectedProductIds } = props
   const numSelected = selectedProductIds.length
 
@@ -164,4 +178,4 @@ const ConnectivitiesTableHead = (props) => {
   )
 }
 
-export default ConnectivitiesTableHead
+export default OtherRequestTableHead

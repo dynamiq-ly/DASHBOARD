@@ -8,6 +8,7 @@ import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
 
+import moment from 'moment'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
@@ -15,10 +16,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { getMeasures, selectProducts, selectProductsSearchText } from './store/poolListSlice'
-import PoolTableHead from './PoolTableHead'
+import { getMeasures, selectProducts, selectProductsSearchText } from './store/requestsSlice'
 
-function PoolTable(props) {
+import OtherRequestTableHead from './OtherRequestTableHead'
+
+function OtherRequestTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -41,7 +43,7 @@ function PoolTable(props) {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.pool_name.toLowerCase().includes(searchText.toLowerCase())
+          item.request_name.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -134,7 +136,7 @@ function PoolTable(props) {
     <div className="w-full flex flex-col min-h-full">
       <FuseScrollbars className="grow overflow-x-auto">
         <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
-          <PoolTableHead
+          <OtherRequestTableHead
             selectedProductIds={selected}
             order={order}
             onSelectAllClick={handleSelectAllClick}
@@ -149,8 +151,8 @@ function PoolTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'pool_name': {
-                      return o[order.pool_name]
+                    case 'request_name': {
+                      return o[order.request_name]
                     }
                     default: {
                       return o[order.id]
@@ -181,41 +183,28 @@ function PoolTable(props) {
                         onChange={(event) => handleCheck(event, n.id)}
                       />
                     </TableCell>
-
-                    <TableCell
-                      className="w-52 h-52 px-4 md:px-0"
-                      component="th"
-                      scope="row"
-                      padding="none"
-                    >
-                      {n.pool_image.length === 0 ? (
-                        <img
-                          className="w-full block rounded"
-                          alt={`${n.pool_name}-${n.pool_capacity}`}
-                          src="assets/images/apps/ecommerce/product-image-placeholder.png"
-                        />
-                      ) : (
-                        <img
-                          className="w-full block rounded"
-                          alt={`${n.pool_name}-${n.pool_capacity}`}
-                          src={`${process.env.REACT_APP_URL}/storage/swimming-pool/images/${n.pool_image}`}
-                        />
-                      )}
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.id}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.pool_name}
-                    </TableCell>
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.pool_capacity}
+                      {n.request_name}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {`${n.pool_description.slice(0, 72)}...`}
+                      {n.request_email}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.pool_status ? (
+                      {`${n.request_content.slice(0, 72)}...`}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {moment(n.created_at).format('LLL')}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.isAnsewred ? (
                         <FuseSvgIcon className="text-green" size={20}>
                           heroicons-outline:check-circle
                         </FuseSvgIcon>
@@ -251,4 +240,4 @@ function PoolTable(props) {
   )
 }
 
-export default withRouter(PoolTable)
+export default withRouter(OtherRequestTable)

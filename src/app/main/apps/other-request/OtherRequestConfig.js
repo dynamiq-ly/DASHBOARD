@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const OtherRequest = lazy(() => import('./OtherRequestScreen'))
+const OtherRequestEdit = lazy(() => import('./request/Request'))
 
 const OtherRequestConfig = {
   settings: {
@@ -11,7 +12,16 @@ const OtherRequestConfig = {
   routes: [
     {
       path: '/other-request',
-      element: <OtherRequest />,
+      children: [
+        {
+          path: '',
+          element: <OtherRequest />,
+        },
+        {
+          path: ':productId',
+          element: <OtherRequestEdit />,
+        },
+      ],
     },
   ],
 }

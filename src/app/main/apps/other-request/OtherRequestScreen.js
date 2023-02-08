@@ -1,6 +1,11 @@
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
+
+import withReducer from 'app/store/withReducer'
+import reducer from './store'
+
 import OtherRequestHeader from './OtherRequestHeader'
+import OtherRequestTable from './OtherRequestTable'
 
 function OtherRequestScreen() {
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
@@ -8,10 +13,10 @@ function OtherRequestScreen() {
   return (
     <FusePageCarded
       header={<OtherRequestHeader />}
-      //   content={<SafetyTable />}
+      content={<OtherRequestTable />}
       scroll={isMobile ? 'normal' : 'content'}
     />
   )
 }
 
-export default OtherRequestScreen
+export default withReducer('requests', reducer)(OtherRequestScreen)
