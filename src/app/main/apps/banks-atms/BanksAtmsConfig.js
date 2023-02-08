@@ -1,4 +1,5 @@
 import { lazy } from 'react'
+
 const BanksAndAtms = lazy(() => import('./BanksAtmsScreen'))
 
 const BanksAtmsConfig = {
