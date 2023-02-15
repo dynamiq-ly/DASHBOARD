@@ -1,5 +1,7 @@
 import { lazy } from 'react'
+
 const TourOperator = lazy(() => import('./TourOperatorScreen'))
+
 const TourOperatorConfig = {
   settings: {
     layout: {
@@ -9,7 +11,15 @@ const TourOperatorConfig = {
   routes: [
     {
       path: '/tour-operators',
-      element: <TourOperator />,
+      children: [
+        {
+          path: '',
+          element: <TourOperator />,
+        },
+        {
+          path: ':productId',
+        },
+      ],
     },
   ],
 }
