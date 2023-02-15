@@ -2,7 +2,7 @@ import { lazy } from 'react'
 
 const Rooms = lazy(() => import('./RoomScreen'))
 const Categories = lazy(() => import('./categories/CategoriesScreen'))
-
+const RoomCategory = lazy(() => import('./categories/category/RoomCategory'))
 const RoomConfig = {
   settings: {
     layout: {
@@ -12,7 +12,16 @@ const RoomConfig = {
   routes: [
     {
       path: 'rooms/category',
-      element: <Categories />,
+      children: [
+        {
+          path: '',
+          element: <Categories />,
+        },
+        {
+          path: ':productId',
+          element: <RoomCategory />,
+        },
+      ],
     },
     {
       path: 'rooms/list',
