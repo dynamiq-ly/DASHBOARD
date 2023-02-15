@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const Excursion = lazy(() => import('./ExcursionScreen'))
+
 const ExcursionCategory = lazy(() => import('./category/CategoryScreen'))
 
 const ExcursionConfig = {
@@ -10,7 +11,15 @@ const ExcursionConfig = {
     },
   },
   routes: [
-    { path: 'excursion/list', element: <Excursion /> },
+    {
+      path: 'excursion/list',
+      children: [
+        {
+          path: '',
+          element: <Excursion />,
+        },
+      ],
+    },
     { path: 'excursion/category', element: <ExcursionCategory /> },
   ],
 }

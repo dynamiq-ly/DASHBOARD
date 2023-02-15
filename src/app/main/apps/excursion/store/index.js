@@ -1,5 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-const reducer = combineReducers({})
+import list from './excursionsSlice'
+
+const reducer = combineReducers({
+  list,
+})
 
 export default reducer
