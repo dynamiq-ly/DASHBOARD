@@ -41,7 +41,7 @@ function TourOperatorTable(props) {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.phone_title.toLowerCase().includes(searchText.toLowerCase())
+          item.agency_title.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -149,8 +149,8 @@ function TourOperatorTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'bank_name': {
-                      return o[order.bank_name]
+                    case 'agency_title': {
+                      return o[order.agency_title]
                     }
                     default: {
                       return o[order.id]
@@ -181,24 +181,43 @@ function TourOperatorTable(props) {
                         onChange={(event) => handleCheck(event, n.id)}
                       />
                     </TableCell>
+
+                    <TableCell
+                      className="w-52 h-52 px-4 md:px-0"
+                      component="th"
+                      scope="row"
+                      padding="none"
+                    >
+                      {n.agency_image.length === 0 ? (
+                        <img
+                          className="w-full block rounded"
+                          alt={`${n.agency_title}-${n.agency_summary}`}
+                          src="assets/images/apps/ecommerce/product-image-placeholder.png"
+                        />
+                      ) : (
+                        <img
+                          className="w-full block rounded"
+                          alt={`${n.agency_title}-${n.agency_summary}`}
+                          src={`${process.env.REACT_APP_URL}/storage/tour-operator/agency/${n.agency_image}`}
+                        />
+                      )}
+                    </TableCell>
+
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.id}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.bank_name}
+                      {n.agency_title}
+                    </TableCell>
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.agency_summary}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {`${n.bank_description.slice(0, 50)}...`}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.bank_location_textual}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.bank_location_coords}
+                      <a href={n.agency_website} target="_blank" rel="noreferrer">
+                        {n.agency_website}
+                      </a>
                     </TableCell>
                   </TableRow>
                 )

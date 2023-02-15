@@ -19,6 +19,13 @@ import { removeMeasures } from './store/agenciesSlice'
 
 const rows = [
   {
+    id: 'agency_image',
+    align: 'left',
+    disablePadding: false,
+    label: '',
+    sort: true,
+  },
+  {
     id: 'id',
     align: 'left',
     disablePadding: true,
@@ -26,31 +33,24 @@ const rows = [
     sort: false,
   },
   {
-    id: 'bank_name',
+    id: 'agency_title',
     align: 'left',
     disablePadding: false,
-    label: 'Name',
+    label: 'Agency',
     sort: true,
   },
   {
-    id: 'bank_description',
+    id: 'agency_summary',
     align: 'left',
     disablePadding: false,
-    label: 'Description',
+    label: 'Summary',
     sort: true,
   },
   {
-    id: 'bank_location_textual',
+    id: 'agency_website',
     align: 'left',
     disablePadding: false,
-    label: 'Location',
-    sort: true,
-  },
-  {
-    id: 'bank_location_coords',
-    align: 'left',
-    disablePadding: false,
-    label: 'Coordinates',
+    label: 'Website',
     sort: true,
   },
 ]
