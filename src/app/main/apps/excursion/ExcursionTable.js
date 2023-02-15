@@ -14,11 +14,11 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
-import { getMeasures, selectProducts, selectProductsSearchText } from './store/listSlice'
+import { getMeasures, selectProducts, selectProductsSearchText } from './store/excursionsSlice'
 
-import BanksAtmTableHead from './BanksAtmsTableHead'
+import ExcursionTableHead from './ExcursionTableHead'
 
-function BankAtmTable(props) {
+function ExcursionTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -41,7 +41,7 @@ function BankAtmTable(props) {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.phone_title.toLowerCase().includes(searchText.toLowerCase())
+          item.activity_list_name.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -134,7 +134,7 @@ function BankAtmTable(props) {
     <div className="w-full flex flex-col min-h-full">
       <FuseScrollbars className="grow overflow-x-auto">
         <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
-          <BanksAtmTableHead
+          <ExcursionTableHead
             selectedProductIds={selected}
             order={order}
             onSelectAllClick={handleSelectAllClick}
@@ -149,8 +149,8 @@ function BankAtmTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'bank_name': {
-                      return o[order.bank_name]
+                    case 'activity_list_name': {
+                      return o[order.activity_list_name]
                     }
                     default: {
                       return o[order.id]
@@ -181,24 +181,42 @@ function BankAtmTable(props) {
                         onChange={(event) => handleCheck(event, n.id)}
                       />
                     </TableCell>
+
+                    <TableCell
+                      className="w-52 h-52 px-4 md:px-0"
+                      component="th"
+                      scope="row"
+                      padding="none"
+                    >
+                      <img
+                        className="w-full block rounded"
+                        alt={`${n.activity_list_name}-${n.activity_list_zone}`}
+                        src={`${process.env.REACT_APP_URL}/storage/excursions/thumbnails/${n.activity_list_thumbnail}`}
+                      />
+                    </TableCell>
+
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.id}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.bank_name}
+                      {n.activity_list_name}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {`${n.bank_description.slice(0, 50)}...`}
+                      {n.activity_list_zone}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.bank_location_textual}
+                      {`${n.activity_list_description.slice(0, 50)}...`}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.bank_location_coords}
+                      {n.activity_list_duration}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.activity_list_meeting_point}
                     </TableCell>
                   </TableRow>
                 )
@@ -226,4 +244,4 @@ function BankAtmTable(props) {
   )
 }
 
-export default withRouter(BankAtmTable)
+export default withRouter(ExcursionTable)
