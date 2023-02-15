@@ -20,14 +20,11 @@ import {
   newProduct,
   resetProduct,
   selectProduct,
-} from '../store/restaurantSlice'
-import reducer from '../store'
+} from '../../store/categorySlice'
+import reducer from '../../store'
 
-import RestaurantHeader from './RestaurantHeader'
+import PoolCategoryHeader from './PoolCategoryHeader'
 import BasicInfoTab from './tabs/BasicInfo'
-import ChefsTab from './tabs/ChefsTab'
-import WeeklyThemes from './tabs/WeeklyThemes'
-import ImageTabs from './tabs/ImageTabs'
 
 /**
  * Form Validation Schema
@@ -39,7 +36,7 @@ const schema = yup.object().shape({
     .min(5, 'The product name must be at least 5 characters'),
 })
 
-function Restaurant(props) {
+function PoolCategory(props) {
   const dispatch = useDispatch()
   const product = useSelector(selectProduct)
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
@@ -126,10 +123,10 @@ function Restaurant(props) {
           className='mt-24'
           component={Link}
           variant='outlined'
-          to='/resturant/list'
+          to='/pools/category'
           color='inherit'
         >
-          Go to Restaurants Page
+          Go to Swimming pool Page
         </Button>
       </motion.div>
     )
@@ -150,7 +147,7 @@ function Restaurant(props) {
   return (
     <FormProvider {...methods}>
       <FusePageCarded
-        header={<RestaurantHeader />}
+        header={<PoolCategoryHeader />}
         content={
           <>
             <Tabs
@@ -163,22 +160,10 @@ function Restaurant(props) {
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
               <Tab className='h-64' label='Basic Info' />
-              <Tab className='h-64' label='Chefs' />
-              <Tab className='h-64' label='Weekly Themes' />
-              <Tab className='h-64' label='Images' />
             </Tabs>
             <div className='p-16 sm:p-24 max-w-3xl'>
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
-              </div>
-              <div className={tabValue !== 1 ? 'hidden' : ''}>
-                <ChefsTab />
-              </div>
-              <div className={tabValue !== 2 ? 'hidden' : ''}>
-                <WeeklyThemes />
-              </div>
-              <div className={tabValue !== 3 ? 'hidden' : ''}>
-                <ImageTabs />
               </div>
             </div>
           </>
@@ -189,4 +174,4 @@ function Restaurant(props) {
   )
 }
 
-export default withReducer('restaurants', reducer)(Restaurant)
+export default withReducer('pools', reducer)(PoolCategory)
