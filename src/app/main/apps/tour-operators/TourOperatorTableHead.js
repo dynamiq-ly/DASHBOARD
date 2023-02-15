@@ -47,6 +47,13 @@ const rows = [
     sort: true,
   },
   {
+    id: 'agency_services',
+    align: 'left',
+    disablePadding: false,
+    label: 'Summary',
+    sort: true,
+  },
+  {
     id: 'agency_website',
     align: 'left',
     disablePadding: false,

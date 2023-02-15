@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const TourOperator = lazy(() => import('./TourOperatorScreen'))
+const Agency = lazy(() => import('./agency/Agency'))
 
 const TourOperatorConfig = {
   settings: {
@@ -18,6 +19,7 @@ const TourOperatorConfig = {
         },
         {
           path: ':productId',
+          element: <Agency />,
         },
       ],
     },

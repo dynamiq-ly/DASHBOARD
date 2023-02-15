@@ -7,26 +7,26 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { removeProduct, saveProduct } from '../store/bankSlice'
+import { removeProduct, saveProduct } from '../store/agencySlice'
 
-function BanksHeader(props) {
+function AgencyHeader(props) {
   const dispatch = useDispatch()
   const methods = useFormContext()
   const { formState, watch, getValues } = methods
   const { isValid, dirtyFields } = formState
-  const name = watch('bank_name')
+  const name = watch('agency_title')
   const theme = useTheme()
   const navigate = useNavigate()
 
   function handleSaveProduct() {
     dispatch(saveProduct(getValues())).then(() => {
-      navigate('/banks-atms')
+      navigate('/tour-operators')
     })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      navigate('/banks-atms')
+      navigate('/tour-operators')
     })
   }
 
@@ -41,7 +41,7 @@ function BanksHeader(props) {
             className="flex items-center sm:mb-12"
             component={Link}
             role="button"
-            to="/banks-atms"
+            to="/tour-operators"
             color="inherit"
           >
             <FuseSvgIcon size={20}>
@@ -49,7 +49,7 @@ function BanksHeader(props) {
                 ? 'heroicons-outline:arrow-sm-left'
                 : 'heroicons-outline:arrow-sm-right'}
             </FuseSvgIcon>
-            <span className="flex mx-4 font-medium">Bank</span>
+            <span className="flex mx-4 font-medium">Agency</span>
           </Typography>
         </motion.div>
 
@@ -60,10 +60,10 @@ function BanksHeader(props) {
             animate={{ x: 0, transition: { delay: 0.3 } }}
           >
             <Typography className="text-16 sm:text-20 truncate font-semibold">
-              {name || 'New Bank'}
+              {name || 'New Agency'}
             </Typography>
             <Typography variant="caption" className="font-medium">
-              Bank Detail
+              Agency Detail
             </Typography>
           </motion.div>
         </div>
@@ -97,4 +97,4 @@ function BanksHeader(props) {
   )
 }
 
-export default BanksHeader
+export default AgencyHeader

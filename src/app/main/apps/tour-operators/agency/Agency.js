@@ -15,14 +15,11 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import { getProduct, newProduct, resetProduct, selectProduct } from '../store/restaurantSlice'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../store/agencySlice'
 import reducer from '../store'
 
-import RestaurantHeader from './RestaurantHeader'
 import BasicInfoTab from './tabs/BasicInfo'
-import ChefsTab from './tabs/ChefsTab'
-import WeeklyThemes from './tabs/WeeklyThemes'
-import ImageTabs from './tabs/ImageTabs'
+import AgencyHeader from './AgencyHeader'
 
 /**
  * Form Validation Schema
@@ -34,7 +31,7 @@ const schema = yup.object().shape({
     .min(5, 'The product name must be at least 5 characters'),
 })
 
-function Restaurant(props) {
+function Agency(props) {
   const dispatch = useDispatch()
   const product = useSelector(selectProduct)
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
@@ -115,16 +112,10 @@ function Restaurant(props) {
         className="flex flex-col flex-1 items-center justify-center h-full"
       >
         <Typography color="text.secondary" variant="h5">
-          There is no such data!
+          There is no such product!
         </Typography>
-        <Button
-          className="mt-24"
-          component={Link}
-          variant="outlined"
-          to="/resturant/list"
-          color="inherit"
-        >
-          Go to Restaurants Page
+        <Button className="mt-24" component={Link} variant="outlined" to="/safety" color="inherit">
+          Go to Safety Page
         </Button>
       </motion.div>
     )
@@ -143,7 +134,7 @@ function Restaurant(props) {
   return (
     <FormProvider {...methods}>
       <FusePageCarded
-        header={<RestaurantHeader />}
+        header={<AgencyHeader />}
         content={
           <>
             <Tabs
@@ -156,23 +147,15 @@ function Restaurant(props) {
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
               <Tab className="h-64" label="Basic Info" />
-              <Tab className="h-64" label="Chefs" />
-              <Tab className="h-64" label="Weekly Themes" />
-              <Tab className="h-64" label="Images" />
+              <Tab className="h-64" label="Services" />
             </Tabs>
             <div className="p-16 sm:p-24 max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
               </div>
-              <div className={tabValue !== 1 ? 'hidden' : ''}>
-                <ChefsTab />
-              </div>
-              <div className={tabValue !== 2 ? 'hidden' : ''}>
-                <WeeklyThemes />
-              </div>
-              <div className={tabValue !== 3 ? 'hidden' : ''}>
-                <ImageTabs />
-              </div>
+              {/* <div className={tabValue !== 1 ? 'hidden' : ''}>
+                <ServiceTab />
+              </div> */}
             </div>
           </>
         }
@@ -182,4 +165,4 @@ function Restaurant(props) {
   )
 }
 
-export default withReducer('restaurants', reducer)(Restaurant)
+export default withReducer('agencies', reducer)(Agency)
