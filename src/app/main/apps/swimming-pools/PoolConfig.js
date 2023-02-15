@@ -1,7 +1,9 @@
 import { lazy } from 'react'
 
 const Pools = lazy(() => import('./PoolScreen'))
+
 const PoolCategories = lazy(() => import('./categories/CategoriesScreen'))
+const PoolCategory = lazy(() => import('./categories/category/PoolCategory'))
 
 const PoolConfig = {
   settings: {
@@ -12,7 +14,16 @@ const PoolConfig = {
   routes: [
     {
       path: 'pools/category',
-      element: <PoolCategories />,
+      children: [
+        {
+          path: '',
+          element: <PoolCategories />,
+        },
+        {
+          path: ':productId',
+          element: <PoolCategory />,
+        },
+      ],
     },
     {
       path: 'pools/list',
