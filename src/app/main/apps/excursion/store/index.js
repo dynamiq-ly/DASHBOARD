@@ -1,5 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-const reducer = combineReducers({})
+import category from './categoriesSlice'
+
+const reducer = combineReducers({
+  category,
+})
 
 export default reducer
