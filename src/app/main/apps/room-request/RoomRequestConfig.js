@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const RoomRequest = lazy(() => import('./RoomRequestScreen'))
+const RequestRoomEdit = lazy(() => import('./request/Request'))
 
 const RoomRequestConfig = {
   settings: {
@@ -15,8 +16,12 @@ const RoomRequestConfig = {
         {
           path: '',
           element: <RoomRequest />,
-        }
-      ]
+        },
+        {
+          path: ':productId',
+          element: <RequestRoomEdit />,
+        },
+      ],
     },
   ],
 }
