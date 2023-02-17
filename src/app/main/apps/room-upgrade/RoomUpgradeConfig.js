@@ -11,7 +11,12 @@ const RoomUpgradeConfig = {
   routes: [
     {
       path: '/room-upgrade',
-      element: <RoomUpgrade />,
+      children: [
+        {
+          path: '',
+          element: <RoomUpgrade />,
+        },
+      ],
     },
   ],
 }
