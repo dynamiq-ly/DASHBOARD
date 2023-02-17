@@ -51,6 +51,7 @@ import RoomConfig from '../main/apps/rooms/RoomConfig'
 import FoodServicesConfig from '../main/apps/room-services/FoodServicesConfig'
 import GymConfig from '../main/apps/gym/GymConfig'
 import PoolConfig from '../main/apps/swimming-pools/PoolConfig'
+import HelpCenterAppConfig from '../main/help-center/HelpCenterAppConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -94,6 +95,7 @@ const routeConfigs = [
   FoodServicesConfig,
   GymConfig,
   PoolConfig,
+  HelpCenterAppConfig,
 ]
 
 const routes = [
@@ -103,7 +105,7 @@ const routes = [
   ),
   {
     path: '/',
-    element: <Navigate to='/' />,
+    element: <Navigate to="/" />,
   },
   { ...RestaurantConfig.routes },
   { ...BarConfig.routes },
@@ -142,7 +144,7 @@ const routes = [
   { ...FoodServicesConfig.routes },
   { ...GymConfig.routes },
   { ...PoolConfig.routes },
-
+  { ...HelpCenterAppConfig.routes },
   {
     path: 'loading',
     element: <FuseLoading />,
@@ -153,7 +155,7 @@ const routes = [
   },
   {
     path: '*',
-    element: <Navigate to='404' />,
+    element: <Navigate to="404" />,
   },
 ]
 

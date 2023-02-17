@@ -592,3 +592,14 @@ export const pools = {
     },
   ],
 }
+
+/**
+ * help center
+ */
+export const helpCenter = {
+  id: 'help_center',
+  title: 'Help Center',
+  type: 'item',
+  icon: 'heroicons-outline:support',
+  url: 'help-center',
+}

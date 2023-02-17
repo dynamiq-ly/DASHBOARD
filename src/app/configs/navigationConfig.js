@@ -41,6 +41,7 @@ import {
   safety,
   gym,
   pools,
+  helpCenter,
 } from './navigation-entries/navigation_entries'
 
 i18next.addResourceBundle('en', 'navigation', en)
@@ -120,6 +121,13 @@ const navigationConfig = [
     subtitle: 'Protcolos & Terms of Use',
     type: 'group',
     children: [{ ...safety }, { ...ourHotel }],
+  },
+  {
+    id: 'help-center',
+    title: 'Help Center',
+    subtitle: 'Help Center and Term of Use',
+    type: 'group',
+    children: [{ ...helpCenter }],
   },
 ]
 
