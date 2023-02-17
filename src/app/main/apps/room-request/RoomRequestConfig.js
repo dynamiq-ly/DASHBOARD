@@ -11,7 +11,12 @@ const RoomRequestConfig = {
   routes: [
     {
       path: '/room-request',
-      element: <RoomRequest />,
+      children: [
+        {
+          path: '',
+          element: <RoomRequest />,
+        }
+      ]
     },
   ],
 }
