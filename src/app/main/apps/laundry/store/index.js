@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import laundry from './laundrySlice'
+import laundry from './laundriesSlice'
 import menu from './menuSlice'
 
 const reducer = combineReducers({

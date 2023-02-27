@@ -11,15 +11,15 @@ const LaundryConfig = {
   },
   routes: [
     {
-      path: '/laundry',
+      path: 'laundry',
       children: [
         {
           path: '',
           element: <Laundry />,
         },
         {
-          // path: 'menu',
-          // element: <Menu />,
+          path: 'menu',
+          element: <Menu />,
         },
       ],
     },

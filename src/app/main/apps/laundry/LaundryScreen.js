@@ -19,4 +19,4 @@ function LaundryScreen() {
   )
 }
 
-export default withReducer('laundries ', reducer)(LaundryScreen)
+export default withReducer('laundries', reducer)(LaundryScreen)
