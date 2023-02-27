@@ -1,23 +1,16 @@
-import {
-  createAsyncThunk,
-  createEntityAdapter,
-  createSlice,
-} from '@reduxjs/toolkit'
+import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const getMeasures = createAsyncThunk(
-  'laundries/menu/getMeasures',
-  async () => {
-    const response = await axios.get('/api/laundry-menu')
-    const data = await response.data
-    return data
-  }
-)
+export const getMeasures = createAsyncThunk('laundries/menu/getMeasures', async () => {
+  const response = await axios.get('/api/laundry-menu')
+  const data = await response.data
+  return data
+})
 
 export const removeMeasures = createAsyncThunk(
   'laundries/menu',
   async (productIds, { dispatch, getState }) => {
-    await axios.delete(`/api/laundry-menu'/${productIds}`, { data: productIds })
+    await axios.delete(`/api/laundry-menu/${productIds}`, { data: productIds })
     return productIds
   }
 )
@@ -49,7 +42,6 @@ const safetySlice = createSlice({
 
 export const { setProductsSearchText } = safetySlice.actions
 
-export const selectProductsSearchText = ({ laundries }) =>
-  laundries.menu.searchText
+export const selectProductsSearchText = ({ laundries }) => laundries.menu.searchText
 
 export default safetySlice.reducer

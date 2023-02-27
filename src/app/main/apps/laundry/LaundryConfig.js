@@ -1,7 +1,9 @@
 import { lazy } from 'react'
 
 const Laundry = lazy(() => import('./LaundryScreen'))
+
 const Menu = lazy(() => import('./menu/MenuScreen'))
+const LaundryMenu = lazy(() => import('./menu/menu-ae/Element'))
 
 const LaundryConfig = {
   settings: {
@@ -19,7 +21,16 @@ const LaundryConfig = {
         },
         {
           path: 'menu',
-          element: <Menu />,
+          children: [
+            {
+              path: '',
+              element: <Menu />,
+            },
+            {
+              path: ':productId',
+              element: <LaundryMenu />,
+            },
+          ],
         },
       ],
     },
