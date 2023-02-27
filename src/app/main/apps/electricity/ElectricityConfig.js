@@ -1,7 +1,6 @@
 import { lazy } from 'react'
-const Electricity = lazy(() => import('./ElectricityScreen'))
 
-import React from 'react'
+const Electricity = lazy(() => import('./ElectricityScreen'))
 
 const ElectricityConfig = {
   settings: {
