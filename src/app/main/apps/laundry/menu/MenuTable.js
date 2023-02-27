@@ -18,11 +18,11 @@ import {
   getMeasures,
   selectProducts,
   selectProductsSearchText,
-} from './store/gymSlice'
+} from '../store/menuSlice'
 
-import GymTableHead from './GymTableHead'
+import GymTableHead from './MenuTableHead'
 
-function ConnectivityTable(props) {
+function MenuTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -153,8 +153,8 @@ function ConnectivityTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'gym_name': {
-                      return o[order.gym_name]
+                    case 'clothes_type': {
+                      return o[order.clothes_type]
                     }
                     default: {
                       return o[order.id]
@@ -190,16 +190,11 @@ function ConnectivityTable(props) {
                     </TableCell>
 
                     <TableCell
-                      className='w-52 h-52 px-4 md:px-0'
+                      className='p-4 md:p-16 truncate'
                       component='th'
                       scope='row'
-                      padding='none'
                     >
-                      <img
-                        className='w-full block rounded'
-                        alt={`${n.gym_name}-${n.gym_description}`}
-                        src={`${process.env.REACT_APP_URL}/storage/gym/${n.gym_image}`}
-                      />
+                      {n.id}
                     </TableCell>
 
                     <TableCell
@@ -207,7 +202,21 @@ function ConnectivityTable(props) {
                       component='th'
                       scope='row'
                     >
-                      {n.gym_name}
+                      {n.clothes_type}
+                    </TableCell>
+                    <TableCell
+                      className='p-4 md:p-16 truncate'
+                      component='th'
+                      scope='row'
+                    >
+                      {n.laundry ? n.laundry : 'N/A'}
+                    </TableCell>
+                    <TableCell
+                      className='p-4 md:p-16 truncate'
+                      component='th'
+                      scope='row'
+                    >
+                      {n.dry_cleaning ? n.dry_cleaning : 'N/A'}
                     </TableCell>
 
                     <TableCell
@@ -215,31 +224,7 @@ function ConnectivityTable(props) {
                       component='th'
                       scope='row'
                     >
-                      {`${n.gym_description.slice(0, 50)}...`}
-                    </TableCell>
-
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
-                      {n.gym_floor}
-                    </TableCell>
-
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
-                      {n.gym_timing}
-                    </TableCell>
-
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
-                      {n.equipments.length}
+                      {n.pressing ? n.pressing : 'N/A'}
                     </TableCell>
                   </TableRow>
                 )
@@ -267,4 +252,4 @@ function ConnectivityTable(props) {
   )
 }
 
-export default withRouter(ConnectivityTable)
+export default withRouter(MenuTable)

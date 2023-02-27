@@ -9,9 +9,9 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import {
   selectProductsSearchText,
   setProductsSearchText,
-} from './store/laundrySlice'
+} from '../store/menuSlice'
 
-export default function Laundryeader() {
+export default function MenuHeader() {
   const dispatch = useDispatch()
   const searchText = useSelector(selectProductsSearchText)
 
@@ -24,7 +24,7 @@ export default function Laundryeader() {
         delay={300}
         className='text-24 md:text-32 font-extrabold tracking-tight'
       >
-        Laundry
+        Laundry Menu
       </Typography>
 
       <div className='flex flex-col w-full sm:w-auto sm:flex-row space-y-16 sm:space-y-0 flex-1 items-center justify-end space-x-8'>

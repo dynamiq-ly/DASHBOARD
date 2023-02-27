@@ -96,6 +96,7 @@ const routeConfigs = [
   GymConfig,
   PoolConfig,
   HelpCenterAppConfig,
+  LaundryConfig,
 ]
 
 const routes = [
@@ -105,7 +106,7 @@ const routes = [
   ),
   {
     path: '/',
-    element: <Navigate to="/" />,
+    element: <Navigate to='/' />,
   },
   { ...RestaurantConfig.routes },
   { ...BarConfig.routes },
@@ -145,6 +146,7 @@ const routes = [
   { ...GymConfig.routes },
   { ...PoolConfig.routes },
   { ...HelpCenterAppConfig.routes },
+  { ...LaundryConfig.routes },
   {
     path: 'loading',
     element: <FuseLoading />,
@@ -155,7 +157,7 @@ const routes = [
   },
   {
     path: '*',
-    element: <Navigate to="404" />,
+    element: <Navigate to='404' />,
   },
 ]
 

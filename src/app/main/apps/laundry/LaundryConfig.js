@@ -1,5 +1,7 @@
 import { lazy } from 'react'
+
 const Laundry = lazy(() => import('./LaundryScreen'))
+const Menu = lazy(() => import('./menu/MenuScreen'))
 
 const LaundryConfig = {
   settings: {
@@ -10,7 +12,16 @@ const LaundryConfig = {
   routes: [
     {
       path: '/laundry',
-      element: <Laundry />,
+      children: [
+        {
+          path: '',
+          element: <Laundry />,
+        },
+        {
+          // path: 'menu',
+          // element: <Menu />,
+        },
+      ],
     },
   ],
 }

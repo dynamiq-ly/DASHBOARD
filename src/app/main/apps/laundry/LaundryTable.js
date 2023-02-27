@@ -18,11 +18,11 @@ import {
   getMeasures,
   selectProducts,
   selectProductsSearchText,
-} from './store/gymSlice'
+} from './store/laundrySlice'
 
-import GymTableHead from './GymTableHead'
+import LaundryTableHead from './LaundryTableHead'
 
-function ConnectivityTable(props) {
+function LaundryTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -45,7 +45,9 @@ function ConnectivityTable(props) {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.phone_title.toLowerCase().includes(searchText.toLowerCase())
+          item.LaundryInstruction.toLowerCase().includes(
+            searchText.toLowerCase()
+          )
         )
       )
       setPage(0)
@@ -138,7 +140,7 @@ function ConnectivityTable(props) {
     <div className='w-full flex flex-col min-h-full'>
       <FuseScrollbars className='grow overflow-x-auto'>
         <Table stickyHeader className='min-w-xl' aria-labelledby='tableTitle'>
-          <GymTableHead
+          <LaundryTableHead
             selectedProductIds={selected}
             order={order}
             onSelectAllClick={handleSelectAllClick}
@@ -153,8 +155,8 @@ function ConnectivityTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'gym_name': {
-                      return o[order.gym_name]
+                    case 'LaundryInstruction': {
+                      return o[order.LaundryInstruction]
                     }
                     default: {
                       return o[order.id]
@@ -190,16 +192,11 @@ function ConnectivityTable(props) {
                     </TableCell>
 
                     <TableCell
-                      className='w-52 h-52 px-4 md:px-0'
+                      className='p-4 md:p-16 truncate'
                       component='th'
                       scope='row'
-                      padding='none'
                     >
-                      <img
-                        className='w-full block rounded'
-                        alt={`${n.gym_name}-${n.gym_description}`}
-                        src={`${process.env.REACT_APP_URL}/storage/gym/${n.gym_image}`}
-                      />
+                      {n.id}
                     </TableCell>
 
                     <TableCell
@@ -207,39 +204,7 @@ function ConnectivityTable(props) {
                       component='th'
                       scope='row'
                     >
-                      {n.gym_name}
-                    </TableCell>
-
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
-                      {`${n.gym_description.slice(0, 50)}...`}
-                    </TableCell>
-
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
-                      {n.gym_floor}
-                    </TableCell>
-
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
-                      {n.gym_timing}
-                    </TableCell>
-
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
-                      {n.equipments.length}
+                      {n.Laundry_instruction}
                     </TableCell>
                   </TableRow>
                 )
@@ -267,4 +232,4 @@ function ConnectivityTable(props) {
   )
 }
 
-export default withRouter(ConnectivityTable)
+export default withRouter(LaundryTable)
