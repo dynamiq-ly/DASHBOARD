@@ -42,7 +42,7 @@ const Root = styled('div')(({ theme }) => ({
   },
 }))
 
-function ImagesTabs(props) {
+function ImagesTab(props) {
   const methods = useFormContext()
   const { control, watch } = methods
 
@@ -52,7 +52,7 @@ function ImagesTabs(props) {
     <Root>
       <div className="flex justify-center sm:justify-start flex-wrap -mx-16">
         <Controller
-          name="images"
+          name="images[]"
           control={control}
           render={({ field: { onChange, value } }) => (
             <Box
@@ -67,6 +67,7 @@ function ImagesTabs(props) {
               className="productImageUpload flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer shadow hover:shadow-lg"
             >
               <input
+                accept="image/*"
                 className="hidden"
                 id="button-file"
                 type="file"
@@ -77,12 +78,11 @@ function ImagesTabs(props) {
                       if (!file) {
                         return
                       }
+
                       const reader = new FileReader()
 
                       reader.onload = () => {
-                        resolve({
-                          image: file,
-                        })
+                        resolve(file)
                       }
 
                       reader.onerror = reject
@@ -102,38 +102,63 @@ function ImagesTabs(props) {
             </Box>
           )}
         />
-        <Controller
-          name="featuredImageId"
-          control={control}
-          defaultValue=""
-          render={({ field: { onChange, value } }) =>
-            images &&
-            images.map((media) => (
-              <div
-                onClick={() => onChange(media.id)}
-                onKeyDown={() => onChange(media.id)}
-                role="button"
-                tabIndex={0}
-                className={clsx(
-                  'productImageItem flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer outline-none shadow hover:shadow-lg',
-                  media.id === value && 'featured'
-                )}
-                key={media.id}
-              >
-                <FuseSvgIcon className="productImageFeaturedStar">heroicons-solid:star</FuseSvgIcon>
-                <img
-                  className="max-w-none w-auto h-full"
-                  // src={`${process.env.REACT_APP_URL}/storage/restaurants/${media.image}`}
-                  src={`${media.image}`}
-                  alt="product"
-                />
-              </div>
-            ))
-          }
-        />
+
+        {typeof images === 'string' ? (
+          <Controller
+            name="images[]"
+            control={control}
+            defaultValue=""
+            render={({ field: { onChange } }) =>
+              JSON.parse(images).map((media, index) => (
+                <div
+                  onClick={() => onChange(media)}
+                  onKeyDown={() => onChange(media)}
+                  role="button"
+                  tabIndex={0}
+                  className={clsx(
+                    'productImageItem flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer outline-none shadow hover:shadow-lg'
+                  )}
+                  key={index}
+                >
+                  <FuseSvgIcon className="productImageFeaturedStar">
+                    heroicons-solid:star
+                  </FuseSvgIcon>
+                  <img
+                    className="max-w-none w-auto h-full"
+                    src={`${process.env.REACT_APP_URL}/storage/points-of-interest/${media}`}
+                    alt="product"
+                  />
+                </div>
+              ))
+            }
+          />
+        ) : (
+          <Controller
+            name="images[]"
+            control={control}
+            defaultValue=""
+            render={({ field: { onChange } }) =>
+              images.map((media, index) => (
+                <div
+                  onClick={() => onChange(media)}
+                  onKeyDown={() => onChange(media)}
+                  role="button"
+                  tabIndex={0}
+                  className={clsx(
+                    'productImageItem flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer outline-none shadow hover:shadow-lg'
+                  )}
+                  key={index}
+                >
+                  <FuseSvgIcon className="productImageFeaturedStar">heroicons-solid:x</FuseSvgIcon>
+                  <img className="max-w-none w-auto h-full" src={media} alt="product" />
+                </div>
+              ))
+            }
+          />
+        )}
       </div>
     </Root>
   )
 }
 
-export default ImagesTabs
+export default ImagesTab

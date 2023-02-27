@@ -189,11 +189,19 @@ function InterestTable(props) {
                       scope="row"
                       padding="none"
                     >
-                      {n.images.length > 0 && (
+                      {n.images ? (
                         <img
                           className="w-full block rounded"
-                          alt={`${n.bar_name}`}
-                          src={`${process.env.REACT_APP_URL}/storage/points-of-interest/${n.images[0].image}`}
+                          alt={`${n.point_title}`}
+                          src={`${process.env.REACT_APP_URL}/storage/points-of-interest/${
+                            JSON.parse(n.images)[0]
+                          }`}
+                        />
+                      ) : (
+                        <img
+                          className="w-full block rounded"
+                          alt={`${n.point_title}-${n.point_small_summary}`}
+                          src="assets/images/apps/ecommerce/product-image-placeholder.png"
                         />
                       )}
                     </TableCell>
