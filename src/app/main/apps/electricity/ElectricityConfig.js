@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const Electricity = lazy(() => import('./ElectricityScreen'))
+const Cables = lazy(() => import('./electricityCables/Cables'))
 
 const ElectricityConfig = {
   settings: {
@@ -11,7 +12,16 @@ const ElectricityConfig = {
   routes: [
     {
       path: '/electricity',
-      element: <Electricity />,
+      children: [
+        {
+          path: '',
+          element: <Electricity />,
+        },
+        {
+          path: ':productId',
+          element: <Cables />,
+        },
+      ],
     },
   ],
 }
