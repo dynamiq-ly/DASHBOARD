@@ -30,11 +30,15 @@ export const saveProduct = createAsyncThunk(
       const data = await response.data
       return data
     }
-    const response = await axios.post('/api/point-of-interest', productData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    const response = await axios.post(
+      '/api/point-of-interest',
+      { ...productData, ...productData.schedule },
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
     const data = await response.data
     return data
   }
