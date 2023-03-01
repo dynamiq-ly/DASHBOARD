@@ -4,13 +4,15 @@ import miniBars from './minibarSlice'
 import miniBarAE from './barSlice'
 
 import foods from './foodsSlice'
+import foodsAE from './foodTimeSlice'
 
 import drinks from './drinksSlice'
 
 const reducer = combineReducers({
-  miniBars,
-  foods,
   drinks,
+  foods,
+  foodsAE,
+  miniBars,
   miniBarAE,
 })
 
