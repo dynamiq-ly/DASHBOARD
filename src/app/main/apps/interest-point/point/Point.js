@@ -23,6 +23,7 @@ import BasicInfoTab from './tabs/BasicInfo'
 import ScheduleTab from './tabs/ScheduleTab'
 import ImageTab from './tabs/ImageTab'
 import CategoryTab from './tabs/CategoryTab'
+import DisponibilyTab from './tabs/DisponibilityTab'
 
 /**
  * Form Validation Schema
@@ -159,6 +160,7 @@ function Point(props) {
               <Tab className="h-64" label="Categroy" />
               <Tab className="h-64" label="Schedule" />
               <Tab className="h-64" label="Images" />
+              <Tab className="h-64" label="Availability" />
             </Tabs>
             <div className="p-16 sm:p-24 max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
@@ -172,6 +174,9 @@ function Point(props) {
               </div>
               <div className={tabValue !== 3 ? 'hidden' : ''}>
                 <ImageTab />
+              </div>
+              <div className={tabValue !== 4 ? 'hidden' : ''}>
+                <DisponibilyTab />
               </div>
             </div>
           </>
