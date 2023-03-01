@@ -55,7 +55,7 @@ const productSlice = createSlice({
           point_recommended_visit: '',
           point_description: '',
           images: [],
-          point_status: 1,
+          point_status: 0,
           point_interest_types_id: '',
           sunday: null,
           monday: null,
