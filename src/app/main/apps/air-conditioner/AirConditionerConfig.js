@@ -1,6 +1,8 @@
 import { lazy } from 'react'
+import Climatization from './climatization/Climatization'
 
 const AirConditioner = lazy(() => import('./AirConditionerScreen'))
+const ClimatizationAE = lazy(() => import('./climatization/Climatization'))
 
 const AirConditionerConfig = {
   settings: {
@@ -15,6 +17,10 @@ const AirConditionerConfig = {
         {
           path: '',
           element: <AirConditioner />,
+        },
+        {
+          path: ':productId',
+          element: <ClimatizationAE />,
         },
       ],
     },
