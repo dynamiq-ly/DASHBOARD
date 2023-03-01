@@ -48,8 +48,6 @@ function ImagesTab(props) {
 
   const images = watch('images')
 
-  console.log(images)
-
   return (
     <Root>
       <div className="flex justify-center sm:justify-start flex-wrap -mx-16">
