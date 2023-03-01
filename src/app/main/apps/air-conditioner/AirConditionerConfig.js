@@ -11,7 +11,12 @@ const AirConditionerConfig = {
   routes: [
     {
       path: '/air-conditioner',
-      element: <AirConditioner />,
+      children: [
+        {
+          path: '',
+          element: <AirConditioner />,
+        },
+      ],
     },
   ],
 }
