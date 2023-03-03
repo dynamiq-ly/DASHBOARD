@@ -19,11 +19,11 @@ import {
   getMeasures,
   selectProducts,
   selectProductsSearchText,
-} from './store/hairDryerSlice'
+} from './store/towelSlice'
 
-import HairDryerTableHead from './HairDryerTableHead'
+import TowelsTableHead from './TowelsTableHead'
 
-function HairDryerTable(props) {
+function TowelsTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -46,7 +46,7 @@ function HairDryerTable(props) {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.HairDryerInstruction.toLowerCase().includes(
+          item.TowelsInstruction.toLowerCase().includes(
             searchText.toLowerCase()
           )
         )
@@ -141,7 +141,7 @@ function HairDryerTable(props) {
     <div className='w-full flex flex-col min-h-full'>
       <FuseScrollbars className='grow overflow-x-auto'>
         <Table stickyHeader className='min-w-xl' aria-labelledby='tableTitle'>
-          <HairDryerTableHead
+          <TowelsTableHead
             selectedProductIds={selected}
             order={order}
             onSelectAllClick={handleSelectAllClick}
@@ -156,8 +156,8 @@ function HairDryerTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'HairDryerInstruction': {
-                      return o[order.HairDryerInstruction]
+                    case 'ElectricityInstruction': {
+                      return o[order.TowelsInstruction]
                     }
                     default: {
                       return o[order.id]
@@ -205,22 +205,7 @@ function HairDryerTable(props) {
                       component='th'
                       scope='row'
                     >
-                      {n.HairDryerInstruction}
-                    </TableCell>
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
-                      {n.HairDryerWarning ? (
-                        <FuseSvgIcon className='text-green' size={20}>
-                          heroicons-outline:check-circle
-                        </FuseSvgIcon>
-                      ) : (
-                        <FuseSvgIcon className='text-red' size={20}>
-                          heroicons-outline:minus-circle
-                        </FuseSvgIcon>
-                      )}
+                      {n.TowelsInstruction}
                     </TableCell>
                   </TableRow>
                 )
@@ -248,4 +233,4 @@ function HairDryerTable(props) {
   )
 }
 
-export default withRouter(HairDryerTable)
+export default withRouter(TowelsTable)
