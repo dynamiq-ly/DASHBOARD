@@ -15,12 +15,12 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/categorySlice'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/drinkSlice'
 import reducer from '../../store'
 
-import PoolCategoryHeader from './PoolCategoryHeader'
+import CategoryHeader from './CategoryHeader'
 import BasicInfoTab from './tabs/BasicInfo'
-import ImagesTab from './tabs/ImageTab'
+import ImageTab from './tabs/ImageTab'
 /**
  * Form Validation Schema
  */
@@ -31,7 +31,7 @@ const schema = yup.object().shape({
     .min(5, 'The product name must be at least 5 characters'),
 })
 
-function PoolCategory(props) {
+function Category(props) {
   const dispatch = useDispatch()
   const product = useSelector(selectProduct)
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
@@ -140,7 +140,7 @@ function PoolCategory(props) {
   return (
     <FormProvider {...methods}>
       <FusePageCarded
-        header={<PoolCategoryHeader />}
+        header={<CategoryHeader />}
         content={
           <>
             <Tabs
@@ -160,7 +160,7 @@ function PoolCategory(props) {
                 <BasicInfoTab />
               </div>
               <div className={tabValue !== 1 ? 'hidden' : ''}>
-                <ImagesTab />
+                <ImageTab />
               </div>
             </div>
           </>
@@ -171,4 +171,4 @@ function PoolCategory(props) {
   )
 }
 
-export default withReducer('pools', reducer)(PoolCategory)
+export default withReducer('roomService', reducer)(Category)

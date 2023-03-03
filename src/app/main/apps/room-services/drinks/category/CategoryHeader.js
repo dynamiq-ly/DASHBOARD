@@ -7,28 +7,28 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { removeProduct, saveProduct } from '../../store/categorySlice'
+import { removeProduct, saveProduct } from '../../store/drinkSlice'
 
-function PoolCategoryHeader(props) {
+function CategoryHeader(props) {
   const dispatch = useDispatch()
   const methods = useFormContext()
   const { formState, watch, getValues } = methods
   const { isValid, dirtyFields } = formState
   const featuredImageId = watch('featuredImageId')
-  const images = watch('pool_image')
-  const name = watch('pool_type')
+  const images = watch('drink_drink_image')
+  const name = watch('drink_drink_category')
   const theme = useTheme()
   const navigate = useNavigate()
 
   function handleSaveProduct() {
     dispatch(saveProduct(getValues())).then(() => {
-      navigate('/pools/category')
+      navigate('/rooms-services/drinks')
     })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      navigate('/pools/category')
+      navigate('/rooms-services/drinks')
     })
   }
 
@@ -43,7 +43,7 @@ function PoolCategoryHeader(props) {
             className="flex items-center sm:mb-12"
             component={Link}
             role="button"
-            to="/pools/category"
+            to="/rooms-services/drinks"
             color="inherit"
           >
             <FuseSvgIcon size={20}>
@@ -51,7 +51,7 @@ function PoolCategoryHeader(props) {
                 ? 'heroicons-outline:arrow-sm-left'
                 : 'heroicons-outline:arrow-sm-right'}
             </FuseSvgIcon>
-            <span className="flex mx-4 font-medium">Pool Category</span>
+            <span className="flex mx-4 font-medium">Drinks Category</span>
           </Typography>
         </motion.div>
 
@@ -86,7 +86,7 @@ function PoolCategoryHeader(props) {
               {name || 'New Category'}
             </Typography>
             <Typography variant="caption" className="font-medium">
-              Pool Category Detail
+              Drink Category Detail
             </Typography>
           </motion.div>
         </div>
@@ -119,4 +119,4 @@ function PoolCategoryHeader(props) {
   )
 }
 
-export default PoolCategoryHeader
+export default CategoryHeader

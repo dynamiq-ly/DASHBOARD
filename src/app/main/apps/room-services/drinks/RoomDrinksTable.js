@@ -40,7 +40,7 @@ function FoodServicesTable(props) {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.food_service_name.toLowerCase().includes(searchText.toLowerCase())
+          item.drink_drink_category.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -76,7 +76,7 @@ function FoodServicesTable(props) {
   }
 
   function handleClick(item) {
-    props.navigate(`${item.id}/${item.measure_name}`)
+    props.navigate(`${item.id}`)
   }
 
   function handleCheck(event, id) {
@@ -188,7 +188,8 @@ function FoodServicesTable(props) {
                       padding="none"
                     >
                       <img
-                        className="w-full block rounded"
+                        className="w-full h-52 block rounded"
+                        style={{ objectFit: 'cover' }}
                         alt={n.drink_drink_category}
                         src={`${process.env.REACT_APP_URL}/storage/room-service/drink-service/${n.drink_drink_image}`}
                       />

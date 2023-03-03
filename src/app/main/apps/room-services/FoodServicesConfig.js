@@ -5,6 +5,7 @@ const FoodServiceAE = lazy(() => import('./foods/edit/Element'))
 const FoodList = lazy(() => import('./foods/list/ListScreen'))
 
 const DrinksServices = lazy(() => import('./drinks/RoomDrinksScreen'))
+const DrinkServiceCategory = lazy(() => import('./drinks/category/Category'))
 
 const MiniBar = lazy(() => import('./mini-bar/MiniBarScreen'))
 const MiniBarBar = lazy(() => import('./mini-bar/bar/Bar'))
@@ -46,8 +47,13 @@ const FoodServicesConfig = {
           element: <DrinksServices />,
         },
         {
-          path: 'productId',
-          element: <></>,
+          path: ':productId',
+          children: [
+            {
+              path: '',
+              element: <DrinkServiceCategory />,
+            },
+          ],
         },
       ],
     },
