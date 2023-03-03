@@ -18,7 +18,7 @@ const HairDryerConfig = {
           element: <HairDryer />,
         },
         {
-          path: 'productId',
+          path: ':productId',
           element: <DryerAE />,
         },
       ],
