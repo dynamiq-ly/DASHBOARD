@@ -4,11 +4,13 @@ import categories from './categoriesSlice'
 import category from './categorySlice'
 
 import poolList from './poolListSlice'
+import pool from './poolSlice'
 
 const reducer = combineReducers({
   categories,
-  poolList,
   category,
+  poolList,
+  pool,
 })
 
 export default reducer

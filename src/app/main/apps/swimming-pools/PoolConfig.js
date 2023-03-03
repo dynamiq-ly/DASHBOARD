@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const Pools = lazy(() => import('./PoolScreen'))
+const PoolAE = lazy(() => import('./pool/Pool'))
 
 const PoolCategories = lazy(() => import('./categories/CategoriesScreen'))
 const PoolCategory = lazy(() => import('./categories/category/PoolCategory'))
@@ -27,7 +28,16 @@ const PoolConfig = {
     },
     {
       path: 'pools/list',
-      element: <Pools />,
+      children: [
+        {
+          path: '',
+          element: <Pools />,
+        },
+        {
+          path: ':productId',
+          element: <PoolAE />,
+        },
+      ],
     },
   ],
 }
