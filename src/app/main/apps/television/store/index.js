@@ -1,11 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import towel from './towelSlice'
-import roomtowel from './roomTowelSlice'
+import television from './televisionSlice'
+import tv from './tvSlice'
 
 const reducer = combineReducers({
-  towel,
-  roomtowel,
+  television,
+  tv,
 })
 
 export default reducer
