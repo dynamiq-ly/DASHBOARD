@@ -14,11 +14,11 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
-import { getMeasures, selectProducts, selectProductsSearchText } from './store/gymSlice'
+import { useParams } from 'react-router-dom'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../../store/platesSlice'
+import ListTableHead from './ListTableHead'
 
-import GymTableHead from './GymTableHead'
-
-function ConnectivityTable(props) {
+function ListTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -33,15 +33,17 @@ function ConnectivityTable(props) {
     id: null,
   })
 
+  const { productId } = useParams()
+
   useEffect(() => {
-    dispatch(getMeasures()).then(() => setLoading(false))
-  }, [dispatch])
+    dispatch(getMeasures(productId)).then(() => setLoading(false))
+  }, [dispatch, productId])
 
   useEffect(() => {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.phone_title.toLowerCase().includes(searchText.toLowerCase())
+          item.plate_name.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -134,7 +136,7 @@ function ConnectivityTable(props) {
     <div className="w-full flex flex-col min-h-full">
       <FuseScrollbars className="grow overflow-x-auto">
         <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
-          <GymTableHead
+          <ListTableHead
             selectedProductIds={selected}
             order={order}
             onSelectAllClick={handleSelectAllClick}
@@ -149,8 +151,8 @@ function ConnectivityTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'gym_name': {
-                      return o[order.gym_name]
+                    case 'plate_name': {
+                      return o[order.plate_name]
                     }
                     default: {
                       return o[order.id]
@@ -189,30 +191,27 @@ function ConnectivityTable(props) {
                       padding="none"
                     >
                       <img
-                        className="w-full block rounded"
-                        alt={`${n.gym_name}-${n.gym_description}`}
-                        src={`${process.env.REACT_APP_URL}/storage/gym/${n.gym_image}`}
+                        className="w-full h-52 block rounded"
+                        style={{ objectFit: 'cover' }}
+                        alt={`${n.plate_name}-${n.plate_description}`}
+                        src={`${process.env.REACT_APP_URL}/storage/room-service/food-service/${n.plate_image}`}
                       />
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.gym_name}
+                      {n.plate_name}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {`${n.gym_description.slice(0, 50)}...`}
+                      {n.plate_price}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.gym_floor}
+                      {n.supplements.length}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.gym_timing}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.equipments.length}
+                      {`${n.plate_descripiton.slice(0, 82)}...`}
                     </TableCell>
                   </TableRow>
                 )
@@ -240,4 +239,4 @@ function ConnectivityTable(props) {
   )
 }
 
-export default withRouter(ConnectivityTable)
+export default withRouter(ListTable)
