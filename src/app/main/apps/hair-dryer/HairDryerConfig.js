@@ -11,7 +11,12 @@ const HairDryerConfig = {
   routes: [
     {
       path: '/hair-dryer',
-      element: <HairDryer />,
+      children: [
+        {
+          path: '',
+          element: <HairDryer />,
+        },
+      ],
     },
   ],
 }
