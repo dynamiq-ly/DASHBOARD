@@ -1,11 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import hairdryer from './hairDryerSlice'
-import dryer from './DryerSlice'
+import towel from './towelSlice'
 
 const reducer = combineReducers({
-  hairdryer,
-  dryer,
+  towel,
 })
 
 export default reducer

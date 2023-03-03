@@ -10,7 +10,12 @@ const TowelsConfig = {
   routes: [
     {
       path: '/towels',
-      element: <Towels />,
+      children: [
+        {
+          path: '',
+          element: <Towels />,
+        },
+      ],
     },
   ],
 }
