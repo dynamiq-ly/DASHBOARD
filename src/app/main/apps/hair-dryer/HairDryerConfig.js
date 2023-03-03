@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const HairDryer = lazy(() => import('./HairDryerScreen'))
+const DryerAE = lazy(() => import('./dryer/Dryer'))
 
 const HairDryerConfig = {
   settings: {
@@ -15,6 +16,10 @@ const HairDryerConfig = {
         {
           path: '',
           element: <HairDryer />,
+        },
+        {
+          path: 'productId',
+          element: <DryerAE />,
         },
       ],
     },

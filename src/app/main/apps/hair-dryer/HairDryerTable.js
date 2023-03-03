@@ -21,6 +21,7 @@ import {
 } from './store/hairDryerSlice'
 
 import HairDryerTableHead from './HairDryerTableHead'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
 
 function HairDryerTable(props) {
   const dispatch = useDispatch()
@@ -211,7 +212,15 @@ function HairDryerTable(props) {
                       component='th'
                       scope='row'
                     >
-                      {n.HairDryerWarning}
+                      {n.HairDryerWarning ? (
+                        <FuseSvgIcon className='text-green' size={20}>
+                          heroicons-outline:check-circle
+                        </FuseSvgIcon>
+                      ) : (
+                        <FuseSvgIcon className='text-red' size={20}>
+                          heroicons-outline:minus-circle
+                        </FuseSvgIcon>
+                      )}
                     </TableCell>
                   </TableRow>
                 )
