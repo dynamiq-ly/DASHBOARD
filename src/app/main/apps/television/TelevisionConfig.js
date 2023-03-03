@@ -1,4 +1,5 @@
 import { lazy } from 'react'
+
 const Television = lazy(() => import('./TelevisionScreen'))
 
 const TelevisionConfig = {
@@ -10,7 +11,12 @@ const TelevisionConfig = {
   routes: [
     {
       path: '/television',
-      element: <Television />,
+      children: [
+        {
+          path: '',
+          element: <Television />,
+        },
+      ],
     },
   ],
 }

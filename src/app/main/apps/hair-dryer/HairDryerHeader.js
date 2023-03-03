@@ -11,7 +11,7 @@ import {
   setProductsSearchText,
 } from './store/hairDryerSlice'
 
-export default function Laundryeader() {
+export default function DryerHeader() {
   const dispatch = useDispatch()
   const searchText = useSelector(selectProductsSearchText)
 
