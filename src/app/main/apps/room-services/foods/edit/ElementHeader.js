@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import { motion } from 'framer-motion'
 import { useFormContext } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { removeProduct, saveProduct } from '../../store/foodTimeSlice'
@@ -17,6 +17,9 @@ function ElementHeader(props) {
   const name = watch('food_service_name')
   const theme = useTheme()
   const navigate = useNavigate()
+
+  const routeParams = useParams()
+  const { productId } = routeParams
 
   function handleSaveProduct() {
     dispatch(saveProduct(getValues())).then(() => {
@@ -73,6 +76,20 @@ function ElementHeader(props) {
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0, transition: { delay: 0.3 } }}
       >
+        {productId !== 'new' && (
+          <Button
+            className="whitespace-nowrap mx-4"
+            component={Link}
+            to="foodlist"
+            variant="contained"
+            color="primary"
+            startIcon={
+              <FuseSvgIcon className="hidden sm:flex">material-twotone:restaurant</FuseSvgIcon>
+            }
+          >
+            Food List
+          </Button>
+        )}
         <Button
           className="whitespace-nowrap mx-4"
           variant="contained"
