@@ -21,7 +21,9 @@ function PoolCategoryHeader(props) {
   const navigate = useNavigate()
 
   function handleSaveProduct() {
-    dispatch(saveProduct(getValues()))
+    dispatch(saveProduct(getValues())).then(() => {
+      navigate('/pools/category')
+    })
   }
 
   function handleRemoveProduct() {

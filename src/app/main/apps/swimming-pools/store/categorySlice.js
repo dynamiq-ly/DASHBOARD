@@ -1,15 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const getProduct = createAsyncThunk(
-  'pools/category/getProduct',
-  async (productId) => {
-    const response = await axios.get(`/api/swimming-pool/${productId}`)
-    const data = await response.data
+export const getProduct = createAsyncThunk('pools/category/getProduct', async (productId) => {
+  const response = await axios.get(`/api/swimming-pool/${productId}`)
+  const data = await response.data
 
-    return data === undefined ? null : data
-  }
-)
+  return data === undefined ? null : data
+})
 
 export const removeProduct = createAsyncThunk(
   'pools/category/removeProduct',
@@ -26,14 +23,26 @@ export const saveProduct = createAsyncThunk(
     const { id } = getState().pools.category
 
     if (id) {
-      const response = await axios.post(`/api/swimming-pool/${id}`, {
-        ...productData,
-        _method: 'PATCH',
-      })
+      const response = await axios.post(
+        `/api/swimming-pool/${id}`,
+        {
+          ...productData,
+          _method: 'PATCH',
+        },
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      )
       const data = await response.data
       return data
     }
-    const response = await axios.post('/api/swimming-pool', productData)
+    const response = await axios.post('/api/swimming-pool', productData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
     const data = await response.data
     return data
   }
