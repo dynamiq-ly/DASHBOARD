@@ -87,7 +87,7 @@ function ElementHeader(props) {
               <FuseSvgIcon className="hidden sm:flex">material-twotone:restaurant</FuseSvgIcon>
             }
           >
-            Food List
+            Plates List
           </Button>
         )}
         <Button
