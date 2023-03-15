@@ -6,6 +6,7 @@ const Restaurant = lazy(() => import('./resto/Restaurant'))
 const RestaurantDrinkMenu = lazy(() => import('./menu/drink/DrinkScreen'))
 const RestaurantFoodsMenu = lazy(() => import('./menu/food/FoodScreen'))
 const RestaurantFoodCategoryMenu = lazy(() => import('./menu/food/category/FoodCategoryScreen'))
+
 const RestaurantRegulation = lazy(() => import('./regulation/RegulationScreen'))
 
 const RestaurantConfig = {
@@ -16,7 +17,7 @@ const RestaurantConfig = {
   },
   routes: [
     {
-      path: 'restaurant/list',
+      path: 'restaurant',
       children: [
         {
           path: '',
@@ -24,17 +25,22 @@ const RestaurantConfig = {
         },
         {
           path: ':productId',
-          element: <Restaurant />,
+
+          children: [
+            { path: '', element: <Restaurant /> },
+            { path: 'regulation', element: <RestaurantRegulation /> },
+            { path: 'menu/drinks', element: <RestaurantDrinkMenu /> },
+            {
+              path: 'menu/food',
+              children: [
+                { path: 'list', element: <RestaurantFoodsMenu /> },
+                { path: 'categorgy', element: <RestaurantFoodCategoryMenu /> },
+              ],
+            },
+          ],
         },
       ],
     },
-    { path: 'restaurant/menu/drinks', element: <RestaurantDrinkMenu /> },
-    { path: 'restaurant/menu/food/list', element: <RestaurantFoodsMenu /> },
-    {
-      path: 'restaurant/menu/food/category',
-      element: <RestaurantFoodCategoryMenu />,
-    },
-    { path: 'restaurant/regulation', element: <RestaurantRegulation /> },
   ],
 }
 

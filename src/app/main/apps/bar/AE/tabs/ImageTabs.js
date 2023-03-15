@@ -128,7 +128,7 @@ function ImagesTab(props) {
                   </FuseSvgIcon>
                   <img
                     className="max-w-none w-auto h-full"
-                    src={`${process.env.REACT_APP_URL}/storage/restaurants/${media.image}`}
+                    src={`${process.env.REACT_APP_URL}/storage/bars/${media.image}`}
                     alt="product"
                   />
                 </div>

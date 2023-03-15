@@ -23,6 +23,7 @@ import BasicInfoTab from './tabs/BasicInfo'
 import ChefsTab from './tabs/ChefsTab'
 import WeeklyThemes from './tabs/WeeklyThemes'
 import ImageTabs from './tabs/ImageTabs'
+import FileList from './tabs/sections/FolderList'
 
 /**
  * Form Validation Schema
@@ -159,6 +160,7 @@ function Restaurant(props) {
               <Tab className="h-64" label="Chefs" />
               <Tab className="h-64" label="Weekly Themes" />
               <Tab className="h-64" label="Images" />
+              <Tab className="h-64" label="Folder" />
             </Tabs>
             <div className="p-16 sm:p-24 max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
@@ -172,6 +174,9 @@ function Restaurant(props) {
               </div>
               <div className={tabValue !== 3 ? 'hidden' : ''}>
                 <ImageTabs />
+              </div>
+              <div className={tabValue !== 4 ? 'hidden' : ''}>
+                <FileList />
               </div>
             </div>
           </>

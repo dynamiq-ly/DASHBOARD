@@ -1,6 +1,8 @@
 import { lazy } from 'react'
 
 const Bar = lazy(() => import('./BarScreen'))
+const BarItem = lazy(() => import('./AE/Item'))
+
 const BarMenu = lazy(() => import('./menu/MenuScreen'))
 const BarMenuCategory = lazy(() => import('./category/CategoryScreen'))
 
@@ -13,7 +15,10 @@ const BarConfig = {
   routes: [
     {
       path: '/bar/list',
-      element: <Bar />,
+      children: [
+        { path: '', element: <Bar /> },
+        { path: ':productId', element: <BarItem /> },
+      ],
     },
     {
       path: 'bar/menu/list',

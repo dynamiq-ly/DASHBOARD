@@ -46,56 +46,11 @@ export const analytics = [
  * restaurant
  */
 export const restuarant = {
-  id: 'restaurant-collapse',
+  id: 'restaurant',
   title: 'Restaurants',
-  type: 'collapse',
+  type: 'item',
   icon: 'material-outline:restaurant',
-  children: [
-    {
-      id: 'restaurant-collapse.resturant',
-      title: 'Restaurant List',
-      type: 'item',
-      url: '/restaurant/list',
-    },
-    {
-      id: 'restaurant-collapse.menu',
-      title: 'Restaurant Menu',
-      type: 'collapse',
-      children: [
-        {
-          id: 'restaurant-collapse.menu.food',
-          title: 'Food Menu',
-          type: 'collapse',
-          children: [
-            {
-              id: 'restaurant-collapse.menu.food.list',
-              title: 'Food List',
-              type: 'item',
-              url: 'restaurant/menu/food/list',
-            },
-            {
-              id: 'restaurant-collapse.menu.food.category',
-              title: 'Food Category',
-              type: 'item',
-              url: 'restaurant/menu/food/category',
-            },
-          ],
-        },
-        {
-          id: 'restaurant-collapse.menu.drink',
-          title: 'Drinks Menu',
-          type: 'item',
-          url: 'restaurant/menu/drinks',
-        },
-      ],
-    },
-    {
-      id: 'restaurant-collapse.regulation',
-      title: 'Restaurant Regulations',
-      type: 'item',
-      url: 'restaurant/regulation',
-    },
-  ],
+  url: '/restaurant',
 }
 
 /**

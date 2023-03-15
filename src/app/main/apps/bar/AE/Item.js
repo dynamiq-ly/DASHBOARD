@@ -15,15 +15,14 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import { getProduct, newProduct, resetProduct, selectProduct } from '../store/pointSlice'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../store/barItemSlice'
 import reducer from '../store'
 
-import PointHeader from './PointHeader'
+import RestaurantHeader from './BarHeader'
 import BasicInfoTab from './tabs/BasicInfo'
-import ScheduleTab from './tabs/ScheduleTab'
-import ImageTab from './tabs/ImageTab'
-import CategoryTab from './tabs/CategoryTab'
-import DisponibilyTab from './tabs/DisponibilityTab'
+import WeeklyThemes from './tabs/WeeklyThemes'
+import ImageTabs from './tabs/ImageTabs'
+import FileList from './tabs/sections/FolderList'
 
 /**
  * Form Validation Schema
@@ -35,7 +34,7 @@ const schema = yup.object().shape({
     .min(5, 'The product name must be at least 5 characters'),
 })
 
-function Point(props) {
+function Restaurant(props) {
   const dispatch = useDispatch()
   const product = useSelector(selectProduct)
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
@@ -122,10 +121,10 @@ function Point(props) {
           className="mt-24"
           component={Link}
           variant="outlined"
-          to="/interest/list"
+          to="/resturant/list"
           color="inherit"
         >
-          Go to Interest Page
+          Go to Restaurants Page
         </Button>
       </motion.div>
     )
@@ -144,7 +143,7 @@ function Point(props) {
   return (
     <FormProvider {...methods}>
       <FusePageCarded
-        header={<PointHeader />}
+        header={<RestaurantHeader />}
         content={
           <>
             <Tabs
@@ -157,26 +156,22 @@ function Point(props) {
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
               <Tab className="h-64" label="Basic Info" />
-              <Tab className="h-64" label="Categroy" />
-              <Tab className="h-64" label="Schedule" />
+              <Tab className="h-64" label="Weekly Themes" />
               <Tab className="h-64" label="Images" />
-              <Tab className="h-64" label="Visibility" />
+              <Tab className="h-64" label="Folder" />
             </Tabs>
             <div className="p-16 sm:p-24 max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
               </div>
               <div className={tabValue !== 1 ? 'hidden' : ''}>
-                <CategoryTab />
+                <WeeklyThemes />
               </div>
               <div className={tabValue !== 2 ? 'hidden' : ''}>
-                <ScheduleTab />
+                <ImageTabs />
               </div>
               <div className={tabValue !== 3 ? 'hidden' : ''}>
-                <ImageTab />
-              </div>
-              <div className={tabValue !== 4 ? 'hidden' : ''}>
-                <DisponibilyTab />
+                <FileList />
               </div>
             </div>
           </>
@@ -187,4 +182,4 @@ function Point(props) {
   )
 }
 
-export default withReducer('interestPoints', reducer)(Point)
+export default withReducer('bars', reducer)(Restaurant)

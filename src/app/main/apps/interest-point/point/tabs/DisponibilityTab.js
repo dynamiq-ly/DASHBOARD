@@ -12,11 +12,11 @@ function DisponibilyTab(props) {
         control={control}
         render={({ field }) => (
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Categroy</InputLabel>
+            <InputLabel id="demo-simple-select-label">Visibility</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="point_status"
-              label="Type"
+              label="Visibility"
               placeholder="Select Visibility"
               value={field.value}
               onChange={field.onChange}
