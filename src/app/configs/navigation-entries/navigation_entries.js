@@ -76,6 +76,12 @@ export const entertainement = {
   icon: 'material-outline:directions_run',
   children: [
     {
+      id: 'entertainement-collapse.calendar',
+      title: 'Calendar',
+      type: 'item',
+      url: 'entertainement/calendar',
+    },
+    {
       id: 'entertainement-collapse.day-activities',
       title: 'Day Activities',
       type: 'item',

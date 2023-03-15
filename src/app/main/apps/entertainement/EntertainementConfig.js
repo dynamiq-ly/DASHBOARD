@@ -5,6 +5,8 @@ const DayActivities = lazy(() => import('./day-activities/DayActivitiesScreen'))
 const NightShows = lazy(() => import('./night-show/NightShowsScreen'))
 const SportEvents = lazy(() => import('./sport-event/SportEventScreen'))
 
+const CalendarAppEntertainement = lazy(() => import('./calendar/CalendarApp'))
+
 const EntertainementConfig = {
   settings: {
     layout: {
@@ -27,6 +29,10 @@ const EntertainementConfig = {
     {
       path: 'entertainement/sport-event',
       element: <SportEvents />,
+    },
+    {
+      path: 'entertainement/calendar',
+      element: <CalendarAppEntertainement />,
     },
   ],
 }
