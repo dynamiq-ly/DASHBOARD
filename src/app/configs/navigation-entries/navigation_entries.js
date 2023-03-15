@@ -58,30 +58,11 @@ export const restuarant = {
  */
 
 export const bar = {
-  id: 'bar-collapse',
+  id: 'bar',
   title: 'Bars',
-  type: 'collapse',
+  type: 'item',
   icon: 'material-outline:local_bar',
-  children: [
-    {
-      id: 'bar-collapse.bar',
-      title: 'Bar List',
-      type: 'item',
-      url: 'bar/list',
-    },
-    {
-      id: 'bar-collapse.bar.list',
-      title: 'Bar Menu List',
-      type: 'item',
-      url: 'bar/menu/list',
-    },
-    {
-      id: 'bar-collapse.bar.category',
-      title: 'Bar Menu Category',
-      type: 'item',
-      url: 'bar/menu/category',
-    },
-  ],
+  url: 'bar',
 }
 
 /**

@@ -14,19 +14,18 @@ const BarConfig = {
   },
   routes: [
     {
-      path: '/bar/list',
+      path: 'bar',
       children: [
         { path: '', element: <Bar /> },
-        { path: ':productId', element: <BarItem /> },
+        {
+          path: ':productId',
+          children: [
+            { path: '', element: <BarItem /> },
+            { path: 'menu/category', element: <BarMenuCategory /> },
+            { path: 'menu/list', element: <BarMenu /> },
+          ],
+        },
       ],
-    },
-    {
-      path: 'bar/menu/list',
-      element: <BarMenu />,
-    },
-    {
-      path: 'bar/menu/category',
-      element: <BarMenuCategory />,
     },
   ],
 }

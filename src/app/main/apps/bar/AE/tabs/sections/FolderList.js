@@ -30,8 +30,13 @@ export default FileList
 
 const foldersData = [
   {
-    id: 'menu/drinks',
+    id: 'menu/category',
     type: 'material-outline:local_bar',
-    contents: 'Drinks Menu',
+    contents: 'Drinks Menu Category',
+  },
+  {
+    id: 'menu/list',
+    type: 'material-outline:local_bar',
+    contents: 'Drinks Menu List',
   },
 ]
