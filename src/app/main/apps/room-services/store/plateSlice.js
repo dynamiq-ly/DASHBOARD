@@ -58,9 +58,12 @@ const productSlice = createSlice({
       prepare: (event) => ({
         payload: {
           //   id: FuseUtils.generateGUID(),
-          food_food_plate: '',
-          food_food_type: '',
-          food_food_image: '',
+          plate_name: '',
+          plate_image: '',
+          plate_descripiton: '',
+          plate_price: 0,
+          plate_variance: undefined,
+          food_service_categories_id: '',
         },
       }),
     },
