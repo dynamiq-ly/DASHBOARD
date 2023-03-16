@@ -6,6 +6,7 @@ import miniBarAE from './barSlice'
 import foods from './foodsSlice'
 import foodsAE from './foodTimeSlice'
 import plates from './platesSlice'
+import plate from './plateSlice'
 
 import drinks from './drinksSlice'
 import category from './drinkSlice'
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   foods,
   foodsAE,
   plates,
+  plate,
   // mini bar service
   miniBars,
   miniBarAE,
