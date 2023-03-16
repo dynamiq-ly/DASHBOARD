@@ -2,7 +2,9 @@ import { lazy } from 'react'
 
 const FoodServices = lazy(() => import('./foods/FoodServicesScreen'))
 const FoodServiceAE = lazy(() => import('./foods/edit/Element'))
+
 const FoodList = lazy(() => import('./foods/list/ListScreen'))
+const FoodListPlate = lazy(() => import('./foods/list/edit/Element'))
 
 const DrinksServices = lazy(() => import('./drinks/RoomDrinksScreen'))
 const DrinkServiceCategory = lazy(() => import('./drinks/category/Category'))
@@ -33,7 +35,16 @@ const FoodServicesConfig = {
             },
             {
               path: 'foodlist',
-              element: <FoodList />,
+              children: [
+                {
+                  path: '',
+                  element: <FoodList />,
+                },
+                {
+                  path: ':plateId',
+                  element: <FoodListPlate />,
+                },
+              ],
             },
           ],
         },
