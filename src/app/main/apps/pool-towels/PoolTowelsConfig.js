@@ -10,8 +10,13 @@ const PoolTowelsConfig = {
   },
   routes: [
     {
-      path: '/pool-towels',
-      element: <PoolTowels />,
+      path: 'pool-towels',
+      children: [
+        {
+          path: '',
+          element: <PoolTowels />,
+        },
+      ],
     },
   ],
 }
