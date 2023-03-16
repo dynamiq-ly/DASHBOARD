@@ -15,6 +15,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
+import FileList from 'app/shared-components/sections/FolderList'
 import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/foodTimeSlice'
 import reducer from '../../store'
 
@@ -149,6 +150,7 @@ function Element(props) {
             >
               <Tab className="h-64" label="Basic Info" />
               <Tab className="h-64" label="Timing Info" />
+              {routeParams.productId !== 'new' && <Tab className="h-64" label="Folder" />}
             </Tabs>
             <div className="p-16 sm:p-24 max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
@@ -157,6 +159,11 @@ function Element(props) {
               <div className={tabValue !== 1 ? 'hidden' : ''}>
                 <TimingTab />
               </div>
+              {routeParams.productId !== 'new' && (
+                <div className={tabValue !== 2 ? 'hidden' : ''}>
+                  <FileList data={folderList} />
+                </div>
+              )}
             </div>
           </>
         }
@@ -165,5 +172,13 @@ function Element(props) {
     </FormProvider>
   )
 }
+
+const folderList = [
+  {
+    id: 'foodlist',
+    type: 'material-twotone:restaurant',
+    contents: 'Plates List',
+  },
+]
 
 export default withReducer('roomService', reducer)(Element)
