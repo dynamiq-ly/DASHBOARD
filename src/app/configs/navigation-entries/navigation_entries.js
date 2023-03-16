@@ -458,16 +458,7 @@ export const medical_assistance = {
   icon: 'material-outline:medical_services',
   url: './medical-assistance',
 }
-/**
- * money_exchange
- */
-export const money_exchange = {
-  id: 'money_exchange',
-  title: 'Money Exchange',
-  type: 'item',
-  icon: 'material-outline:local_atm',
-  url: './money-exchange',
-}
+
 /**
  * banks and ATMs
  */
