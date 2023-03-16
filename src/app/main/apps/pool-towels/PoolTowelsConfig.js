@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const PoolTowels = lazy(() => import('./PoolTowelsScreen'))
+const PoolTowel = lazy(() => import('./pool-towel/PoolTowel'))
 
 const PoolTowelsConfig = {
   settings: {
@@ -10,8 +11,17 @@ const PoolTowelsConfig = {
   },
   routes: [
     {
-      path: '/pool-towels',
-      element: <PoolTowels />,
+      path: 'pool-towels',
+      children: [
+        {
+          path: '',
+          element: <PoolTowels />,
+        },
+        {
+          path: ':productId',
+          element: <PoolTowel />,
+        },
+      ],
     },
   ],
 }

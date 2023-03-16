@@ -18,7 +18,7 @@ const AirConditionerConfig = {
           element: <AirConditioner />,
         },
         {
-          path: 'productId',
+          path: ':productId',
           element: <ClimatizationAE />,
         },
       ],
