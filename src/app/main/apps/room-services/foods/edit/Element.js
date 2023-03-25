@@ -175,7 +175,7 @@ function Element(props) {
 
 const folderList = [
   {
-    id: 'foodlist',
+    id: 'plates',
     type: 'material-twotone:restaurant',
     contents: 'Plates List',
   },
