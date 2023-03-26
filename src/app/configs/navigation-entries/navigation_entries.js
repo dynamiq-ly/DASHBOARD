@@ -1,4 +1,17 @@
 /**
+ * application
+ */
+export const application = [
+  {
+    id: 'file-system',
+    title: 'File Storage',
+    type: 'item',
+    icon: 'heroicons-outline:folder',
+    url: 'file-system',
+  },
+]
+
+/**
  * safety
  */
 export const safety = {

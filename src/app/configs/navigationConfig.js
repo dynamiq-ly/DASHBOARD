@@ -41,6 +41,7 @@ import {
   gym,
   pools,
   helpCenter,
+  application,
 } from './navigation-entries/navigation_entries'
 
 i18next.addResourceBundle('en', 'navigation', en)
@@ -54,6 +55,13 @@ const navigationConfig = [
     subtitle: 'Business analytics and trackers',
     type: 'group',
     children: [...analytics],
+  },
+  {
+    id: 'application',
+    title: 'Application',
+    subtitle: 'Application pages',
+    type: 'group',
+    children: [...application],
   },
   {
     id: 'facilities',
