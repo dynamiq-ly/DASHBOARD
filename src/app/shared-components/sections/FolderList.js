@@ -1,12 +1,14 @@
 import { Box } from '@mui/system'
 import { lighten } from '@mui/material/styles'
+import { Typography } from '@mui/material'
 import FolderItem from './FolderItem'
 
 /**
  * @param {Object} data
+ * @param {string} title
  * @returns {JSX.Element}
  */
-function FileList({ data = [] }) {
+function FileList({ data = [], title = undefined }) {
   return (
     <div>
       {data.length > 0 && (
@@ -19,6 +21,7 @@ function FileList({ data = [] }) {
                 : lighten(theme.palette.background.default, 0.02),
           }}
         >
+          {title && <Typography className="font-medium">{title}</Typography>}
           <div className="flex flex-wrap -m-8 mt-8">
             {data.map((item) => (
               <FolderItem key={item.id} item={item} />
