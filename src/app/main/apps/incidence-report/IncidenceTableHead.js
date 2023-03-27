@@ -53,6 +53,13 @@ const rows = [
     label: 'Description',
     sort: true,
   },
+  {
+    id: 'IsAnswered',
+    align: 'left',
+    disablePadding: false,
+    label: 'Is Answered',
+    sort: true,
+  },
 ]
 
 const IncidenceTableHead = (props) => {
