@@ -11,7 +11,12 @@ const IncidenceConfig = {
   routes: [
     {
       path: '/incidence-report',
-      element: <Incidence />,
+      children: [
+        {
+          path: '',
+          element: <Incidence />,
+        },
+      ],
     },
   ],
 }
