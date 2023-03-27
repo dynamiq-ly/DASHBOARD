@@ -1,18 +1,11 @@
-import {
-  createAsyncThunk,
-  createEntityAdapter,
-  createSlice,
-} from '@reduxjs/toolkit'
+import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const getMeasures = createAsyncThunk(
-  'towels/towel/getMeasures',
-  async () => {
-    const response = await axios.get('/api/towels')
-    const data = await response.data
-    return data
-  }
-)
+export const getMeasures = createAsyncThunk('towels/towel/getMeasures', async () => {
+  const response = await axios.get('/api/towels')
+  const data = await response.data
+  return data
+})
 
 export const removeMeasures = createAsyncThunk(
   'towels/towel',

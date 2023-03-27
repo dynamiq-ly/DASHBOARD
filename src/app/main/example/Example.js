@@ -22,18 +22,18 @@ function ExamplePage(props) {
   return (
     <Root
       header={
-        <div className='p-24'>
+        <div className="p-24">
           <h4>{t('TITLE')}</h4>
         </div>
       }
       content={
-        <div className='p-24'>
+        <div className="p-24">
           <h4>Content</h4>
           <br />
           <DemoContent />
         </div>
       }
-      scroll='content'
+      scroll="content"
     />
   )
 }

@@ -161,12 +161,4 @@ function Element(props) {
   )
 }
 
-const folderList = [
-  {
-    id: 'supplements',
-    type: 'material-twotone:restaurant',
-    contents: 'Supplements',
-  },
-]
-
 export default withReducer('foodsService', reducer)(Element)
