@@ -41,7 +41,7 @@ function RestaurantHeader(props) {
             className="flex items-center sm:mb-12"
             component={Link}
             role="button"
-            to="/restaurant/list"
+            to="/restaurant"
             color="inherit"
           >
             <FuseSvgIcon size={20}>
