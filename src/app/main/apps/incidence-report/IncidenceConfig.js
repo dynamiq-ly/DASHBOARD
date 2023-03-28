@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const Incidence = lazy(() => import('./IncidenceScreen'))
+const Report = lazy(() => import('./incidence/Incidence'))
 
 const IncidenceConfig = {
   settings: {
@@ -11,7 +12,16 @@ const IncidenceConfig = {
   routes: [
     {
       path: '/incidence-report',
-      element: <Incidence />,
+      children: [
+        {
+          path: '',
+          element: <Incidence />,
+        },
+        {
+          path: ':productId',
+          element: <Report />,
+        },
+      ],
     },
   ],
 }
