@@ -4,29 +4,31 @@ import Typography from '@mui/material/Typography'
 import { motion } from 'framer-motion'
 import { useFormContext } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { removeProduct, saveProduct } from '../store/restaurantSlice'
+import { removeProduct, saveProduct } from '../../store/regulationSlice'
 
-function RestaurantHeader(props) {
+function ElementHeader(props) {
   const dispatch = useDispatch()
   const methods = useFormContext()
   const { formState, watch, getValues } = methods
   const { isValid, dirtyFields } = formState
-  const featuredImageId = watch('featuredImageId')
-  const images = watch('images')
-  const name = watch('restaurant_name')
+  const name = watch('restaurant_regulations_name')
   const theme = useTheme()
   const navigate = useNavigate()
 
+  const { productId } = useParams()
+
   function handleSaveProduct() {
-    dispatch(saveProduct(getValues()))
+    dispatch(saveProduct(getValues())).then(() => {
+      navigate(`/restaurant/${productId}/regulation`)
+    })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      navigate('/restaurant/list')
+      navigate(`/restaurant/${productId}/regulation`)
     })
   }
 
@@ -41,7 +43,7 @@ function RestaurantHeader(props) {
             className="flex items-center sm:mb-12"
             component={Link}
             role="button"
-            to="/restaurant"
+            to={`/restaurant/${productId}/regulation`}
             color="inherit"
           >
             <FuseSvgIcon size={20}>
@@ -55,36 +57,15 @@ function RestaurantHeader(props) {
 
         <div className="flex items-center max-w-full">
           <motion.div
-            className="hidden sm:flex"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1, transition: { delay: 0.3 } }}
-          >
-            {featuredImageId && images.length > 0 ? (
-              <img
-                className="w-32 sm:w-48 rounded"
-                src={`${process.env.REACT_APP_URL}storage/restaurants/${
-                  _.find(images, { id: featuredImageId }).image
-                }`}
-                alt={name}
-              />
-            ) : (
-              <img
-                className="w-32 sm:w-48 rounded"
-                src="assets/images/apps/ecommerce/product-image-placeholder.png"
-                alt={name}
-              />
-            )}
-          </motion.div>
-          <motion.div
             className="flex flex-col items-center sm:items-start min-w-0 mx-8 sm:mx-16"
             initial={{ x: -20 }}
             animate={{ x: 0, transition: { delay: 0.3 } }}
           >
             <Typography className="text-16 sm:text-20 truncate font-semibold">
-              {name || 'New Restaurant'}
+              {name || 'New Regulations'}
             </Typography>
             <Typography variant="caption" className="font-medium">
-              Restaurant Detail
+              Regulations Detail
             </Typography>
           </motion.div>
         </div>
@@ -107,7 +88,7 @@ function RestaurantHeader(props) {
           className="whitespace-nowrap mx-4"
           variant="contained"
           color="secondary"
-          disabled={_.isEmpty(dirtyFields) || !isValid}
+          disabled={_.isEmpty(dirtyFields)}
           onClick={handleSaveProduct}
         >
           Save
@@ -117,4 +98,4 @@ function RestaurantHeader(props) {
   )
 }
 
-export default RestaurantHeader
+export default ElementHeader
