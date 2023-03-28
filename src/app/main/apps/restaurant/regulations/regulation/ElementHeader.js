@@ -1,21 +1,36 @@
 import Button from '@mui/material/Button'
-import Input from '@mui/material/Input'
-import Paper from '@mui/material/Paper'
 import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import { motion } from 'framer-motion'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { useFormContext } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-
-import { selectProductsSearchText, setProductsSearchText } from '../store/regulationsSlice'
+import { removeProduct, saveProduct } from '../../store/regulationSlice'
 
 function ElementHeader(props) {
-  const theme = useTheme()
   const dispatch = useDispatch()
-  const searchText = useSelector(selectProductsSearchText)
+  const methods = useFormContext()
+  const { formState, watch, getValues } = methods
+  const { isValid, dirtyFields } = formState
+  const name = watch('restaurant_regulations_name')
+  const theme = useTheme()
+  const navigate = useNavigate()
 
   const { productId } = useParams()
+
+  function handleSaveProduct() {
+    dispatch(saveProduct(getValues())).then(() => {
+      navigate(`/restaurant/${productId}/regulation`)
+    })
+  }
+
+  function handleRemoveProduct() {
+    dispatch(removeProduct()).then(() => {
+      navigate(`/restaurant/${productId}/regulation`)
+    })
+  }
 
   return (
     <div className="flex flex-col sm:flex-row flex-1 w-full items-center justify-between space-y-8 sm:space-y-0 py-32 px-24 md:px-32">
@@ -28,7 +43,7 @@ function ElementHeader(props) {
             className="flex items-center sm:mb-12"
             component={Link}
             role="button"
-            to={`/restaurant/${productId}`}
+            to={`/restaurant/${productId}/regulation`}
             color="inherit"
           >
             <FuseSvgIcon size={20}>
@@ -36,7 +51,7 @@ function ElementHeader(props) {
                 ? 'heroicons-outline:arrow-sm-left'
                 : 'heroicons-outline:arrow-sm-right'}
             </FuseSvgIcon>
-            <span className="flex mx-4 font-medium">Restaurant List</span>
+            <span className="flex mx-4 font-medium">Restaurant</span>
           </Typography>
         </motion.div>
 
@@ -47,46 +62,36 @@ function ElementHeader(props) {
             animate={{ x: 0, transition: { delay: 0.3 } }}
           >
             <Typography className="text-16 sm:text-20 truncate font-semibold">
-              Regulation List
+              {name || 'New Regulations'}
+            </Typography>
+            <Typography variant="caption" className="font-medium">
+              Regulations Detail
             </Typography>
           </motion.div>
-          <Paper
-            component={motion.div}
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
-            className="flex items-center w-full sm:max-w-256 space-x-8 px-16 rounded-full border-1 shadow-0"
-          >
-            <FuseSvgIcon color="disabled">heroicons-solid:search</FuseSvgIcon>
-
-            <Input
-              placeholder="Search products"
-              className="flex flex-1"
-              disableUnderline
-              fullWidth
-              value={searchText}
-              inputProps={{
-                'aria-label': 'Search',
-              }}
-              onChange={(ev) => dispatch(setProductsSearchText(ev))}
-            />
-          </Paper>
         </div>
       </div>
-
       <motion.div
         className="flex"
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0, transition: { delay: 0.3 } }}
       >
         <Button
-          className=""
-          component={Link}
-          to="new"
+          className="whitespace-nowrap mx-4"
           variant="contained"
           color="secondary"
-          startIcon={<FuseSvgIcon>heroicons-outline:plus</FuseSvgIcon>}
+          onClick={handleRemoveProduct}
+          startIcon={<FuseSvgIcon className="hidden sm:flex">heroicons-outline:trash</FuseSvgIcon>}
         >
-          Add
+          Remove
+        </Button>
+        <Button
+          className="whitespace-nowrap mx-4"
+          variant="contained"
+          color="secondary"
+          disabled={_.isEmpty(dirtyFields)}
+          onClick={handleSaveProduct}
+        >
+          Save
         </Button>
       </motion.div>
     </div>

@@ -8,6 +8,7 @@ const RestaurantFoodsMenu = lazy(() => import('./menu/food/FoodScreen'))
 const RestaurantFoodCategoryMenu = lazy(() => import('./menu/food/category/FoodCategoryScreen'))
 
 const RestaurantRegulation = lazy(() => import('./regulations/RegulationScreen'))
+const RestaurantRegulationEdit = lazy(() => import('./regulations/regulation/Element'))
 
 const RestaurantConfig = {
   settings: {
@@ -27,7 +28,13 @@ const RestaurantConfig = {
           path: ':productId',
           children: [
             { path: '', element: <Restaurant /> },
-            { path: 'regulation', element: <RestaurantRegulation /> },
+            {
+              path: 'regulation',
+              children: [
+                { path: '', element: <RestaurantRegulation /> },
+                { path: ':regulationId', element: <RestaurantRegulationEdit /> },
+              ],
+            },
             { path: 'menu/drinks', element: <RestaurantDrinkMenu /> },
             {
               path: 'menu/food',
