@@ -2,7 +2,8 @@ import { lazy } from 'react'
 
 const Excursion = lazy(() => import('./ExcursionScreen'))
 
-const ExcursionCategory = lazy(() => import('./category/CategoryScreen'))
+const ExcursionCategories = lazy(() => import('./category/CategoryScreen'))
+const ExcursionCategory = lazy(() => import('./category/type/Type'))
 
 const ExcursionConfig = {
   settings: {
@@ -20,7 +21,19 @@ const ExcursionConfig = {
         },
       ],
     },
-    { path: 'excursion/category', element: <ExcursionCategory /> },
+    {
+      path: 'excursion/category',
+      children: [
+        {
+          path: '',
+          element: <ExcursionCategories />,
+        },
+        {
+          path: ':productId',
+          element: <ExcursionCategory />,
+        },
+      ],
+    },
   ],
 }
 
