@@ -15,11 +15,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
 import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
-import {
-  getMeasures,
-  selectProducts,
-  selectProductsSearchText,
-} from './store/HouseKeepingSlice'
+import { getMeasures, selectProducts, selectProductsSearchText } from './store/HouseKeepingSlice'
 
 import HouseKeepingTableHead from './HouseKeepingTableHead'
 
@@ -45,9 +41,7 @@ function HouseKeepingTable(props) {
   useEffect(() => {
     if (searchText.length !== 0) {
       setData(
-        _.filter(products, (item) =>
-          item.request.toLowerCase().includes(searchText.toLowerCase())
-        )
+        _.filter(products, (item) => item.request.toLowerCase().includes(searchText.toLowerCase()))
       )
       setPage(0)
     } else {
@@ -115,7 +109,7 @@ function HouseKeepingTable(props) {
 
   if (loading) {
     return (
-      <div className='flex items-center justify-center h-full'>
+      <div className="flex items-center justify-center h-full">
         <FuseLoading />
       </div>
     )
@@ -126,9 +120,9 @@ function HouseKeepingTable(props) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { delay: 0.1 } }}
-        className='flex flex-1 items-center justify-center h-full'
+        className="flex flex-1 items-center justify-center h-full"
       >
-        <Typography color='text.secondary' variant='h5'>
+        <Typography color="text.secondary" variant="h5">
           There are no data!
         </Typography>
       </motion.div>
@@ -136,9 +130,9 @@ function HouseKeepingTable(props) {
   }
 
   return (
-    <div className='w-full flex flex-col min-h-full'>
-      <FuseScrollbars className='grow overflow-x-auto'>
-        <Table stickyHeader className='min-w-xl' aria-labelledby='tableTitle'>
+    <div className="w-full flex flex-col min-h-full">
+      <FuseScrollbars className="grow overflow-x-auto">
+        <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
           <HouseKeepingTableHead
             selectedProductIds={selected}
             order={order}
@@ -170,19 +164,16 @@ function HouseKeepingTable(props) {
                 const isSelected = selected.indexOf(n.id) !== -1
                 return (
                   <TableRow
-                    className='h-72 cursor-pointer'
+                    className="h-72 cursor-pointer"
                     hover
-                    role='checkbox'
+                    role="checkbox"
                     aria-checked={isSelected}
                     tabIndex={-1}
                     key={n.id}
                     selected={isSelected}
                     onClick={(event) => handleClick(n)}
                   >
-                    <TableCell
-                      className='w-40 md:w-64 text-center'
-                      padding='none'
-                    >
+                    <TableCell className="w-40 md:w-64 text-center" padding="none">
                       <Checkbox
                         checked={isSelected}
                         onClick={(event) => event.stopPropagation()}
@@ -190,39 +181,23 @@ function HouseKeepingTable(props) {
                       />
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.id}
                     </TableCell>
 
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.request}
                     </TableCell>
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.room_number}
                     </TableCell>
-                    <TableCell
-                      className='p-4 md:p-16 truncate'
-                      component='th'
-                      scope='row'
-                    >
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.isAnsexred ? (
-                        <FuseSvgIcon className='text-green' size={20}>
+                        <FuseSvgIcon className="text-green" size={20}>
                           heroicons-outline:check-circle
                         </FuseSvgIcon>
                       ) : (
-                        <FuseSvgIcon className='text-red' size={20}>
+                        <FuseSvgIcon className="text-red" size={20}>
                           heroicons-outline:minus-circle
                         </FuseSvgIcon>
                       )}
@@ -235,8 +210,8 @@ function HouseKeepingTable(props) {
       </FuseScrollbars>
 
       <TablePagination
-        className='shrink-0 border-t-1'
-        component='div'
+        className="shrink-0 border-t-1"
+        component="div"
         count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
