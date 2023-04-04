@@ -15,15 +15,10 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import {
-  getProduct,
-  newProduct,
-  resetProduct,
-  selectProduct,
-} from '../../store/categorySlice'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/categorySlice'
 import reducer from '../../store'
 
-import CategoryHeader from '../CategoryHeader'
+import TypeHeader from './TypeHeader'
 import BasicInfoTab from './tabs/BasicInfo'
 import ImagesTab from './tabs/ImageTab'
 /**
@@ -114,17 +109,17 @@ function ExcursionCategory(props) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { delay: 0.1 } }}
-        className='flex flex-col flex-1 items-center justify-center h-full'
+        className="flex flex-col flex-1 items-center justify-center h-full"
       >
-        <Typography color='text.secondary' variant='h5'>
+        <Typography color="text.secondary" variant="h5">
           There is no such data!
         </Typography>
         <Button
-          className='mt-24'
+          className="mt-24"
           component={Link}
-          variant='outlined'
-          to='/pools/category'
-          color='inherit'
+          variant="outlined"
+          to="/pools/category"
+          color="inherit"
         >
           Go to excursions and activities Page
         </Button>
@@ -137,9 +132,7 @@ function ExcursionCategory(props) {
    */
   if (
     _.isEmpty(form) ||
-    (product &&
-      routeParams.productId !== `${product.id}` &&
-      routeParams.productId !== 'new')
+    (product && routeParams.productId !== `${product.id}` && routeParams.productId !== 'new')
   ) {
     return <FuseLoading />
   }
@@ -147,22 +140,22 @@ function ExcursionCategory(props) {
   return (
     <FormProvider {...methods}>
       <FusePageCarded
-        header={<CategoryHeader />}
+        header={<TypeHeader />}
         content={
           <>
             <Tabs
               value={tabValue}
               onChange={handleTabChange}
-              indicatorColor='secondary'
-              textColor='secondary'
-              variant='scrollable'
-              scrollButtons='auto'
+              indicatorColor="secondary"
+              textColor="secondary"
+              variant="scrollable"
+              scrollButtons="auto"
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
-              <Tab className='h-64' label='Basic Info' />
-              <Tab className='h-64' label='Image' />
+              <Tab className="h-64" label="Basic Info" />
+              <Tab className="h-64" label="Image" />
             </Tabs>
-            <div className='p-16 sm:p-24 max-w-3xl'>
+            <div className="p-16 sm:p-24 max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
               </div>
