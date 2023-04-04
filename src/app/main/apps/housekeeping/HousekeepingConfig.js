@@ -1,5 +1,7 @@
 import { lazy } from 'react'
 const Housekeeping = lazy(() => import('./HousekeepingScreen'))
+const Cleaning = lazy(() => import('./RoomCleaning/RoomCleaning'))
+
 const HousekeepingConfig = {
   settings: {
     layout: {
@@ -13,6 +15,10 @@ const HousekeepingConfig = {
         {
           path: '',
           element: <Housekeeping />,
+        },
+        {
+          path: ':productId',
+          element: <Cleaning />,
         },
       ],
     },
