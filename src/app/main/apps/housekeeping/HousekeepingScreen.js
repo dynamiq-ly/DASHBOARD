@@ -1,18 +1,22 @@
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
+import withReducer from 'app/store/withReducer'
 
-import HousekeepingHeader from './HousekeepingHeader'
+import reducer from './store'
 
-function HousekeepingScreen() {
+import HouseKeepingHeader from './HousekeepingHeader'
+import HouseKeepingTable from './HouseKeepingTable'
+
+function HouseKeepingScreen() {
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
 
   return (
     <FusePageCarded
-      header={<HousekeepingHeader />}
-      //   content={<SafetyTable />}
+      header={<HouseKeepingHeader />}
+      content={<HouseKeepingTable />}
       scroll={isMobile ? 'normal' : 'content'}
     />
   )
 }
 
-export default HousekeepingScreen
+export default withReducer('housekeeping', reducer)(HouseKeepingScreen)

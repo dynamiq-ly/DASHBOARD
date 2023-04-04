@@ -9,7 +9,12 @@ const HousekeepingConfig = {
   routes: [
     {
       path: '/housekeeping',
-      element: <Housekeeping />,
+      children: [
+        {
+          path: '',
+          element: <Housekeeping />,
+        },
+      ],
     },
   ],
 }
