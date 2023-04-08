@@ -9,6 +9,20 @@ export const application = [
     icon: 'heroicons-outline:folder',
     url: 'file-system',
   },
+  {
+    id: 'Feature-manager',
+    title: 'Features Manager',
+    type: 'item',
+    icon: 'material-twotone:format_strikethrough',
+    url: 'routing-manager',
+  },
+  {
+    id: 'staff-manager',
+    title: 'Staff Manager',
+    type: 'item',
+    icon: 'heroicons-outline:user-group',
+    url: 'staff-manager',
+  },
 ]
 
 /**
