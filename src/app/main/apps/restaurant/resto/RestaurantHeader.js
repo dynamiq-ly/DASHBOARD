@@ -21,12 +21,14 @@ function RestaurantHeader(props) {
   const navigate = useNavigate()
 
   function handleSaveProduct() {
-    dispatch(saveProduct(getValues()))
+    dispatch(saveProduct(getValues())).then(() => {
+      navigate('/restaurant')
+    })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      navigate('/restaurant/list')
+      navigate('/restaurant')
     })
   }
 
@@ -107,7 +109,8 @@ function RestaurantHeader(props) {
           className="whitespace-nowrap mx-4"
           variant="contained"
           color="secondary"
-          disabled={_.isEmpty(dirtyFields) || !isValid}
+          // disabled={_.isEmpty(dirtyFields) || !isValid}
+          disabled={_.isEmpty(dirtyFields)}
           onClick={handleSaveProduct}
         >
           Save

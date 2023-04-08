@@ -23,14 +23,34 @@ export const saveProduct = createAsyncThunk(
     const { id } = getState().restaurants.resto
 
     if (id) {
-      const response = await axios.post(`/api/restaurant/${id}`, {
-        ...productData,
-        _method: 'PATCH',
-      })
+      const response = await axios.post(
+        `/api/restaurant/${id}`,
+        {
+          ...productData,
+          _method: 'PATCH',
+        },
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      )
       const data = await response.data
       return data
     }
-    const response = await axios.post('/api/restaurant', productData)
+    const response = await axios.post(
+      '/api/restaurant',
+      {
+        ...productData,
+        ...productData.chefs,
+        ...productData.schedule,
+      },
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
     const data = await response.data
     return data
   }
@@ -46,9 +66,29 @@ const productSlice = createSlice({
       prepare: (event) => ({
         payload: {
           //   id: FuseUtils.generateGUID(),
-          connectivity_name: '',
-          connectivity_password: '',
-          connectivity_state: false,
+          restaurant_name: '',
+          restaurant_website: '',
+          restaurant_descripton: '',
+          restaurant_opens: '',
+          restaurant_closes: '',
+          restaurant_location: '',
+          restaurant_speciality: '',
+          restaurant_status: 1,
+          restaurant_capacity: 0,
+          restaurant_can_book: 0,
+          restaurant_booked_capacity: '0',
+          images: [],
+          restaurant_chef_exec_name: '',
+          restaurant_chef_exec_image: 'R.jpg',
+          restaurant_chef_name: '',
+          restaurant_chef_image: 'R.jpg',
+          sunday: null,
+          monday: null,
+          tuesday: null,
+          wednesday: null,
+          thursday: null,
+          friday: null,
+          saturday: null,
         },
       }),
     },

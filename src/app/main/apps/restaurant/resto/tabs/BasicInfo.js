@@ -60,6 +60,21 @@ function BasicInfoTab(props) {
       />
 
       <Controller
+        name="restaurant_location"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            className="mt-8 mb-16"
+            label="Location"
+            id="	restaurant_location"
+            variant="outlined"
+            fullWidth
+          />
+        )}
+      />
+
+      <Controller
         name="restaurant_website"
         control={control}
         render={({ field }) => (
@@ -67,7 +82,7 @@ function BasicInfoTab(props) {
             {...field}
             className="mt-8 mb-16"
             label="Web Link"
-            id="	restaurant_website"
+            id="restaurant_website"
             variant="outlined"
             fullWidth
           />
