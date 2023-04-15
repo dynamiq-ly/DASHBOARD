@@ -1,16 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import restaurant from './restaurantsSlice'
-import resto from './restaurantSlice'
-
-import regulations from './regulationsSlice'
-import regulation from './regulationSlice'
+import restaurants from './restaurantsSlice'
 
 const reducer = combineReducers({
-  restaurant,
-  resto,
-  regulations,
-  regulation,
+  restaurants,
 })
 
 export default reducer

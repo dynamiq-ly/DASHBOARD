@@ -15,7 +15,7 @@ import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { lighten } from '@mui/material/styles'
-import { removeMeasures } from './store/restaurantsSlice'
+import { removeMeasures } from '../store/restaurantsSlice'
 
 const rows = [
   {
@@ -33,50 +33,44 @@ const rows = [
     sort: true,
   },
   {
-    id: 'restaurant_speciality',
+    id: 'restaurant_sepciality',
     align: 'left',
     disablePadding: false,
-    label: 'Speciality',
+    label: 'Cuisine',
     sort: true,
   },
   {
-    id: 'restaurant_descripton',
+    id: 'restaurant_description',
     align: 'left',
     disablePadding: false,
-    label: 'Descripton',
+    label: 'Description',
     sort: true,
   },
   {
-    id: 'restaurant_head_chef',
+    id: 'restaurant_can_book',
     align: 'left',
     disablePadding: false,
-    label: 'Chef',
+    label: 'Booking',
     sort: true,
   },
   {
-    id: 'restaurant_opens',
+    id: 'restaurant_is_buffet',
     align: 'left',
     disablePadding: false,
-    label: 'Open',
+    label: 'Is Buffet',
     sort: true,
   },
+
   {
-    id: 'restaurant_closes',
+    id: 'isVisible',
     align: 'left',
     disablePadding: false,
-    label: 'Close',
-    sort: true,
-  },
-  {
-    id: 'restaurant_status',
-    align: 'left',
-    disablePadding: false,
-    label: 'Status',
+    label: 'Is Visible',
     sort: true,
   },
 ]
 
-const RestaurantsTableHead = (props) => {
+const RestaurantTableHead = (props) => {
   const { selectedProductIds } = props
   const numSelected = selectedProductIds.length
 
@@ -192,4 +186,4 @@ const RestaurantsTableHead = (props) => {
   )
 }
 
-export default RestaurantsTableHead
+export default RestaurantTableHead

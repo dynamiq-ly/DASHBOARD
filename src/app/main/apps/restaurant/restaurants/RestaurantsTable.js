@@ -14,12 +14,11 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
-import { useParams } from 'react-router-dom'
-import { getMeasures, selectProducts, selectProductsSearchText } from '../store/regulationsSlice'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../store/restaurantsSlice'
+import RestaurantsTableHead from './RestaurantTableHead'
 
-import RegulationTableHead from './RegulationTableHead'
-
-function RegulationTable(props) {
+function RestaurantsTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -34,17 +33,15 @@ function RegulationTable(props) {
     id: null,
   })
 
-  const { productId } = useParams()
-
   useEffect(() => {
-    dispatch(getMeasures(productId)).then(() => setLoading(false))
-  }, [dispatch, productId])
+    dispatch(getMeasures()).then(() => setLoading(false))
+  }, [dispatch])
 
   useEffect(() => {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.restaurant_regulations_name.toLowerCase().includes(searchText.toLowerCase())
+          item.restaurant_name.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -137,7 +134,7 @@ function RegulationTable(props) {
     <div className="w-full flex flex-col min-h-full">
       <FuseScrollbars className="grow overflow-x-auto">
         <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
-          <RegulationTableHead
+          <RestaurantsTableHead
             selectedProductIds={selected}
             order={order}
             onSelectAllClick={handleSelectAllClick}
@@ -152,8 +149,8 @@ function RegulationTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'restaurant_name': {
-                      return o[order.restaurant_name]
+                    case 'room_name': {
+                      return o[order.room_name]
                     }
                     default: {
                       return o[order.id]
@@ -191,15 +188,72 @@ function RegulationTable(props) {
                       scope="row"
                       padding="none"
                     >
-                      {n.id}
+                      {n.images.length === 0 ? (
+                        <img
+                          className="w-full block rounded"
+                          alt={`${n.restaurant_name}-${n.restaurant_description}`}
+                          src="assets/images/apps/ecommerce/product-image-placeholder.png"
+                        />
+                      ) : (
+                        <img
+                          className="w-full block rounded"
+                          alt={`${n.restaurant_name}-${n.restaurant_description}`}
+                          src={`${process.env.REACT_APP_URL}/storage/restaurants/${n.images[0].image}`}
+                        />
+                      )}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.restaurant_regulations_name}
+                      {n.restaurant_name}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.restaurant_regulations_description}
+                      {
+                        n.specialities.find((speciality) => speciality.speciality_main === 1)
+                          .speciality_name
+                      }
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.restaurant_description.length > 72
+                        ? `${n.restaurant_description.slice(0, 72)}...`
+                        : n.restaurant_description}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.booking.can_book ? (
+                        <FuseSvgIcon className="text-green" size={20}>
+                          heroicons-outline:check-circle
+                        </FuseSvgIcon>
+                      ) : (
+                        <FuseSvgIcon className="text-red" size={20}>
+                          heroicons-outline:minus-circle
+                        </FuseSvgIcon>
+                      )}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.schedule.isBuffet ? (
+                        <FuseSvgIcon className="text-green" size={20}>
+                          heroicons-outline:check-circle
+                        </FuseSvgIcon>
+                      ) : (
+                        <FuseSvgIcon className="text-red" size={20}>
+                          heroicons-outline:minus-circle
+                        </FuseSvgIcon>
+                      )}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.isVisible ? (
+                        <FuseSvgIcon className="text-green" size={20}>
+                          heroicons-outline:check-circle
+                        </FuseSvgIcon>
+                      ) : (
+                        <FuseSvgIcon className="text-red" size={20}>
+                          heroicons-outline:minus-circle
+                        </FuseSvgIcon>
+                      )}
                     </TableCell>
                   </TableRow>
                 )
@@ -227,4 +281,4 @@ function RegulationTable(props) {
   )
 }
 
-export default withRouter(RegulationTable)
+export default withRouter(RestaurantsTable)
