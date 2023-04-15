@@ -29,7 +29,7 @@ const rows = [
     id: 'request',
     align: 'left',
     disablePadding: false,
-    label: 'Content',
+    label: 'Resquest Name',
     sort: true,
   },
   {
@@ -47,7 +47,7 @@ const rows = [
     sort: true,
   },
   {
-    id: 'isAnsexred',
+    id: 'isAnsewred',
     align: 'left',
     disablePadding: false,
     label: 'Status',

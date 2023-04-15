@@ -154,8 +154,8 @@ function MedicalAssistanceTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'HairDryerInstruction': {
-                      return o[order.HairDryerInstruction]
+                    case 'request': {
+                      return o[order.request]
                     }
                     default: {
                       return o[order.id]
@@ -226,7 +226,7 @@ function MedicalAssistanceTable(props) {
                       component='th'
                       scope='row'
                     >
-                      {n.isAnsexred ? (
+                      {n.isAnsewred ? (
                         <FuseSvgIcon className='text-green' size={20}>
                           heroicons-outline:check-circle
                         </FuseSvgIcon>
