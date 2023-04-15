@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const MedicalAssistance = lazy(() => import('./MedicalAssistanceScreen'))
+const Measures = lazy(() => import('./MedicalMeasures/MedicalMeasures'))
 
 const MedicalAssistanceConfig = {
   settings: {
@@ -11,7 +12,16 @@ const MedicalAssistanceConfig = {
   routes: [
     {
       path: '/medical-assistance',
-      element: <MedicalAssistance />,
+      children: [
+        {
+          path: '',
+          element: <MedicalAssistance />,
+        },
+        {
+          path: ':productId',
+          element: <Measures />,
+        },
+      ],
     },
   ],
 }
