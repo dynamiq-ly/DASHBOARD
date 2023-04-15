@@ -1,7 +1,11 @@
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
+import withReducer from 'app/store/withReducer'
+
+import reducer from './store'
 
 import MedicalAssistanceHeader from './MedicalAssistanceHeader'
+import MedicalAssistanceTable from './MeficalAssistanceTable'
 
 function MedicalAssistanceScreen() {
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
@@ -9,10 +13,10 @@ function MedicalAssistanceScreen() {
   return (
     <FusePageCarded
       header={<MedicalAssistanceHeader />}
-      //   content={<SafetyTable />}
+      content={<MedicalAssistanceTable />}
       scroll={isMobile ? 'normal' : 'content'}
     />
   )
 }
 
-export default MedicalAssistanceScreen
+export default withReducer('medicalmeasures', reducer)(MedicalAssistanceScreen)

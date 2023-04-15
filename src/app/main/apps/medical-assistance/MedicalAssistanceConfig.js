@@ -11,7 +11,12 @@ const MedicalAssistanceConfig = {
   routes: [
     {
       path: '/medical-assistance',
-      element: <MedicalAssistance />,
+      children: [
+        {
+          path: '',
+          element: <MedicalAssistance />,
+        },
+      ],
     },
   ],
 }
