@@ -63,7 +63,7 @@ const productSlice = createSlice({
           //   id: FuseUtils.generateGUID(),
           regulation_name: '',
           regulation_description: '',
-          regulation_images: [],
+          regulation_images: '',
         },
       }),
     },

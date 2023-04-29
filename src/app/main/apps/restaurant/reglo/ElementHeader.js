@@ -65,9 +65,7 @@ function ElementHeader(props) {
             {images.length > 0 ? (
               <img
                 className="w-32 sm:w-48 rounded"
-                src={`${process.env.REACT_APP_URL}/storage/restaurants/regulations/${
-                  JSON.parse(images)[0]
-                }`}
+                src={`${process.env.REACT_APP_URL}/storage/restaurants/regulations/${images}`}
                 alt={name}
               />
             ) : (

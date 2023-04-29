@@ -194,9 +194,7 @@ function RegulationsTable(props) {
                         <img
                           className="w-full block rounded"
                           alt={`${n.regulation_name}`}
-                          src={`${process.env.REACT_APP_URL}/storage/restaurants/regulations/${
-                            JSON.parse(n.regulation_images)[0]
-                          }`}
+                          src={`${process.env.REACT_APP_URL}/storage/restaurants/regulations/${n.regulation_images}`}
                         />
                       ) : (
                         <img
