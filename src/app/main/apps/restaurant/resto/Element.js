@@ -158,7 +158,7 @@ function Element(props) {
               <Tab className="h-64" label="Config" />
               {routeParams.productId !== 'new' && <Tab className="h-64" label="Folder" />}
             </Tabs>
-            <div className="p-16 sm:p-24 max-w-3xl">
+            <div className="p-16  max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
               </div>
@@ -183,6 +183,7 @@ function Element(props) {
                 <div className={tabValue !== 5 ? 'hidden' : ''}>
                   <FileList title="Menu Catalog" data={folderList.menus} />
                   <FileList title="Management" data={folderList.management} />
+                  <FileList title="Bookings" data={folderList.reservation} />
                 </div>
               )}
             </div>
@@ -227,6 +228,13 @@ const folderList = {
       id: 'regulations',
       type: 'material-twotone:insert_drive_file',
       contents: 'Regulations',
+    },
+  ],
+  reservation: [
+    {
+      id: 'reservation',
+      type: 'material-twotone:collections_bookmark',
+      contents: 'Reservation',
     },
   ],
 }
