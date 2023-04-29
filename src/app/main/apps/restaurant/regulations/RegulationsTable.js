@@ -14,11 +14,11 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { getMeasures, selectProducts, selectProductsSearchText } from '../store/restaurantsSlice'
-import RestaurantsTableHead from './RestaurantTableHead'
+import { useParams } from 'react-router-dom'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../store/regulationsSlice'
+import RegulationsTableHead from './RegulationsTableHead'
 
-function RestaurantsTable(props) {
+function RegulationsTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -33,15 +33,17 @@ function RestaurantsTable(props) {
     id: null,
   })
 
+  const { productId } = useParams()
+
   useEffect(() => {
-    dispatch(getMeasures()).then(() => setLoading(false))
-  }, [dispatch])
+    dispatch(getMeasures(productId)).then(() => setLoading(false))
+  }, [dispatch, productId])
 
   useEffect(() => {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.restaurant_name.toLowerCase().includes(searchText.toLowerCase())
+          item.regulation_name.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -134,7 +136,7 @@ function RestaurantsTable(props) {
     <div className="w-full flex flex-col min-h-full">
       <FuseScrollbars className="grow overflow-x-auto">
         <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
-          <RestaurantsTableHead
+          <RegulationsTableHead
             selectedProductIds={selected}
             order={order}
             onSelectAllClick={handleSelectAllClick}
@@ -188,76 +190,29 @@ function RestaurantsTable(props) {
                       scope="row"
                       padding="none"
                     >
-                      {n.images.length === 0 ? (
+                      {n.regulation_images ? (
                         <img
                           className="w-full block rounded"
-                          alt={`${n.restaurant_name}-${n.restaurant_description}`}
+                          alt={`${n.regulation_name}`}
+                          src={`${process.env.REACT_APP_URL}/storage/restaurants/regulations/${
+                            JSON.parse(n.regulation_images)[0]
+                          }`}
+                        />
+                      ) : (
+                        <img
+                          className="w-full block rounded"
+                          alt={`${n.regulation_name}`}
                           src="assets/images/apps/ecommerce/product-image-placeholder.png"
                         />
-                      ) : (
-                        <img
-                          className="w-full block rounded"
-                          alt={`${n.restaurant_name}-${n.restaurant_description}`}
-                          src={`${process.env.REACT_APP_URL}/storage/restaurants/${n.images[0].image}`}
-                        />
                       )}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.restaurant_name}
+                      {n.regulation_name}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.specialities.length > 0 ? (
-                        n.specialities.find((speciality) => speciality.speciality_main === 1)
-                          .speciality_name
-                      ) : (
-                        <div className="inline text-12 font-semibold py-4 px-12 rounded-full truncate bg-red-700 text-white">
-                          No speciality
-                        </div>
-                      )}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.restaurant_description.length > 72
-                        ? `${n.restaurant_description.slice(0, 72)}...`
-                        : n.restaurant_description}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.booking.can_book ? (
-                        <FuseSvgIcon className="text-green" size={20}>
-                          heroicons-outline:check-circle
-                        </FuseSvgIcon>
-                      ) : (
-                        <FuseSvgIcon className="text-red" size={20}>
-                          heroicons-outline:minus-circle
-                        </FuseSvgIcon>
-                      )}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.schedule.isBuffet ? (
-                        <FuseSvgIcon className="text-green" size={20}>
-                          heroicons-outline:check-circle
-                        </FuseSvgIcon>
-                      ) : (
-                        <FuseSvgIcon className="text-red" size={20}>
-                          heroicons-outline:minus-circle
-                        </FuseSvgIcon>
-                      )}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.isVisible ? (
-                        <FuseSvgIcon className="text-green" size={20}>
-                          heroicons-outline:check-circle
-                        </FuseSvgIcon>
-                      ) : (
-                        <FuseSvgIcon className="text-red" size={20}>
-                          heroicons-outline:minus-circle
-                        </FuseSvgIcon>
-                      )}
+                      {n.regulation_description}
                     </TableCell>
                   </TableRow>
                 )
@@ -285,4 +240,4 @@ function RestaurantsTable(props) {
   )
 }
 
-export default withRouter(RestaurantsTable)
+export default withRouter(RegulationsTable)
