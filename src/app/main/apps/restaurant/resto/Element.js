@@ -232,7 +232,7 @@ const folderList = {
   ],
   reservation: [
     {
-      id: 'reservation',
+      id: 'reservations',
       type: 'material-twotone:collections_bookmark',
       contents: 'Reservation',
     },

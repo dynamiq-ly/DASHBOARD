@@ -15,6 +15,8 @@ const RestaurantSepcialityDetail = lazy(() => import('./specialty/Element'))
 const RestaurantChefs = lazy(() => import('./chefs/ChefsScreen'))
 const RestaurantChefsDetail = lazy(() => import('./chef/Element'))
 
+const RestaurantReservation = lazy(() => import('./reservations/ReservationsScreen'))
+
 const RestaurantConfig = {
   settings: {
     layout: {
@@ -87,6 +89,10 @@ const RestaurantConfig = {
                   element: <RestaurantChefsDetail />,
                 },
               ],
+            },
+            {
+              path: 'reservations',
+              element: <RestaurantReservation />,
             },
           ],
         },
