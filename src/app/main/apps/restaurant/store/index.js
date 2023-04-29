@@ -8,6 +8,8 @@ import servings from './servingsSlice'
 import serving from './servingSlice'
 import specialities from './specialitiesSlice'
 import specialty from './specialtySlice'
+import chefs from './chefsSlice'
+import chef from './chefSlice'
 
 const reducer = combineReducers({
   restaurants,
@@ -18,6 +20,8 @@ const reducer = combineReducers({
   serving,
   specialities,
   specialty,
+  chefs,
+  chef,
 })
 
 export default reducer

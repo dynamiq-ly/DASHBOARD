@@ -15,14 +15,10 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import FileList from 'app/shared-components/sections/FolderList'
-import { getProduct, newProduct, resetProduct, selectProduct } from '../store/restaurantSlice'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../store/chefSlice'
 import reducer from '../store'
 
 import BasicInfoTab from './tabs/BasicInfo'
-import DisponibilyTab from './tabs/DisponibilyTab'
-import BookingTab from './tabs/BookingTab'
-import WeeklyThemes from './tabs/WeeklyTheme'
 import ImagesTab from './tabs/ImagesTab'
 import ElementHeader from './ElementHeader'
 
@@ -54,9 +50,9 @@ function Element(props) {
 
   useDeepCompareEffect(() => {
     function updateProductState() {
-      const { productId } = routeParams
+      const { chefId } = routeParams
 
-      if (productId === 'new') {
+      if (chefId === 'new') {
         /**
          * Create New Product data
          */
@@ -65,7 +61,7 @@ function Element(props) {
         /**
          * Get Product data
          */
-        dispatch(getProduct(productId)).then((action) => {
+        dispatch(getProduct(chefId)).then((action) => {
           /**
            * If the requested product is not exist show message
            */
@@ -131,7 +127,7 @@ function Element(props) {
    */
   if (
     _.isEmpty(form) ||
-    (product && routeParams.productId !== `${product.id}` && routeParams.productId !== 'new')
+    (product && routeParams.chefId !== `${product.id}` && routeParams.chefId !== 'new')
   ) {
     return <FuseLoading />
   }
@@ -152,40 +148,16 @@ function Element(props) {
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
               <Tab className="h-64" label="Basic Info" />
-              <Tab className="h-64" label="Booking Info" />
-              <Tab className="h-64" label="Weekly Theme Info" />
               <Tab className="h-64" label="Images Tab" />
-              <Tab className="h-64" label="Config" />
-              {routeParams.productId !== 'new' && <Tab className="h-64" label="Folder" />}
             </Tabs>
-            <div className="p-16  max-w-3xl">
+            <div className="p-16 sm:p-24 max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
               </div>
 
               <div className={tabValue !== 1 ? 'hidden' : ''}>
-                <BookingTab />
-              </div>
-
-              <div className={tabValue !== 2 ? 'hidden' : ''}>
-                <WeeklyThemes />
-              </div>
-
-              <div className={tabValue !== 3 ? 'hidden' : ''}>
                 <ImagesTab />
               </div>
-
-              <div className={tabValue !== 4 ? 'hidden' : ''}>
-                <DisponibilyTab />
-              </div>
-
-              {routeParams.productId !== 'new' && (
-                <div className={tabValue !== 5 ? 'hidden' : ''}>
-                  <FileList title="Menu Catalog" data={folderList.menus} />
-                  <FileList title="Management" data={folderList.management} />
-                  <FileList title="Bookings" data={folderList.reservation} />
-                </div>
-              )}
             </div>
           </>
         }
@@ -193,50 +165,6 @@ function Element(props) {
       />
     </FormProvider>
   )
-}
-
-const folderList = {
-  menus: [
-    {
-      id: 'food-menu',
-      type: 'material-twotone:restaurant',
-      contents: 'Food Menu',
-    },
-    {
-      id: 'drinks-menu',
-      type: 'material-twotone:coffee',
-      contents: 'Drinks Menu',
-    },
-  ],
-  management: [
-    {
-      id: 'chefs',
-      type: 'material-twotone:restaurant',
-      contents: 'Chef',
-    },
-    {
-      id: 'specialities',
-      type: 'material-twotone:coffee',
-      contents: 'Specialities',
-    },
-    {
-      id: 'servings',
-      type: 'material-twotone:timelapse',
-      contents: 'Servings',
-    },
-    {
-      id: 'regulations',
-      type: 'material-twotone:insert_drive_file',
-      contents: 'Regulations',
-    },
-  ],
-  reservation: [
-    {
-      id: 'reservation',
-      type: 'material-twotone:collections_bookmark',
-      contents: 'Reservation',
-    },
-  ],
 }
 
 export default withReducer('restaurantFacility', reducer)(Element)
