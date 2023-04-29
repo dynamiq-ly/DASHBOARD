@@ -6,6 +6,9 @@ const RestaurantDetail = lazy(() => import('./resto/Element'))
 const RestaurantRegulation = lazy(() => import('./regulations/RegulationsScreen'))
 const RestaurantRegulationDetail = lazy(() => import('./reglo/Element'))
 
+const RestaurantServings = lazy(() => import('./servings/ServingsScreen'))
+const RestaurantServingDetail = lazy(() => import('./serve/Element'))
+
 const RestaurantConfig = {
   settings: {
     layout: {
@@ -37,6 +40,19 @@ const RestaurantConfig = {
                 {
                   path: ':regulationId',
                   element: <RestaurantRegulationDetail />,
+                },
+              ],
+            },
+            {
+              path: 'servings',
+              children: [
+                {
+                  path: '',
+                  element: <RestaurantServings />,
+                },
+                {
+                  path: ':servingId',
+                  element: <RestaurantServingDetail />,
                 },
               ],
             },
