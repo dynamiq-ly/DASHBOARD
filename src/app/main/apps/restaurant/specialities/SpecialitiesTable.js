@@ -14,11 +14,11 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { getMeasures, selectProducts, selectProductsSearchText } from '../store/restaurantsSlice'
-import RestaurantsTableHead from './RestaurantTableHead'
+import { useParams } from 'react-router-dom'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../store/specialitiesSlice'
+import SpecialitiesTableHead from './SpecialitiesTableHead'
 
-function RestaurantsTable(props) {
+function SpecialitiesTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -33,15 +33,17 @@ function RestaurantsTable(props) {
     id: null,
   })
 
+  const { productId } = useParams()
+
   useEffect(() => {
-    dispatch(getMeasures()).then(() => setLoading(false))
-  }, [dispatch])
+    dispatch(getMeasures(productId)).then(() => setLoading(false))
+  }, [dispatch, productId])
 
   useEffect(() => {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.restaurant_name.toLowerCase().includes(searchText.toLowerCase())
+          item.speciality_name.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -134,7 +136,7 @@ function RestaurantsTable(props) {
     <div className="w-full flex flex-col min-h-full">
       <FuseScrollbars className="grow overflow-x-auto">
         <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
-          <RestaurantsTableHead
+          <SpecialitiesTableHead
             selectedProductIds={selected}
             order={order}
             onSelectAllClick={handleSelectAllClick}
@@ -149,8 +151,8 @@ function RestaurantsTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'room_name': {
-                      return o[order.room_name]
+                    case 'speciality_name': {
+                      return o[order.speciality_name]
                     }
                     default: {
                       return o[order.id]
@@ -188,86 +190,22 @@ function RestaurantsTable(props) {
                       scope="row"
                       padding="none"
                     >
-                      {n.images.length === 0 ? (
-                        <img
-                          className="w-full block rounded"
-                          alt={`${n.restaurant_name}-${n.restaurant_description}`}
-                          src="assets/images/apps/ecommerce/product-image-placeholder.png"
-                        />
-                      ) : (
-                        <img
-                          className="w-full block rounded"
-                          alt={`${n.restaurant_name}-${n.restaurant_description}`}
-                          src={`${process.env.REACT_APP_URL}/storage/restaurants/${n.images[0].image}`}
-                        />
-                      )}
+                      {n.id}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.restaurant_name}
+                      {n.speciality_name}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {/* eslint-disable-next-line no-nested-ternary */}
-                      {n.specialities.length > 0 ? (
-                        n.specialities.find((speciality) => speciality.speciality_main === 1) ? (
-                          <div className="inline text-12 font-semibold py-4 px-12 rounded-full truncate bg-blue-700 text-white">
-                            {
-                              n.specialities.find((speciality) => speciality.speciality_main === 1)
-                                .speciality_name
-                            }
-                          </div>
-                        ) : (
-                          <div className="inline text-12 font-semibold py-4 px-12 rounded-full truncate bg-purple-500 text-white">
-                            ({n.specialities.length}) speciality
-                          </div>
-                        )
-                      ) : (
-                        <div className="inline text-12 font-semibold py-4 px-12 rounded-full truncate bg-red-700 text-white">
-                          No speciality
+                      {n.speciality_main ? (
+                        <div className="inline text-12 font-semibold py-4 px-12 rounded-full truncate bg-green-700 text-white">
+                          Main Restaurant Speciality
                         </div>
-                      )}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.restaurant_description.length > 72
-                        ? `${n.restaurant_description.slice(0, 72)}...`
-                        : n.restaurant_description}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.booking.can_book ? (
-                        <FuseSvgIcon className="text-green" size={20}>
-                          heroicons-outline:check-circle
-                        </FuseSvgIcon>
                       ) : (
-                        <FuseSvgIcon className="text-red" size={20}>
-                          heroicons-outline:minus-circle
-                        </FuseSvgIcon>
-                      )}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.schedule.isBuffet ? (
-                        <FuseSvgIcon className="text-green" size={20}>
-                          heroicons-outline:check-circle
-                        </FuseSvgIcon>
-                      ) : (
-                        <FuseSvgIcon className="text-red" size={20}>
-                          heroicons-outline:minus-circle
-                        </FuseSvgIcon>
-                      )}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.isVisible ? (
-                        <FuseSvgIcon className="text-green" size={20}>
-                          heroicons-outline:check-circle
-                        </FuseSvgIcon>
-                      ) : (
-                        <FuseSvgIcon className="text-red" size={20}>
-                          heroicons-outline:minus-circle
-                        </FuseSvgIcon>
+                        <div className="inline text-12 font-semibold py-4 px-12 rounded-full truncate bg-blue-700 text-white">
+                          Other Cuisine Specialites
+                        </div>
                       )}
                     </TableCell>
                   </TableRow>
@@ -296,4 +234,4 @@ function RestaurantsTable(props) {
   )
 }
 
-export default withRouter(RestaurantsTable)
+export default withRouter(SpecialitiesTable)

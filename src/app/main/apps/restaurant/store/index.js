@@ -6,6 +6,8 @@ import regulations from './regulationsSlice'
 import regulation from './regulationSlice'
 import servings from './servingsSlice'
 import serving from './servingSlice'
+import specialities from './specialitiesSlice'
+import specialty from './specialtySlice'
 
 const reducer = combineReducers({
   restaurants,
@@ -14,6 +16,8 @@ const reducer = combineReducers({
   regulation,
   servings,
   serving,
+  specialities,
+  specialty,
 })
 
 export default reducer

@@ -9,6 +9,9 @@ const RestaurantRegulationDetail = lazy(() => import('./reglo/Element'))
 const RestaurantServings = lazy(() => import('./servings/ServingsScreen'))
 const RestaurantServingDetail = lazy(() => import('./serve/Element'))
 
+const RestaurantSpecialities = lazy(() => import('./specialities/SpecialitiesScreen'))
+const RestaurantSepcialityDetail = lazy(() => import('./specialty/Element'))
+
 const RestaurantConfig = {
   settings: {
     layout: {
@@ -53,6 +56,19 @@ const RestaurantConfig = {
                 {
                   path: ':servingId',
                   element: <RestaurantServingDetail />,
+                },
+              ],
+            },
+            {
+              path: 'specialities',
+              children: [
+                {
+                  path: '',
+                  element: <RestaurantSpecialities />,
+                },
+                {
+                  path: ':specialityId',
+                  element: <RestaurantSepcialityDetail />,
                 },
               ],
             },
