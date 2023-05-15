@@ -10,17 +10,20 @@ import { selectSelectedLabels } from './labelsSlice'
 
 export const dateFormat = 'YYYY-MM-DDTHH:mm:ss.sssZ'
 
-export const getEvents = createAsyncThunk('calendarApp/events/getEvents', async () => {
-  const response = await axios.get('/api/calendar/events')
-  const data = await response.data
+export const getEvents = createAsyncThunk(
+  'calendarApp/events/getEvents',
+  async (productId, { dispatch, getState }) => {
+    const response = await axios.get(`/api/restaurant/reservations?query=${productId}}`)
+    const data = await response.data
 
-  return data
-})
+    return data
+  }
+)
 
 export const addEvent = createAsyncThunk(
   'calendarApp/events/addEvent',
   async (newEvent, { dispatch }) => {
-    const response = await axios.post('/api/calendar/events', newEvent)
+    const response = await axios.post('/api/reservations', newEvent)
     const data = await response.data
 
     return data
@@ -30,7 +33,7 @@ export const addEvent = createAsyncThunk(
 export const updateEvent = createAsyncThunk(
   'calendarApp/events/updateEvent',
   async (event, { dispatch }) => {
-    const response = await axios.put(`/api/calendar/events/${event.id}`, event)
+    const response = await axios.put(`/api/reservations/${event.id}`, event)
     const data = await response.data
 
     return data
@@ -40,7 +43,7 @@ export const updateEvent = createAsyncThunk(
 export const removeEvent = createAsyncThunk(
   'calendarApp/events/removeEvent',
   async (eventId, { dispatch }) => {
-    const response = await axios.delete(`/api/calendar/events/${eventId}`)
+    const response = await axios.delete(`/api/reservations/${eventId}`)
     const data = await response.data
 
     return data

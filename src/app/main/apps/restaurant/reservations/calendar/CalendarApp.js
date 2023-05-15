@@ -8,6 +8,7 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import FusePageSimple from '@fuse/core/FusePageSimple'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
+import { useParams } from 'react-router-dom'
 import CalendarHeader from './CalendarHeader'
 import EventDialog from './dialogs/event/EventDialog'
 import reducer from './store'
@@ -20,7 +21,6 @@ import {
 } from './store/eventsSlice'
 import { getLabels, selectLabels } from './store/labelsSlice'
 import LabelsDialog from './dialogs/labels/LabelsDialog'
-import CalendarAppSidebar from './CalendarAppSidebar'
 import CalendarAppEventContent from './CalendarAppEventContent'
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
@@ -110,10 +110,12 @@ function CalendarApp(props) {
   const theme = useTheme()
   const labels = useSelector(selectLabels)
 
+  const { productId } = useParams()
+
   useEffect(() => {
-    dispatch(getEvents())
+    dispatch(getEvents(productId))
     dispatch(getLabels())
-  }, [dispatch])
+  }, [dispatch, productId])
 
   useEffect(() => {
     setLeftSidebarOpen(!isMobile)
@@ -195,10 +197,6 @@ function CalendarApp(props) {
             ref={calendarRef}
           />
         }
-        leftSidebarContent={<CalendarAppSidebar />}
-        leftSidebarOpen={leftSidebarOpen}
-        leftSidebarOnClose={() => setLeftSidebarOpen(false)}
-        leftSidebarWidth={240}
         scroll="content"
       />
       <EventDialog />
