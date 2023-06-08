@@ -1,11 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
 import nightShows from './nightsSlice'
-import dayActivities from './daysSlice'
+import days from './daysSlice'
 
 const reducer = combineReducers({
   nightShows,
-  dayActivities,
+  days,
 })
 
 export default reducer

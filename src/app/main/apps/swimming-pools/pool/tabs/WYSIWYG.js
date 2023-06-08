@@ -1,29 +1,30 @@
 import { Controller, useFormContext } from 'react-hook-form'
-import { TextField } from '@mui/material'
+
+import { useState } from 'react'
+
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
 
 function WYSIWYG(props) {
   const methods = useFormContext()
   const { control } = methods
 
+  const [value, setValue] = useState('')
+
   return (
     <div>
-      <Controller
-        name="pool_description"
+      {/* <Controller
+        className="mt-8 mb-16"
+        render={({ field }) => <WYSIWYGEditor {...field} />}
+        name="message"
         control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            required
-            label="Pool Type"
-            autoFocus
-            multiline
-            rows={20}
-            id="pool_description"
-            variant="outlined"
-            fullWidth
-          />
-        )}
+      /> */}
+
+      <Controller
+        className="mt-8 mb-16"
+        render={({ field }) => <ReactQuill theme="snow" value={value} onChange={setValue} />}
+        name="message"
+        control={control}
       />
     </div>
   )

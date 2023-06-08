@@ -19,7 +19,9 @@ import { AuthProvider } from './auth/AuthContext'
 /**
  * Axios HTTP Request defaults
  */
-axios.defaults.baseURL = 'https://api.utells.com'
+axios.defaults.baseURL =
+  process.env.NODE_ENV === 'production' ? 'https://api.utells.com' : 'http://localhost:8000'
+
 // axios.defaults.withCredentials = true
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 // axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'

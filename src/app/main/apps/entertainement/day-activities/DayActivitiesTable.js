@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
+import StatusBade from 'app/shared-components/StatusBadge'
 import { getMeasures, selectProducts, selectProductsSearchText } from '../store/daysSlice'
 
 import DayActivitiesTableHead from './DayActivitiesTableHead'
@@ -42,7 +43,7 @@ function NightShowsTable(props) {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.entertainement.entertainements_title.toLowerCase().includes(searchText.toLowerCase())
+          item.entertainement.entertainement_name.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -150,8 +151,8 @@ function NightShowsTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'entertainements_title': {
-                      return o[order.entertainement.entertainements_title]
+                    case 'entertainement_name': {
+                      return o[order.entertainement_name]
                     }
                     default: {
                       return o[order.id]
@@ -189,47 +190,47 @@ function NightShowsTable(props) {
                       scope="row"
                       padding="none"
                     >
-                      {n.entertainement.images.length === 0 ? (
+                      {n.images.length === 0 ? (
                         <img
                           className="w-full block rounded"
-                          alt={`${n.entertainement.entertainements_title}-${n.entertainement.entertainements_location}`}
+                          alt={`${n.entertainement_name}-${n.entertainement_location}`}
                           src="assets/images/apps/ecommerce/product-image-placeholder.png"
                         />
                       ) : (
                         <img
                           className="w-full block rounded"
-                          alt={`${n.entertainement.entertainements_title}-${n.entertainement.entertainements_location}`}
-                          src={`${process.env.REACT_APP_URL}/storage/entertainement/${n.entertainement.images[0].image}`}
+                          alt={`${n.entertainement_name}-${n.entertainement_location}`}
+                          src={`${process.env.REACT_APP_URL}/storage/entertainement/day/${n.images[0].image}`}
                         />
                       )}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.entertainement.entertainements_title}
+                      {n.entertainement_name}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.night_show_leader}
+                      {n.entertainement_summary}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.night_show_type}
+                      {n.entertainement_location}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.night_show_ticked_price}
+                      <StatusBade name={n.entertainement_age} color="bg-black text-white" />
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.entertainement.entertainements_location}
+                      {n.timings.length === 0 ? 'N/A' : n.timings.length}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.entertainement.entertainements_duration}h
+                      <StatusBade name={n.entertainement_joinable} />
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.entertainement.entertainements_status ? (
+                      {n.isVisible ? (
                         <FuseSvgIcon className="text-green" size={20}>
                           heroicons-outline:check-circle
                         </FuseSvgIcon>
