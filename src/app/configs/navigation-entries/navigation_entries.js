@@ -95,7 +95,6 @@ export const bar = {
 /**
  * entertainement
  */
-
 export const entertainement = {
   id: 'entertainement-collapse',
   title: 'Entertainements',
@@ -107,6 +106,10 @@ export const entertainement = {
       title: 'Calendar',
       type: 'item',
       url: 'entertainement/calendar',
+      badge: {
+        title: 0,
+        classes: 'w-20 h-20 bg-fuchsia text-white rounded-full',
+      },
     },
     {
       id: 'entertainement-collapse.day-activities',
@@ -125,12 +128,6 @@ export const entertainement = {
       title: 'Sport Events',
       type: 'item',
       url: 'entertainement/sport-event',
-    },
-    {
-      id: 'entertainement-collapse.entertainement',
-      title: 'Events Programs',
-      type: 'item',
-      url: 'entertainement/event-programs',
     },
   ],
 }
