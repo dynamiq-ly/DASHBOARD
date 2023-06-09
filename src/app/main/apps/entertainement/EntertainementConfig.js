@@ -31,7 +31,12 @@ const EntertainementConfig = {
     },
     {
       path: 'entertainement/night-show',
-      element: <NightShows />,
+      children: [
+        {
+          path: '',
+          element: <NightShows />,
+        }
+      ]
     },
     {
       path: 'entertainement/sport-event',
