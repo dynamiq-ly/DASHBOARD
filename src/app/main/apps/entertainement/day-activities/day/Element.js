@@ -22,6 +22,7 @@ import BasicInfoTab from './tabs/BasicInfo'
 import ImagesTab from './tabs/ImagesTab'
 import DisponibilyTab from './tabs/DisponibilyTab'
 import ElementHeader from './ElementHeader'
+import TimingTab from './tabs/TimingTab'
 
 /**
  * Form Validation Schema
@@ -164,6 +165,10 @@ function Element(props) {
 
               <div className={tabValue !== 2 ? 'hidden' : ''}>
                 <ImagesTab />
+              </div>
+
+              <div className={tabValue !== 3 ? 'hidden' : ''}>
+                <TimingTab />
               </div>
             </div>
           </>

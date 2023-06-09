@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
+import { useHelperContext } from 'src/app/contexts/HelperContext'
 import { removeProduct, saveProduct } from '../../store/daySlice'
 
 function ElementHeader(props) {
@@ -19,8 +20,11 @@ function ElementHeader(props) {
   const theme = useTheme()
   const navigate = useNavigate()
 
+  const { fetchWeeklyTimingCount } = useHelperContext()
+
   function handleSaveProduct() {
     dispatch(saveProduct(getValues())).then(() => {
+      fetchWeeklyTimingCount()
       navigate('/entertainement/day-activities')
     })
   }
@@ -30,8 +34,6 @@ function ElementHeader(props) {
       navigate('/entertainement/day-activities')
     })
   }
-
-  console.log(images)
 
   return (
     <div className="flex flex-col sm:flex-row flex-1 w-full items-center justify-between space-y-8 sm:space-y-0 py-32 px-24 md:px-32">

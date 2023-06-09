@@ -36,7 +36,7 @@ function BasicInfoTab(props) {
             {...field}
             className="mt-8 mb-16"
             id="entertainement_summary"
-            label="email"
+            label="Summary"
             required
             type="text"
             variant="outlined"
@@ -53,7 +53,7 @@ function BasicInfoTab(props) {
             {...field}
             className="mt-8 mb-16"
             id="entertainement_description"
-            label="Phone"
+            label="Description"
             required
             type="text"
             multiline
