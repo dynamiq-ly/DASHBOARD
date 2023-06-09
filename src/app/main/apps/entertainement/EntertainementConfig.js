@@ -4,6 +4,7 @@ const DayActivities = lazy(() => import('./day-activities/DayActivitiesScreen'))
 const DayActivity = lazy(() => import('./day-activities/day/Element'))
 
 const NightShows = lazy(() => import('./night-show/NightShowsScreen'))
+const NightShow = lazy(() => import('./night-show/night/Element'))
 
 const SportEvents = lazy(() => import('./sport-event/SportEventScreen'))
 
@@ -35,8 +36,12 @@ const EntertainementConfig = {
         {
           path: '',
           element: <NightShows />,
-        }
-      ]
+        },
+        {
+          path: ':productId',
+          element: <NightShow />,
+        },
+      ],
     },
     {
       path: 'entertainement/sport-event',
