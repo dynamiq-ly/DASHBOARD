@@ -5,14 +5,18 @@ import axios from 'axios'
 
 const HelperContext = createContext({
   badgeCount: 0,
+  locations: [],
 })
 
 export const useHelperContext = () => useContext(HelperContext)
 
 const HelperProvider = ({ children }) => {
   const dispatch = useDispatch()
-  const [badgeCount, setBadgeCount] = useState(0)
 
+  const [badgeCount, setBadgeCount] = useState(0)
+  const [locations, setLocations] = useState([])
+
+  /* Fetch event count */
   const fetchWeeklyTimingCount = async () => {
     try {
       console.log('fetchWeeklyTimingCount')
@@ -25,9 +29,23 @@ const HelperProvider = ({ children }) => {
       setBadgeCount(0)
     }
   }
-
   useEffect(() => {
     fetchWeeklyTimingCount()
+  }, [])
+
+  /* Fetch locations */
+  const fetchLocations = async () => {
+    try {
+      console.log('fetchLocations')
+      const response = await axios.get(`${process.env.REACT_APP_URL}/api/hotel/location-parts`)
+      setLocations(response.data)
+    } catch (error) {
+      console.error('Error fetching locations:', error)
+      setLocations([])
+    }
+  }
+  useEffect(() => {
+    fetchLocations()
   }, [])
 
   useEffect(() => {
@@ -40,7 +58,16 @@ const HelperProvider = ({ children }) => {
     )
   }, [dispatch, badgeCount])
 
-  return <HelperContext.Provider value={{}}>{children}</HelperContext.Provider>
+  const functions = {
+    fetchWeeklyTimingCount,
+    fetchLocations,
+  }
+
+  return (
+    <HelperContext.Provider value={{ badgeCount, locations, ...functions }}>
+      {children}
+    </HelperContext.Provider>
+  )
 }
 
 export default HelperProvider

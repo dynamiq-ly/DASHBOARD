@@ -7,27 +7,27 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { removeProduct, saveProduct } from '../store/restaurantSlice'
+import { removeProduct, saveProduct } from '../../store/daySlice'
 
 function ElementHeader(props) {
   const dispatch = useDispatch()
   const methods = useFormContext()
   const { formState, watch, getValues } = methods
   const { isValid, dirtyFields } = formState
-  const name = watch('restaurant_name')
+  const name = watch('entertainement_name')
   const images = watch('images')
   const theme = useTheme()
   const navigate = useNavigate()
 
   function handleSaveProduct() {
     dispatch(saveProduct(getValues())).then(() => {
-      navigate('/restaurant')
+      navigate('/entertainement/day-activities')
     })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      navigate('/restaurant')
+      navigate('/entertainement/day-activities')
     })
   }
 
@@ -44,7 +44,7 @@ function ElementHeader(props) {
             className="flex items-center sm:mb-12"
             component={Link}
             role="button"
-            to="/restaurant"
+            to="/entertainement/day-activities"
             color="inherit"
           >
             <FuseSvgIcon size={20}>
@@ -52,7 +52,7 @@ function ElementHeader(props) {
                 ? 'heroicons-outline:arrow-sm-left'
                 : 'heroicons-outline:arrow-sm-right'}
             </FuseSvgIcon>
-            <span className="flex mx-4 font-medium">Service Details</span>
+            <span className="flex mx-4 font-medium">Day Activities</span>
           </Typography>
         </motion.div>
 
@@ -65,7 +65,7 @@ function ElementHeader(props) {
             {images.length > 0 ? (
               <img
                 className="w-32 sm:w-48 rounded"
-                src={`${process.env.REACT_APP_URL}/storage/restaurants/${images[0].image}`}
+                src={`${process.env.REACT_APP_URL}/storage/entertainement/day/${images[0].image}`}
                 alt={name}
               />
             ) : (
@@ -82,10 +82,10 @@ function ElementHeader(props) {
             animate={{ x: 0, transition: { delay: 0.3 } }}
           >
             <Typography className="text-16 sm:text-20 truncate font-semibold">
-              {name || 'New Restaurant'}
+              {name || 'New Activity'}
             </Typography>
             <Typography variant="caption" className="font-medium">
-              Service Detail
+              Day Activity Detail
             </Typography>
           </motion.div>
         </div>

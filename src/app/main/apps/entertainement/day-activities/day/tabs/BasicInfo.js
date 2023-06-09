@@ -1,14 +1,18 @@
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { Controller, useFormContext } from 'react-hook-form'
+import { useHelperContext } from 'src/app/contexts/HelperContext'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
   const { control } = methods
 
+  const { locations } = useHelperContext()
+
   return (
     <div>
       <Controller
-        name="restaurant_name"
+        name="entertainement_name"
         control={control}
         render={({ field }) => (
           <TextField
@@ -17,7 +21,7 @@ function BasicInfoTab(props) {
             required
             label="Name"
             autoFocus
-            id="restaurant_name"
+            id="entertainement_name"
             variant="outlined"
             fullWidth
           />
@@ -25,13 +29,13 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="restaurant_email"
+        name="entertainement_summary"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            id="restaurant_email"
+            id="entertainement_summary"
             label="email"
             required
             type="text"
@@ -42,35 +46,18 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="restaurant_phone"
+        name="entertainement_description"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            id="restaurant_phone"
+            id="entertainement_description"
             label="Phone"
             required
             type="text"
-            variant="outlined"
-            fullWidth
-          />
-        )}
-      />
-
-      <Controller
-        name="restaurant_description"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            id="restaurant_description"
-            label="Description"
-            required
             multiline
-            rows={6}
-            type="text"
+            rows={5}
             variant="outlined"
             fullWidth
           />
@@ -78,53 +65,51 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="restaurant_website"
+        name="entertainement_age"
         control={control}
         render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            id="restaurant_website"
-            label="Website"
-            required
-            type="text"
-            variant="outlined"
-            fullWidth
-          />
+          <FormControl fullWidth className="mt-8 mb-16">
+            <InputLabel id="demo-simple-select-label">Age Group</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="entertainement_age"
+              label="Age Group"
+              placeholder="Select Age Group"
+              value={field.value}
+              onChange={field.onChange}
+            >
+              <MenuItem value="KIDS">KIDS</MenuItem>
+              <MenuItem value="ADULTS">ADULTS</MenuItem>
+              <MenuItem value="TEENS">TEENS</MenuItem>
+              <MenuItem value="FAMILY">FAMILY</MenuItem>
+              <MenuItem value="OTHER">OTHER</MenuItem>
+            </Select>
+          </FormControl>
         )}
       />
 
       <Controller
-        name="restaurant_location"
+        name="entertainement_location"
         control={control}
         render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            id="restaurant_location"
-            label="Addresse"
-            required
-            type="text"
-            variant="outlined"
-            fullWidth
-          />
-        )}
-      />
-
-      <Controller
-        name="restaurant_position"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            id="restaurant_position"
-            label="Coordinates"
-            required
-            type="text"
-            variant="outlined"
-            fullWidth
-          />
+          <FormControl fullWidth className="mt-8 mb-16">
+            <InputLabel id="demo-simple-select-label">Location</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="entertainement_location"
+              label="Age Group"
+              placeholder="Select Location"
+              value={field.value}
+              onChange={field.onChange}
+            >
+              <MenuItem value="NOT REGISTRED YET">NOT REGISTRED YET</MenuItem>
+              {locations.map((location, index) => (
+                <MenuItem key={index} value={location.location_name}>
+                  {location.location_name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         )}
       />
     </div>
