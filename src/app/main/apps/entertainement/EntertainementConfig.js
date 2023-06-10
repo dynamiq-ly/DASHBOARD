@@ -45,7 +45,15 @@ const EntertainementConfig = {
     },
     {
       path: 'entertainement/sport-event',
-      element: <SportEvents />,
+      children: [
+        {
+          path: '',
+          element: <SportEvents />,
+        },
+        {
+          path: ':productId',
+        },
+      ],
     },
     {
       path: 'entertainement/calendar',

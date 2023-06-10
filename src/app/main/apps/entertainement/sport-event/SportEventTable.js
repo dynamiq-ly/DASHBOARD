@@ -16,11 +16,11 @@ import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import StatusBade from 'app/shared-components/StatusBadge'
-import { getMeasures, selectProducts, selectProductsSearchText } from '../store/daysSlice'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../store/sportsSlice'
 
-import DayActivitiesTableHead from './DayActivitiesTableHead'
+import DayActivitiesTableHead from './SportEventTableHead'
 
-function NightShowsTable(props) {
+function SportEventTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -184,29 +184,12 @@ function NightShowsTable(props) {
                       />
                     </TableCell>
 
-                    <TableCell
-                      className="w-52 h-52 px-4 md:px-0"
-                      component="th"
-                      scope="row"
-                      padding="none"
-                    >
-                      {n.images.length === 0 ? (
-                        <img
-                          className="w-full block rounded"
-                          alt={`${n.entertainement_name}-${n.entertainement_location}`}
-                          src="assets/images/apps/ecommerce/product-image-placeholder.png"
-                        />
-                      ) : (
-                        <img
-                          className="w-full block rounded"
-                          alt={`${n.entertainement_name}-${n.entertainement_location}`}
-                          src={`${process.env.REACT_APP_URL}/storage/entertainement/day/${n.images[0].image}`}
-                        />
-                      )}
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.entertainement_name}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.entertainement_name}
+                      <StatusBade name={n.sport.sport_type} color="bg-blue text-white" />
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
@@ -218,15 +201,15 @@ function NightShowsTable(props) {
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      <StatusBade name={n.entertainement_age} color="bg-black text-white" />
+                      <StatusBade name={n.sport.sport_event} color="bg-black text-white" />
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.timings.length === 0 ? 'N/A' : n.timings.length}
+                      {n.timings[0].date}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      <StatusBade name={n.entertainement_joinable} />
+                      {n.timings[0].time_start} - {n.timings[0].time_end}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
@@ -266,4 +249,4 @@ function NightShowsTable(props) {
   )
 }
 
-export default withRouter(NightShowsTable)
+export default withRouter(SportEventTable)
