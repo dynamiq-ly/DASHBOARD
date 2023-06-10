@@ -31,6 +31,7 @@ function ElementHeader(props) {
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
+      fetchWeeklyTimingCount()
       navigate('/entertainement/night-show')
     })
   }

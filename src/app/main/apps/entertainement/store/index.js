@@ -7,6 +7,7 @@ import days from './daysSlice'
 import day from './daySlice'
 
 import sports from './sportsSlice'
+import sport from './sportSlice'
 
 const reducer = combineReducers({
   nights,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   days,
   day,
   sports,
+  sport,
 })
 
 export default reducer

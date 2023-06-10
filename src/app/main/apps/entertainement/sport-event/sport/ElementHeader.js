@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { useHelperContext } from 'src/app/contexts/HelperContext'
-import { removeProduct, saveProduct } from '../../store/daySlice'
+import { removeProduct, saveProduct } from '../../store/sportSlice'
 
 function ElementHeader(props) {
   const dispatch = useDispatch()
@@ -16,7 +16,7 @@ function ElementHeader(props) {
   const { formState, watch, getValues } = methods
   const { isValid, dirtyFields } = formState
   const name = watch('entertainement_name')
-  const images = watch('images')
+  const images = watch('sport.sport_event_image')
   const theme = useTheme()
   const navigate = useNavigate()
 
@@ -25,16 +25,18 @@ function ElementHeader(props) {
   function handleSaveProduct() {
     dispatch(saveProduct(getValues())).then(() => {
       fetchWeeklyTimingCount()
-      navigate('/entertainement/day-activities')
+      navigate('/entertainement/sport-event')
     })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
       fetchWeeklyTimingCount()
-      navigate('/entertainement/day-activities')
+      navigate('/entertainement/sport-event')
     })
   }
+
+  console.log('ElementHeader rendered', images)
 
   return (
     <div className="flex flex-col sm:flex-row flex-1 w-full items-center justify-between space-y-8 sm:space-y-0 py-32 px-24 md:px-32">
@@ -47,7 +49,7 @@ function ElementHeader(props) {
             className="flex items-center sm:mb-12"
             component={Link}
             role="button"
-            to="/entertainement/day-activities"
+            to="/entertainement/sport-event"
             color="inherit"
           >
             <FuseSvgIcon size={20}>
@@ -55,7 +57,7 @@ function ElementHeader(props) {
                 ? 'heroicons-outline:arrow-sm-left'
                 : 'heroicons-outline:arrow-sm-right'}
             </FuseSvgIcon>
-            <span className="flex mx-4 font-medium">Day Activities</span>
+            <span className="flex mx-4 font-medium">Sport Events</span>
           </Typography>
         </motion.div>
 
@@ -65,12 +67,8 @@ function ElementHeader(props) {
             initial={{ scale: 0 }}
             animate={{ scale: 1, transition: { delay: 0.3 } }}
           >
-            {images.length > 0 ? (
-              <img
-                className="w-32 sm:w-48 rounded"
-                src={`${process.env.REACT_APP_URL}/storage/entertainement/day/${images[0].image}`}
-                alt={name}
-              />
+            {images !== 'null' && images !== null ? (
+              <img className="w-32 sm:w-48 rounded" src={images} alt={name} />
             ) : (
               <img
                 className="w-32 sm:w-48 rounded"
@@ -85,10 +83,10 @@ function ElementHeader(props) {
             animate={{ x: 0, transition: { delay: 0.3 } }}
           >
             <Typography className="text-16 sm:text-20 truncate font-semibold">
-              {name || 'New Activity'}
+              {name || 'New Sport'}
             </Typography>
             <Typography variant="caption" className="font-medium">
-              Day Activity Detail
+              Sport Event Detail
             </Typography>
           </motion.div>
         </div>
