@@ -11,7 +11,7 @@ const SafetyConfig = {
   },
   routes: [
     {
-      path: 'safety',
+      path: 'policies',
       children: [
         {
           path: '',
