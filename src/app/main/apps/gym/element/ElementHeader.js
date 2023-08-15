@@ -50,7 +50,7 @@ function ElementHeader(props) {
                 ? 'heroicons-outline:arrow-sm-left'
                 : 'heroicons-outline:arrow-sm-right'}
             </FuseSvgIcon>
-            <span className="flex mx-4 font-medium">Chefs List</span>
+            <span className="flex mx-4 font-medium">Gyms List</span>
           </Typography>
         </motion.div>
 
