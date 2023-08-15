@@ -45,7 +45,7 @@ const Root = styled('div')(({ theme }) => ({
 
 function ImagesTab(props) {
   const methods = useFormContext()
-  const { productId } = useParams()
+  const { chefId } = useParams()
   const { control, watch } = methods
 
   const images = watch('image')
@@ -108,7 +108,7 @@ function ImagesTab(props) {
           )}
         />
 
-        {productId !== 'new' ? (
+        {chefId !== 'new' ? (
           <Controller
             name="image"
             control={control}
@@ -144,7 +144,7 @@ function ImagesTab(props) {
 
                   <img
                     className="max-w-none w-auto h-full"
-                    src={`${process.env.REACT_APP_STORAGE_UTELLS}/gym/thumbnails/${images}`}
+                    src={`${process.env.REACT_APP_STORAGE_UTELLS}/gym/staffs/${images}`}
                     alt="product"
                   />
                 </div>

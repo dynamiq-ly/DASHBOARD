@@ -13,30 +13,30 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { lighten } from '@mui/material/styles'
-import { removeMeasures } from '../store/chefsSlice'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
+import { removeMeasures } from '../store/staffsSlice'
 
 const rows = [
   {
-    id: 'chef_images',
+    id: 'image',
     align: 'left',
     disablePadding: true,
     label: '',
     sort: false,
   },
   {
-    id: 'chef_name',
+    id: 'name',
     align: 'left',
     disablePadding: false,
-    label: 'Chef Name',
+    label: 'Name',
     sort: true,
   },
   {
-    id: 'chef_role',
+    id: 'job_titl',
     align: 'left',
     disablePadding: false,
-    label: 'Chef Role',
+    label: 'Job Title',
     sort: true,
   },
 ]

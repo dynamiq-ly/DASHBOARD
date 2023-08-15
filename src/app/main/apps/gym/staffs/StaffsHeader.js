@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { selectProductsSearchText, setProductsSearchText } from '../store/chefsSlice'
+import { selectProductsSearchText, setProductsSearchText } from '../store/staffsSlice'
 
 function ChefsHeader() {
   const dispatch = useDispatch()
@@ -26,7 +26,7 @@ function ChefsHeader() {
             className="flex items-center sm:mb-12"
             component={Link}
             role="button"
-            to={`/restaurant/${productId}`}
+            to={`/gym/${productId}`}
             color="inherit"
           >
             <FuseSvgIcon size={20}>
@@ -34,7 +34,7 @@ function ChefsHeader() {
                 ? 'heroicons-outline:arrow-sm-left'
                 : 'heroicons-outline:arrow-sm-right'}
             </FuseSvgIcon>
-            <span className="flex mx-4 font-medium">Restaurant</span>
+            <span className="flex mx-4 font-medium">Gym</span>
           </Typography>
         </motion.div>
 
@@ -45,7 +45,7 @@ function ChefsHeader() {
             animate={{ x: 0, transition: { delay: 0.3 } }}
           >
             <Typography className="text-16 sm:text-20 truncate font-semibold">
-              Chefs List
+              Staff List
             </Typography>
             <Typography variant="caption" className="font-medium">
               Details

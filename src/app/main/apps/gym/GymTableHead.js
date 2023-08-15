@@ -13,8 +13,8 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { lighten } from '@mui/material/styles'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { removeMeasures } from './store/gymSlice'
 
 const rows = [

@@ -19,6 +19,4 @@ function ChefsScreen() {
   )
 }
 
-export default withReducer('restaurantFacility', reducer)(ChefsScreen)
-
-const testing = {}
+export default withReducer('gyms', reducer)(ChefsScreen)

@@ -16,8 +16,8 @@ import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
 import _ from '@lodash'
 import FuseScrollbars from '@fuse/core/FuseScrollbars'
-import { getMeasures, selectProducts, selectProductsSearchText } from '../store/chefsSlice'
-import ChefsTableHead from './ChefsTableHead'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../store/staffsSlice'
+import ChefsTableHead from './StaffsTableHead'
 
 function ChefsTable(props) {
   const dispatch = useDispatch()
@@ -43,9 +43,7 @@ function ChefsTable(props) {
   useEffect(() => {
     if (searchText.length !== 0) {
       setData(
-        _.filter(products, (item) =>
-          item.chef_name.toLowerCase().includes(searchText.toLowerCase())
-        )
+        _.filter(products, (item) => item.name.toLowerCase().includes(searchText.toLowerCase()))
       )
       setPage(0)
     } else {
@@ -191,11 +189,11 @@ function ChefsTable(props) {
                       scope="row"
                       padding="none"
                     >
-                      {n.chef_image ? (
+                      {n.image ? (
                         <img
                           className="w-full block rounded"
-                          alt={`${n.chef_name}`}
-                          src={`${process.env.REACT_APP_URL}/storage/restaurants/chefs/${n.chef_image}`}
+                          alt={`${n.name}`}
+                          src={`${process.env.REACT_APP_STORAGE_UTELLS}/gym/staffs/${n.image}`}
                         />
                       ) : (
                         <img
@@ -207,19 +205,19 @@ function ChefsTable(props) {
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.chef_name}
+                      {n.name}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       <div
                         className={clsx(
                           'inline text-12 font-semibold py-4 px-12 rounded-full truncate',
-                          n.chef_role.toLowerCase().includes('exec')
+                          n.job_title.toLowerCase().includes('exec', 'manager')
                             ? 'bg-blue text-white'
                             : 'bg-green text-white'
                         )}
                       >
-                        {n.chef_role}
+                        {n.job_title}
                       </div>
                     </TableCell>
                   </TableRow>

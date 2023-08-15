@@ -4,10 +4,10 @@ import Typography from '@mui/material/Typography'
 import { motion } from 'framer-motion'
 import { useFormContext } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { removeProduct, saveProduct } from '../store/elementSlice'
+import { removeProduct, saveProduct } from '../../store/staffSlice'
 
 function ElementHeader(props) {
   const dispatch = useDispatch()
@@ -19,15 +19,17 @@ function ElementHeader(props) {
   const theme = useTheme()
   const navigate = useNavigate()
 
+  const { productId } = useParams()
+
   function handleSaveProduct() {
     dispatch(saveProduct(getValues())).then(() => {
-      navigate(`/gym`)
+      navigate(`/gym/${productId}/staffs`)
     })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      navigate(`/gym`)
+      navigate(`/gym/${productId}/staffs`)
     })
   }
 
@@ -42,7 +44,7 @@ function ElementHeader(props) {
             className="flex items-center sm:mb-12"
             component={Link}
             role="button"
-            to="/gym"
+            to={`/gym/${productId}/staffs`}
             color="inherit"
           >
             <FuseSvgIcon size={20}>
@@ -50,7 +52,7 @@ function ElementHeader(props) {
                 ? 'heroicons-outline:arrow-sm-left'
                 : 'heroicons-outline:arrow-sm-right'}
             </FuseSvgIcon>
-            <span className="flex mx-4 font-medium">Chefs List</span>
+            <span className="flex mx-4 font-medium">Staff List</span>
           </Typography>
         </motion.div>
 
@@ -63,7 +65,7 @@ function ElementHeader(props) {
             {images.length > 0 ? (
               <img
                 className="w-32 sm:w-48 rounded"
-                src={`${process.env.REACT_APP_STORAGE_UTELLS}/gym/thumbnails/${images}`}
+                src={`${process.env.REACT_APP_STORAGE_UTELLS}/gym/staffs/${images}`}
                 alt={name}
               />
             ) : (
@@ -80,10 +82,10 @@ function ElementHeader(props) {
             animate={{ x: 0, transition: { delay: 0.3 } }}
           >
             <Typography className="text-16 sm:text-20 truncate font-semibold">
-              {name || 'New Gym'}
+              {name || 'New Staff'}
             </Typography>
             <Typography variant="caption" className="font-medium">
-              Gym Detail
+              Staff Detail
             </Typography>
           </motion.div>
         </div>
