@@ -20,13 +20,13 @@ function ProtocolHeader(props) {
 
   function handleSaveProduct() {
     dispatch(saveProduct(getValues())).then(() => {
-      navigate('/safety')
+      navigate('/policies')
     })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      navigate('/safety')
+      navigate('/policies')
     })
   }
 
@@ -41,7 +41,7 @@ function ProtocolHeader(props) {
             className="flex items-center sm:mb-12"
             component={Link}
             role="button"
-            to="/safety"
+            to="/policies"
             color="inherit"
           >
             <FuseSvgIcon size={20}>
@@ -49,7 +49,7 @@ function ProtocolHeader(props) {
                 ? 'heroicons-outline:arrow-sm-left'
                 : 'heroicons-outline:arrow-sm-right'}
             </FuseSvgIcon>
-            <span className="flex mx-4 font-medium">Measures</span>
+            <span className="flex mx-4 font-medium">Policies</span>
           </Typography>
         </motion.div>
 
@@ -60,10 +60,10 @@ function ProtocolHeader(props) {
             animate={{ x: 0, transition: { delay: 0.3 } }}
           >
             <Typography className="text-16 sm:text-20 truncate font-semibold">
-              {name || 'New Measure'}
+              {name || 'New Policy'}
             </Typography>
             <Typography variant="caption" className="font-medium">
-              Measure Detail
+              Policy Detail
             </Typography>
           </motion.div>
         </div>

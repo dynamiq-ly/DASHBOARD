@@ -2,39 +2,45 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const getProduct = createAsyncThunk('measures/safety/getProduct', async (productId) => {
-  const response = await axios.get(`/api/measures/${productId}`)
+  const response = await axios.get(`/api/policies/${productId}`)
   const data = await response.data
 
   return data === undefined ? null : data
 })
 
-export const removeProduct = createAsyncThunk(
-  'measures/safety/removeProduct',
-  async (val, { dispatch, getState }) => {
-    const { id } = getState().measures.safety
-    await axios.delete(`/api/measures/${id}`)
-    return id
-  }
-)
+export const removeProduct = createAsyncThunk('measures/safety/removeProduct', async (val, { dispatch, getState }) => {
+  const { id } = getState().measures.safety
+  await axios.delete(`/api/policies/${id}`)
+  return id
+})
 
-export const saveProduct = createAsyncThunk(
-  'measures/safety/saveProduct',
-  async (productData, { dispatch, getState }) => {
-    const { id } = getState().measures.safety
+export const saveProduct = createAsyncThunk('measures/safety/saveProduct', async (productData, { dispatch, getState }) => {
+  const { id } = getState().measures.safety
 
-    if (id) {
-      const response = await axios.post(`/api/measures/${id}`, {
+  if (id) {
+    const response = await axios.post(
+      `/api/policies/${id}`,
+      {
         ...productData,
         _method: 'PATCH',
-      })
-      const data = await response.data
-      return data
-    }
-    const response = await axios.post('/api/measures', productData)
+      },
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
     const data = await response.data
     return data
   }
-)
+  const response = await axios.post('/api/policies', productData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+  const data = await response.data
+  return data
+})
 
 const productSlice = createSlice({
   name: 'measures/safety',
@@ -46,9 +52,10 @@ const productSlice = createSlice({
       prepare: (event) => ({
         payload: {
           //   id: FuseUtils.generateGUID(),
-          measure_name: '',
-          measure_content: '',
-          measure_icon: '',
+          title: '',
+          subTitle: '',
+          type: '',
+          file: null,
         },
       }),
     },
