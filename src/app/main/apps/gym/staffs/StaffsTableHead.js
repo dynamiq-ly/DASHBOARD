@@ -13,49 +13,35 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
-import { lighten } from '@mui/material/styles'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { removeMeasures } from './store/safetiesSlice'
+import { lighten } from '@mui/material/styles'
+import { removeMeasures } from '../store/chefsSlice'
 
 const rows = [
   {
-    id: 'id',
+    id: 'chef_images',
     align: 'left',
     disablePadding: true,
     label: '',
     sort: false,
   },
   {
-    id: 'title',
+    id: 'chef_name',
     align: 'left',
     disablePadding: false,
-    label: 'Title',
+    label: 'Chef Name',
     sort: true,
   },
   {
-    id: 'subTitle',
+    id: 'chef_role',
     align: 'left',
     disablePadding: false,
-    label: 'Sub Title',
-    sort: true,
-  },
-  {
-    id: 'type',
-    align: 'left',
-    disablePadding: false,
-    label: 'Type',
-    sort: true,
-  },
-  {
-    id: 'filePath',
-    align: 'left',
-    disablePadding: false,
-    label: 'Link To File',
+    label: 'Chef Role',
     sort: true,
   },
 ]
 
-const SafetyTableHead = (props) => {
+const RestaurantTableHead = (props) => {
   const { selectedProductIds } = props
   const numSelected = selectedProductIds.length
 
@@ -171,4 +157,4 @@ const SafetyTableHead = (props) => {
   )
 }
 
-export default SafetyTableHead
+export default RestaurantTableHead

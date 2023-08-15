@@ -10,16 +10,16 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from '@mui/material'
+import { useParams } from 'react-router-dom'
+import clsx from 'clsx'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
-
 import _ from '@lodash'
 import FuseScrollbars from '@fuse/core/FuseScrollbars'
-import { getMeasures, selectProducts, selectProductsSearchText } from './store/safetiesSlice'
-import SafetyTableHead from './SafetyTableHead'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../store/chefsSlice'
+import ChefsTableHead from './ChefsTableHead'
 
-function SafetyTable(props) {
+function ChefsTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -34,18 +34,17 @@ function SafetyTable(props) {
     id: null,
   })
 
+  const { productId } = useParams()
+
   useEffect(() => {
-    dispatch(getMeasures()).then(() => setLoading(false))
-  }, [dispatch])
+    dispatch(getMeasures(productId)).then(() => setLoading(false))
+  }, [dispatch, productId])
 
   useEffect(() => {
     if (searchText.length !== 0) {
       setData(
-        _.filter(
-          products,
-          (item) =>
-            item.title.toLowerCase().includes(searchText.toLowerCase()) ||
-            item.type.toLowerCase().includes(searchText.toLowerCase())
+        _.filter(products, (item) =>
+          item.chef_name.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -138,7 +137,7 @@ function SafetyTable(props) {
     <div className="w-full flex flex-col min-h-full">
       <FuseScrollbars className="grow overflow-x-auto">
         <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
-          <SafetyTableHead
+          <ChefsTableHead
             selectedProductIds={selected}
             order={order}
             onSelectAllClick={handleSelectAllClick}
@@ -153,8 +152,8 @@ function SafetyTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'measure_name': {
-                      return o[order.measure_name]
+                    case 'chef_name': {
+                      return o[order.chef_name]
                     }
                     default: {
                       return o[order.id]
@@ -168,7 +167,6 @@ function SafetyTable(props) {
               .map((n) => {
                 const isSelected = selected.indexOf(n.id) !== -1
                 return (
-                  // <TableRow className='h-72 cursor-pointer' hover role='checkbox' aria-checked={isSelected} tabIndex={-1} key={n.id} selected={isSelected} onClick={(event) => handleClick(n)}>
                   <TableRow
                     className="h-72 cursor-pointer"
                     hover
@@ -177,6 +175,7 @@ function SafetyTable(props) {
                     tabIndex={-1}
                     key={n.id}
                     selected={isSelected}
+                    onClick={(event) => handleClick(n)}
                   >
                     <TableCell className="w-40 md:w-64 text-center" padding="none">
                       <Checkbox
@@ -187,52 +186,41 @@ function SafetyTable(props) {
                     </TableCell>
 
                     <TableCell
-                      className="p-4 md:p-16"
+                      className="w-52 h-52 px-4 md:px-0"
                       component="th"
                       scope="row"
-                      onClick={(event) => handleClick(n)}
+                      padding="none"
                     >
-                      {n.id}
+                      {n.chef_image ? (
+                        <img
+                          className="w-full block rounded"
+                          alt={`${n.chef_name}`}
+                          src={`${process.env.REACT_APP_URL}/storage/restaurants/chefs/${n.chef_image}`}
+                        />
+                      ) : (
+                        <img
+                          className="w-full block rounded"
+                          alt={`${n.chef_name}`}
+                          src="assets/images/apps/ecommerce/product-image-placeholder.png"
+                        />
+                      )}
                     </TableCell>
 
-                    <TableCell
-                      className="p-4 md:p-16 truncate"
-                      component="th"
-                      scope="row"
-                      onClick={(event) => handleClick(n)}
-                    >
-                      {n.title}
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.chef_name}
                     </TableCell>
 
-                    <TableCell
-                      className="p-4 md:p-16"
-                      component="th"
-                      scope="row"
-                      onClick={(event) => handleClick(n)}
-                    >
-                      {n.subTitle}
-                    </TableCell>
-
-                    <TableCell
-                      className="p-4 md:p-16 font-bold text-blue-800"
-                      component="th"
-                      scope="row"
-                      onClick={(event) => handleClick(n)}
-                    >
-                      {n.type}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16" component="th" scope="row">
-                      <Link
-                        component="a"
-                        variant="button"
-                        className="px-8 py-4 rounded"
-                        href={`${process.env.REACT_APP_STORAGE_UTELLS}/pdf/policies/${n.filePath}`}
-                        target="_blank"
-                        rel="noreferrer"
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      <div
+                        className={clsx(
+                          'inline text-12 font-semibold py-4 px-12 rounded-full truncate',
+                          n.chef_role.toLowerCase().includes('exec')
+                            ? 'bg-blue text-white'
+                            : 'bg-green text-white'
+                        )}
                       >
-                        {n.title} PDF LINK
-                      </Link>
+                        {n.chef_role}
+                      </div>
                     </TableCell>
                   </TableRow>
                 )
@@ -260,4 +248,4 @@ function SafetyTable(props) {
   )
 }
 
-export default withRouter(SafetyTable)
+export default withRouter(ChefsTable)

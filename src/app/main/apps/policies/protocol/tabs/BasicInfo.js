@@ -8,38 +8,72 @@ function BasicInfoTab(props) {
 
   return (
     <div>
-      <Controller name='title' control={control} render={({ field }) => <TextField {...field} className='mt-8 mb-16' required label='Title' autoFocus id='title' variant='outlined' fullWidth />} />
-
       <Controller
-        name='subTitle'
+        name="title"
         control={control}
-        render={({ field }) => <TextField {...field} className='mt-8 mb-16' id='subTitle' label='Content' type='text' multiline rows={5} variant='outlined' fullWidth />}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            className="mt-8 mb-16"
+            required
+            label="Title"
+            autoFocus
+            id="title"
+            variant="outlined"
+            fullWidth
+          />
+        )}
       />
 
       <Controller
-        name='type'
+        name="subTitle"
         control={control}
         render={({ field }) => (
-          <FormControl fullWidth className='mt-8 mb-16'>
-            <InputLabel id='demo-simple-select-label'>Type</InputLabel>
-            <Select labelId='demo-simple-select-label' id='type' label='Visibility' placeholder='Select Type' value={field.value} onChange={field.onChange}>
-              <MenuItem value='APPLICATION'>Application Policies</MenuItem>
-              <MenuItem value='HOTEL'>Hotel Policies</MenuItem>
+          <TextField
+            {...field}
+            className="mt-8 mb-16"
+            id="subTitle"
+            label="Content"
+            type="text"
+            multiline
+            rows={5}
+            variant="outlined"
+            fullWidth
+          />
+        )}
+      />
+
+      <Controller
+        name="type"
+        control={control}
+        render={({ field }) => (
+          <FormControl fullWidth className="mt-8 mb-16">
+            <InputLabel id="demo-simple-select-label">Type</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="type"
+              label="Visibility"
+              placeholder="Select Type"
+              value={field.value}
+              onChange={field.onChange}
+            >
+              <MenuItem value="APPLICATION">Application Policies</MenuItem>
+              <MenuItem value="HOTEL">Hotel Policies</MenuItem>
             </Select>
           </FormControl>
         )}
       />
 
       <Controller
-        name='file'
+        name="file"
         control={control}
         render={({ field: { onChange, value } }) => (
           <TextField
-            id='file'
-            className='mt-8 mb-16'
-            label='File'
+            id="file"
+            className="mt-8 mb-16"
+            label="File"
             fullWidth
-            type='file'
+            type="file"
             onChange={async (e) => {
               function readFileAsync() {
                 return new Promise((resolve, reject) => {

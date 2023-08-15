@@ -8,39 +8,45 @@ export const getProduct = createAsyncThunk('measures/safety/getProduct', async (
   return data === undefined ? null : data
 })
 
-export const removeProduct = createAsyncThunk('measures/safety/removeProduct', async (val, { dispatch, getState }) => {
-  const { id } = getState().measures.safety
-  await axios.delete(`/api/policies/${id}`)
-  return id
-})
+export const removeProduct = createAsyncThunk(
+  'measures/safety/removeProduct',
+  async (val, { dispatch, getState }) => {
+    const { id } = getState().measures.safety
+    await axios.delete(`/api/policies/${id}`)
+    return id
+  }
+)
 
-export const saveProduct = createAsyncThunk('measures/safety/saveProduct', async (productData, { dispatch, getState }) => {
-  const { id } = getState().measures.safety
+export const saveProduct = createAsyncThunk(
+  'measures/safety/saveProduct',
+  async (productData, { dispatch, getState }) => {
+    const { id } = getState().measures.safety
 
-  if (id) {
-    const response = await axios.post(
-      `/api/policies/${id}`,
-      {
-        ...productData,
-        _method: 'PATCH',
-      },
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
+    if (id) {
+      const response = await axios.post(
+        `/api/policies/${id}`,
+        {
+          ...productData,
+          _method: 'PATCH',
         },
-      }
-    )
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      )
+      const data = await response.data
+      return data
+    }
+    const response = await axios.post('/api/policies', productData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
     const data = await response.data
     return data
   }
-  const response = await axios.post('/api/policies', productData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  })
-  const data = await response.data
-  return data
-})
+)
 
 const productSlice = createSlice({
   name: 'measures/safety',
