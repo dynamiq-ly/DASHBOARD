@@ -1,12 +1,12 @@
 import axios from 'axios'
-import BrowserRouter from '@fuse/core/BrowserRouter'
-import FuseLayout from '@fuse/core/FuseLayout'
-import FuseTheme from '@fuse/core/FuseTheme'
 import { SnackbarProvider } from 'notistack'
 import { useSelector } from 'react-redux'
 import rtlPlugin from 'stylis-plugin-rtl'
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
+import FuseTheme from '@fuse/core/FuseTheme'
+import FuseLayout from '@fuse/core/FuseLayout'
+import BrowserRouter from '@fuse/core/BrowserRouter'
 import { selectCurrentLanguageDirection } from 'app/store/i18nSlice'
 import { selectUser } from 'app/store/userSlice'
 import themeLayouts from 'app/theme-layouts/themeLayouts'
@@ -20,7 +20,10 @@ import HelperProvider from './contexts/HelperContext'
 /**
  * Axios HTTP Request defaults
  */
-axios.defaults.baseURL = process.env.REACT_APP_NODE_ENV === 'production' ? 'https://api.utells.com' : 'http://localhost:8000'
+axios.defaults.baseURL =
+  process.env.REACT_APP_NODE_ENV === 'production'
+    ? 'https://api.utells.com'
+    : 'http://localhost:8000'
 
 // axios.defaults.withCredentials = true
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
