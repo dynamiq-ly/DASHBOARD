@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const Gym = lazy(() => import('./GymScreen'))
+const GymDetail = lazy(() => import('./element/Element'))
 
 const GymConfig = {
   setting: {
@@ -15,6 +16,10 @@ const GymConfig = {
         {
           path: '',
           element: <Gym />,
+        },
+        {
+          path: ':productId',
+          element: <GymDetail />,
         },
       ],
     },
