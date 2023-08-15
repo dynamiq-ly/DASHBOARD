@@ -17,6 +17,7 @@ import FuseLoading from '@fuse/core/FuseLoading'
 
 import { getMeasures, selectProducts, selectProductsSearchText } from './store/safetiesSlice'
 import SafetyTableHead from './SafetyTableHead'
+import { Link } from '@mui/material'
 
 function SafetyTable(props) {
   const dispatch = useDispatch()
@@ -39,11 +40,7 @@ function SafetyTable(props) {
 
   useEffect(() => {
     if (searchText.length !== 0) {
-      setData(
-        _.filter(products, (item) =>
-          item.measure_name.toLowerCase().includes(searchText.toLowerCase())
-        )
-      )
+      setData(_.filter(products, (item) => item.title.toLowerCase().includes(searchText.toLowerCase()) || item.type.toLowerCase().includes(searchText.toLowerCase())))
       setPage(0)
     } else {
       setData(products)
@@ -91,10 +88,7 @@ function SafetyTable(props) {
     } else if (selectedIndex === selected.length - 1) {
       newSelected = newSelected.concat(selected.slice(0, -1))
     } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      )
+      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1))
     }
 
     setSelected(newSelected)
@@ -110,7 +104,7 @@ function SafetyTable(props) {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-full">
+      <div className='flex items-center justify-center h-full'>
         <FuseLoading />
       </div>
     )
@@ -118,12 +112,8 @@ function SafetyTable(props) {
 
   if (data.length === 0) {
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: { delay: 0.1 } }}
-        className="flex flex-1 items-center justify-center h-full"
-      >
-        <Typography color="text.secondary" variant="h5">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.1 } }} className='flex flex-1 items-center justify-center h-full'>
+        <Typography color='text.secondary' variant='h5'>
           There are no data!
         </Typography>
       </motion.div>
@@ -131,9 +121,9 @@ function SafetyTable(props) {
   }
 
   return (
-    <div className="w-full flex flex-col min-h-full">
-      <FuseScrollbars className="grow overflow-x-auto">
-        <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
+    <div className='w-full flex flex-col min-h-full'>
+      <FuseScrollbars className='grow overflow-x-auto'>
+        <Table stickyHeader className='min-w-xl' aria-labelledby='tableTitle'>
           <SafetyTableHead
             selectedProductIds={selected}
             order={order}
@@ -164,38 +154,32 @@ function SafetyTable(props) {
               .map((n) => {
                 const isSelected = selected.indexOf(n.id) !== -1
                 return (
-                  <TableRow
-                    className="h-72 cursor-pointer"
-                    hover
-                    role="checkbox"
-                    aria-checked={isSelected}
-                    tabIndex={-1}
-                    key={n.id}
-                    selected={isSelected}
-                    onClick={(event) => handleClick(n)}
-                  >
-                    <TableCell className="w-40 md:w-64 text-center" padding="none">
-                      <Checkbox
-                        checked={isSelected}
-                        onClick={(event) => event.stopPropagation()}
-                        onChange={(event) => handleCheck(event, n.id)}
-                      />
+                  // <TableRow className='h-72 cursor-pointer' hover role='checkbox' aria-checked={isSelected} tabIndex={-1} key={n.id} selected={isSelected} onClick={(event) => handleClick(n)}>
+                  <TableRow className='h-72 cursor-pointer' hover role='checkbox' aria-checked={isSelected} tabIndex={-1} key={n.id} selected={isSelected}>
+                    <TableCell className='w-40 md:w-64 text-center' padding='none'>
+                      <Checkbox checked={isSelected} onClick={(event) => event.stopPropagation()} onChange={(event) => handleCheck(event, n.id)} />
                     </TableCell>
 
-                    <TableCell className="p-4 md:p-16" component="th" scope="row">
+                    <TableCell className='p-4 md:p-16' component='th' scope='row' onClick={(event) => handleClick(n)}>
                       {n.id}
                     </TableCell>
 
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.measure_name}
+                    <TableCell className='p-4 md:p-16 truncate' component='th' scope='row' onClick={(event) => handleClick(n)}>
+                      {n.title}
                     </TableCell>
 
-                    <TableCell className="p-4 md:p-16" component="th" scope="row">
-                      {`${n.measure_content.slice(0, 100)}...`}
+                    <TableCell className='p-4 md:p-16' component='th' scope='row' onClick={(event) => handleClick(n)}>
+                      {n.subTitle}
                     </TableCell>
 
-                    <TableCell className="p-4 md:p-16" component="th" scope="row">
-                      {n.measure_icon}
+                    <TableCell className='p-4 md:p-16 font-bold text-blue-800' component='th' scope='row' onClick={(event) => handleClick(n)}>
+                      {n.type}
+                    </TableCell>
+
+                    <TableCell className='p-4 md:p-16' component='th' scope='row'>
+                      <Link component='a' variant='button' className='px-8 py-4 rounded' href={`${process.env.REACT_APP_STORAGE_UTELLS}/pdf/policies/${n.filePath}`} target='_blank' rel='noreferrer'>
+                        {n.title} PDF LINK
+                      </Link>
                     </TableCell>
                   </TableRow>
                 )
@@ -205,8 +189,8 @@ function SafetyTable(props) {
       </FuseScrollbars>
 
       <TablePagination
-        className="shrink-0 border-t-1"
-        component="div"
+        className='shrink-0 border-t-1'
+        component='div'
         count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}

@@ -30,11 +30,10 @@ export const application = [
  */
 export const safety = {
   id: 'protocols.safety-measures-component',
-  title: 'Safety',
-  translate: 'SAFETY',
+  title: 'Policies',
   type: 'item',
   icon: 'heroicons-outline:heart',
-  url: 'safety',
+  url: 'policies',
 }
 
 /**

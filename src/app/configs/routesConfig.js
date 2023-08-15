@@ -13,7 +13,7 @@ import SignUpConfig from '../main/sign-up/SignUpConfig'
 import SignOutConfig from '../main/sign-out/SignOutConfig'
 import Error404Page from '../main/404/Error404Page'
 
-import SafetyConfig from '../main/apps/safety/SafetyConfig'
+import SafetyConfig from '../main/apps/policies/SafetyConfig'
 import StatisticsConfig from '../main/apps/statistics/StatisticConfig'
 import RestaurantConfig from '../main/apps/restaurant/RestaurantConfig'
 import BarConfig from '../main/apps/bar/BarConfig'
