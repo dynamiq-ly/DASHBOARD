@@ -10,16 +10,16 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from '@mui/material'
+import { useParams } from 'react-router-dom'
+import clsx from 'clsx'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
 import _ from '@lodash'
 import FuseScrollbars from '@fuse/core/FuseScrollbars'
-import { getMeasures, selectProducts, selectProductsSearchText } from './store/gymSlice'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../store/staffsSlice'
+import ChefsTableHead from './StaffsTableHead'
 
-import GymTableHead from './GymTableHead'
-
-function ConnectivityTable(props) {
+function ChefsTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -34,19 +34,16 @@ function ConnectivityTable(props) {
     id: null,
   })
 
+  const { productId } = useParams()
+
   useEffect(() => {
-    dispatch(getMeasures()).then(() => setLoading(false))
-  }, [dispatch])
+    dispatch(getMeasures(productId)).then(() => setLoading(false))
+  }, [dispatch, productId])
 
   useEffect(() => {
     if (searchText.length !== 0) {
       setData(
-        _.filter(
-          products,
-          (item) =>
-            item.name.toLowerCase().includes(searchText.toLowerCase()) ||
-            item.location.toLowerCase().includes(searchText.toLowerCase())
-        )
+        _.filter(products, (item) => item.name.toLowerCase().includes(searchText.toLowerCase()))
       )
       setPage(0)
     } else {
@@ -138,7 +135,7 @@ function ConnectivityTable(props) {
     <div className="w-full flex flex-col min-h-full">
       <FuseScrollbars className="grow overflow-x-auto">
         <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
-          <GymTableHead
+          <ChefsTableHead
             selectedProductIds={selected}
             order={order}
             onSelectAllClick={handleSelectAllClick}
@@ -153,8 +150,8 @@ function ConnectivityTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'gym_name': {
-                      return o[order.gym_name]
+                    case 'chef_name': {
+                      return o[order.chef_name]
                     }
                     default: {
                       return o[order.id]
@@ -192,11 +189,19 @@ function ConnectivityTable(props) {
                       scope="row"
                       padding="none"
                     >
-                      <img
-                        className="w-full block rounded"
-                        alt={`${n.name}-${n.description}`}
-                        src={`${process.env.REACT_APP_STORAGE_UTELLS}/gym/thumbnails/${n.image}`}
-                      />
+                      {n.image ? (
+                        <img
+                          className="w-full block rounded"
+                          alt={`${n.name}`}
+                          src={`${process.env.REACT_APP_STORAGE_UTELLS}/gym/staffs/${n.image}`}
+                        />
+                      ) : (
+                        <img
+                          className="w-full block rounded"
+                          alt={`${n.chef_name}`}
+                          src="assets/images/apps/ecommerce/product-image-placeholder.png"
+                        />
+                      )}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
@@ -204,42 +209,16 @@ function ConnectivityTable(props) {
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.location}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {`${n.description.slice(0, 75)}...`}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.equipements.length}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.staff.length}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n['timing-open']} {n['timing-close']}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16" component="th" scope="row">
-                      {n.terms ? (
-                        <Link
-                          component="a"
-                          variant="button"
-                          className="px-8 py-4 rounded"
-                          href={`${process.env.REACT_APP_STORAGE_UTELLS}/pdf/gym/${n.terms}`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {n.name} PDF LINK
-                        </Link>
-                      ) : (
-                        <div className="inline text-12 font-semibold py-4 px-12 rounded-full truncate bg-red-700 text-white">
-                          No Terms Uploaded
-                        </div>
-                      )}
+                      <div
+                        className={clsx(
+                          'inline text-12 font-semibold py-4 px-12 rounded-full truncate',
+                          n.job_title.toLowerCase().includes('exec', 'manager')
+                            ? 'bg-blue text-white'
+                            : 'bg-green text-white'
+                        )}
+                      >
+                        {n.job_title}
+                      </div>
                     </TableCell>
                   </TableRow>
                 )
@@ -267,4 +246,4 @@ function ConnectivityTable(props) {
   )
 }
 
-export default withRouter(ConnectivityTable)
+export default withRouter(ChefsTable)

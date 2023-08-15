@@ -1,5 +1,5 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import TextField from '@mui/material/TextField'
+
 import { Controller, useFormContext } from 'react-hook-form'
 
 function BasicInfoTab(props) {
@@ -9,16 +9,16 @@ function BasicInfoTab(props) {
   return (
     <div>
       <Controller
-        name="title"
+        name="name"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
             required
-            label="Title"
+            label="Gym Name"
             autoFocus
-            id="title"
+            id="name"
             variant="outlined"
             fullWidth
           />
@@ -26,17 +26,16 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="subTitle"
+        name="location"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            id="subTitle"
-            label="Content"
-            type="text"
-            multiline
-            rows={5}
+            required
+            label="Gym Location"
+            autoFocus
+            id="location"
             variant="outlined"
             fullWidth
           />
@@ -44,34 +43,32 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="type"
+        name="description"
         control={control}
         render={({ field }) => (
-          <FormControl fullWidth className="mt-8 mb-16">
-            <InputLabel id="demo-simple-select-label">Type</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="type"
-              label="Visibility"
-              placeholder="Select Type"
-              value={field.value}
-              onChange={field.onChange}
-            >
-              <MenuItem value="APPLICATION">Application Policies</MenuItem>
-              <MenuItem value="HOTEL">Hotel Policies</MenuItem>
-            </Select>
-          </FormControl>
+          <TextField
+            {...field}
+            className="mt-8 mb-16"
+            required
+            label="Gym Description"
+            autoFocus
+            multiline
+            rows={5}
+            id="description"
+            variant="outlined"
+            fullWidth
+          />
         )}
       />
 
       <Controller
-        name="file"
+        name="terms"
         control={control}
         render={({ field: { onChange, value } }) => (
           <TextField
-            id="file"
+            id="terms"
             className="mt-8 mb-16"
-            label="File"
+            label="Terms"
             fullWidth
             type="file"
             onChange={async (e) => {
@@ -98,6 +95,40 @@ function BasicInfoTab(props) {
 
               onChange(newImage)
             }}
+          />
+        )}
+      />
+
+      <Controller
+        name="timing-open"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            className="mt-8 mb-16"
+            required
+            autoFocus
+            type="time"
+            id="timing-open"
+            variant="outlined"
+            fullWidth
+          />
+        )}
+      />
+
+      <Controller
+        name="timing-close"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            className="mt-8 mb-16"
+            required
+            autoFocus
+            type="time"
+            id="timing-close"
+            variant="outlined"
+            fullWidth
           />
         )}
       />

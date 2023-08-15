@@ -15,47 +15,26 @@ import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
 import { lighten } from '@mui/material/styles'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { removeMeasures } from './store/safetiesSlice'
+import { removeMeasures } from '../store/equipementsSlice'
 
 const rows = [
   {
-    id: 'id',
+    id: 'image',
     align: 'left',
     disablePadding: true,
     label: '',
     sort: false,
   },
   {
-    id: 'title',
+    id: 'name',
     align: 'left',
     disablePadding: false,
-    label: 'Title',
-    sort: true,
-  },
-  {
-    id: 'subTitle',
-    align: 'left',
-    disablePadding: false,
-    label: 'Sub Title',
-    sort: true,
-  },
-  {
-    id: 'type',
-    align: 'left',
-    disablePadding: false,
-    label: 'Type',
-    sort: true,
-  },
-  {
-    id: 'filePath',
-    align: 'left',
-    disablePadding: false,
-    label: 'Link To File',
+    label: 'Name',
     sort: true,
   },
 ]
 
-const SafetyTableHead = (props) => {
+const RestaurantTableHead = (props) => {
   const { selectedProductIds } = props
   const numSelected = selectedProductIds.length
 
@@ -171,4 +150,4 @@ const SafetyTableHead = (props) => {
   )
 }
 
-export default SafetyTableHead
+export default RestaurantTableHead

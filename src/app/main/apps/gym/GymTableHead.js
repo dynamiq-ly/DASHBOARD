@@ -13,8 +13,8 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { lighten } from '@mui/material/styles'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { removeMeasures } from './store/gymSlice'
 
 const rows = [
@@ -26,38 +26,54 @@ const rows = [
     sort: false,
   },
   {
-    id: 'gym_name',
+    id: 'name',
     align: 'left',
     disablePadding: false,
     label: 'Name',
     sort: true,
   },
   {
-    id: 'gym_description',
-    align: 'left',
-    disablePadding: false,
-    label: 'Description',
-    sort: true,
-  },
-  {
-    id: 'gym_floor',
+    id: 'Location',
     align: 'left',
     disablePadding: false,
     label: 'Location',
     sort: true,
   },
   {
-    id: 'gym_timing',
+    id: 'description',
     align: 'left',
     disablePadding: false,
-    label: 'Timing',
+    label: 'Description',
     sort: true,
   },
+
   {
     id: 'equipments',
     align: 'left',
     disablePadding: false,
     label: 'Equipments',
+    sort: true,
+  },
+  {
+    id: 'staff',
+    align: 'left',
+    disablePadding: false,
+    label: 'Staff',
+    sort: true,
+  },
+  {
+    id: 'timing',
+    align: 'left',
+    disablePadding: false,
+    label: 'Timing',
+    sort: true,
+  },
+
+  {
+    id: 'terms',
+    align: 'left',
+    disablePadding: false,
+    label: 'terms',
     sort: true,
   },
 ]

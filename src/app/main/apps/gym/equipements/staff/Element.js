@@ -15,11 +15,12 @@ import { useDeepCompareEffect } from '@fuse/hooks'
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import FuseLoading from '@fuse/core/FuseLoading'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import { getProduct, newProduct, resetProduct, selectProduct } from '../store/safetySlice'
-import reducer from '../store'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/equipementSlice'
+import reducer from '../../store'
 
 import BasicInfoTab from './tabs/BasicInfo'
-import ProtocolHeader from './ProtocolHeader'
+import ImagesTab from './tabs/ImagesTab'
+import ElementHeader from './ElementHeader'
 
 /**
  * Form Validation Schema
@@ -31,7 +32,7 @@ const schema = yup.object().shape({
     .min(5, 'The product name must be at least 5 characters'),
 })
 
-function Product(props) {
+function Element(props) {
   const dispatch = useDispatch()
   const product = useSelector(selectProduct)
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
@@ -49,9 +50,9 @@ function Product(props) {
 
   useDeepCompareEffect(() => {
     function updateProductState() {
-      const { productId } = routeParams
+      const { equipId } = routeParams
 
-      if (productId === 'new') {
+      if (equipId === 'new') {
         /**
          * Create New Product data
          */
@@ -60,7 +61,7 @@ function Product(props) {
         /**
          * Get Product data
          */
-        dispatch(getProduct(productId)).then((action) => {
+        dispatch(getProduct(equipId)).then((action) => {
           /**
            * If the requested product is not exist show message
            */
@@ -126,7 +127,7 @@ function Product(props) {
    */
   if (
     _.isEmpty(form) ||
-    (product && routeParams.productId !== `${product.id}` && routeParams.productId !== 'new')
+    (product && routeParams.equipId !== `${product.id}` && routeParams.equipId !== 'new')
   ) {
     return <FuseLoading />
   }
@@ -134,7 +135,7 @@ function Product(props) {
   return (
     <FormProvider {...methods}>
       <FusePageCarded
-        header={<ProtocolHeader />}
+        header={<ElementHeader />}
         content={
           <>
             <Tabs
@@ -147,10 +148,14 @@ function Product(props) {
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
               <Tab className="h-64" label="Basic Info" />
+              <Tab className="h-64" label="Images Tab" />
             </Tabs>
             <div className="p-16 sm:p-24 max-w-3xl">
-              <div>
+              <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
+              </div>
+              <div className={tabValue !== 1 ? 'hidden' : ''}>
+                <ImagesTab />
               </div>
             </div>
           </>
@@ -161,4 +166,4 @@ function Product(props) {
   )
 }
 
-export default withReducer('measures', reducer)(Product)
+export default withReducer('gyms', reducer)(Element)

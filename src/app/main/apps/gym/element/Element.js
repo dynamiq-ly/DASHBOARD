@@ -15,11 +15,13 @@ import { useDeepCompareEffect } from '@fuse/hooks'
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import FuseLoading from '@fuse/core/FuseLoading'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import { getProduct, newProduct, resetProduct, selectProduct } from '../store/safetySlice'
+import FileList from 'app/shared-components/sections/FolderList'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../store/elementSlice'
 import reducer from '../store'
 
 import BasicInfoTab from './tabs/BasicInfo'
-import ProtocolHeader from './ProtocolHeader'
+import ImagesTab from './tabs/ImagesTab'
+import ElementHeader from './ElementHeader'
 
 /**
  * Form Validation Schema
@@ -31,7 +33,7 @@ const schema = yup.object().shape({
     .min(5, 'The product name must be at least 5 characters'),
 })
 
-function Product(props) {
+function Element(props) {
   const dispatch = useDispatch()
   const product = useSelector(selectProduct)
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
@@ -134,7 +136,7 @@ function Product(props) {
   return (
     <FormProvider {...methods}>
       <FusePageCarded
-        header={<ProtocolHeader />}
+        header={<ElementHeader />}
         content={
           <>
             <Tabs
@@ -147,11 +149,23 @@ function Product(props) {
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
               <Tab className="h-64" label="Basic Info" />
+              <Tab className="h-64" label="Images Tab" />
+              {routeParams.productId !== 'new' && <Tab className="h-64" label="Folder" />}
             </Tabs>
-            <div className="p-16 sm:p-24 max-w-3xl">
-              <div>
+            <div className="p-16  max-w-3xl">
+              <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
               </div>
+
+              <div className={tabValue !== 1 ? 'hidden' : ''}>
+                <ImagesTab />
+              </div>
+
+              {routeParams.productId !== 'new' && (
+                <div className={tabValue !== 2 ? 'hidden' : ''}>
+                  <FileList title="Menu Catalog" data={folderList.menus} />
+                </div>
+              )}
             </div>
           </>
         }
@@ -161,4 +175,19 @@ function Product(props) {
   )
 }
 
-export default withReducer('measures', reducer)(Product)
+const folderList = {
+  menus: [
+    {
+      id: 'staffs',
+      type: 'material-twotone:supervised_user_circle',
+      contents: 'Staff',
+    },
+    {
+      id: 'equipements',
+      type: 'material-twotone:monitor_weight',
+      contents: 'Equipements',
+    },
+  ],
+}
+
+export default withReducer('gyms', reducer)(Element)

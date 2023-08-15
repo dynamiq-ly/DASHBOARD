@@ -1,30 +1,33 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const getProduct = createAsyncThunk('measures/safety/getProduct', async (productId) => {
-  const response = await axios.get(`/api/policies/${productId}`)
-  const data = await response.data
+export const getProduct = createAsyncThunk(
+  'gyms/gym/getProduct',
+  async (gymId, { dispatch, getState }) => {
+    const response = await axios.get(`/api/gym/${gymId}`)
+    const data = await response.data
 
-  return data === undefined ? null : data
-})
+    return data === undefined ? null : data
+  }
+)
 
 export const removeProduct = createAsyncThunk(
-  'measures/safety/removeProduct',
+  'gyms/gym/removeProduct',
   async (val, { dispatch, getState }) => {
-    const { id } = getState().measures.safety
-    await axios.delete(`/api/policies/${id}`)
+    const { id } = getState().gyms.gym
+    await axios.delete(`/api/gym/${id}`)
     return id
   }
 )
 
 export const saveProduct = createAsyncThunk(
-  'measures/safety/saveProduct',
+  'gyms/gym/saveProduct',
   async (productData, { dispatch, getState }) => {
-    const { id } = getState().measures.safety
+    const { id } = getState().gyms.gym
 
     if (id) {
       const response = await axios.post(
-        `/api/policies/${id}`,
+        `/api/gym/${id}`,
         {
           ...productData,
           _method: 'PATCH',
@@ -38,7 +41,7 @@ export const saveProduct = createAsyncThunk(
       const data = await response.data
       return data
     }
-    const response = await axios.post('/api/policies', productData, {
+    const response = await axios.post('/api/gym', productData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -49,7 +52,7 @@ export const saveProduct = createAsyncThunk(
 )
 
 const productSlice = createSlice({
-  name: 'measures/safety',
+  name: 'gyms/gym',
   initialState: null,
   reducers: {
     resetProduct: () => null,
@@ -58,10 +61,14 @@ const productSlice = createSlice({
       prepare: (event) => ({
         payload: {
           //   id: FuseUtils.generateGUID(),
-          title: '',
-          subTitle: '',
-          type: '',
-          file: null,
+          name: '',
+          image: '',
+          location: '',
+          terms: null,
+          description: '',
+          'timing-open': '',
+          'timing-close': '',
+          reservation: 0,
         },
       }),
     },
@@ -75,6 +82,6 @@ const productSlice = createSlice({
 
 export const { newProduct, resetProduct } = productSlice.actions
 
-export const selectProduct = ({ measures }) => measures.safety
+export const selectProduct = ({ gyms }) => gyms.gym
 
 export default productSlice.reducer
