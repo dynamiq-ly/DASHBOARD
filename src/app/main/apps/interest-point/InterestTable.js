@@ -209,7 +209,16 @@ function InterestTable(props) {
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      <p className="font-semibold capitalize">{n.location}</p>
+                      {n.coordinates && <p className="font-normal text-[12px]">{n.coordinates}</p>}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.category.name}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.phone}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">

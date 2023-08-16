@@ -33,10 +33,24 @@ const rows = [
     sort: true,
   },
   {
+    id: 'location',
+    align: 'left',
+    disablePadding: false,
+    label: 'Location',
+    sort: true,
+  },
+  {
     id: 'point_id',
     align: 'left',
     disablePadding: false,
     label: 'Category',
+    sort: true,
+  },
+  {
+    id: 'phone',
+    align: 'left',
+    disablePadding: false,
+    label: 'Contact Phone',
     sort: true,
   },
   {
