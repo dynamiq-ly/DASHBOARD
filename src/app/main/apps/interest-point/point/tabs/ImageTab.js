@@ -147,7 +147,9 @@ function ImagesTab(props) {
                 fileReader.onload = () => {
                   const dataUrl = fileReader.result
                   const imgElement = document.getElementById(`image-${index}`)
-                  imgElement.src = dataUrl
+                  if (imgElement) {
+                    imgElement.src = dataUrl
+                  }
                 }
 
                 fileReader.readAsDataURL(media)
