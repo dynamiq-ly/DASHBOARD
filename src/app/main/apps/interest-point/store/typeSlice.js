@@ -4,7 +4,7 @@ import axios from 'axios'
 export const getProduct = createAsyncThunk(
   'pointsCategories/pointCategory/getProduct',
   async (productId) => {
-    const response = await axios.get(`/api/point-of-interest/type/${productId}`)
+    const response = await axios.get(`/api/point-of-interest/categories/${productId}`)
     const data = await response.data
 
     return data === undefined ? null : data
@@ -15,7 +15,7 @@ export const removeProduct = createAsyncThunk(
   'pointsCategories/pointCategory/removeProduct',
   async (val, { dispatch, getState }) => {
     const { id } = getState().pointsCategories.pointCategory
-    await axios.delete(`/api/point-of-interest/type/${id}`)
+    await axios.delete(`/api/point-of-interest/categories/${id}`)
     return id
   }
 )
@@ -26,14 +26,14 @@ export const saveProduct = createAsyncThunk(
     const { id } = getState().pointsCategories.pointCategory
 
     if (id) {
-      const response = await axios.post(`/api/point-of-interest/type/${id}`, {
+      const response = await axios.post(`/api/point-of-interest/categories/${id}`, {
         ...productData,
         _method: 'PATCH',
       })
       const data = await response.data
       return data
     }
-    const response = await axios.post('/api/point-of-interest/type', productData)
+    const response = await axios.post('/api/point-of-interest/categories', productData)
     const data = await response.data
     return data
   }
@@ -49,9 +49,8 @@ const productSlice = createSlice({
       prepare: (event) => ({
         payload: {
           //   id: FuseUtils.generateGUID(),
-          connectivity_name: '',
-          connectivity_password: '',
-          connectivity_state: false,
+          name: '',
+          visible: 1,
         },
       }),
     },

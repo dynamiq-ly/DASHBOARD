@@ -8,14 +8,14 @@ function DisponibilyTab(props) {
   return (
     <div>
       <Controller
-        name="point_status"
+        name="visible"
         control={control}
         render={({ field }) => (
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Visibility</InputLabel>
             <Select
               labelId="demo-simple-select-label"
-              id="point_status"
+              id="visible"
               label="Visibility"
               placeholder="Select Visibility"
               value={field.value}

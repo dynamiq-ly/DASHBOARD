@@ -2,7 +2,7 @@ import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/too
 import axios from 'axios'
 
 export const getMeasures = createAsyncThunk('interestPoints/points/getMeasures', async () => {
-  const response = await axios.get('/api/point-of-interest&status=0')
+  const response = await axios.get('/api/point-of-interest')
   const data = await response.data
   return data
 })

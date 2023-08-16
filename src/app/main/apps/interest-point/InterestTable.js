@@ -1,5 +1,3 @@
-import FuseScrollbars from '@fuse/core/FuseScrollbars'
-import _ from '@lodash'
 import Checkbox from '@mui/material/Checkbox'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -12,6 +10,8 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
+import _ from '@lodash'
+import FuseScrollbars from '@fuse/core/FuseScrollbars'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
@@ -192,38 +192,33 @@ function InterestTable(props) {
                       {n.images ? (
                         <img
                           className="w-full block rounded"
-                          alt={`${n.point_title}`}
-                          src={`${process.env.REACT_APP_URL}/storage/points-of-interest/${
-                            JSON.parse(n.images)[0]
-                          }`}
+                          alt={`${n.name}`}
+                          src={`${process.env.REACT_APP_STORAGE_UTELLS}/point-of-interest/${n.images[0].image}`}
                         />
                       ) : (
                         <img
                           className="w-full block rounded"
-                          alt={`${n.point_title}-${n.point_small_summary}`}
+                          alt={`${n.name}-${n.location}`}
                           src="assets/images/apps/ecommerce/product-image-placeholder.png"
                         />
                       )}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.point_title}
+                      {n.name}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.point_type.point_type}
+                      <p className="font-semibold capitalize">{n.location}</p>
+                      {n.coordinates && <p className="font-normal text-[12px]">{n.coordinates}</p>}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.point_small_summary}
+                      {n.category.name}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.point_contact_number}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.point_textual_location}
+                      {n.phone}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
