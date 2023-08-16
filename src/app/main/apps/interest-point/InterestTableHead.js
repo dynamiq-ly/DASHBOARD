@@ -13,8 +13,8 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { lighten } from '@mui/material/styles'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { removeMeasures } from './store/pointsSlice'
 
 const rows = [
@@ -26,43 +26,21 @@ const rows = [
     sort: false,
   },
   {
-    id: 'point_title',
+    id: 'name',
     align: 'left',
     disablePadding: false,
     label: 'Name',
     sort: true,
   },
   {
-    id: 'point_type',
+    id: 'point_id',
     align: 'left',
     disablePadding: false,
     label: 'Category',
     sort: true,
   },
   {
-    id: 'point_small_summary',
-    align: 'left',
-    disablePadding: false,
-    label: 'Summary',
-    sort: true,
-  },
-
-  {
-    id: 'point_contact_number',
-    align: 'left',
-    disablePadding: false,
-    label: 'Phone Number',
-    sort: true,
-  },
-  {
-    id: 'point_textual_location',
-    align: 'left',
-    disablePadding: false,
-    label: 'Location',
-    sort: true,
-  },
-  {
-    id: 'point_status',
+    id: 'visible',
     align: 'left',
     disablePadding: false,
     label: 'Status',

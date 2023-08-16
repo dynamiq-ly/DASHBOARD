@@ -8,7 +8,7 @@ function BasicInfoTab(props) {
   return (
     <div>
       <Controller
-        name="point_title"
+        name="name"
         control={control}
         render={({ field }) => (
           <TextField
@@ -17,7 +17,7 @@ function BasicInfoTab(props) {
             required
             label="Name"
             autoFocus
-            id="point_title"
+            id="name"
             variant="outlined"
             fullWidth
           />
@@ -25,17 +25,17 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="point_small_summary"
+        name="location"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            label="Small Summary"
+            label="Location"
             required
             multiline
             rows={2}
-            id="point_small_summary"
+            id="location"
             variant="outlined"
             fullWidth
           />
@@ -43,59 +43,14 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="point_contact_number"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            label="Phone Number"
-            id="	point_contact_number"
-            variant="outlined"
-            fullWidth
-          />
-        )}
-      />
-
-      <Controller
-        name="point_website_information"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            label="Web Link"
-            id="	point_website_information"
-            variant="outlined"
-            fullWidth
-          />
-        )}
-      />
-
-      <Controller
-        name="point_textual_location"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            label="adress"
-            id="point_textual_location"
-            variant="outlined"
-            fullWidth
-          />
-        )}
-      />
-
-      <Controller
-        name="point_cords_location"
+        name="coordinates"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
             label="Coordinates"
-            id="point_cords_location"
+            id="	coordinates"
             variant="outlined"
             fullWidth
           />
@@ -103,14 +58,14 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="point_recommended_visit"
+        name="website"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            label="Recommended Visit"
-            id="point_recommended_visit"
+            label="Web Link"
+            id="website"
             variant="outlined"
             fullWidth
           />
@@ -118,13 +73,28 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="point_description"
+        name="phone"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            id="point_description"
+            label="Phone"
+            id="phone"
+            variant="outlined"
+            fullWidth
+          />
+        )}
+      />
+
+      <Controller
+        name="description"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            className="mt-8 mb-16"
+            id="description"
             label="Descripton"
             type="text"
             required

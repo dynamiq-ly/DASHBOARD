@@ -1,6 +1,7 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { Controller, useFormContext } from 'react-hook-form'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
@@ -39,8 +40,18 @@ function BasicInfoTab(props) {
               value={field.value}
               onChange={field.onChange}
             >
-              <MenuItem value={0}>Not Visible</MenuItem>
-              <MenuItem value={1}>Visible</MenuItem>
+              <MenuItem value={0} className="flex items-center gap-2">
+                <FuseSvgIcon className="text-red" size={20}>
+                  heroicons-outline:minus-circle
+                </FuseSvgIcon>{' '}
+                Not Visible
+              </MenuItem>
+              <MenuItem value={1} className="flex items-center gap-2">
+                <FuseSvgIcon className="text-green" size={20}>
+                  heroicons-outline:check-circle
+                </FuseSvgIcon>{' '}
+                Visible
+              </MenuItem>
             </Select>
           </FormControl>
         )}
