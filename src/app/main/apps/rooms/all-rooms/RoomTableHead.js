@@ -13,9 +13,9 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { lighten } from '@mui/material/styles'
-import { removeMeasures } from './store/roomListSlice'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
+import { removeMeasures } from '../store/roomListSlice'
 
 const rows = [
   {
@@ -26,49 +26,56 @@ const rows = [
     sort: false,
   },
   {
-    id: 'room_name',
+    id: 'name',
     align: 'left',
     disablePadding: false,
     label: 'Name',
     sort: true,
   },
   {
-    id: 'room_price',
+    id: 'category',
+    align: 'left',
+    disablePadding: false,
+    label: 'Category',
+    sort: true,
+  },
+  {
+    id: 'price',
     align: 'left',
     disablePadding: false,
     label: 'Price',
     sort: true,
   },
   {
-    id: 'room_descripton',
+    id: 'location',
     align: 'left',
     disablePadding: false,
-    label: 'Descripton',
+    label: 'location',
     sort: true,
   },
   {
-    id: 'room_floor',
+    id: 'addons',
     align: 'left',
     disablePadding: false,
-    label: 'Floor',
+    label: 'Addons',
     sort: true,
   },
   {
-    id: 'room_number',
+    id: 'features',
     align: 'left',
     disablePadding: false,
-    label: 'Room Number',
+    label: 'Features',
     sort: true,
   },
   {
-    id: 'room_occupency_max',
+    id: 'booking',
     align: 'left',
     disablePadding: false,
-    label: 'Room Occupency',
+    label: 'Booking',
     sort: true,
   },
   {
-    id: 'room_status',
+    id: 'visible',
     align: 'left',
     disablePadding: false,
     label: 'Status',
@@ -98,7 +105,7 @@ const RoomTableHead = (props) => {
 
   return (
     <TableHead>
-      <TableRow className='h-48 sm:h-64'>
+      <TableRow className="h-48 sm:h-64">
         <TableCell
           sx={{
             backgroundColor: (theme) =>
@@ -106,8 +113,8 @@ const RoomTableHead = (props) => {
                 ? lighten(theme.palette.background.default, 0.4)
                 : lighten(theme.palette.background.default, 0.02),
           }}
-          padding='none'
-          className='w-40 md:w-64 text-center z-99'
+          padding="none"
+          className="w-40 md:w-64 text-center z-99"
         >
           <Checkbox
             indeterminate={numSelected > 0 && numSelected < props.rowCount}
@@ -116,21 +123,21 @@ const RoomTableHead = (props) => {
           />
           {numSelected > 0 && (
             <Box
-              className='flex items-center justify-center absolute w-64 top-0 ltr:left-0 rtl:right-0 mx-56 h-64 z-10 border-b-1'
+              className="flex items-center justify-center absolute w-64 top-0 ltr:left-0 rtl:right-0 mx-56 h-64 z-10 border-b-1"
               sx={{
                 background: (theme) => theme.palette.background.default,
               }}
             >
               <IconButton
                 aria-owns={selectedProductsMenu ? 'selectedProductsMenu' : null}
-                aria-haspopup='true'
+                aria-haspopup="true"
                 onClick={openSelectedProductsMenu}
-                size='large'
+                size="large"
               >
                 <FuseSvgIcon>heroicons-outline:dots-horizontal</FuseSvgIcon>
               </IconButton>
               <Menu
-                id='selectedProductsMenu'
+                id="selectedProductsMenu"
                 anchorEl={selectedProductsMenu}
                 open={Boolean(selectedProductsMenu)}
                 onClose={closeSelectedProductsMenu}
@@ -143,10 +150,10 @@ const RoomTableHead = (props) => {
                       closeSelectedProductsMenu()
                     }}
                   >
-                    <ListItemIcon className='min-w-40'>
+                    <ListItemIcon className="min-w-40">
                       <FuseSvgIcon>heroicons-outline:trash</FuseSvgIcon>
                     </ListItemIcon>
-                    <ListItemText primary='Remove' />
+                    <ListItemText primary="Remove" />
                   </MenuItem>
                 </MenuList>
               </Menu>
@@ -162,27 +169,23 @@ const RoomTableHead = (props) => {
                     ? lighten(theme.palette.background.default, 0.4)
                     : lighten(theme.palette.background.default, 0.02),
               }}
-              className='p-4 md:p-16'
+              className="p-4 md:p-16"
               key={row.id}
               align={row.align}
               padding={row.disablePadding ? 'none' : 'normal'}
-              sortDirection={
-                props.order.id === row.id ? props.order.direction : false
-              }
+              sortDirection={props.order.id === row.id ? props.order.direction : false}
             >
               {row.sort && (
                 <Tooltip
-                  title='Sort'
-                  placement={
-                    row.align === 'right' ? 'bottom-end' : 'bottom-start'
-                  }
+                  title="Sort"
+                  placement={row.align === 'right' ? 'bottom-end' : 'bottom-start'}
                   enterDelay={300}
                 >
                   <TableSortLabel
                     active={props.order.id === row.id}
                     direction={props.order.direction}
                     onClick={createSortHandler(row.id)}
-                    className='font-semibold'
+                    className="font-semibold"
                   >
                     {row.label}
                   </TableSortLabel>

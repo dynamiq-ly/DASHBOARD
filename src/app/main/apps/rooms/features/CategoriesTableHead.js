@@ -15,7 +15,7 @@ import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
 import { lighten } from '@mui/material/styles'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { removeMeasures } from '../store/categoriesSlice'
+import { removeMeasures } from '../store/features-slice'
 
 const rows = [
   {
@@ -29,15 +29,22 @@ const rows = [
     id: 'label',
     align: 'left',
     disablePadding: false,
-    label: 'Category',
+    label: 'Label',
     sort: true,
   },
 
   {
-    id: 'visible',
+    id: 'description',
     align: 'left',
     disablePadding: false,
-    label: 'Status',
+    label: 'Description',
+    sort: true,
+  },
+  {
+    id: 'keys',
+    align: 'left',
+    disablePadding: false,
+    label: 'keys',
     sort: true,
   },
 ]

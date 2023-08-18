@@ -1,10 +1,10 @@
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
 import withReducer from 'app/store/withReducer'
-import reducer from './store'
+import reducer from '../store'
 
-import RoomHeader from './RoomHeader'
-import RoomTable from './RoomTable'
+import RoomHeader from './AddonsHeader'
+import RoomTable from './AddonsTable'
 
 function RoomListScreen() {
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))

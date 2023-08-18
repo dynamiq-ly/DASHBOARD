@@ -1,43 +1,55 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const getProduct = createAsyncThunk('rooms/category/getProduct', async (productId) => {
-  const response = await axios.get(`/api/rooms/categories/${productId}`)
+export const getProduct = createAsyncThunk('rooms/assignAddon/getProduct', async (productId) => {
+  const response = await axios.get(`api/rooms/link-addons-room/${productId}`)
   const data = await response.data
 
   return data === undefined ? null : data
 })
 
 export const removeProduct = createAsyncThunk(
-  'rooms/category/removeProduct',
+  'rooms/assignAddon/removeProduct',
   async (val, { dispatch, getState }) => {
-    const { id } = getState().rooms.category
-    await axios.delete(`/api/rooms/categories/${id}`)
+    const { id } = getState().rooms.assignAddon
+    await axios.delete(`api/rooms/link-addons-room/${id}`)
     return id
   }
 )
 
 export const saveProduct = createAsyncThunk(
-  'rooms/category/saveProduct',
+  'rooms/assignAddon/saveProduct',
   async (productData, { dispatch, getState }) => {
-    const { id } = getState().rooms.category
+    const { id } = getState().rooms.assignAddon
 
     if (id) {
-      const response = await axios.post(`/api/rooms/categories/${id}`, {
-        ...productData,
-        _method: 'PATCH',
-      })
+      const response = await axios.post(
+        `api/rooms/link-addons-room/${id}`,
+        {
+          ...productData,
+          _method: 'PATCH',
+        },
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      )
       const data = await response.data
       return data
     }
-    const response = await axios.post('/api/rooms/categories', productData)
+    const response = await axios.post('api/rooms/link-addons-room', productData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
     const data = await response.data
     return data
   }
 )
 
 const productSlice = createSlice({
-  name: 'rooms/category',
+  name: 'rooms/assignAddon',
   initialState: null,
   reducers: {
     resetProduct: () => null,
@@ -46,8 +58,9 @@ const productSlice = createSlice({
       prepare: (event) => ({
         payload: {
           //   id: FuseUtils.generateGUID(),
-          label: '',
-          visible: 1,
+          featured: false,
+          room_id: '',
+          addon_id: '',
         },
       }),
     },
@@ -61,6 +74,6 @@ const productSlice = createSlice({
 
 export const { newProduct, resetProduct } = productSlice.actions
 
-export const selectProduct = ({ rooms }) => rooms.category
+export const selectProduct = ({ rooms }) => rooms.assignAddon
 
 export default productSlice.reducer

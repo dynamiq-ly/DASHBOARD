@@ -15,11 +15,13 @@ import { useDeepCompareEffect } from '@fuse/hooks'
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import FuseLoading from '@fuse/core/FuseLoading'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/categorySlice'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/addon-slice'
 import reducer from '../../store'
 
-import RoomCategoryHeader from './RoomCategoryHeader'
+import RoomCategoryHeader from './ElementHeader'
+
 import BasicInfoTab from './tabs/BasicInfo'
+import ImageTab from './tabs/ImageTab'
 
 /**
  * Form Validation Schema
@@ -152,11 +154,15 @@ function RoomCategory(props) {
               scrollButtons="auto"
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
-              <Tab className="h-64" label="Room Category" />
+              <Tab className="h-64" label="Feature Name" />
+              <Tab className="h-64" label="Feature Icon" />
             </Tabs>
             <div className="p-16 sm:p-24 max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
+              </div>
+              <div className={tabValue !== 1 ? 'hidden' : ''}>
+                <ImageTab />
               </div>
             </div>
           </>

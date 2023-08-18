@@ -4,30 +4,33 @@ import Typography from '@mui/material/Typography'
 import { motion } from 'framer-motion'
 import { useFormContext } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { removeProduct, saveProduct } from '../../store/categorySlice'
+import { removeProduct, saveProduct } from '../../store/feature-slice'
 
-function RoomCategoryHeader(props) {
+function ElementHeader(props) {
   const dispatch = useDispatch()
   const methods = useFormContext()
   const { formState, watch, getValues } = methods
   const { isValid, dirtyFields } = formState
 
   const name = watch('label')
+
   const theme = useTheme()
   const navigate = useNavigate()
 
+  const { productId } = useParams()
+
   function handleSaveProduct() {
     dispatch(saveProduct(getValues())).then(() => {
-      navigate('/rooms/category')
+      navigate(`/rooms/list/${productId}`)
     })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      navigate('/rooms/category')
+      navigate(`/rooms/list/${productId}`)
     })
   }
 
@@ -42,7 +45,7 @@ function RoomCategoryHeader(props) {
             className="flex items-center sm:mb-12"
             component={Link}
             role="button"
-            to="/rooms/category"
+            to={`/rooms/list/${productId}`}
             color="inherit"
           >
             <FuseSvgIcon size={20}>
@@ -50,7 +53,7 @@ function RoomCategoryHeader(props) {
                 ? 'heroicons-outline:arrow-sm-left'
                 : 'heroicons-outline:arrow-sm-right'}
             </FuseSvgIcon>
-            <span className="flex mx-4 font-medium">Rooms Category</span>
+            <span className="flex mx-4 font-medium">Room List</span>
           </Typography>
         </motion.div>
 
@@ -61,10 +64,10 @@ function RoomCategoryHeader(props) {
             animate={{ x: 0, transition: { delay: 0.3 } }}
           >
             <Typography className="text-16 sm:text-20 truncate font-semibold">
-              {name || 'New Category'}
+              {name || 'New Feature'}
             </Typography>
             <Typography variant="caption" className="font-medium">
-              Rooms Category Detail
+              Feature Detail
             </Typography>
           </motion.div>
         </div>
@@ -88,6 +91,7 @@ function RoomCategoryHeader(props) {
           variant="contained"
           color="secondary"
           disabled={_.isEmpty(dirtyFields)}
+          // disabled={_.isEmpty(dirtyFields) || !isValid}
           onClick={handleSaveProduct}
         >
           Save
@@ -97,4 +101,4 @@ function RoomCategoryHeader(props) {
   )
 }
 
-export default RoomCategoryHeader
+export default ElementHeader

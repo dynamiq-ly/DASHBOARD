@@ -15,34 +15,33 @@ import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
 import { lighten } from '@mui/material/styles'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { removeMeasures } from '../store/categoriesSlice'
+import { removeMeasures } from '../store/add-ons-Slice'
 
 const rows = [
   {
-    id: 'id',
+    id: 'image',
     align: 'left',
     disablePadding: true,
-    label: 'ID',
+    label: '',
     sort: false,
   },
   {
     id: 'label',
     align: 'left',
     disablePadding: false,
-    label: 'Category',
+    label: 'Name',
     sort: true,
   },
-
   {
-    id: 'visible',
+    id: 'rooms',
     align: 'left',
     disablePadding: false,
-    label: 'Status',
+    label: 'Assigned To',
     sort: true,
   },
 ]
 
-const CategoriesTableHead = (props) => {
+const RoomTableHead = (props) => {
   const { selectedProductIds } = props
   const numSelected = selectedProductIds.length
 
@@ -158,4 +157,4 @@ const CategoriesTableHead = (props) => {
   )
 }
 
-export default CategoriesTableHead
+export default RoomTableHead

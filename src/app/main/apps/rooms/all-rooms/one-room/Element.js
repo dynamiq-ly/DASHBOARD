@@ -9,17 +9,26 @@ import { Link, useParams } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { Box, lighten } from '@mui/system'
 import _ from '@lodash'
 import withReducer from 'app/store/withReducer'
 import { useDeepCompareEffect } from '@fuse/hooks'
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import FuseLoading from '@fuse/core/FuseLoading'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/categorySlice'
+import NavLinkAdapter from '@fuse/core/NavLinkAdapter/NavLinkAdapter'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/room-slice'
 import reducer from '../../store'
 
-import RoomCategoryHeader from './RoomCategoryHeader'
+import RoomCategoryHeader from './ElementHeader'
+
 import BasicInfoTab from './tabs/BasicInfo'
+import PriceTab from './tabs/Price'
+import ImageTab from './tabs/ImageTab'
+import Category from './tabs/Category'
+import Config from './tabs/Config'
+import Addons from './tabs/Addons'
 
 /**
  * Form Validation Schema
@@ -152,11 +161,70 @@ function RoomCategory(props) {
               scrollButtons="auto"
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
-              <Tab className="h-64" label="Room Category" />
+              <Tab className="h-64" label="Room Information" />
+              <Tab
+                className="h-64"
+                label="Room Category"
+                disabled={routeParams.productId !== 'new'}
+              />
+              <Tab className="h-64" label="Room Pricing" />
+              <Tab className="h-64" label="Room Images" />
+              <Tab className="h-64" label="Room Config" />
+              <Tab
+                className="h-64"
+                label="Room Addons"
+                disabled={routeParams.productId === 'new'}
+              />
+              <Tab
+                className="h-64"
+                label="Room Features"
+                disabled={routeParams.productId === 'new'}
+              />
             </Tabs>
-            <div className="p-16 sm:p-24 max-w-3xl">
+            <div className="p-16 sm:p-24">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
+              </div>
+              <div className={tabValue !== 1 ? 'hidden' : ''}>
+                <Category />
+              </div>
+              <div className={tabValue !== 2 ? 'hidden' : ''}>
+                <PriceTab />
+              </div>
+              <div className={tabValue !== 3 ? 'hidden' : ''}>
+                <ImageTab />
+              </div>
+              <div className={tabValue !== 4 ? 'hidden' : ''}>
+                <Config />
+              </div>
+              <div className={tabValue !== 5 ? 'hidden' : ''}>
+                {routeParams.productId !== 'new' && <Addons />}
+              </div>
+              <div className={tabValue !== 6 ? 'hidden' : ''}>
+                <Box
+                  sx={{
+                    backgroundColor: (theme) =>
+                      theme.palette.mode === 'light'
+                        ? lighten(theme.palette.background.default, 0.4)
+                        : lighten(theme.palette.background.default, 0.02),
+                  }}
+                  className="relative w-full sm:w-160 h-160 m-8 p-16 shadow rounded-16"
+                >
+                  <NavLinkAdapter
+                    className="flex flex-col h-full w-full"
+                    to={`/rooms/list/${routeParams.productId}/features`}
+                    role="button"
+                  >
+                    <div className="flex flex-auto w-full items-center justify-center">
+                      <FuseSvgIcon className="sm:flex text-lg">
+                        heroicons-outline:adjustments
+                      </FuseSvgIcon>
+                    </div>
+                    <div className="flex shrink flex-col justify-center text-center">
+                      <Typography className="truncate text-12 font-medium">Features</Typography>
+                    </div>
+                  </NavLinkAdapter>
+                </Box>
               </div>
             </div>
           </>

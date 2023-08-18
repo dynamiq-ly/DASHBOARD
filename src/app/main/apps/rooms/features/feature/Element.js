@@ -15,10 +15,11 @@ import { useDeepCompareEffect } from '@fuse/hooks'
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import FuseLoading from '@fuse/core/FuseLoading'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/categorySlice'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/feature-slice'
 import reducer from '../../store'
 
-import RoomCategoryHeader from './RoomCategoryHeader'
+import RoomCategoryHeader from './ElementHeader'
+
 import BasicInfoTab from './tabs/BasicInfo'
 
 /**
@@ -49,9 +50,9 @@ function RoomCategory(props) {
 
   useDeepCompareEffect(() => {
     function updateProductState() {
-      const { productId } = routeParams
+      const { featureId } = routeParams
 
-      if (productId === 'new') {
+      if (featureId === 'new') {
         /**
          * Create New Product data
          */
@@ -60,7 +61,7 @@ function RoomCategory(props) {
         /**
          * Get Product data
          */
-        dispatch(getProduct(productId)).then((action) => {
+        dispatch(getProduct(featureId)).then((action) => {
           /**
            * If the requested product is not exist show message
            */
@@ -132,7 +133,7 @@ function RoomCategory(props) {
    */
   if (
     _.isEmpty(form) ||
-    (product && routeParams.productId !== `${product.id}` && routeParams.productId !== 'new')
+    (product && routeParams.featureId !== `${product.id}` && routeParams.featureId !== 'new')
   ) {
     return <FuseLoading />
   }
@@ -152,7 +153,7 @@ function RoomCategory(props) {
               scrollButtons="auto"
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
-              <Tab className="h-64" label="Room Category" />
+              <Tab className="h-64" label="Addon Assign" />
             </Tabs>
             <div className="p-16 sm:p-24 max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>

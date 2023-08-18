@@ -7,27 +7,27 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { removeProduct, saveProduct } from '../../store/categorySlice'
+import { removeProduct, saveProduct } from '../../store/addon-slice'
 
-function RoomCategoryHeader(props) {
+function ElementHeader(props) {
   const dispatch = useDispatch()
   const methods = useFormContext()
   const { formState, watch, getValues } = methods
   const { isValid, dirtyFields } = formState
-
   const name = watch('label')
+  const images = watch('image')
   const theme = useTheme()
   const navigate = useNavigate()
 
   function handleSaveProduct() {
     dispatch(saveProduct(getValues())).then(() => {
-      navigate('/rooms/category')
+      navigate(`/rooms/add-ons`)
     })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      navigate('/rooms/category')
+      navigate(`/rooms/add-ons`)
     })
   }
 
@@ -42,7 +42,7 @@ function RoomCategoryHeader(props) {
             className="flex items-center sm:mb-12"
             component={Link}
             role="button"
-            to="/rooms/category"
+            to="/rooms/add-ons"
             color="inherit"
           >
             <FuseSvgIcon size={20}>
@@ -50,21 +50,40 @@ function RoomCategoryHeader(props) {
                 ? 'heroicons-outline:arrow-sm-left'
                 : 'heroicons-outline:arrow-sm-right'}
             </FuseSvgIcon>
-            <span className="flex mx-4 font-medium">Rooms Category</span>
+            <span className="flex mx-4 font-medium">Features List</span>
           </Typography>
         </motion.div>
 
         <div className="flex items-center max-w-full">
+          <motion.div
+            className="hidden sm:flex"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1, transition: { delay: 0.3 } }}
+          >
+            {images ? (
+              <img
+                className="w-32 sm:w-48 rounded"
+                src={`${process.env.REACT_APP_STORAGE_UTELLS}/rooms/room-add-ons/${images}`}
+                alt={name}
+              />
+            ) : (
+              <img
+                className="w-32 sm:w-48 rounded"
+                src="assets/images/apps/ecommerce/product-image-placeholder.png"
+                alt={name}
+              />
+            )}
+          </motion.div>
           <motion.div
             className="flex flex-col items-center sm:items-start min-w-0 mx-8 sm:mx-16"
             initial={{ x: -20 }}
             animate={{ x: 0, transition: { delay: 0.3 } }}
           >
             <Typography className="text-16 sm:text-20 truncate font-semibold">
-              {name || 'New Category'}
+              {name || 'New Features'}
             </Typography>
             <Typography variant="caption" className="font-medium">
-              Rooms Category Detail
+              Features Detail
             </Typography>
           </motion.div>
         </div>
@@ -88,6 +107,7 @@ function RoomCategoryHeader(props) {
           variant="contained"
           color="secondary"
           disabled={_.isEmpty(dirtyFields)}
+          // disabled={_.isEmpty(dirtyFields) || !isValid}
           onClick={handleSaveProduct}
         >
           Save
@@ -97,4 +117,4 @@ function RoomCategoryHeader(props) {
   )
 }
 
-export default RoomCategoryHeader
+export default ElementHeader

@@ -10,12 +10,12 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import _ from '@lodash'
 import FuseScrollbars from '@fuse/core/FuseScrollbars'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
-import { getMeasures, selectProducts, selectProductsSearchText } from '../store/categoriesSlice'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../store/features-slice'
 
 import CategoriesTableHead from './CategoriesTableHead'
 
@@ -34,16 +34,16 @@ function CategoryTable(props) {
     id: null,
   })
 
+  const { productId } = useParams()
+
   useEffect(() => {
-    dispatch(getMeasures()).then(() => setLoading(false))
-  }, [dispatch])
+    dispatch(getMeasures(productId)).then(() => setLoading(false))
+  }, [dispatch, productId])
 
   useEffect(() => {
     if (searchText.length !== 0) {
       setData(
-        _.filter(products, (item) =>
-          item.room_type_name.toLowerCase().includes(searchText.toLowerCase())
-        )
+        _.filter(products, (item) => item.label.toLowerCase().includes(searchText.toLowerCase()))
       )
       setPage(0)
     } else {
@@ -192,15 +192,13 @@ function CategoryTable(props) {
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.visible ? (
-                        <FuseSvgIcon className="text-green" size={20}>
-                          heroicons-outline:check-circle
-                        </FuseSvgIcon>
-                      ) : (
-                        <FuseSvgIcon className="text-red" size={20}>
-                          heroicons-outline:minus-circle
-                        </FuseSvgIcon>
-                      )}
+                      {n.description.length > 72
+                        ? `${n.description.substring(0, 72)}...`
+                        : n.description}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.keys}
                     </TableCell>
                   </TableRow>
                 )
