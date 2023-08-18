@@ -14,6 +14,7 @@ import _ from '@lodash'
 import FuseScrollbars from '@fuse/core/FuseScrollbars'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
 import { getMeasures, selectProducts, selectProductsSearchText } from '../store/roomListSlice'
 import RestaurantsTableHead from './RoomTableHead'
 
@@ -204,6 +205,54 @@ function RoomTable(props) {
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
                       {n.name}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.category.label}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.price}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      <div className="flex items-center">
+                        <span className="mr-1 uppercase">{n.room_floor}</span>
+                        <span className="text-gray-600"> - </span>
+                        <span className="ml-1">{n.room_number}</span>
+                      </div>
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.addons.length}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.features.length}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.config.booking ? (
+                        <FuseSvgIcon className="text-green" size={20}>
+                          heroicons-outline:check-circle
+                        </FuseSvgIcon>
+                      ) : (
+                        <FuseSvgIcon className="text-red" size={20}>
+                          heroicons-outline:minus-circle
+                        </FuseSvgIcon>
+                      )}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.config.visible ? (
+                        <FuseSvgIcon className="text-green" size={20}>
+                          heroicons-outline:check-circle
+                        </FuseSvgIcon>
+                      ) : (
+                        <FuseSvgIcon className="text-red" size={20}>
+                          heroicons-outline:minus-circle
+                        </FuseSvgIcon>
+                      )}
                     </TableCell>
                   </TableRow>
                 )
