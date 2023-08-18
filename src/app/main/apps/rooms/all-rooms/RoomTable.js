@@ -14,12 +14,11 @@ import _ from '@lodash'
 import FuseScrollbars from '@fuse/core/FuseScrollbars'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
-import { getMeasures, selectProducts, selectProductsSearchText } from '../store/categoriesSlice'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../store/roomListSlice'
+import RestaurantsTableHead from './RoomTableHead'
 
-import CategoriesTableHead from './CategoriesTableHead'
-
-function CategoryTable(props) {
+function RoomTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -42,7 +41,7 @@ function CategoryTable(props) {
     if (searchText.length !== 0) {
       setData(
         _.filter(products, (item) =>
-          item.room_type_name.toLowerCase().includes(searchText.toLowerCase())
+          item.room_name.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -135,7 +134,7 @@ function CategoryTable(props) {
     <div className="w-full flex flex-col min-h-full">
       <FuseScrollbars className="grow overflow-x-auto">
         <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
-          <CategoriesTableHead
+          <RestaurantsTableHead
             selectedProductIds={selected}
             order={order}
             onSelectAllClick={handleSelectAllClick}
@@ -150,8 +149,8 @@ function CategoryTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'room_type_name': {
-                      return o[order.room_type_name]
+                    case 'room_name': {
+                      return o[order.room_name]
                     }
                     default: {
                       return o[order.id]
@@ -183,16 +182,51 @@ function CategoryTable(props) {
                       />
                     </TableCell>
 
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.id}
+                    <TableCell
+                      className="w-52 h-52 px-4 md:px-0"
+                      component="th"
+                      scope="row"
+                      padding="none"
+                    >
+                      {n.images.length === 0 ? (
+                        <img
+                          className="w-full block rounded"
+                          alt={`${n.room_name}-${n.room_price}`}
+                          src="assets/images/apps/ecommerce/product-image-placeholder.png"
+                        />
+                      ) : (
+                        <img
+                          className="w-full block rounded"
+                          alt={`${n.room_name}-${n.room_price}`}
+                          src={`${process.env.REACT_APP_URL}/storage/restaurants/${n.images[0].image}`}
+                        />
+                      )}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.label}
+                      {n.room_name}
+                    </TableCell>
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.room_price}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.visible ? (
+                      {`${n.room_descripton.slice(0, 72)}...`}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.room_floor}
+                    </TableCell>
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.room_number}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.room_occupency_max}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.room_status ? (
                         <FuseSvgIcon className="text-green" size={20}>
                           heroicons-outline:check-circle
                         </FuseSvgIcon>
@@ -228,4 +262,4 @@ function CategoryTable(props) {
   )
 }
 
-export default withRouter(CategoryTable)
+export default withRouter(RoomTable)

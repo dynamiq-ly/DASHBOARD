@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { selectProductsSearchText, setProductsSearchText } from './store/roomListSlice'
+import { selectProductsSearchText, setProductsSearchText } from '../store/add-ons-Slice'
 
 function RoomHeader() {
   const dispatch = useDispatch()
@@ -21,7 +21,7 @@ function RoomHeader() {
         delay={300}
         className="text-24 md:text-32 font-extrabold tracking-tight"
       >
-        Room List
+        Room Special Features
       </Typography>
 
       <div className="flex flex-col w-full sm:w-auto sm:flex-row space-y-16 sm:space-y-0 flex-1 items-center justify-end space-x-8">

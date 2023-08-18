@@ -196,6 +196,12 @@ export const rooms = {
       url: './rooms/category',
     },
     {
+      id: 'rooms.specials',
+      title: 'Room Features',
+      type: 'item',
+      url: './rooms/add-ons',
+    },
+    {
       id: 'rooms.list',
       title: 'Rooms List',
       type: 'item',

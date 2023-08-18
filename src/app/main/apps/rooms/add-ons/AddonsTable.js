@@ -1,5 +1,3 @@
-import FuseScrollbars from '@fuse/core/FuseScrollbars'
-import _ from '@lodash'
 import Checkbox from '@mui/material/Checkbox'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -12,11 +10,12 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
+import _ from '@lodash'
+import FuseScrollbars from '@fuse/core/FuseScrollbars'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { getMeasures, selectProducts, selectProductsSearchText } from './store/roomListSlice'
-import RestaurantsTableHead from './RoomTableHead'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../store/add-ons-Slice'
+import RestaurantsTableHead from './AddonsTableHead'
 
 function RoomTable(props) {
   const dispatch = useDispatch()
@@ -188,53 +187,27 @@ function RoomTable(props) {
                       scope="row"
                       padding="none"
                     >
-                      {n.images.length === 0 ? (
+                      {n.image ? (
+                        <img
+                          alt={`${n.label}`}
+                          className="w-32 sm:w-48 rounded"
+                          src={`${process.env.REACT_APP_STORAGE_UTELLS}/rooms/room-add-ons/${n.image}`}
+                        />
+                      ) : (
                         <img
                           className="w-full block rounded"
-                          alt={`${n.room_name}-${n.room_price}`}
+                          alt={`${n.restaurant_name}-${n.restaurant_description}`}
                           src="assets/images/apps/ecommerce/product-image-placeholder.png"
                         />
-                      ) : (
-                        <img
-                          className="w-full block rounded"
-                          alt={`${n.room_name}-${n.room_price}`}
-                          src={`${process.env.REACT_APP_URL}/storage/restaurants/${n.images[0].image}`}
-                        />
                       )}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.room_name}
-                    </TableCell>
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.room_price}
+                      {n.label}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {`${n.room_descripton.slice(0, 72)}...`}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.room_floor}
-                    </TableCell>
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.room_number}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.room_occupency_max}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.room_status ? (
-                        <FuseSvgIcon className="text-green" size={20}>
-                          heroicons-outline:check-circle
-                        </FuseSvgIcon>
-                      ) : (
-                        <FuseSvgIcon className="text-red" size={20}>
-                          heroicons-outline:minus-circle
-                        </FuseSvgIcon>
-                      )}
+                      {n.rooms.length > 1 ? `${n.rooms.length} Rooms` : `${n.rooms.length} Room`}
                     </TableCell>
                   </TableRow>
                 )
