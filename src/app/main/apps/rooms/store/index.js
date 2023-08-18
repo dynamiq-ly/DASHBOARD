@@ -5,8 +5,13 @@ import category from './categorySlice'
 
 import addons from './add-ons-Slice'
 import addon from './addon-slice'
+import assignAddon from './assign-addon-slice'
 
 import roomList from './roomListSlice'
+import room from './room-slice'
+
+import features from './features-slice'
+import feature from './feature-slice'
 
 const reducer = combineReducers({
   categories,
@@ -14,8 +19,13 @@ const reducer = combineReducers({
 
   addons,
   addon,
+  assignAddon,
 
   roomList,
+  room,
+
+  features,
+  feature,
 })
 
 export default reducer

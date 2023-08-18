@@ -10,14 +10,16 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import _ from '@lodash'
 import FuseScrollbars from '@fuse/core/FuseScrollbars'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
-import { getMeasures, selectProducts, selectProductsSearchText } from '../store/roomListSlice'
-import RestaurantsTableHead from './RoomTableHead'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../store/features-slice'
 
-function RoomTable(props) {
+import CategoriesTableHead from './CategoriesTableHead'
+
+function CategoryTable(props) {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const searchText = useSelector(selectProductsSearchText)
@@ -32,16 +34,16 @@ function RoomTable(props) {
     id: null,
   })
 
+  const { productId } = useParams()
+
   useEffect(() => {
-    dispatch(getMeasures()).then(() => setLoading(false))
-  }, [dispatch])
+    dispatch(getMeasures(productId)).then(() => setLoading(false))
+  }, [dispatch, productId])
 
   useEffect(() => {
     if (searchText.length !== 0) {
       setData(
-        _.filter(products, (item) =>
-          item.room_name.toLowerCase().includes(searchText.toLowerCase())
-        )
+        _.filter(products, (item) => item.label.toLowerCase().includes(searchText.toLowerCase()))
       )
       setPage(0)
     } else {
@@ -133,7 +135,7 @@ function RoomTable(props) {
     <div className="w-full flex flex-col min-h-full">
       <FuseScrollbars className="grow overflow-x-auto">
         <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
-          <RestaurantsTableHead
+          <CategoriesTableHead
             selectedProductIds={selected}
             order={order}
             onSelectAllClick={handleSelectAllClick}
@@ -148,8 +150,8 @@ function RoomTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'room_name': {
-                      return o[order.room_name]
+                    case 'room_type_name': {
+                      return o[order.room_type_name]
                     }
                     default: {
                       return o[order.id]
@@ -181,29 +183,22 @@ function RoomTable(props) {
                       />
                     </TableCell>
 
-                    <TableCell
-                      className="w-52 h-52 px-4 md:px-0"
-                      component="th"
-                      scope="row"
-                      padding="none"
-                    >
-                      {n.images.length === 0 ? (
-                        <img
-                          className="w-full block rounded"
-                          alt={`${n.room_name}-${n.room_price}`}
-                          src="assets/images/apps/ecommerce/product-image-placeholder.png"
-                        />
-                      ) : (
-                        <img
-                          className="w-full block rounded"
-                          alt={`${n.room_name}-${n.room_price}`}
-                          src={`${process.env.REACT_APP_STORAGE_UTELLS}/rooms/${n.images[0].image}`}
-                        />
-                      )}
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.id}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.name}
+                      {n.label}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.description.length > 72
+                        ? `${n.description.substring(0, 72)}...`
+                        : n.description}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.keys}
                     </TableCell>
                   </TableRow>
                 )
@@ -231,4 +226,4 @@ function RoomTable(props) {
   )
 }
 
-export default withRouter(RoomTable)
+export default withRouter(CategoryTable)
