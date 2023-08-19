@@ -164,7 +164,7 @@ function Element(props) {
                 label="Staff Manager"
               />
               <Tab
-                disabled={routeParams.productId === 'new' || product.menu_a_la_carte !== null}
+                disabled={routeParams.productId === 'new' || product && product.menu_a_la_carte !== null}
                 className="h-64"
                 label="Menu Manager"
               />
@@ -191,11 +191,11 @@ function Element(props) {
               </div>
 
               <div className={tabValue !== 5 ? 'hidden' : ''}>
-                <Staff />
+                {routeParams.productId !== 'new' && <Staff/>}
               </div>
 
               <div className={tabValue !== 6 ? 'hidden' : ''}>
-                <Menu />
+                {routeParams.productId !== 'new' && <Menu/>}
               </div>
             </div>
           </>
