@@ -42,18 +42,18 @@ function CategoryTab(props) {
 
       {getValues('type') === 'glass' && (
         <Controller
-          name="preparation"
+          name="preperation"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
               className="mt-8 mb-16"
               required
-              label="drink preparation"
+              label="Glass preperation"
               autoFocus
               multiline
               rows={4}
-              id="preparation"
+              id="preperation"
               variant="outlined"
               fullWidth
               helperText="Please specify the preparation of the Drink"

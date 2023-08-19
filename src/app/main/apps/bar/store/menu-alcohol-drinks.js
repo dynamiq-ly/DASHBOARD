@@ -70,7 +70,7 @@ const productSlice = createSlice({
           served_with: '',
 
           slug: '',
-          preparation: null,
+          preperation: '',
           description: '',
 
           features: [],
