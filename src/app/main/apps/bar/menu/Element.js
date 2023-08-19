@@ -15,18 +15,14 @@ import { useDeepCompareEffect } from '@fuse/hooks'
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import FuseLoading from '@fuse/core/FuseLoading'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import { getProduct, newProduct, resetProduct, selectProduct } from '../store/bar-detail-slice'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../store/link-bar-menu'
 import reducer from '../store'
 
-import BasicInfoTab from './tabs/BasicInfo'
-import ImagesTab from './tabs/ImagesTab'
-import TimingTab from './tabs/TimingTab'
-import PDFTab from './tabs/FileTab'
-import ConfigTab from './tabs/ConfigTab'
-import Staff from './tabs/Staff'
-import Menu from './tabs/Menu'
+import RoomCategoryHeader from './ElementHeader'
 
-import ElementHeader from './ElementHeader'
+import BasicInfoTab from './tabs/BasicInfo'
+import ImageTab from './tabs/ImageTab'
+import { Alcohol, Soft } from './tabs/Drinks'
 
 /**
  * Form Validation Schema
@@ -38,7 +34,7 @@ const schema = yup.object().shape({
     .min(5, 'The product name must be at least 5 characters'),
 })
 
-function Element(props) {
+function RoomCategory(props) {
   const dispatch = useDispatch()
   const product = useSelector(selectProduct)
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
@@ -56,9 +52,9 @@ function Element(props) {
 
   useDeepCompareEffect(() => {
     function updateProductState() {
-      const { productId } = routeParams
+      const { menuId } = routeParams
 
-      if (productId === 'new') {
+      if (menuId === 'new') {
         /**
          * Create New Product data
          */
@@ -67,7 +63,7 @@ function Element(props) {
         /**
          * Get Product data
          */
-        dispatch(getProduct(productId)).then((action) => {
+        dispatch(getProduct(menuId)).then((action) => {
           /**
            * If the requested product is not exist show message
            */
@@ -119,10 +115,16 @@ function Element(props) {
         className="flex flex-col flex-1 items-center justify-center h-full"
       >
         <Typography color="text.secondary" variant="h5">
-          There is no such product!
+          There is no such data!
         </Typography>
-        <Button className="mt-24" component={Link} variant="outlined" to="/safety" color="inherit">
-          Go to Safety Page
+        <Button
+          className="mt-24"
+          component={Link}
+          variant="outlined"
+          to="/rooms/category"
+          color="inherit"
+        >
+          Go to Room Categories Page
         </Button>
       </motion.div>
     )
@@ -133,7 +135,7 @@ function Element(props) {
    */
   if (
     _.isEmpty(form) ||
-    (product && routeParams.productId !== `${product.id}` && routeParams.productId !== 'new')
+    (product && routeParams.menuId !== `${product.id}` && routeParams.menuId !== 'new')
   ) {
     return <FuseLoading />
   }
@@ -141,7 +143,7 @@ function Element(props) {
   return (
     <FormProvider {...methods}>
       <FusePageCarded
-        header={<ElementHeader />}
+        header={<RoomCategoryHeader />}
         content={
           <>
             <Tabs
@@ -153,49 +155,25 @@ function Element(props) {
               scrollButtons="auto"
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
-              <Tab className="h-64" label="Bar Info" />
-              <Tab className="h-64" label="working Hours" />
-              <Tab className="h-64" label="Menu Carte PDF" />
-              <Tab className="h-64" label="Images" />
-              <Tab className="h-64" label="Configuration" />
+              <Tab className="h-64" label="Menu Item Information" />
+              <Tab className="h-64" label="Menu Item Image" />
               <Tab
-                disabled={routeParams.productId === 'new'}
+                disabled={routeParams.menuId === 'new'}
                 className="h-64"
-                label="Staff Manager"
-              />
-              <Tab
-                disabled={routeParams.productId === 'new' || product.menu_a_la_carte !== null}
-                className="h-64"
-                label="Menu Manager"
+                label={product.type === 'soft' ? 'Soft Drinks' : 'Alcoholic Drinks'}
               />
             </Tabs>
-            <div className="p-16">
+            <div className="p-16 sm:p-24 max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
               </div>
 
               <div className={tabValue !== 1 ? 'hidden' : ''}>
-                <TimingTab />
+                <ImageTab />
               </div>
 
               <div className={tabValue !== 2 ? 'hidden' : ''}>
-                <PDFTab />
-              </div>
-
-              <div className={tabValue !== 3 ? 'hidden' : ''}>
-                <ImagesTab />
-              </div>
-
-              <div className={tabValue !== 4 ? 'hidden' : ''}>
-                <ConfigTab />
-              </div>
-
-              <div className={tabValue !== 5 ? 'hidden' : ''}>
-                <Staff />
-              </div>
-
-              <div className={tabValue !== 6 ? 'hidden' : ''}>
-                <Menu />
+                {product.type === 'soft' ? <Soft /> : <Alcohol />}
               </div>
             </div>
           </>
@@ -206,19 +184,4 @@ function Element(props) {
   )
 }
 
-const folderList = {
-  menus: [
-    {
-      id: 'staffs',
-      type: 'material-twotone:supervised_user_circle',
-      contents: 'Staff',
-    },
-    {
-      id: 'equipements',
-      type: 'material-twotone:monitor_weight',
-      contents: 'Equipements',
-    },
-  ],
-}
-
-export default withReducer('bars', reducer)(Element)
+export default withReducer('bars', reducer)(RoomCategory)

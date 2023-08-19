@@ -1,30 +1,30 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const getProduct = createAsyncThunk('bars/staff/getProduct', async (productId) => {
-  const response = await axios.get(`/api/bars/staff/${productId}`)
+export const getProduct = createAsyncThunk('bars/menu/getProduct', async (productId) => {
+  const response = await axios.get(`/api/bars/menu/${productId}`)
   const data = await response.data
 
   return data === undefined ? null : data
 })
 
 export const removeProduct = createAsyncThunk(
-  'bars/staff/removeProduct',
+  'bars/menu/removeProduct',
   async (val, { dispatch, getState }) => {
-    const { id } = getState().bars.staff
-    await axios.delete(`/api/bars/staff/${id}`)
+    const { id } = getState().bars.menu
+    await axios.delete(`/api/bars/menu/${id}`)
     return id
   }
 )
 
 export const saveProduct = createAsyncThunk(
-  'bars/staff/saveProduct',
+  'bars/menu/saveProduct',
   async (productData, { dispatch, getState }) => {
-    const { id } = getState().bars.staff
+    const { id } = getState().bars.menu
 
     if (id) {
       const response = await axios.post(
-        `/api/bars/staff/${id}`,
+        `/api/bars/menu/${id}`,
         {
           ...productData,
           _method: 'PATCH',
@@ -38,7 +38,7 @@ export const saveProduct = createAsyncThunk(
       const data = await response.data
       return data
     }
-    const response = await axios.post('/api/bars/staff', productData, {
+    const response = await axios.post('/api/bars/menu', productData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -49,7 +49,7 @@ export const saveProduct = createAsyncThunk(
 )
 
 const productSlice = createSlice({
-  name: 'bars/staff',
+  name: 'bars/menu',
   initialState: null,
   reducers: {
     resetProduct: () => null,
@@ -59,8 +59,8 @@ const productSlice = createSlice({
         payload: {
           //   id: FuseUtils.generateGUID(),
           name: '',
-          position: '',
-          image: '',
+          type: '',
+          categories: '',
           bar_id: '',
         },
       }),
@@ -75,6 +75,6 @@ const productSlice = createSlice({
 
 export const { newProduct, resetProduct } = productSlice.actions
 
-export const selectProduct = ({ bars }) => bars.staff
+export const selectProduct = ({ bars }) => bars.menu
 
 export default productSlice.reducer

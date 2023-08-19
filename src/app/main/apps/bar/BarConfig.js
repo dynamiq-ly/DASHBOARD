@@ -3,6 +3,7 @@ import { lazy } from 'react'
 const Bars = lazy(() => import('./bars/BarScreen'))
 const BarsDetail = lazy(() => import('./bar/Element'))
 const BarStaffDetail = lazy(() => import('./staff/Element'))
+const BarMenuDetail = lazy(() => import('./menu/Element'))
 
 const BarConfig = {
   settings: {
@@ -25,6 +26,15 @@ const BarConfig = {
             {
               path: 'staff/:staffId',
               element: <BarStaffDetail />,
+            },
+            {
+              path: 'menu/:menuId',
+              children: [
+                {
+                  path: '',
+                  element: <BarMenuDetail />,
+                },
+              ],
             },
           ],
         },
