@@ -15,14 +15,12 @@ import { useDeepCompareEffect } from '@fuse/hooks'
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import FuseLoading from '@fuse/core/FuseLoading'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import { getProduct, newProduct, resetProduct, selectProduct } from '../store/link-bar-menu'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../store/menu-soft-drinks'
 import reducer from '../store'
 
 import RoomCategoryHeader from './ElementHeader'
 
 import BasicInfoTab from './tabs/BasicInfo'
-import ImageTab from './tabs/ImageTab'
-import { Alcohol, Soft } from './tabs/Drinks'
 
 /**
  * Form Validation Schema
@@ -52,9 +50,9 @@ function RoomCategory(props) {
 
   useDeepCompareEffect(() => {
     function updateProductState() {
-      const { menuId } = routeParams
+      const { softId } = routeParams
 
-      if (menuId === 'new') {
+      if (softId === 'new') {
         /**
          * Create New Product data
          */
@@ -63,7 +61,7 @@ function RoomCategory(props) {
         /**
          * Get Product data
          */
-        dispatch(getProduct(menuId)).then((action) => {
+        dispatch(getProduct(softId)).then((action) => {
           /**
            * If the requested product is not exist show message
            */
@@ -135,7 +133,7 @@ function RoomCategory(props) {
    */
   if (
     _.isEmpty(form) ||
-    (product && routeParams.menuId !== `${product.id}` && routeParams.menuId !== 'new')
+    (product && routeParams.softId !== `${product.id}` && routeParams.softId !== 'new')
   ) {
     return <FuseLoading />
   }
@@ -155,32 +153,11 @@ function RoomCategory(props) {
               scrollButtons="auto"
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
-              <Tab className="h-64" label="Menu Item Information" />
-              <Tab className="h-64" label="Menu Item Image" />
-              <Tab
-                disabled={routeParams.menuId === 'new'}
-                className="h-64"
-                label={
-                  // eslint-disable-next-line no-nested-ternary
-                  product.type === 'soft'
-                    ? 'Soft Drinks'
-                    : product.type === 'alcohol'
-                    ? 'Alcoholic Drinks'
-                    : 'Create a record to display'
-                }
-              />
+              <Tab className="h-64" label="Soft Drinks Info" />
             </Tabs>
             <div className="p-16 sm:p-24 max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
-              </div>
-
-              <div className={tabValue !== 1 ? 'hidden' : ''}>
-                <ImageTab />
-              </div>
-
-              <div className={tabValue !== 2 ? 'hidden' : ''}>
-                {routeParams.menuId !== 'new' && product.type === 'soft' ? <Soft /> : <Alcohol />}
               </div>
             </div>
           </>

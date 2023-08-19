@@ -160,14 +160,7 @@ function RoomCategory(props) {
               <Tab
                 disabled={routeParams.menuId === 'new'}
                 className="h-64"
-                label={
-                  // eslint-disable-next-line no-nested-ternary
-                  product.type === 'soft'
-                    ? 'Soft Drinks'
-                    : product.type === 'alcohol'
-                    ? 'Alcoholic Drinks'
-                    : 'Create a record to display'
-                }
+                label={product.type === 'soft' ? 'Soft Drinks' : 'Alcoholic Drinks'}
               />
             </Tabs>
             <div className="p-16 sm:p-24 max-w-3xl">
@@ -180,7 +173,7 @@ function RoomCategory(props) {
               </div>
 
               <div className={tabValue !== 2 ? 'hidden' : ''}>
-                {routeParams.menuId !== 'new' && product.type === 'soft' ? <Soft /> : <Alcohol />}
+                {product.type === 'soft' ? <Soft /> : <Alcohol />}
               </div>
             </div>
           </>

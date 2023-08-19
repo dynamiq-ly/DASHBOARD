@@ -4,6 +4,8 @@ const Bars = lazy(() => import('./bars/BarScreen'))
 const BarsDetail = lazy(() => import('./bar/Element'))
 const BarStaffDetail = lazy(() => import('./staff/Element'))
 const BarMenuDetail = lazy(() => import('./menu/Element'))
+const BarMenuSoftDrinks = lazy(() => import('./soft-drinks/Element'))
+const BarMenuAlcoholDrinks = lazy(() => import('./alcohol-drink/Element'))
 
 const BarConfig = {
   settings: {
@@ -33,6 +35,14 @@ const BarConfig = {
                 {
                   path: '',
                   element: <BarMenuDetail />,
+                },
+                {
+                  path: 'soft/:softId',
+                  element: <BarMenuSoftDrinks />,
+                },
+                {
+                  path: 'alcohol/:alcoholId',
+                  element: <BarMenuAlcoholDrinks />,
                 },
               ],
             },
