@@ -13,9 +13,9 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { lighten } from '@mui/material/styles'
-import { removeMeasures } from './store/barSlice'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
+import { removeMeasures } from '../store/bars-slice'
 
 const rows = [
   {
@@ -26,10 +26,17 @@ const rows = [
     sort: false,
   },
   {
-    id: 'bar_name',
+    id: 'name',
     align: 'left',
     disablePadding: false,
     label: 'Name',
+    sort: true,
+  },
+  {
+    id: 'type',
+    align: 'left',
+    disablePadding: false,
+    label: 'Type',
     sort: true,
   },
   {
@@ -39,13 +46,15 @@ const rows = [
     label: 'Location',
     sort: true,
   },
+
   {
-    id: 'bar_open_time',
+    id: 'timing',
     align: 'left',
     disablePadding: false,
-    label: 'Open Time',
+    label: 'timing',
     sort: true,
   },
+
   {
     id: 'bar_phone_number',
     align: 'left',
@@ -54,10 +63,17 @@ const rows = [
     sort: true,
   },
   {
-    id: 'bar_closed_days',
+    id: 'adults_only',
     align: 'left',
     disablePadding: false,
-    label: 'Closed Days',
+    label: 'Only Adults allowed',
+    sort: true,
+  },
+  {
+    id: 'reservation',
+    align: 'left',
+    disablePadding: false,
+    label: 'Reservation allowed',
     sort: true,
   },
   {

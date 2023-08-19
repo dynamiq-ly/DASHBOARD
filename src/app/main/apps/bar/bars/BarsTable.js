@@ -1,5 +1,3 @@
-import FuseScrollbars from '@fuse/core/FuseScrollbars'
-import _ from '@lodash'
 import Checkbox from '@mui/material/Checkbox'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -12,10 +10,12 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
+import _ from '@lodash'
+import FuseScrollbars from '@fuse/core/FuseScrollbars'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { getMeasures, selectProducts, selectProductsSearchText } from './store/barSlice'
+import { getMeasures, selectProducts, selectProductsSearchText } from '../store/bars-slice'
 
 import BarsTableHead from './BarsTableHead'
 
@@ -197,28 +197,54 @@ function RestaurantsTable(props) {
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.bar_name}
+                      {n.title}
+                    </TableCell>
+
+                    <TableCell
+                      className="p-4 md:p-16 truncate font-semibold"
+                      component="th"
+                      scope="row"
+                    >
+                      {n.type}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.bar_location}
+                      {n.location}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.bar_open_time}
+                      {`From: ${n.timing_open} To: ${n.timing_close}`}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.bar_phone_number}
+                      {n.phone_number}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      <p>{n.bar_closed_days.split(',').length} days</p>
-                      <b>{n.bar_closed_days.replaceAll(',', ' - ')}</b>
+                      {n.adults_only ? (
+                        <FuseSvgIcon className="text-green" size={20}>
+                          heroicons-outline:check-circle
+                        </FuseSvgIcon>
+                      ) : (
+                        <FuseSvgIcon className="text-red" size={20}>
+                          heroicons-outline:minus-circle
+                        </FuseSvgIcon>
+                      )}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.bar_status ? (
+                      {n.reservation_required ? (
+                        <FuseSvgIcon className="text-green" size={20}>
+                          heroicons-outline:check-circle
+                        </FuseSvgIcon>
+                      ) : (
+                        <FuseSvgIcon className="text-red" size={20}>
+                          heroicons-outline:minus-circle
+                        </FuseSvgIcon>
+                      )}
+                    </TableCell>
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.visible ? (
                         <FuseSvgIcon className="text-green" size={20}>
                           heroicons-outline:check-circle
                         </FuseSvgIcon>

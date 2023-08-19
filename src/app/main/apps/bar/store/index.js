@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import bar from './barSlice'
+import bar from './bars-slice'
 import item from './barItemSlice'
 
 const reducer = combineReducers({

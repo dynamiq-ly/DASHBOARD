@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 
-const Bar = lazy(() => import('./BarScreen'))
+const Bar = lazy(() => import('./bars/BarScreen'))
 const BarItem = lazy(() => import('./AE/Item'))
 
 const BarMenu = lazy(() => import('./menu/MenuScreen'))
