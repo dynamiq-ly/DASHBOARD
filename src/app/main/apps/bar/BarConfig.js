@@ -1,10 +1,7 @@
 import { lazy } from 'react'
 
-const Bar = lazy(() => import('./bars/BarScreen'))
-const BarItem = lazy(() => import('./AE/Item'))
-
-const BarMenu = lazy(() => import('./menu/MenuScreen'))
-const BarMenuCategory = lazy(() => import('./category/CategoryScreen'))
+const Bars = lazy(() => import('./bars/BarScreen'))
+const BarsDetail = lazy(() => import('./bar/Element'))
 
 const BarConfig = {
   settings: {
@@ -16,13 +13,14 @@ const BarConfig = {
     {
       path: 'bar',
       children: [
-        { path: '', element: <Bar /> },
+        { path: '', element: <Bars /> },
         {
           path: ':productId',
           children: [
-            { path: '', element: <BarItem /> },
-            { path: 'menu/category', element: <BarMenuCategory /> },
-            { path: 'menu/list', element: <BarMenu /> },
+            {
+              path: '',
+              element: <BarsDetail />,
+            },
           ],
         },
       ],

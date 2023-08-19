@@ -2,9 +2,9 @@ import { orange } from '@mui/material/colors'
 import { lighten, styled } from '@mui/material/styles'
 import clsx from 'clsx'
 import { Controller, useFormContext } from 'react-hook-form'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import Box from '@mui/material/Box'
 import { useParams } from 'react-router-dom'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 
 const Root = styled('div')(({ theme }) => ({
   '& .productImageFeaturedStar': {
@@ -96,7 +96,7 @@ function ImagesTab(props) {
 
                   const newImage = await readFileAsync()
 
-                  onChange([newImage, ...value])
+                  onChange([...value, newImage])
                 }}
               />
               <FuseSvgIcon size={32} color="action">
@@ -128,7 +128,7 @@ function ImagesTab(props) {
                   </FuseSvgIcon>
                   <img
                     className="max-w-none w-auto h-full"
-                    src={`${process.env.REACT_APP_URL}/storage/bars/${media.image}`}
+                    src={`${process.env.REACT_APP_STORAGE_UTELLS}/bars/${media.image}`}
                     alt="product"
                   />
                 </div>
@@ -147,7 +147,9 @@ function ImagesTab(props) {
                 fileReader.onload = () => {
                   const dataUrl = fileReader.result
                   const imgElement = document.getElementById(`image-${index}`)
-                  imgElement.src = dataUrl
+                  if (imgElement) {
+                    imgElement.src = dataUrl
+                  }
                 }
 
                 fileReader.readAsDataURL(media)

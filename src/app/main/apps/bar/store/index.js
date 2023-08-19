@@ -1,11 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
 import bar from './bars-slice'
-import item from './barItemSlice'
+import barDetail from './bar-detail-slice'
 
 const reducer = combineReducers({
   bar,
-  item,
+  barDetail,
 })
 
 export default reducer

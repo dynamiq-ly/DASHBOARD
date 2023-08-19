@@ -41,7 +41,7 @@ function RestaurantsTable(props) {
   useEffect(() => {
     if (searchText.length !== 0) {
       setData(
-        _.filter(products, (item) => item.bar_name.toLowerCase().includes(searchText.toLowerCase()))
+        _.filter(products, (item) => item.title.toLowerCase().includes(searchText.toLowerCase()))
       )
       setPage(0)
     } else {

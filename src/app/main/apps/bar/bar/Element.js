@@ -1,28 +1,31 @@
-import FuseLoading from '@fuse/core/FuseLoading'
-import FusePageCarded from '@fuse/core/FusePageCarded'
-import { useDeepCompareEffect } from '@fuse/hooks'
 import Button from '@mui/material/Button'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import Typography from '@mui/material/Typography'
-import withReducer from 'app/store/withReducer'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import _ from '@lodash'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import _ from '@lodash'
+import withReducer from 'app/store/withReducer'
+import { useDeepCompareEffect } from '@fuse/hooks'
+import FusePageCarded from '@fuse/core/FusePageCarded'
+import FuseLoading from '@fuse/core/FuseLoading'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import { getProduct, newProduct, resetProduct, selectProduct } from '../store/barItemSlice'
+import FileList from 'app/shared-components/sections/FolderList'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../store/bar-detail-slice'
 import reducer from '../store'
 
-import RestaurantHeader from './BarHeader'
 import BasicInfoTab from './tabs/BasicInfo'
-import WeeklyThemes from './tabs/WeeklyThemes'
-import ImageTabs from './tabs/ImageTabs'
-import FileList from './tabs/sections/FolderList'
+import ImagesTab from './tabs/ImagesTab'
+import TimingTab from './tabs/TimingTab'
+import PDFTab from './tabs/FileTab'
+import ConfigTab from './tabs/ConfigTab'
+
+import ElementHeader from './ElementHeader'
 
 /**
  * Form Validation Schema
@@ -34,7 +37,7 @@ const schema = yup.object().shape({
     .min(5, 'The product name must be at least 5 characters'),
 })
 
-function Restaurant(props) {
+function Element(props) {
   const dispatch = useDispatch()
   const product = useSelector(selectProduct)
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
@@ -115,16 +118,10 @@ function Restaurant(props) {
         className="flex flex-col flex-1 items-center justify-center h-full"
       >
         <Typography color="text.secondary" variant="h5">
-          There is no such data!
+          There is no such product!
         </Typography>
-        <Button
-          className="mt-24"
-          component={Link}
-          variant="outlined"
-          to="/resturant/list"
-          color="inherit"
-        >
-          Go to Restaurants Page
+        <Button className="mt-24" component={Link} variant="outlined" to="/safety" color="inherit">
+          Go to Safety Page
         </Button>
       </motion.div>
     )
@@ -143,7 +140,7 @@ function Restaurant(props) {
   return (
     <FormProvider {...methods}>
       <FusePageCarded
-        header={<RestaurantHeader />}
+        header={<ElementHeader />}
         content={
           <>
             <Tabs
@@ -155,24 +152,39 @@ function Restaurant(props) {
               scrollButtons="auto"
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
-              <Tab className="h-64" label="Basic Info" />
-              <Tab className="h-64" label="Weekly Themes" />
+              <Tab className="h-64" label="Bar Info" />
+              <Tab className="h-64" label="working Hours" />
+              <Tab className="h-64" label="Menu Carte PDF" />
               <Tab className="h-64" label="Images" />
-              <Tab className="h-64" label="Folder" />
+              <Tab className="h-64" label="Configuration" />
+              {routeParams.productId !== 'new' && <Tab className="h-64" label="Folder" />}
             </Tabs>
-            <div className="p-16 sm:p-24 max-w-3xl">
+            <div className="p-16  max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
               </div>
+
               <div className={tabValue !== 1 ? 'hidden' : ''}>
-                <WeeklyThemes />
+                <TimingTab />
               </div>
+
               <div className={tabValue !== 2 ? 'hidden' : ''}>
-                <ImageTabs />
+                <PDFTab />
               </div>
+
               <div className={tabValue !== 3 ? 'hidden' : ''}>
-                <FileList />
+                <ImagesTab />
               </div>
+
+              <div className={tabValue !== 4 ? 'hidden' : ''}>
+                <ConfigTab />
+              </div>
+
+              {routeParams.productId !== 'new' && (
+                <div className={tabValue !== 5 ? 'hidden' : ''}>
+                  <FileList title="Menu Catalog" data={folderList.menus} />
+                </div>
+              )}
             </div>
           </>
         }
@@ -182,4 +194,19 @@ function Restaurant(props) {
   )
 }
 
-export default withReducer('bars', reducer)(Restaurant)
+const folderList = {
+  menus: [
+    {
+      id: 'staffs',
+      type: 'material-twotone:supervised_user_circle',
+      contents: 'Staff',
+    },
+    {
+      id: 'equipements',
+      type: 'material-twotone:monitor_weight',
+      contents: 'Equipements',
+    },
+  ],
+}
+
+export default withReducer('bars', reducer)(Element)

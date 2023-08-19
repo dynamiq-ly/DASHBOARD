@@ -7,26 +7,27 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { removeProduct, saveProduct } from '../store/barItemSlice'
+import { removeProduct, saveProduct } from '../store/bar-detail-slice'
 
-function RestaurantHeader(props) {
+function ElementHeader(props) {
   const dispatch = useDispatch()
   const methods = useFormContext()
   const { formState, watch, getValues } = methods
   const { isValid, dirtyFields } = formState
-  const featuredImageId = watch('featuredImageId')
+  const name = watch('title')
   const images = watch('images')
-  const name = watch('bar_name')
   const theme = useTheme()
   const navigate = useNavigate()
 
   function handleSaveProduct() {
-    dispatch(saveProduct(getValues()))
+    dispatch(saveProduct(getValues())).then(() => {
+      navigate(`/bar`)
+    })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      navigate('/restaurant/list')
+      navigate(`/bar`)
     })
   }
 
@@ -41,7 +42,7 @@ function RestaurantHeader(props) {
             className="flex items-center sm:mb-12"
             component={Link}
             role="button"
-            to="/restaurant/list"
+            to="/bar"
             color="inherit"
           >
             <FuseSvgIcon size={20}>
@@ -49,7 +50,7 @@ function RestaurantHeader(props) {
                 ? 'heroicons-outline:arrow-sm-left'
                 : 'heroicons-outline:arrow-sm-right'}
             </FuseSvgIcon>
-            <span className="flex mx-4 font-medium">Bar</span>
+            <span className="flex mx-4 font-medium">Bars List</span>
           </Typography>
         </motion.div>
 
@@ -59,12 +60,10 @@ function RestaurantHeader(props) {
             initial={{ scale: 0 }}
             animate={{ scale: 1, transition: { delay: 0.3 } }}
           >
-            {featuredImageId && images.length > 0 ? (
+            {images.length > 0 ? (
               <img
                 className="w-32 sm:w-48 rounded"
-                src={`${process.env.REACT_APP_URL}storage/bars/${
-                  _.find(images, { id: featuredImageId }).image
-                }`}
+                src={`${process.env.REACT_APP_STORAGE_UTELLS}/bars/${images[0].image}`}
                 alt={name}
               />
             ) : (
@@ -107,7 +106,8 @@ function RestaurantHeader(props) {
           className="whitespace-nowrap mx-4"
           variant="contained"
           color="secondary"
-          disabled={_.isEmpty(dirtyFields) || !isValid}
+          disabled={_.isEmpty(dirtyFields)}
+          // disabled={_.isEmpty(dirtyFields) || !isValid}
           onClick={handleSaveProduct}
         >
           Save
@@ -117,4 +117,4 @@ function RestaurantHeader(props) {
   )
 }
 
-export default RestaurantHeader
+export default ElementHeader

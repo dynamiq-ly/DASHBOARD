@@ -1,4 +1,5 @@
 import TextField from '@mui/material/TextField'
+
 import { Controller, useFormContext } from 'react-hook-form'
 
 function BasicInfoTab(props) {
@@ -8,16 +9,16 @@ function BasicInfoTab(props) {
   return (
     <div>
       <Controller
-        name="bar_name"
+        name="title"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
             required
-            label="Name"
+            label="bar Title"
             autoFocus
-            id="bar_name"
+            id="title"
             variant="outlined"
             fullWidth
           />
@@ -25,15 +26,16 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="bar_location"
+        name="type"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            label="Location"
             required
-            id="bar_location"
+            label="Bar Type"
+            autoFocus
+            id="type"
             variant="outlined"
             fullWidth
           />
@@ -41,33 +43,52 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="bar_description"
+        name="location"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            id="bar_description"
-            label="Descripton"
-            type="text"
             required
+            label="Bar Location"
+            autoFocus
+            id="location"
+            variant="outlined"
+            fullWidth
+          />
+        )}
+      />
+
+      <Controller
+        name="phone_number"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            className="mt-8 mb-16"
+            required
+            label="Bar Phone Number"
+            autoFocus
+            id="phone_number"
+            variant="outlined"
+            fullWidth
+          />
+        )}
+      />
+
+      <Controller
+        name="description"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            className="mt-8 mb-16"
+            required
+            label="Bar Description"
+            autoFocus
             multiline
             rows={5}
-            variant="outlined"
-            fullWidth
-          />
-        )}
-      />
-
-      <Controller
-        name="bar_phone_number"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            label="Phone Number"
-            id="	bar_phone_number"
+            id="description"
             variant="outlined"
             fullWidth
           />
