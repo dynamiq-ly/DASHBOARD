@@ -6,6 +6,7 @@ const BarStaffDetail = lazy(() => import('./staff/Element'))
 const BarMenuDetail = lazy(() => import('./menu/Element'))
 const BarMenuSoftDrinks = lazy(() => import('./soft-drinks/Element'))
 const BarMenuAlcoholDrinks = lazy(() => import('./alcohol-drink/Element'))
+const BarMenuAlcoholDrinksFeatures = lazy(() => import('./feautres/Element'))
 
 const BarConfig = {
   settings: {
@@ -42,7 +43,10 @@ const BarConfig = {
                 },
                 {
                   path: 'alcohol/:alcoholId',
-                  element: <BarMenuAlcoholDrinks />,
+                  children: [
+                    { path: '', element: <BarMenuAlcoholDrinks /> },
+                    { path: 'features/:featuresId', element: <BarMenuAlcoholDrinksFeatures /> },
+                  ],
                 },
               ],
             },

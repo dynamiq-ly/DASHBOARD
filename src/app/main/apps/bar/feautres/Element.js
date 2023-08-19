@@ -15,16 +15,12 @@ import { useDeepCompareEffect } from '@fuse/hooks'
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import FuseLoading from '@fuse/core/FuseLoading'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import { getProduct, newProduct, resetProduct, selectProduct } from '../store/menu-alcohol-drinks'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../store/link-alochol-feature'
 import reducer from '../store'
 
 import RoomCategoryHeader from './ElementHeader'
-
 import BasicInfoTab from './tabs/BasicInfo'
-import InformationTab from './tabs/Information'
-import ServingTab from './tabs/Serving'
 import ImageTab from './tabs/ImageTab'
-import Features from './tabs/Features'
 
 /**
  * Form Validation Schema
@@ -54,9 +50,9 @@ function RoomCategory(props) {
 
   useDeepCompareEffect(() => {
     function updateProductState() {
-      const { alcoholId } = routeParams
+      const { featuresId } = routeParams
 
-      if (alcoholId === 'new') {
+      if (featuresId === 'new') {
         /**
          * Create New Product data
          */
@@ -65,7 +61,7 @@ function RoomCategory(props) {
         /**
          * Get Product data
          */
-        dispatch(getProduct(alcoholId)).then((action) => {
+        dispatch(getProduct(featuresId)).then((action) => {
           /**
            * If the requested product is not exist show message
            */
@@ -137,7 +133,7 @@ function RoomCategory(props) {
    */
   if (
     _.isEmpty(form) ||
-    (product && routeParams.alcoholId !== `${product.id}` && routeParams.alcoholId !== 'new')
+    (product && routeParams.featuresId !== `${product.id}` && routeParams.featuresId !== 'new')
   ) {
     return <FuseLoading />
   }
@@ -157,15 +153,8 @@ function RoomCategory(props) {
               scrollButtons="auto"
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
-              <Tab className="h-64" label="Alcohol Drink Information" />
-              <Tab className="h-64" label="Alcohol Drink Basic Info" />
-              <Tab className="h-64" label="Alcohol Drink Serving" />
-              <Tab className="h-64" label="Alcohol Image" />
-              <Tab
-                disabled={routeParams.alcoholId === 'new'}
-                className="h-64"
-                label="Alcohol Feature"
-              />
+              <Tab className="h-64" label="Alcohol Feature Info" />
+              <Tab className="h-64" label="Alcohol Feature Image" />
             </Tabs>
             <div className="p-16 sm:p-24 max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
@@ -173,19 +162,7 @@ function RoomCategory(props) {
               </div>
 
               <div className={tabValue !== 1 ? 'hidden' : ''}>
-                <InformationTab />
-              </div>
-
-              <div className={tabValue !== 2 ? 'hidden' : ''}>
-                <ServingTab />
-              </div>
-
-              <div className={tabValue !== 3 ? 'hidden' : ''}>
                 <ImageTab />
-              </div>
-
-              <div className={tabValue !== 4 ? 'hidden' : ''}>
-                <Features />
               </div>
             </div>
           </>
