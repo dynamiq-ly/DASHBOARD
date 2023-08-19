@@ -23,7 +23,7 @@ const BarConfig = {
               element: <BarsDetail />,
             },
             {
-              path: ':staffId',
+              path: 'staff/:staffId',
               element: <BarStaffDetail />,
             },
           ],

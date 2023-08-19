@@ -16,7 +16,7 @@ function BasicInfoTab(props) {
       <Box className="relative w-full sm:w-160 h-160 m-8 p-16 shadow rounded-16 bg-blue-700">
         <NavLinkAdapter
           className="flex flex-col h-full w-full"
-          to={`/bar/${productId}/new`}
+          to={`/bar/${productId}/staff/new`}
           role="button"
         >
           <div className="flex flex-auto w-full items-center justify-center text-white">
@@ -39,7 +39,7 @@ function BasicInfoTab(props) {
         >
           <NavLinkAdapter
             className="flex flex-col h-full w-full"
-            to={`/bar/${productId}/${el.id}`}
+            to={`/bar/${productId}/staff/${el.id}`}
             role="button"
           >
             <div className="flex flex-auto w-full items-center justify-center">
