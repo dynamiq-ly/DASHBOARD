@@ -5,6 +5,7 @@ import barDetail from './bar-detail-slice'
 import staff from './link-bar-staff'
 import menu from './link-bar-menu'
 import soft from './menu-soft-drinks'
+import alcohol from './menu-alcohol-drinks'
 
 const reducer = combineReducers({
   bar,
@@ -12,6 +13,7 @@ const reducer = combineReducers({
   staff,
   menu,
   soft,
+  alcohol,
 })
 
 export default reducer

@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { removeProduct, saveProduct } from '../store/link-bar-menu'
+import { removeProduct, saveProduct } from '../store/menu-alcohol-drinks'
 
 function ElementHeader(props) {
   const dispatch = useDispatch()
@@ -16,23 +16,23 @@ function ElementHeader(props) {
   const { isValid, dirtyFields } = formState
 
   const name = watch('name')
-  const type = watch('type')
-  const bar = watch('bar.title')
+
+  const bar = watch('menu.name')
 
   const theme = useTheme()
   const navigate = useNavigate()
 
-  const { productId } = useParams()
+  const { productId, menuId } = useParams()
 
   function handleSaveProduct() {
     dispatch(saveProduct(getValues())).then(() => {
-      navigate(`/bar/${productId}`)
+      navigate(`/bar/${productId}/menu/${menuId}`)
     })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      navigate(`/bar/${productId}`)
+      navigate(`/bar/${productId}/menu/${menuId}`)
     })
   }
 
@@ -47,7 +47,7 @@ function ElementHeader(props) {
             className="flex items-center sm:mb-12"
             component={Link}
             role="button"
-            to={`/bar/${productId}`}
+            to={`/bar/${productId}/menu/${menuId}`}
             color="inherit"
           >
             <FuseSvgIcon size={20}>
@@ -55,7 +55,7 @@ function ElementHeader(props) {
                 ? 'heroicons-outline:arrow-sm-left'
                 : 'heroicons-outline:arrow-sm-right'}
             </FuseSvgIcon>
-            <span className="flex mx-4 font-medium">{!bar ? 'Bar List' : `${bar} Detail`}</span>
+            <span className="flex mx-4 font-medium">{!bar ? 'Menu List' : `${bar} Detail`}</span>
           </Typography>
         </motion.div>
 
@@ -69,7 +69,7 @@ function ElementHeader(props) {
               {name || 'New Menu Item'}
             </Typography>
             <Typography variant="caption" className="font-medium">
-              {type || 'Menu Category'}
+              Drink Details
             </Typography>
           </motion.div>
         </div>

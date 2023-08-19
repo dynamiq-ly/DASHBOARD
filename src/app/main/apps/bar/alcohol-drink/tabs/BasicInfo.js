@@ -1,5 +1,6 @@
-import { Autocomplete, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
-import { useEffect, useLayoutEffect } from 'react'
+import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
+import axios from 'axios'
+import { useEffect, useLayoutEffect, useState } from 'react'
 
 import { Controller, useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
@@ -7,16 +8,25 @@ import { useParams } from 'react-router-dom'
 function CategoryTab(props) {
   const methods = useFormContext()
   const { control, setValue, getValues } = methods
+  const [categories, setCategories] = useState('')
 
-  const { productId } = useParams()
+  const { menuId } = useParams()
 
   useLayoutEffect(() => {
-    setValue('bar_id', productId)
-  }, [productId, setValue])
+    setValue('drink_id', menuId)
+  }, [menuId, setValue])
 
   useEffect(() => {
-    if (getValues('type') === 'soft') setValue('categories', '')
-  }, [setValue, getValues])
+    if (getValues('type') === 'glass') {
+      setValue('small_price', 0)
+    }
+  }, [getValues, setValue])
+
+  useLayoutEffect(() => {
+    axios
+      .get(`/api/bars/menu/${menuId}`)
+      .then((response) => setCategories(response.data.categories))
+  }, [categories, menuId])
 
   return (
     <div>
@@ -28,12 +38,12 @@ function CategoryTab(props) {
             {...field}
             className="mt-8 mb-16"
             required
-            label="Staff name"
+            label="drink name"
             autoFocus
             id="name"
             variant="outlined"
             fullWidth
-            helperText="Please specify the name of the staff"
+            helperText="Please specify the name of the Drink"
           />
         )}
       />
@@ -52,45 +62,97 @@ function CategoryTab(props) {
               value={field.value}
               onChange={field.onChange}
             >
-              <MenuItem value="soft" className="flex items-center gap-2">
-                Soft Drinks
+              <MenuItem value="bottle" className="flex items-center gap-2">
+                Bottle
               </MenuItem>
-              <MenuItem value="alcohol" className="flex items-center gap-2">
-                Alcohol Drinks
+              <MenuItem value="glass" className="flex items-center gap-2">
+                Glass
               </MenuItem>
             </Select>
           </FormControl>
         )}
       />
 
-      {getValues('type') === 'alcohol' && (
+      <Controller
+        name="price"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            className="mt-8 mb-16"
+            required
+            label="drink price"
+            autoFocus
+            type="number"
+            id="price"
+            variant="outlined"
+            fullWidth
+            helperText="Please specify the price of the Drink"
+          />
+        )}
+      />
+
+      {getValues('type') === 'bottle' && (
         <Controller
-          name="categories"
+          name="small_price"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <Autocomplete
+          render={({ field }) => (
+            <TextField
+              {...field}
               className="mt-8 mb-16"
-              multiple
-              freeSolo
-              value={value && JSON.parse(value)}
-              options={[]}
-              onChange={(event, newValue) => {
-                onChange(JSON.stringify(newValue))
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  className="mt-8 mb-16"
-                  placeholder="Insert Categories"
-                  label="Categories"
-                  variant="outlined"
-                  helperText="Please specify the categories of the menu, to keep inserting press enter."
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              )}
+              required
+              label="drink small_price"
+              type="number"
+              autoFocus
+              id="small_price"
+              variant="outlined"
+              fullWidth
+              helperText="Please specify the small_price of the Drink"
             />
+          )}
+        />
+      )}
+
+      <Controller
+        name="size"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            className="mt-8 mb-16"
+            required
+            label="Bootle Size"
+            autoFocus
+            id="size"
+            variant="outlined"
+            fullWidth
+            helperText="Please specify the price of the Drink"
+          />
+        )}
+      />
+
+      {categories && (
+        <Controller
+          name="category"
+          control={control}
+          render={({ field }) => (
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Category Type</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="type"
+                className="mt-8 mb-16"
+                label="Categories"
+                value={field.value}
+                onChange={field.onChange}
+              >
+                {JSON.parse(categories).map((item, index) => (
+                  <MenuItem key={index} value={item} className="flex items-center gap-2">
+                    {item}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           )}
         />
       )}
