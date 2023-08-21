@@ -1,5 +1,3 @@
-import FuseScrollbars from '@fuse/core/FuseScrollbars'
-import _ from '@lodash'
 import Checkbox from '@mui/material/Checkbox'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -12,10 +10,11 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
+import _ from '@lodash'
+import FuseScrollbars from '@fuse/core/FuseScrollbars'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import StatusBade from 'app/shared-components/StatusBadge'
 import { getMeasures, selectProducts, selectProductsSearchText } from '../store/daysSlice'
 
 import DayActivitiesTableHead from './DayActivitiesTableHead'
@@ -42,8 +41,11 @@ function NightShowsTable(props) {
   useEffect(() => {
     if (searchText.length !== 0) {
       setData(
-        _.filter(products, (item) =>
-          item.entertainement_name.toLowerCase().includes(searchText.toLowerCase())
+        _.filter(
+          products,
+          (item) =>
+            item.name.toLowerCase().includes(searchText.toLowerCase()) ||
+            item.location.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -190,47 +192,47 @@ function NightShowsTable(props) {
                       scope="row"
                       padding="none"
                     >
-                      {n.images.length === 0 ? (
+                      {n.image.length === 0 ? (
                         <img
                           className="w-full block rounded"
-                          alt={`${n.entertainement_name}-${n.entertainement_location}`}
+                          alt={`${n.name}-${n.location}`}
                           src="assets/images/apps/ecommerce/product-image-placeholder.png"
                         />
                       ) : (
                         <img
                           className="w-full block rounded"
-                          alt={`${n.entertainement_name}-${n.entertainement_location}`}
-                          src={`${process.env.REACT_APP_URL}/storage/entertainement/day/${n.images[0].image}`}
+                          alt={`${n.name}-${n.location}`}
+                          src={`${process.env.REACT_APP_URL}/storage/entertainement/days/${n.image}`}
                         />
                       )}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.entertainement_name}
+                      {n.name}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.entertainement_summary}
+                      {n.location}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.entertainement_location}
+                      {n.timing.length}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      <StatusBade name={n.entertainement_age} color="bg-black text-white" />
+                      {n.joinable ? (
+                        <FuseSvgIcon className="text-green" size={20}>
+                          heroicons-outline:check-circle
+                        </FuseSvgIcon>
+                      ) : (
+                        <FuseSvgIcon className="text-red" size={20}>
+                          heroicons-outline:minus-circle
+                        </FuseSvgIcon>
+                      )}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.timings.length === 0 ? 'N/A' : n.timings.length}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      <StatusBade name={n.entertainement_joinable} />
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.isVisible ? (
+                      {n.visible ? (
                         <FuseSvgIcon className="text-green" size={20}>
                           heroicons-outline:check-circle
                         </FuseSvgIcon>
