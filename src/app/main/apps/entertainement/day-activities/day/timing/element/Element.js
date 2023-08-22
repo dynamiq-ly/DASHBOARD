@@ -15,14 +15,12 @@ import { useDeepCompareEffect } from '@fuse/hooks'
 import FusePageCarded from '@fuse/core/FusePageCarded'
 import FuseLoading from '@fuse/core/FuseLoading'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/daySlice'
-import reducer from '../../store'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../../../../store/day-timing'
+import reducer from '../../../../store'
 
-import ImagesTab from './tabs/ImagesTab'
+import RoomCategoryHeader from './ElementHeader'
+
 import BasicInfoTab from './tabs/BasicInfo'
-import TimingTab from './tabs/TimingTab'
-
-import ElementHeader from './ElementHeader'
 
 /**
  * Form Validation Schema
@@ -34,7 +32,7 @@ const schema = yup.object().shape({
     .min(5, 'The product name must be at least 5 characters'),
 })
 
-function Element(props) {
+function RoomCategory(props) {
   const dispatch = useDispatch()
   const product = useSelector(selectProduct)
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'))
@@ -52,9 +50,9 @@ function Element(props) {
 
   useDeepCompareEffect(() => {
     function updateProductState() {
-      const { productId } = routeParams
+      const { timeId } = routeParams
 
-      if (productId === 'new') {
+      if (timeId === 'new') {
         /**
          * Create New Product data
          */
@@ -63,7 +61,7 @@ function Element(props) {
         /**
          * Get Product data
          */
-        dispatch(getProduct(productId)).then((action) => {
+        dispatch(getProduct(timeId)).then((action) => {
           /**
            * If the requested product is not exist show message
            */
@@ -115,10 +113,16 @@ function Element(props) {
         className="flex flex-col flex-1 items-center justify-center h-full"
       >
         <Typography color="text.secondary" variant="h5">
-          There is no such product!
+          There is no such data!
         </Typography>
-        <Button className="mt-24" component={Link} variant="outlined" to="/safety" color="inherit">
-          Go to Safety Page
+        <Button
+          className="mt-24"
+          component={Link}
+          variant="outlined"
+          to="/rooms/category"
+          color="inherit"
+        >
+          Go to Room Categories Page
         </Button>
       </motion.div>
     )
@@ -129,7 +133,7 @@ function Element(props) {
    */
   if (
     _.isEmpty(form) ||
-    (product && routeParams.productId !== `${product.id}` && routeParams.productId !== 'new')
+    (product && routeParams.timeId !== `${product.id}` && routeParams.timeId !== 'new')
   ) {
     return <FuseLoading />
   }
@@ -137,7 +141,7 @@ function Element(props) {
   return (
     <FormProvider {...methods}>
       <FusePageCarded
-        header={<ElementHeader />}
+        header={<RoomCategoryHeader />}
         content={
           <>
             <Tabs
@@ -149,25 +153,11 @@ function Element(props) {
               scrollButtons="auto"
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
-              <Tab className="h-64" label="Day Activity Image" />
-              <Tab className="h-64" label="Day Activity Info" />
-              <Tab
-                disabled={routeParams.productId === 'new'}
-                className="h-64"
-                label="Day Activities Timing"
-              />
+              <Tab className="h-64" label="Timing Information" />
             </Tabs>
-            <div className="">
-              <div className={tabValue !== 0 ? 'hidden' : 'p-16'}>
-                <ImagesTab />
-              </div>
-
-              <div className={tabValue !== 1 ? 'hidden' : 'p-16'}>
+            <div className="p-16 sm:p-24 max-w-3xl">
+              <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
-              </div>
-
-              <div className={tabValue !== 2 ? 'hidden' : 'p-16'}>
-                {routeParams.productId !== 'new' && <TimingTab />}
               </div>
             </div>
           </>
@@ -178,4 +168,4 @@ function Element(props) {
   )
 }
 
-export default withReducer('entertainements', reducer)(Element)
+export default withReducer('entertainements', reducer)(RoomCategory)

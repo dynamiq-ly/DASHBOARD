@@ -2,6 +2,7 @@ import { lazy } from 'react'
 
 const DayActivities = lazy(() => import('./day-activities/DayActivitiesScreen'))
 const DayActivity = lazy(() => import('./day-activities/day/Element'))
+const DayActivityTiming = lazy(() => import('./day-activities/day/timing/element/Element'))
 
 const NightShows = lazy(() => import('./night-show/NightShowsScreen'))
 const NightShow = lazy(() => import('./night-show/night/Element'))
@@ -25,7 +26,16 @@ const EntertainementConfig = {
         },
         {
           path: ':productId',
-          element: <DayActivity />,
+          children: [
+            {
+              path: '',
+              element: <DayActivity />,
+            },
+            {
+              path: ':timeId',
+              element: <DayActivityTiming />,
+            },
+          ],
         },
       ],
     },
