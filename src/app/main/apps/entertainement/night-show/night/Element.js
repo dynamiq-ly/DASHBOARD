@@ -1,29 +1,29 @@
-import FuseLoading from '@fuse/core/FuseLoading'
-import FusePageCarded from '@fuse/core/FusePageCarded'
-import { useDeepCompareEffect } from '@fuse/hooks'
 import Button from '@mui/material/Button'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import Typography from '@mui/material/Typography'
-import withReducer from 'app/store/withReducer'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import _ from '@lodash'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import _ from '@lodash'
+import withReducer from 'app/store/withReducer'
+import { useDeepCompareEffect } from '@fuse/hooks'
+import FusePageCarded from '@fuse/core/FusePageCarded'
+import FuseLoading from '@fuse/core/FuseLoading'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
 import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/nightSlice'
 import reducer from '../../store'
 
 import BasicInfoTab from './tabs/BasicInfo'
 import ImagesTab from './tabs/ImagesTab'
-import DisponibilyTab from './tabs/DisponibilyTab'
-import ElementHeader from './ElementHeader'
 import TimingTab from './tabs/TimingTab'
-import NightTab from './tabs/NightTab'
+import HostTabs from './tabs/HostTab'
+
+import ElementHeader from './ElementHeader'
 
 /**
  * Form Validation Schema
@@ -150,30 +150,29 @@ function Element(props) {
               scrollButtons="auto"
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
-              <Tab className="h-64" label="Basic Info" />
-              <Tab className="h-64" label="Night Show Info" />
-              <Tab className="h-64" label="Disponibily" />
-              <Tab className="h-64" label="Images Tab" />
-              {routeParams.productId === 'new' && <Tab className="h-64" label="Timings" />}
+              <Tab className="h-64" label="Night Show Image" />
+              <Tab className="h-64" label="Night Shows Information" />
+              <Tab className="h-64" label="Night Show Host" />
+              <Tab
+                disabled={routeParams.productId === 'new'}
+                className="h-64"
+                label="Nigh Shows Timings"
+              />
             </Tabs>
-            <div className="p-16  max-w-3xl">
+            <div className="p-16">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
-                <BasicInfoTab />
-              </div>
-
-              <div className={tabValue !== 1 ? 'hidden' : ''}>
-                <NightTab />
-              </div>
-
-              <div className={tabValue !== 2 ? 'hidden' : ''}>
-                <DisponibilyTab />
-              </div>
-
-              <div className={tabValue !== 3 ? 'hidden' : ''}>
                 <ImagesTab />
               </div>
 
-              <div className={tabValue !== 4 ? 'hidden' : ''}>
+              <div className={tabValue !== 1 ? 'hidden' : ''}>
+                <BasicInfoTab />
+              </div>
+
+              <div className={tabValue !== 2 ? 'hidden' : ''}>
+                <HostTabs />
+              </div>
+
+              <div className={tabValue !== 3 ? 'hidden' : ''}>
                 <TimingTab />
               </div>
             </div>

@@ -1,13 +1,19 @@
-import TextField from '@mui/material/TextField'
+import { TextField } from '@mui/material'
+import { useLayoutEffect, useState } from 'react'
+
 import { Controller, useFormContext } from 'react-hook-form'
-import { useHelperContext } from 'src/app/contexts/HelperContext'
-import { BannerImage } from './ImageTab'
+import { useParams } from 'react-router-dom'
 
-function BasicInfoTab(props) {
+function CategoryTab(props) {
   const methods = useFormContext()
-  const { control } = methods
+  const { control, setValue } = methods
+  const [data, setData] = useState(undefined)
 
-  const { locations } = useHelperContext()
+  const { productId } = useParams()
+
+  useLayoutEffect(() => {
+    setValue('et_id', productId)
+  }, [productId, setValue])
 
   return (
     <div>
@@ -19,8 +25,8 @@ function BasicInfoTab(props) {
             {...field}
             className="mt-8 mb-16"
             required
-            label="Location"
             autoFocus
+            type="Location"
             id="location"
             variant="outlined"
             fullWidth
@@ -29,16 +35,16 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="category"
+        name="day"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            id="category"
-            label="Category"
             required
-            type="text"
+            autoFocus
+            type="date"
+            id="day"
             variant="outlined"
             fullWidth
           />
@@ -46,25 +52,40 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="slug"
+        name="start_time"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            id="slug"
-            label="Title"
             required
-            type="text"
+            autoFocus
+            type="time"
+            id="start_time"
             variant="outlined"
             fullWidth
           />
         )}
       />
 
-      <BannerImage />
+      <Controller
+        name="end_time"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            className="mt-8 mb-16"
+            required
+            autoFocus
+            type="time"
+            id="end_time"
+            variant="outlined"
+            fullWidth
+          />
+        )}
+      />
     </div>
   )
 }
 
-export default BasicInfoTab
+export default CategoryTab

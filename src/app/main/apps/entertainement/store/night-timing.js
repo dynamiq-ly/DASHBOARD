@@ -2,9 +2,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const getProduct = createAsyncThunk(
-  'entertainements/night/getProduct',
+  'entertainements/nightTiming/getProduct',
   async (productId) => {
-    const response = await axios.get(`/api/entertainement/night-shows/${productId}`)
+    const response = await axios.get(`/api/entertainement/night-shows/timing/${productId}`)
     const data = await response.data
 
     return data === undefined ? null : data
@@ -12,22 +12,22 @@ export const getProduct = createAsyncThunk(
 )
 
 export const removeProduct = createAsyncThunk(
-  'entertainements/night/removeProduct',
+  'entertainements/nightTiming/removeProduct',
   async (val, { dispatch, getState }) => {
-    const { id } = getState().entertainements.night
-    await axios.delete(`/api/entertainement/night-shows/${id}`)
+    const { id } = getState().entertainements.nightTiming
+    await axios.delete(`/api/entertainement/night-shows/timing/${id}`)
     return id
   }
 )
 
 export const saveProduct = createAsyncThunk(
-  'entertainements/night/saveProduct',
+  'entertainements/nightTiming/saveProduct',
   async (productData, { dispatch, getState }) => {
-    const { id } = getState().entertainements.night
+    const { id } = getState().entertainements.nightTiming
 
     if (id) {
       const response = await axios.post(
-        `/api/entertainement/night-shows/${id}`,
+        `/api/entertainement/night-shows/timing/${id}`,
         {
           ...productData,
           _method: 'PATCH',
@@ -41,24 +41,18 @@ export const saveProduct = createAsyncThunk(
       const data = await response.data
       return data
     }
-    const response = await axios.post(
-      '/api/entertainement/night-shows',
-      {
-        ...productData,
+    const response = await axios.post('/api/entertainement/night-shows/timing', productData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
       },
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
-    )
+    })
     const data = await response.data
     return data
   }
 )
 
 const productSlice = createSlice({
-  name: 'entertainements/night',
+  name: 'entertainements/nightTiming',
   initialState: null,
   reducers: {
     resetProduct: () => null,
@@ -67,18 +61,11 @@ const productSlice = createSlice({
       prepare: (event) => ({
         payload: {
           //   id: FuseUtils.generateGUID(),
-          image: '',
-          name: '',
-          description: '',
-          genre: '',
-          visible: 1,
-          joinable: 0,
-          youtube_link: '',
-          website_link: '',
-          host_name: '',
-          host_image: '',
-          host_role: '',
-          host_description: '',
+          age: '',
+          day: '',
+          time_start: '',
+          time_end: '',
+          et_id: '',
         },
       }),
     },
@@ -92,6 +79,6 @@ const productSlice = createSlice({
 
 export const { newProduct, resetProduct } = productSlice.actions
 
-export const selectProduct = ({ entertainements }) => entertainements.night
+export const selectProduct = ({ entertainements }) => entertainements.nightTiming
 
 export default productSlice.reducer

@@ -4,35 +4,33 @@ import Typography from '@mui/material/Typography'
 import { motion } from 'framer-motion'
 import { useFormContext } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { useHelperContext } from 'src/app/contexts/HelperContext'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { removeProduct, saveProduct } from '../../store/nightSlice'
+import { removeProduct, saveProduct } from '../../../../store/day-timing'
 
 function ElementHeader(props) {
   const dispatch = useDispatch()
   const methods = useFormContext()
   const { formState, watch, getValues } = methods
   const { isValid, dirtyFields } = formState
-  const name = watch('name')
-  const images = watch('image')
+
+  const bar = watch('activity.name')
+
   const theme = useTheme()
   const navigate = useNavigate()
 
-  const { fetchWeeklyTimingCount } = useHelperContext()
+  const { productId } = useParams()
 
   function handleSaveProduct() {
     dispatch(saveProduct(getValues())).then(() => {
-      fetchWeeklyTimingCount()
-      navigate('/entertainement/night-show')
+      navigate(`/entertainement/day-activities/${productId}`)
     })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      fetchWeeklyTimingCount()
-      navigate('/entertainement/night-show')
+      navigate(`/entertainement/day-activities/${productId}`)
     })
   }
 
@@ -47,7 +45,7 @@ function ElementHeader(props) {
             className="flex items-center sm:mb-12"
             component={Link}
             role="button"
-            to="/entertainement/night-show"
+            to={`/entertainement/day-activities/${productId}`}
             color="inherit"
           >
             <FuseSvgIcon size={20}>
@@ -55,40 +53,19 @@ function ElementHeader(props) {
                 ? 'heroicons-outline:arrow-sm-left'
                 : 'heroicons-outline:arrow-sm-right'}
             </FuseSvgIcon>
-            <span className="flex mx-4 font-medium">Night Shows</span>
+            <span className="flex mx-4 font-medium">Activity Detail</span>
           </Typography>
         </motion.div>
 
         <div className="flex items-center max-w-full">
           <motion.div
-            className="hidden sm:flex"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1, transition: { delay: 0.3 } }}
-          >
-            {images.length > 0 ? (
-              <img
-                className="w-32 sm:w-48 rounded"
-                src={`${process.env.REACT_APP_URL}/storage/entertainment/nights/${images}`}
-                alt={name}
-              />
-            ) : (
-              <img
-                className="w-32 sm:w-48 rounded"
-                src="assets/images/apps/ecommerce/product-image-placeholder.png"
-                alt={name}
-              />
-            )}
-          </motion.div>
-          <motion.div
             className="flex flex-col items-center sm:items-start min-w-0 mx-8 sm:mx-16"
             initial={{ x: -20 }}
             animate={{ x: 0, transition: { delay: 0.3 } }}
           >
-            <Typography className="text-16 sm:text-20 truncate font-semibold">
-              {name || 'New Show'}
-            </Typography>
+            <Typography className="text-16 sm:text-20 truncate font-semibold">Timing</Typography>
             <Typography variant="caption" className="font-medium">
-              Night Show Detail
+              {bar ? `${bar} Timing Detail` : 'timing detail'}
             </Typography>
           </motion.div>
         </div>

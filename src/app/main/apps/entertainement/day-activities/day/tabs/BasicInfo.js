@@ -1,18 +1,16 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { Controller, useFormContext } from 'react-hook-form'
-import { useHelperContext } from 'src/app/contexts/HelperContext'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
   const { control } = methods
 
-  const { locations } = useHelperContext()
-
   return (
     <div>
       <Controller
-        name="entertainement_name"
+        name="name"
         control={control}
         render={({ field }) => (
           <TextField
@@ -21,7 +19,7 @@ function BasicInfoTab(props) {
             required
             label="Name"
             autoFocus
-            id="entertainement_name"
+            id="name"
             variant="outlined"
             fullWidth
           />
@@ -29,16 +27,16 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="entertainement_summary"
+        name="location"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            id="entertainement_summary"
-            label="Summary"
             required
-            type="text"
+            label="Location"
+            autoFocus
+            id="location"
             variant="outlined"
             fullWidth
           />
@@ -46,13 +44,13 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="entertainement_description"
+        name="description"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            id="entertainement_description"
+            id="description"
             label="Description"
             required
             type="text"
@@ -65,49 +63,62 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="entertainement_age"
+        name="visible"
         control={control}
         render={({ field }) => (
           <FormControl fullWidth className="mt-8 mb-16">
-            <InputLabel id="demo-simple-select-label">Age Group</InputLabel>
+            <InputLabel id="demo-simple-select-label">Visibility</InputLabel>
             <Select
               labelId="demo-simple-select-label"
-              id="entertainement_age"
-              label="Age Group"
-              placeholder="Select Age Group"
+              id="visible"
+              label="Visibility"
+              placeholder="Select Visibility"
               value={field.value}
               onChange={field.onChange}
             >
-              <MenuItem value="KIDS">KIDS</MenuItem>
-              <MenuItem value="ADULTS">ADULTS</MenuItem>
-              <MenuItem value="TEENS">TEENS</MenuItem>
-              <MenuItem value="FAMILY">FAMILY</MenuItem>
-              <MenuItem value="OTHER">OTHER</MenuItem>
+              <MenuItem value={0} className="flex items-center gap-4">
+                <FuseSvgIcon className="text-red" size={20}>
+                  heroicons-outline:minus-circle
+                </FuseSvgIcon>
+                Not Displayed Displayed
+              </MenuItem>
+              <MenuItem value={1} className="flex items-center gap-4">
+                <FuseSvgIcon className="text-green" size={20}>
+                  heroicons-outline:minus-circle
+                </FuseSvgIcon>
+                Is Displayed
+              </MenuItem>
             </Select>
           </FormControl>
         )}
       />
 
       <Controller
-        name="entertainement_location"
+        name="joinable"
         control={control}
         render={({ field }) => (
           <FormControl fullWidth className="mt-8 mb-16">
-            <InputLabel id="demo-simple-select-label">Location</InputLabel>
+            <InputLabel id="demo-simple-select-label">Can People Join</InputLabel>
             <Select
               labelId="demo-simple-select-label"
-              id="entertainement_location"
-              label="Age Group"
-              placeholder="Select Location"
+              id="joinable"
+              label="Can People Join"
+              placeholder="Select Option"
               value={field.value}
               onChange={field.onChange}
             >
-              <MenuItem value="NOT REGISTRED YET">NOT REGISTRED YET</MenuItem>
-              {locations.map((location, index) => (
-                <MenuItem key={index} value={location.location_name}>
-                  {location.location_name}
-                </MenuItem>
-              ))}
+              <MenuItem value={1} className="flex items-center gap-4">
+                <FuseSvgIcon className="text-green" size={20}>
+                  heroicons-outline:minus-circle
+                </FuseSvgIcon>
+                You have join to attend
+              </MenuItem>
+              <MenuItem value={0} className="flex items-center gap-4">
+                <FuseSvgIcon className="text-red" size={20}>
+                  heroicons-outline:minus-circle
+                </FuseSvgIcon>
+                Everyone is welcomed
+              </MenuItem>
             </Select>
           </FormControl>
         )}

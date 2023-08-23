@@ -1,27 +1,22 @@
 import TextField from '@mui/material/TextField'
 import { Controller, useFormContext } from 'react-hook-form'
-import { useHelperContext } from 'src/app/contexts/HelperContext'
-import { BannerImage } from './ImageTab'
+import HostImage from './HostImage'
 
-function BasicInfoTab(props) {
+function HostTabs(props) {
   const methods = useFormContext()
   const { control } = methods
-
-  const { locations } = useHelperContext()
 
   return (
     <div>
       <Controller
-        name="location"
+        name="host_name"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            required
-            label="Location"
-            autoFocus
-            id="location"
+            label="Performer Name"
+            id="host_name"
             variant="outlined"
             fullWidth
           />
@@ -29,16 +24,14 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="category"
+        name="host_role"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            id="category"
-            label="Category"
-            required
-            type="text"
+            label="Performer Role"
+            id="host_role"
             variant="outlined"
             fullWidth
           />
@@ -46,25 +39,25 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="slug"
+        name="host_description"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            id="slug"
-            label="Title"
-            required
-            type="text"
+            label="host Description"
+            multiline
+            rows={5}
+            id="host_description"
             variant="outlined"
             fullWidth
           />
         )}
       />
 
-      <BannerImage />
+      <HostImage />
     </div>
   )
 }
 
-export default BasicInfoTab
+export default HostTabs

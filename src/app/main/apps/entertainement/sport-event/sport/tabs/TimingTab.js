@@ -1,4 +1,5 @@
-import TextField from '@mui/material/TextField'
+import { TextField } from '@mui/material'
+
 import { Controller, useFormContext } from 'react-hook-form'
 
 function TimingTab(props) {
@@ -8,7 +9,7 @@ function TimingTab(props) {
   return (
     <div>
       <Controller
-        name="date"
+        name="day"
         control={control}
         render={({ field }) => (
           <TextField
@@ -16,8 +17,8 @@ function TimingTab(props) {
             className="mt-8 mb-16"
             required
             autoFocus
-            id="date"
             type="date"
+            id="day"
             variant="outlined"
             fullWidth
           />
@@ -25,7 +26,7 @@ function TimingTab(props) {
       />
 
       <Controller
-        name="time_start"
+        name="start_time"
         control={control}
         render={({ field }) => (
           <TextField
@@ -34,7 +35,7 @@ function TimingTab(props) {
             required
             autoFocus
             type="time"
-            id="time_start"
+            id="start_time"
             variant="outlined"
             fullWidth
           />
@@ -42,7 +43,7 @@ function TimingTab(props) {
       />
 
       <Controller
-        name="time_end"
+        name="end_time"
         control={control}
         render={({ field }) => (
           <TextField
@@ -51,7 +52,7 @@ function TimingTab(props) {
             required
             autoFocus
             type="time"
-            id="time_end"
+            id="end_time"
             variant="outlined"
             fullWidth
           />

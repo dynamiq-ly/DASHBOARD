@@ -2,14 +2,14 @@ import { lazy } from 'react'
 
 const DayActivities = lazy(() => import('./day-activities/DayActivitiesScreen'))
 const DayActivity = lazy(() => import('./day-activities/day/Element'))
+const DayActivityTiming = lazy(() => import('./day-activities/day/timing/element/Element'))
 
 const NightShows = lazy(() => import('./night-show/NightShowsScreen'))
 const NightShow = lazy(() => import('./night-show/night/Element'))
+const NightShowTiming = lazy(() => import('./night-show/night/timing/element/Element'))
 
 const SportEvents = lazy(() => import('./sport-event/SportEventScreen'))
 const SportEvent = lazy(() => import('./sport-event/sport/Element'))
-
-const CalendarAppEntertainement = lazy(() => import('./calendar/CalendarApp'))
 
 const EntertainementConfig = {
   settings: {
@@ -27,7 +27,16 @@ const EntertainementConfig = {
         },
         {
           path: ':productId',
-          element: <DayActivity />,
+          children: [
+            {
+              path: '',
+              element: <DayActivity />,
+            },
+            {
+              path: ':timeId',
+              element: <DayActivityTiming />,
+            },
+          ],
         },
       ],
     },
@@ -40,7 +49,10 @@ const EntertainementConfig = {
         },
         {
           path: ':productId',
-          element: <NightShow />,
+          children: [
+            { path: '', element: <NightShow /> },
+            { path: ':timeId', element: <NightShowTiming /> },
+          ],
         },
       ],
     },
@@ -56,10 +68,6 @@ const EntertainementConfig = {
           element: <SportEvent />,
         },
       ],
-    },
-    {
-      path: 'entertainement/calendar',
-      element: <CalendarAppEntertainement />,
     },
   ],
 }

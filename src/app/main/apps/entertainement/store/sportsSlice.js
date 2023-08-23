@@ -2,7 +2,7 @@ import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/too
 import axios from 'axios'
 
 export const getMeasures = createAsyncThunk('entertainements/sports/getMeasures', async () => {
-  const response = await axios.get('/api/entertainement/sport-events')
+  const response = await axios.get('/api/entertainement/sport-programs')
   const data = await response.data
   return data
 })
@@ -10,7 +10,7 @@ export const getMeasures = createAsyncThunk('entertainements/sports/getMeasures'
 export const removeMeasures = createAsyncThunk(
   'entertainements/sports',
   async (productIds, { dispatch, getState }) => {
-    await axios.delete(`/api/entertainement/sport-events/${productIds}`, {
+    await axios.delete(`/api/entertainement/sport-programs/${productIds}`, {
       data: productIds,
     })
     return productIds

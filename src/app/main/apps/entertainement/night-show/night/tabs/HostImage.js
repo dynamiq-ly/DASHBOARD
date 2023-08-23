@@ -43,20 +43,21 @@ const Root = styled('div')(({ theme }) => ({
   },
 }))
 
-function ImagesTab(props) {
+function AwayImageTab(props) {
   const methods = useFormContext()
   const { productId } = useParams()
   const { control, watch } = methods
 
-  const images = watch('image')
+  const images = watch('host_image')
 
-  console.table('images => ', images)
+  /* log the away image */
+  console.log('AwayImageTab: images:', images)
 
   return (
     <Root>
       <div className="flex justify-center sm:justify-start flex-wrap -mx-16">
         <Controller
-          name="image"
+          name="host_image"
           control={control}
           render={({ field: { onChange, value } }) => (
             <Box
@@ -67,13 +68,13 @@ function ImagesTab(props) {
                     : lighten(theme.palette.background.default, 0.02),
               }}
               component="label"
-              htmlFor="button-file"
-              className="productImageUpload flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer shadow hover:shadow-lg"
+              htmlFor="away-button-file"
+              className="awayImageUpload flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer shadow hover:shadow-lg"
             >
               <input
                 accept="image/*"
                 className="hidden"
-                id="button-file"
+                id="away-button-file"
                 type="file"
                 multiple
                 onChange={async (e) => {
@@ -110,25 +111,23 @@ function ImagesTab(props) {
 
         {productId !== 'new' ? (
           <Controller
-            name="image"
+            name="host_image"
             control={control}
             defaultValue=""
             render={({ field: { onChange } }) => {
               const fileReader = new FileReader()
 
-              if (typeof images !== 'string') {
+              if (typeof images !== 'string' && images !== null) {
                 fileReader.onload = () => {
                   const dataUrl = fileReader.result
-                  const imgElement = document.getElementById(`image-reader-update`)
-                  if (imgElement) {
-                    imgElement.src = dataUrl
-                  }
+                  const imgElement = document.getElementById(`away-image-reader-update`)
+                  imgElement.src = dataUrl
                 }
 
                 fileReader.readAsDataURL(images)
               }
 
-              return images && typeof images === 'string' ? (
+              return typeof images === 'string' ? (
                 <div
                   onClick={() => onChange(images)}
                   onKeyDown={() => onChange(images)}
@@ -144,7 +143,7 @@ function ImagesTab(props) {
 
                   <img
                     className="max-w-none w-auto h-full"
-                    src={`${process.env.REACT_APP_STORAGE_UTELLS}/entertainment/nights/${images}`}
+                    src={`${process.env.REACT_APP_URL}/storage/entertainment/nights/shows/${images}`}
                     alt="product"
                   />
                 </div>
@@ -162,14 +161,20 @@ function ImagesTab(props) {
                     heroicons-solid:star
                   </FuseSvgIcon>
 
-                  <img id="image-reader-update" alt="point interest" />
+                  {images !== null ? (
+                    <img id="away-image-reader-update" alt="point interest" />
+                  ) : (
+                    <div className="flex items-center justify-center w-128 h-128 text-gray-500">
+                      No image available
+                    </div>
+                  )}
                 </div>
               )
             }}
           />
         ) : (
           <Controller
-            name="image"
+            name="host_image"
             control={control}
             defaultValue=""
             render={({ field: { onChange } }) => {
@@ -178,10 +183,8 @@ function ImagesTab(props) {
               if (images) {
                 fileReader.onload = () => {
                   const dataUrl = fileReader.result
-                  const imgElement = document.getElementById(`image-reader`)
-                  if (imgElement) {
-                    imgElement.src = dataUrl
-                  }
+                  const imgElement = document.getElementById(`away-image-reader`)
+                  imgElement.src = dataUrl
                 }
 
                 fileReader.readAsDataURL(images)
@@ -193,13 +196,13 @@ function ImagesTab(props) {
                     role="button"
                     tabIndex={0}
                     className={clsx(
-                      'image-reader productImageItem flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer outline-none shadow hover:shadow-lg'
+                      'away-image-reader productImageItem flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer outline-none shadow hover:shadow-lg'
                     )}
                   >
                     <FuseSvgIcon className="productImageFeaturedStar">
                       heroicons-solid:x
                     </FuseSvgIcon>
-                    <img id="image-reader" alt="point interest" />
+                    <img id="away-image-reader" alt="point interest" />
                   </div>
                 )
               }
@@ -212,4 +215,4 @@ function ImagesTab(props) {
   )
 }
 
-export default ImagesTab
+export default AwayImageTab
