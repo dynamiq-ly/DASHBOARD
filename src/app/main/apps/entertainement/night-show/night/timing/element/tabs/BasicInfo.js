@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
+import { TextField } from '@mui/material'
 import { useLayoutEffect, useState } from 'react'
 
 import { Controller, useFormContext } from 'react-hook-form'
@@ -18,28 +18,19 @@ function CategoryTab(props) {
   return (
     <div>
       <Controller
-        name="age"
+        name="location"
         control={control}
         render={({ field }) => (
-          <FormControl fullWidth className="mt-8 mb-16">
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="age"
-              label="Age"
-              placeholder="Select Age groupe"
-              value={field.value}
-              onChange={field.onChange}
-            >
-              {['adult', 'child', 'family', 'couple', 'group', 'elderly', 'teenager'].map(
-                (item, index) => (
-                  <MenuItem value={item} key={index}>
-                    {item}
-                  </MenuItem>
-                )
-              )}
-            </Select>
-          </FormControl>
+          <TextField
+            {...field}
+            className="mt-8 mb-16"
+            required
+            autoFocus
+            type="Location"
+            id="location"
+            variant="outlined"
+            fullWidth
+          />
         )}
       />
 

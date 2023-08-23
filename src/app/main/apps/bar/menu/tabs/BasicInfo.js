@@ -72,7 +72,7 @@ function CategoryTab(props) {
               className="mt-8 mb-16"
               multiple
               freeSolo
-              value={value && JSON.parse(value) || ""}
+              value={(value && JSON.parse(value)) || ''}
               options={[]}
               onChange={(event, newValue) => {
                 onChange(JSON.stringify(newValue))

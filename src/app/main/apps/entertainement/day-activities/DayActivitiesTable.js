@@ -202,7 +202,7 @@ function NightShowsTable(props) {
                         <img
                           className="w-full block rounded"
                           alt={`${n.name}-${n.location}`}
-                          src={`${process.env.REACT_APP_URL}/storage/entertainement/days/${n.image}`}
+                          src={`${process.env.REACT_APP_URL}/storage/entertainment/days/${n.image}`}
                         />
                       )}
                     </TableCell>

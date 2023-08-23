@@ -144,7 +144,7 @@ function ImagesTab(props) {
 
                   <img
                     className="max-w-none w-auto h-full"
-                    src={`${process.env.REACT_APP_STORAGE_UTELLS}/entertainement/days/${images}`}
+                    src={`${process.env.REACT_APP_STORAGE_UTELLS}/entertainment/days/${images}`}
                     alt="product"
                   />
                 </div>

@@ -68,7 +68,7 @@ function ElementHeader(props) {
             {images.length > 0 ? (
               <img
                 className="w-32 sm:w-48 rounded"
-                src={`${process.env.REACT_APP_STORAGE_UTELLS}/entertainement/days/${images}`}
+                src={`${process.env.REACT_APP_STORAGE_UTELLS}/entertainment/days/${images}`}
                 alt={name}
               />
             ) : (

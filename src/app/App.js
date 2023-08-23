@@ -21,7 +21,7 @@ import HelperProvider from './contexts/HelperContext'
  * Axios HTTP Request defaults
  */
 axios.defaults.baseURL =
-  process.env.REACT_APP_NODE_ENV === 'production'
+  process.env.REACT_APP_NODE_ENV === 'development'
     ? 'https://api.utells.com'
     : 'http://localhost:8000'
 
