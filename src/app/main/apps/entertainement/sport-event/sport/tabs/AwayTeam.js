@@ -1,10 +1,13 @@
+import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
+
+import { Controller, useFormContext } from 'react-hook-form'
+
 import { orange } from '@mui/material/colors'
 import { lighten, styled } from '@mui/material/styles'
 import clsx from 'clsx'
-import { Controller, useFormContext } from 'react-hook-form'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import Box from '@mui/material/Box'
 import { useParams } from 'react-router-dom'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
 
 const Root = styled('div')(({ theme }) => ({
   '& .productImageFeaturedStar': {
@@ -43,21 +46,84 @@ const Root = styled('div')(({ theme }) => ({
   },
 }))
 
-function AwayImageTab(props) {
+function TimingTab(props) {
+  const methods = useFormContext()
+  const { control, getValues } = methods
+
+  return (
+    <div>
+      <Controller
+        name="lots_teams"
+        control={control}
+        render={({ field }) => (
+          <FormControl fullWidth className="mt-8 mb-16">
+            <InputLabel id="demo-simple-select-label">Does an Away team exists ?</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="lots_teams"
+              label="Visibility"
+              placeholder="Select setting"
+              value={field.value}
+              onChange={field.onChange}
+            >
+              <MenuItem value={0} className="flex items-center gap-4">
+                <FuseSvgIcon className="text-red" size={20}>
+                  heroicons-outline:minus-circle
+                </FuseSvgIcon>
+                No Away Team
+              </MenuItem>
+              <MenuItem value={1} className="flex items-center gap-4">
+                <FuseSvgIcon className="text-green" size={20}>
+                  heroicons-outline:minus-circle
+                </FuseSvgIcon>
+                Away Team
+              </MenuItem>
+            </Select>
+          </FormControl>
+        )}
+      />
+
+      {getValues('lots_teams') === 1 && (
+        <>
+          <Controller
+            name="away_team_name"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                className="mt-8 mb-16"
+                required
+                autoFocus
+                id="away_team_name"
+                variant="outlined"
+                fullWidth
+              />
+            )}
+          />
+
+          <ImagesTab />
+        </>
+      )}
+    </div>
+  )
+}
+
+export default TimingTab
+
+function ImagesTab(props) {
   const methods = useFormContext()
   const { productId } = useParams()
   const { control, watch } = methods
 
-  const images = watch('sport.sport_event_away_image')
+  const images = watch('away_team_logo')
 
-  /* log the away image */
-  console.log('AwayImageTab: images:', images)
+  console.table('images => ', images)
 
   return (
     <Root>
       <div className="flex justify-center sm:justify-start flex-wrap -mx-16">
         <Controller
-          name="sport.sport_event_away_image"
+          name="away_team_logo"
           control={control}
           render={({ field: { onChange, value } }) => (
             <Box
@@ -68,13 +134,13 @@ function AwayImageTab(props) {
                     : lighten(theme.palette.background.default, 0.02),
               }}
               component="label"
-              htmlFor="away-button-file"
-              className="awayImageUpload flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer shadow hover:shadow-lg"
+              htmlFor="update-away-button-file"
+              className="productImageUpload flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer shadow hover:shadow-lg"
             >
               <input
                 accept="image/*"
                 className="hidden"
-                id="away-button-file"
+                id="update-away-button-file"
                 type="file"
                 multiple
                 onChange={async (e) => {
@@ -111,7 +177,7 @@ function AwayImageTab(props) {
 
         {productId !== 'new' ? (
           <Controller
-            name="sport.sport_event_away_image"
+            name="away_team_logo"
             control={control}
             defaultValue=""
             render={({ field: { onChange } }) => {
@@ -120,8 +186,10 @@ function AwayImageTab(props) {
               if (typeof images !== 'string' && images !== null) {
                 fileReader.onload = () => {
                   const dataUrl = fileReader.result
-                  const imgElement = document.getElementById(`away-image-reader-update`)
-                  imgElement.src = dataUrl
+                  const imgElement = document.getElementById(`update-away-image-reader-update`)
+                  if (imgElement) {
+                    imgElement.src = dataUrl
+                  }
                 }
 
                 fileReader.readAsDataURL(images)
@@ -143,7 +211,7 @@ function AwayImageTab(props) {
 
                   <img
                     className="max-w-none w-auto h-full"
-                    src={`${process.env.REACT_APP_URL}/storage/entertainement/sport/${images}`}
+                    src={`${process.env.REACT_APP_URL}/storage/entertainment/sports/${images}`}
                     alt="product"
                   />
                 </div>
@@ -161,20 +229,14 @@ function AwayImageTab(props) {
                     heroicons-solid:star
                   </FuseSvgIcon>
 
-                  {images !== null ? (
-                    <img id="away-image-reader-update" alt="point interest" />
-                  ) : (
-                    <div className="flex items-center justify-center w-128 h-128 text-gray-500">
-                      No image available
-                    </div>
-                  )}
+                  <img id="update-away-image-reader-update" alt="point interest" />
                 </div>
               )
             }}
           />
         ) : (
           <Controller
-            name="sport.sport_event_away_image"
+            name="away_team_logo"
             control={control}
             defaultValue=""
             render={({ field: { onChange } }) => {
@@ -183,8 +245,10 @@ function AwayImageTab(props) {
               if (images) {
                 fileReader.onload = () => {
                   const dataUrl = fileReader.result
-                  const imgElement = document.getElementById(`away-image-reader`)
-                  imgElement.src = dataUrl
+                  const imgElement = document.getElementById(`update-away-image-reader`)
+                  if (imgElement) {
+                    imgElement.src = dataUrl
+                  }
                 }
 
                 fileReader.readAsDataURL(images)
@@ -196,13 +260,13 @@ function AwayImageTab(props) {
                     role="button"
                     tabIndex={0}
                     className={clsx(
-                      'away-image-reader productImageItem flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer outline-none shadow hover:shadow-lg'
+                      'update-away-image-reader productImageItem flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer outline-none shadow hover:shadow-lg'
                     )}
                   >
                     <FuseSvgIcon className="productImageFeaturedStar">
                       heroicons-solid:x
                     </FuseSvgIcon>
-                    <img id="away-image-reader" alt="point interest" />
+                    <img id="update-away-image-reader" alt="point interest" />
                   </div>
                 )
               }
@@ -214,5 +278,3 @@ function AwayImageTab(props) {
     </Root>
   )
 }
-
-export default AwayImageTab

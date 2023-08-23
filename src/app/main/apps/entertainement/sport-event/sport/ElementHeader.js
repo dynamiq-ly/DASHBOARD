@@ -5,9 +5,9 @@ import { motion } from 'framer-motion'
 import { useFormContext } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { useHelperContext } from 'src/app/contexts/HelperContext'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { useHelperContext } from 'src/app/contexts/HelperContext'
 import { removeProduct, saveProduct } from '../../store/sportSlice'
 
 function ElementHeader(props) {

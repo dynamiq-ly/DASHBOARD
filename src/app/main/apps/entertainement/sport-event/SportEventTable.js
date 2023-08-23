@@ -1,5 +1,3 @@
-import FuseScrollbars from '@fuse/core/FuseScrollbars'
-import _ from '@lodash'
 import Checkbox from '@mui/material/Checkbox'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -12,6 +10,8 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
+import _ from '@lodash'
+import FuseScrollbars from '@fuse/core/FuseScrollbars'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
@@ -42,9 +42,7 @@ function SportEventTable(props) {
   useEffect(() => {
     if (searchText.length !== 0) {
       setData(
-        _.filter(products, (item) =>
-          item.entertainement_name.toLowerCase().includes(searchText.toLowerCase())
-        )
+        _.filter(products, (item) => item.slug.toLowerCase().includes(searchText.toLowerCase()))
       )
       setPage(0)
     } else {
@@ -151,8 +149,8 @@ function SportEventTable(props) {
               [
                 (o) => {
                   switch (order.id) {
-                    case 'entertainement_name': {
-                      return o[order.entertainement_name]
+                    case 'slug': {
+                      return o[order.slug]
                     }
                     default: {
                       return o[order.id]
@@ -185,35 +183,27 @@ function SportEventTable(props) {
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.entertainement_name}
+                      {n.slug}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      <StatusBade name={n.sport.sport_type} color="bg-blue text-white" />
+                      <StatusBade name={n.category} color="bg-blue text-white" />
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.entertainement_summary}
+                      {n.location}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.entertainement_location}
+                      {n.day}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      <StatusBade name={n.sport.sport_event} color="bg-black text-white" />
+                      {n.start_time} - {n.end_time}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.timings[0].date}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.timings[0].time_start} - {n.timings[0].time_end}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.isVisible ? (
+                      {n.lots_teams ? (
                         <FuseSvgIcon className="text-green" size={20}>
                           heroicons-outline:check-circle
                         </FuseSvgIcon>

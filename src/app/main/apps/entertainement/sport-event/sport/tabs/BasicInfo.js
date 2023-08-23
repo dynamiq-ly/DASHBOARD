@@ -1,7 +1,7 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { Controller, useFormContext } from 'react-hook-form'
 import { useHelperContext } from 'src/app/contexts/HelperContext'
+import { BannerImage } from './ImageTab'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
@@ -12,16 +12,16 @@ function BasicInfoTab(props) {
   return (
     <div>
       <Controller
-        name="entertainement_name"
+        name="location"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
             required
-            label="Name"
+            label="Location"
             autoFocus
-            id="entertainement_name"
+            id="location"
             variant="outlined"
             fullWidth
           />
@@ -29,14 +29,14 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="entertainement_summary"
+        name="category"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            id="entertainement_summary"
-            label="Summary"
+            id="category"
+            label="Category"
             required
             type="text"
             variant="outlined"
@@ -46,48 +46,23 @@ function BasicInfoTab(props) {
       />
 
       <Controller
-        name="entertainement_description"
+        name="slug"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             className="mt-8 mb-16"
-            id="entertainement_description"
-            label="Description"
+            id="slug"
+            label="Title"
             required
             type="text"
-            multiline
-            rows={5}
             variant="outlined"
             fullWidth
           />
         )}
       />
 
-      <Controller
-        name="entertainement_location"
-        control={control}
-        render={({ field }) => (
-          <FormControl fullWidth className="mt-8 mb-16">
-            <InputLabel id="demo-simple-select-label">Location</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="entertainement_location"
-              label="Age Group"
-              placeholder="Select Location"
-              value={field.value}
-              onChange={field.onChange}
-            >
-              <MenuItem value="NOT REGISTRED YET">NOT REGISTRED YET</MenuItem>
-              {locations.map((location, index) => (
-                <MenuItem key={index} value={location.location_name}>
-                  {location.location_name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        )}
-      />
+      <BannerImage />
     </div>
   )
 }
