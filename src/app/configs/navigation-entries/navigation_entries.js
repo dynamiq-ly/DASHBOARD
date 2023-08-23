@@ -101,16 +101,6 @@ export const entertainement = {
   icon: 'material-outline:directions_run',
   children: [
     {
-      id: 'entertainement-collapse.calendar',
-      title: 'Calendar',
-      type: 'item',
-      url: 'entertainement/calendar',
-      badge: {
-        title: 0,
-        classes: 'w-20 h-20 bg-fuchsia text-white rounded-full',
-      },
-    },
-    {
       id: 'entertainement-collapse.day-activities',
       title: 'Day Activities',
       type: 'item',

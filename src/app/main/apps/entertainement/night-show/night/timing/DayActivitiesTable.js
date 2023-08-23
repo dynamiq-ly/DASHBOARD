@@ -50,7 +50,8 @@ function TimingTable(props) {
 
   return (
     <div>
-      <div className="w-full flex flex-col min-h-full">
+      {
+        data && <div className="w-full flex flex-col min-h-full">
         <FuseScrollbars className="grow overflow-x-auto">
           <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
             <DayActivitiesTableHead rowCount={data.length} />
@@ -104,7 +105,8 @@ function TimingTable(props) {
           </Table>
         </FuseScrollbars>
       </div>
-    </div>
+      }
+      </div>
   )
 }
 
