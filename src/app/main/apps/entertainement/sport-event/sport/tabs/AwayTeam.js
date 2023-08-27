@@ -8,6 +8,7 @@ import clsx from 'clsx'
 import Box from '@mui/material/Box'
 import { useParams } from 'react-router-dom'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
+import HomeTeam from './HomeTeam'
 
 const Root = styled('div')(({ theme }) => ({
   '& .productImageFeaturedStar': {
@@ -82,9 +83,10 @@ function TimingTab(props) {
           </FormControl>
         )}
       />
-
       {getValues('lots_teams') === 1 && (
         <>
+          <HomeTeam />
+
           <Controller
             name="away_team_name"
             control={control}
@@ -211,7 +213,7 @@ function ImagesTab(props) {
 
                   <img
                     className="max-w-none w-auto h-full"
-                    src={`${process.env.REACT_APP_URL}/storage/entertainment/sports/${images}`}
+                    src={`${process.env.REACT_APP_STORAGE_UTELLS}/entertainment/sports/${images}`}
                     alt="product"
                   />
                 </div>

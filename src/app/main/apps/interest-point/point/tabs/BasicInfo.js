@@ -1,5 +1,7 @@
 import TextField from '@mui/material/TextField'
 import { Controller, useFormContext } from 'react-hook-form'
+import DisponibilyTab from './DisponibilityTab'
+import CategoryTab from './CategoryTab'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
@@ -7,6 +9,9 @@ function BasicInfoTab(props) {
 
   return (
     <div>
+      <CategoryTab />
+      <DisponibilyTab />
+
       <Controller
         name="name"
         control={control}

@@ -21,7 +21,6 @@ import reducer from '../../store'
 import BasicInfoTab from './tabs/BasicInfo'
 import ImagesTab from './tabs/ImagesTab'
 import TimingTab from './tabs/TimingTab'
-import HostTabs from './tabs/HostTab'
 
 import ElementHeader from './ElementHeader'
 
@@ -152,7 +151,6 @@ function Element(props) {
             >
               <Tab className="h-64" label="Night Show Image" />
               <Tab className="h-64" label="Night Shows Information" />
-              <Tab className="h-64" label="Night Show Host" />
               <Tab
                 disabled={routeParams.productId === 'new'}
                 className="h-64"
@@ -167,12 +165,7 @@ function Element(props) {
               <div className={tabValue !== 1 ? 'hidden' : ''}>
                 <BasicInfoTab />
               </div>
-
               <div className={tabValue !== 2 ? 'hidden' : ''}>
-                <HostTabs />
-              </div>
-
-              <div className={tabValue !== 3 ? 'hidden' : ''}>
                 <TimingTab />
               </div>
             </div>

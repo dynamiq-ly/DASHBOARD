@@ -143,7 +143,7 @@ function AwayImageTab(props) {
 
                   <img
                     className="max-w-none w-auto h-full"
-                    src={`${process.env.REACT_APP_URL}/storage/entertainment/nights/shows/${images}`}
+                    src={`${process.env.REACT_APP_STORAGE_UTELLS}/entertainment/nights/shows/${images}`}
                     alt="product"
                   />
                 </div>

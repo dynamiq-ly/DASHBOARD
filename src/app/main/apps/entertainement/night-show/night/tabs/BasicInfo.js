@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField'
 import { Controller, useFormContext } from 'react-hook-form'
 import { useHelperContext } from 'src/app/contexts/HelperContext'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
+import HostTabs from './HostTab'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
@@ -169,6 +170,8 @@ function BasicInfoTab(props) {
           />
         )}
       />
+
+      <HostTabs />
     </div>
   )
 }

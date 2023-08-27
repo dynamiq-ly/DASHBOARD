@@ -2,6 +2,7 @@ import TextField from '@mui/material/TextField'
 import { Controller, useFormContext } from 'react-hook-form'
 import { useHelperContext } from 'src/app/contexts/HelperContext'
 import { BannerImage } from './ImageTab'
+import TimingTab from './TimingTab'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
@@ -63,6 +64,8 @@ function BasicInfoTab(props) {
       />
 
       <BannerImage />
+
+      <TimingTab />
     </div>
   )
 }

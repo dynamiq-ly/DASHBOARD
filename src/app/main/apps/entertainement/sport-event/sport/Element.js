@@ -19,9 +19,7 @@ import { getProduct, newProduct, resetProduct, selectProduct } from '../../store
 import reducer from '../../store'
 
 import BasicInfoTab from './tabs/BasicInfo'
-import HomeTeam from './tabs/HomeTeam'
 import AwayTeam from './tabs/AwayTeam'
-import TimingTab from './tabs/TimingTab'
 
 import ElementHeader from './ElementHeader'
 
@@ -151,23 +149,13 @@ function Element(props) {
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
               <Tab className="h-64" label="Basic Info" />
-              <Tab className="h-64" label="Sport Timing" />
-              <Tab className="h-64" label="Home Team Information" />
-              <Tab className="h-64" label="Away Team Information" />
+              <Tab className="h-64" label="Team Information" />
             </Tabs>
             <div className="p-16  max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
               </div>
               <div className={tabValue !== 1 ? 'hidden' : ''}>
-                <TimingTab />
-              </div>
-
-              <div className={tabValue !== 2 ? 'hidden' : ''}>
-                <HomeTeam />
-              </div>
-
-              <div className={tabValue !== 3 ? 'hidden' : ''}>
                 <AwayTeam />
               </div>
             </div>

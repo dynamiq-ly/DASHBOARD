@@ -6,7 +6,7 @@ function DisponibilyTab(props) {
   const { control } = methods
 
   return (
-    <div>
+    <div className="mt-8 mb-16">
       <Controller
         name="visible"
         control={control}

@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel } from '@mui/material'
+import { Alert, AlertTitle, Checkbox, FormControlLabel } from '@mui/material'
 import TextField from '@mui/material/TextField'
 
 import { Controller, useFormContext } from 'react-hook-form'
@@ -27,6 +27,22 @@ function BasicInfoTab(props) {
             )
           }}
         />
+      )}
+
+      {getValues('menu_a_la_carte') && (
+        <Alert severity="info">
+          <AlertTitle>PDF file exsits</AlertTitle>A file already uploaded{' '}
+          <a
+            href={`${process.env.REACT_APP_STORAGE_UTELLS}/pdf/menus/bar/${getValues(
+              'menu_a_la_carte'
+            )}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <strong>check it out!</strong>
+          </a>{' '}
+          You can override it by uploading a new oen
+        </Alert>
       )}
 
       <Controller

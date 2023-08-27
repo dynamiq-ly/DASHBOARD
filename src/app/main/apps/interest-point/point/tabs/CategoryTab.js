@@ -15,7 +15,7 @@ function CategoryTab(props) {
   }, []) // eslint-disable-line
 
   return (
-    <div>
+    <div className="mt-8 mb-24">
       <Controller
         name="point_id"
         control={control}

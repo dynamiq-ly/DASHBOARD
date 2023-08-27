@@ -62,7 +62,7 @@ const productSlice = createSlice({
           website: '',
           description: '',
           visible: 1,
-          point_id: 0,
+          point_id: '',
           images: [],
           sunday: '',
           monday: '',

@@ -20,9 +20,8 @@ import reducer from '../store'
 
 import BasicInfoTab from './tabs/BasicInfo'
 import ImagesTab from './tabs/ImagesTab'
-import TimingTab from './tabs/TimingTab'
+
 import PDFTab from './tabs/FileTab'
-import ConfigTab from './tabs/ConfigTab'
 import Staff from './tabs/Staff'
 import Menu from './tabs/Menu'
 
@@ -154,17 +153,17 @@ function Element(props) {
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
               <Tab className="h-64" label="Bar Info" />
-              <Tab className="h-64" label="working Hours" />
               <Tab className="h-64" label="Menu Carte PDF" />
               <Tab className="h-64" label="Images" />
-              <Tab className="h-64" label="Configuration" />
               <Tab
                 disabled={routeParams.productId === 'new'}
                 className="h-64"
                 label="Staff Manager"
               />
               <Tab
-                disabled={routeParams.productId === 'new' || product && product.menu_a_la_carte !== null}
+                disabled={
+                  routeParams.productId === 'new' || (product && product.menu_a_la_carte !== null)
+                }
                 className="h-64"
                 label="Menu Manager"
               />
@@ -173,29 +172,20 @@ function Element(props) {
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
               </div>
-
               <div className={tabValue !== 1 ? 'hidden' : ''}>
-                <TimingTab />
-              </div>
-
-              <div className={tabValue !== 2 ? 'hidden' : ''}>
                 <PDFTab />
               </div>
 
-              <div className={tabValue !== 3 ? 'hidden' : ''}>
+              <div className={tabValue !== 2 ? 'hidden' : ''}>
                 <ImagesTab />
               </div>
 
+              <div className={tabValue !== 3 ? 'hidden' : ''}>
+                {routeParams.productId !== 'new' && <Staff />}
+              </div>
+
               <div className={tabValue !== 4 ? 'hidden' : ''}>
-                <ConfigTab />
-              </div>
-
-              <div className={tabValue !== 5 ? 'hidden' : ''}>
-                {routeParams.productId !== 'new' && <Staff/>}
-              </div>
-
-              <div className={tabValue !== 6 ? 'hidden' : ''}>
-                {routeParams.productId !== 'new' && <Menu/>}
+                {routeParams.productId !== 'new' && <Menu />}
               </div>
             </div>
           </>

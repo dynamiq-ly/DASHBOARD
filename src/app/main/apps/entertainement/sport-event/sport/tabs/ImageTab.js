@@ -145,7 +145,7 @@ function BannerImage(props) {
 
                   <img
                     className="max-w-none w-auto h-full"
-                    src={`${process.env.REACT_APP_URL}/storage/entertainment/sports/${images}`}
+                    src={`${process.env.REACT_APP_STORAGE_UTELLS}/entertainment/sports/${images}`}
                     alt="product"
                   />
                 </div>
@@ -292,7 +292,7 @@ function HomeTeamImage(props) {
             render={({ field: { onChange } }) => {
               const fileReader = new FileReader()
 
-              if (typeof images !== 'string') {
+              if (typeof images !== 'string' && images !== null) {
                 fileReader.onload = () => {
                   const dataUrl = fileReader.result
                   const imgElement = document.getElementById(`image-reader-update`)
@@ -320,7 +320,7 @@ function HomeTeamImage(props) {
 
                   <img
                     className="max-w-none w-auto h-full"
-                    src={`${process.env.REACT_APP_URL}/storage/entertainment/sports/${images}`}
+                    src={`${process.env.REACT_APP_STORAGE_UTELLS}/entertainment/sports/${images}`}
                     alt="product"
                   />
                 </div>

@@ -63,21 +63,6 @@ function ElementHeader(props) {
 
         <div className="flex items-center max-w-full">
           <motion.div
-            className="hidden sm:flex"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1, transition: { delay: 0.3 } }}
-          >
-            {images !== 'null' && images !== null ? (
-              <img className="w-32 sm:w-48 rounded" src={images} alt={name} />
-            ) : (
-              <img
-                className="w-32 sm:w-48 rounded"
-                src="assets/images/apps/ecommerce/product-image-placeholder.png"
-                alt={name}
-              />
-            )}
-          </motion.div>
-          <motion.div
             className="flex flex-col items-center sm:items-start min-w-0 mx-8 sm:mx-16"
             initial={{ x: -20 }}
             animate={{ x: 0, transition: { delay: 0.3 } }}
