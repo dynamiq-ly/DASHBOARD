@@ -1,10 +1,12 @@
 import TextField from '@mui/material/TextField'
 
 import { Controller, useFormContext } from 'react-hook-form'
+import { Alert, AlertTitle } from '@mui/material'
+import ImagesTab from './ImagesTab'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
-  const { control } = methods
+  const { control, getValues } = methods
 
   return (
     <div>
@@ -60,6 +62,20 @@ function BasicInfoTab(props) {
           />
         )}
       />
+
+      {getValues('terms') && (
+        <Alert severity="info">
+          <AlertTitle>PDF file exsits</AlertTitle>A file already uploaded{' '}
+          <a
+            href={`${process.env.REACT_APP_STORAGE_UTELLS}/pdf/gym/${getValues('terms')}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <strong>check it out!</strong>
+          </a>{' '}
+          You can override it by uploading a new oen
+        </Alert>
+      )}
 
       <Controller
         name="terms"
@@ -132,6 +148,8 @@ function BasicInfoTab(props) {
           />
         )}
       />
+
+      <ImagesTab />
     </div>
   )
 }

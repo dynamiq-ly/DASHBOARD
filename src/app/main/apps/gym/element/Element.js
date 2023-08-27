@@ -20,7 +20,6 @@ import { getProduct, newProduct, resetProduct, selectProduct } from '../store/el
 import reducer from '../store'
 
 import BasicInfoTab from './tabs/BasicInfo'
-import ImagesTab from './tabs/ImagesTab'
 import ElementHeader from './ElementHeader'
 
 /**
@@ -149,21 +148,27 @@ function Element(props) {
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
               <Tab className="h-64" label="Basic Info" />
-              <Tab className="h-64" label="Images Tab" />
-              {routeParams.productId !== 'new' && <Tab className="h-64" label="Folder" />}
+              <Tab disabled={routeParams.productId === 'new'} className="h-64" label="Staff" />
+              <Tab
+                disabled={routeParams.productId === 'new'}
+                className="h-64"
+                label="Equipements"
+              />
             </Tabs>
             <div className="p-16  max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
               </div>
 
-              <div className={tabValue !== 1 ? 'hidden' : ''}>
-                <ImagesTab />
-              </div>
+              {routeParams.productId !== 'new' && (
+                <div className={tabValue !== 1 ? 'hidden' : ''}>
+                  <FileList title="Staff Information" data={folderList.staff} />
+                </div>
+              )}
 
               {routeParams.productId !== 'new' && (
                 <div className={tabValue !== 2 ? 'hidden' : ''}>
-                  <FileList title="Menu Catalog" data={folderList.menus} />
+                  <FileList title="Equipements" data={folderList.equipement} />
                 </div>
               )}
             </div>
@@ -176,12 +181,14 @@ function Element(props) {
 }
 
 const folderList = {
-  menus: [
+  staff: [
     {
       id: 'staffs',
       type: 'material-twotone:supervised_user_circle',
       contents: 'Staff',
     },
+  ],
+  equipement: [
     {
       id: 'equipements',
       type: 'material-twotone:monitor_weight',

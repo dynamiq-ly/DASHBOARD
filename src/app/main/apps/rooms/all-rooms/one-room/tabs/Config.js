@@ -8,7 +8,7 @@ function CategoryTab(props) {
   const { control } = methods
 
   return (
-    <div className="flex flex-col gap-32">
+    <div className="flex flex-col gap-32 mt-8 mb-16">
       <Controller
         name="config.visible"
         control={control}

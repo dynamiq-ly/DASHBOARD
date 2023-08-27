@@ -26,8 +26,6 @@ import RoomCategoryHeader from './ElementHeader'
 import BasicInfoTab from './tabs/BasicInfo'
 import PriceTab from './tabs/Price'
 import ImageTab from './tabs/ImageTab'
-import Category from './tabs/Category'
-import Config from './tabs/Config'
 import Addons from './tabs/Addons'
 
 /**
@@ -162,14 +160,8 @@ function RoomCategory(props) {
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
               <Tab className="h-64" label="Room Information" />
-              <Tab
-                className="h-64"
-                label="Room Category"
-                disabled={routeParams.productId !== 'new'}
-              />
               <Tab className="h-64" label="Room Pricing" />
               <Tab className="h-64" label="Room Images" />
-              <Tab className="h-64" label="Room Config" />
               <Tab
                 className="h-64"
                 label="Room Addons"
@@ -186,21 +178,16 @@ function RoomCategory(props) {
                 <BasicInfoTab />
               </div>
               <div className={tabValue !== 1 ? 'hidden' : ''}>
-                <Category />
-              </div>
-              <div className={tabValue !== 2 ? 'hidden' : ''}>
                 <PriceTab />
               </div>
-              <div className={tabValue !== 3 ? 'hidden' : ''}>
+              <div className={tabValue !== 2 ? 'hidden' : ''}>
                 <ImageTab />
               </div>
-              <div className={tabValue !== 4 ? 'hidden' : ''}>
-                <Config />
-              </div>
-              <div className={tabValue !== 5 ? 'hidden' : ''}>
+
+              <div className={tabValue !== 3 ? 'hidden' : ''}>
                 {routeParams.productId !== 'new' && <Addons />}
               </div>
-              <div className={tabValue !== 6 ? 'hidden' : ''}>
+              <div className={tabValue !== 4 ? 'hidden' : ''}>
                 <Box
                   sx={{
                     backgroundColor: (theme) =>
