@@ -15,7 +15,6 @@ function ScheduleTab(props) {
             {...field}
             className="mt-8 mb-16"
             label="Sunday"
-            autoFocus
             id="schedule.sunday"
             variant="outlined"
             fullWidth
@@ -30,7 +29,6 @@ function ScheduleTab(props) {
             {...field}
             className="mt-8 mb-16"
             label="Monday"
-            autoFocus
             id="schedule.monday"
             variant="outlined"
             fullWidth
@@ -45,7 +43,6 @@ function ScheduleTab(props) {
             {...field}
             className="mt-8 mb-16"
             label="Tuesday"
-            autoFocus
             id="schedule.tuesday"
             variant="outlined"
             fullWidth
@@ -60,7 +57,6 @@ function ScheduleTab(props) {
             {...field}
             className="mt-8 mb-16"
             label="Wednesday"
-            autoFocus
             id="schedule.wednesday"
             variant="outlined"
             fullWidth
@@ -75,7 +71,6 @@ function ScheduleTab(props) {
             {...field}
             className="mt-8 mb-16"
             label="Thursday"
-            autoFocus
             id="schedule.thursday"
             variant="outlined"
             fullWidth
@@ -90,7 +85,6 @@ function ScheduleTab(props) {
             {...field}
             className="mt-8 mb-16"
             label="Friday"
-            autoFocus
             id="schedule.friday"
             variant="outlined"
             fullWidth
@@ -105,7 +99,6 @@ function ScheduleTab(props) {
             {...field}
             className="mt-8 mb-16"
             label="Saturday"
-            autoFocus
             id="schedule.saturday"
             variant="outlined"
             fullWidth

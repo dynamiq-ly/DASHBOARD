@@ -29,8 +29,12 @@ import ImageTab from './tabs/ImageTab'
 const schema = yup.object().shape({
   name: yup
     .string()
-    .required('You must enter a product name')
-    .min(5, 'The product name must be at least 5 characters'),
+    .required('You Point name is required')
+    .min(5, 'The Point name should be at least 5 characters'),
+  location: yup
+    .string()
+    .required('You must enter a The textual location')
+    .min(10, 'The location must be at least 5 characters'),
 })
 
 function Point(props) {

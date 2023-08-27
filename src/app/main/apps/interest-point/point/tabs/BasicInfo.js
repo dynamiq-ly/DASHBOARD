@@ -5,7 +5,9 @@ import CategoryTab from './CategoryTab'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
-  const { control } = methods
+  const { control, formState } = methods
+
+  const { errors } = formState
 
   return (
     <div>
@@ -25,6 +27,8 @@ function BasicInfoTab(props) {
             id="name"
             variant="outlined"
             fullWidth
+            error={!!errors.name}
+            helperText={errors?.name?.message}
           />
         )}
       />
@@ -43,6 +47,8 @@ function BasicInfoTab(props) {
             id="location"
             variant="outlined"
             fullWidth
+            error={!!errors.location}
+            helperText={errors?.location?.message}
           />
         )}
       />

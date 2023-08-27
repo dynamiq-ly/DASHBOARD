@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Button } from '@mui/material'
+import { Button, Checkbox } from '@mui/material'
 import FuseScrollbars from '@fuse/core/FuseScrollbars'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
@@ -20,6 +20,8 @@ function TimingTable(props) {
 
   const { productId } = useParams()
   const navigate = useNavigate()
+
+  const [selected, setSelected] = useState([])
 
   useEffect(() => {
     axios
@@ -46,6 +48,18 @@ function TimingTable(props) {
           .then(() => setLoading(false))
       )
       .then(() => setLoading(false))
+  }
+
+  function handleSelectAllClick(event) {
+    if (event.target.checked) {
+      setSelected(data.map((n) => n.id))
+      return
+    }
+    setSelected([])
+  }
+
+  function handleDeselect() {
+    setSelected([])
   }
 
   return (
@@ -86,6 +100,8 @@ function TimingTable(props) {
                       component="th"
                       scope="row"
                     >
+                      <Checkbox />
+
                       <Button
                         variant="contained"
                         color="secondary"
