@@ -6,7 +6,9 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
-  const { control } = methods
+  const { control, formState } = methods
+
+  const { errors } = formState
 
   return (
     <div>
@@ -23,6 +25,8 @@ function BasicInfoTab(props) {
             id="title"
             variant="outlined"
             fullWidth
+            error={!!errors.title}
+            helperText={errors?.title?.message}
           />
         )}
       />
@@ -40,6 +44,8 @@ function BasicInfoTab(props) {
             id="type"
             variant="outlined"
             fullWidth
+            error={!!errors.type}
+            helperText={errors?.type?.message}
           />
         )}
       />
@@ -57,6 +63,8 @@ function BasicInfoTab(props) {
             id="location"
             variant="outlined"
             fullWidth
+            error={!!errors.location}
+            helperText={errors?.location?.message}
           />
         )}
       />
@@ -74,6 +82,8 @@ function BasicInfoTab(props) {
             id="phone_number"
             variant="outlined"
             fullWidth
+            error={!!errors.phone_number}
+            helperText={errors?.phone_number?.message}
           />
         )}
       />
@@ -93,6 +103,8 @@ function BasicInfoTab(props) {
             id="description"
             variant="outlined"
             fullWidth
+            error={!!errors.description}
+            helperText={errors?.description?.message}
           />
         )}
       />
@@ -111,6 +123,8 @@ function BasicInfoTab(props) {
             id="timing_open"
             variant="outlined"
             fullWidth
+            error={!!errors.timing_open}
+            helperText={errors?.timing_open?.message}
           />
         )}
       />
@@ -129,6 +143,8 @@ function BasicInfoTab(props) {
             id="timing_close"
             variant="outlined"
             fullWidth
+            error={!!errors.timing_close}
+            helperText={errors?.timing_close?.message}
           />
         )}
       />

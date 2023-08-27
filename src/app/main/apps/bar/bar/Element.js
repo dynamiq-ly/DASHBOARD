@@ -31,10 +31,35 @@ import ElementHeader from './ElementHeader'
  * Form Validation Schema
  */
 const schema = yup.object().shape({
-  name: yup
+  title: yup
     .string()
-    .required('You must enter a product name')
-    .min(5, 'The product name must be at least 5 characters'),
+    .required('You must enter a Bar name')
+    .min(5, 'The Bar name must be at least 5 characters'),
+  type: yup
+    .string()
+    .required('You must enter a Bar Type')
+    .min(5, 'The Bar type must be at least 5 characters'),
+  location: yup
+    .string()
+    .required('You must enter a Bar Location')
+    .min(5, 'The Bar Location must be at least 5 characters'),
+  phone_number: yup
+    .string()
+    .required('Phone number is required')
+    .matches(/^\+/, 'Phone number must start with +')
+    .min(6, 'The Phone number must be at least 6 characters'),
+  description: yup
+    .string()
+    .required('You must enter a description')
+    .min(52, 'Too short should at least be 52 characters'),
+  timing_open: yup.string().required('You must enter the opening time'),
+  timing_close: yup
+    .string()
+    .required('You must enter the closing time')
+    .test('time-check', 'Closing time must be greater than opening time', function (value) {
+      const { timing_open: openTime } = this.parent
+      return openTime < value
+    }),
 })
 
 function Element(props) {
