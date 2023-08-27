@@ -106,8 +106,7 @@ function ElementHeader(props) {
           className="whitespace-nowrap mx-4"
           variant="contained"
           color="secondary"
-          disabled={_.isEmpty(dirtyFields)}
-          // disabled={_.isEmpty(dirtyFields) || !isValid}
+          disabled={_.isEmpty(dirtyFields) || !isValid}
           onClick={handleSaveProduct}
         >
           Save

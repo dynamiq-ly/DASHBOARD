@@ -6,7 +6,9 @@ import ImagesTab from './ImagesTab'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
-  const { control, getValues } = methods
+  const { control, getValues, formState } = methods
+
+  const { errors } = formState
 
   return (
     <div>
@@ -23,6 +25,8 @@ function BasicInfoTab(props) {
             id="name"
             variant="outlined"
             fullWidth
+            error={!!errors.name}
+            helperText={errors?.name?.message}
           />
         )}
       />
@@ -40,6 +44,8 @@ function BasicInfoTab(props) {
             id="location"
             variant="outlined"
             fullWidth
+            error={!!errors.location}
+            helperText={errors?.location?.message}
           />
         )}
       />
@@ -59,6 +65,8 @@ function BasicInfoTab(props) {
             id="description"
             variant="outlined"
             fullWidth
+            error={!!errors.description}
+            helperText={errors?.description?.message}
           />
         )}
       />
@@ -128,6 +136,8 @@ function BasicInfoTab(props) {
             id="timing-open"
             variant="outlined"
             fullWidth
+            error={!!errors['timing-open']}
+            helperText={errors['timing-open']?.message}
           />
         )}
       />
@@ -145,6 +155,8 @@ function BasicInfoTab(props) {
             id="timing-close"
             variant="outlined"
             fullWidth
+            error={!!errors['timing-close']}
+            helperText={errors['timing-close']?.message}
           />
         )}
       />

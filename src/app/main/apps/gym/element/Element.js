@@ -28,8 +28,26 @@ import ElementHeader from './ElementHeader'
 const schema = yup.object().shape({
   name: yup
     .string()
-    .required('You must enter a product name')
-    .min(5, 'The product name must be at least 5 characters'),
+    .required('Gym name is required')
+    .min(5, 'The Gym name must be at least 5 characters'),
+  location: yup
+    .string()
+    .required('You must enter a The textual location')
+    .min(5, 'The location must be at least 5 characters'),
+
+  description: yup
+    .string()
+    .required('You must enter a description')
+    .min(52, 'Too short should at least be 52 characters'),
+
+  'timing-open': yup.string().required('You must enter the opening time'),
+  'timing-close': yup
+    .string()
+    .required('You must enter the closing time')
+    .test('time-check', 'Closing time must be greater than opening time', function (value) {
+      const { 'timing-open': openTime } = this.parent
+      return openTime < value
+    }),
 })
 
 function Element(props) {
