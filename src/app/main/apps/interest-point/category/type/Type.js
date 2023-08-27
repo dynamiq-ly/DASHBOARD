@@ -28,7 +28,7 @@ const schema = yup.object().shape({
   name: yup
     .string()
     .required('You must enter a product name')
-    .min(5, 'The product name must be at least 5 characters'),
+    .min(3, 'The product name must be at least 3 characters'),
 })
 
 function Type(props) {

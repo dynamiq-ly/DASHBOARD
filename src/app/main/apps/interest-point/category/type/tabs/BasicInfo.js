@@ -5,7 +5,9 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
-  const { control } = methods
+  const { control, formState } = methods
+
+  const { errors } = formState
 
   return (
     <div>
@@ -22,6 +24,8 @@ function BasicInfoTab(props) {
             id="name"
             variant="outlined"
             fullWidth
+            error={!!errors.name}
+            helperText={errors?.name?.message}
           />
         )}
       />
