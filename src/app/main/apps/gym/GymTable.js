@@ -40,14 +40,7 @@ function ConnectivityTable(props) {
 
   useEffect(() => {
     if (searchText.length !== 0) {
-      setData(
-        _.filter(
-          products,
-          (item) =>
-            item.name.toLowerCase().includes(searchText.toLowerCase()) ||
-            item.location.toLowerCase().includes(searchText.toLowerCase())
-        )
-      )
+      setData(_.filter(products, (item) => item.name.toLowerCase().includes(searchText.toLowerCase()) || item.location.toLowerCase().includes(searchText.toLowerCase())))
       setPage(0)
     } else {
       setData(products)
@@ -95,10 +88,7 @@ function ConnectivityTable(props) {
     } else if (selectedIndex === selected.length - 1) {
       newSelected = newSelected.concat(selected.slice(0, -1))
     } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      )
+      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1))
     }
 
     setSelected(newSelected)
@@ -114,7 +104,7 @@ function ConnectivityTable(props) {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-full">
+      <div className='flex items-center justify-center h-full'>
         <FuseLoading />
       </div>
     )
@@ -122,12 +112,8 @@ function ConnectivityTable(props) {
 
   if (data.length === 0) {
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: { delay: 0.1 } }}
-        className="flex flex-1 items-center justify-center h-full"
-      >
-        <Typography color="text.secondary" variant="h5">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.1 } }} className='flex flex-1 items-center justify-center h-full'>
+        <Typography color='text.secondary' variant='h5'>
           There are no data!
         </Typography>
       </motion.div>
@@ -135,17 +121,10 @@ function ConnectivityTable(props) {
   }
 
   return (
-    <div className="w-full flex flex-col min-h-full">
-      <FuseScrollbars className="grow overflow-x-auto">
-        <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
-          <GymTableHead
-            selectedProductIds={selected}
-            order={order}
-            onSelectAllClick={handleSelectAllClick}
-            onRequestSort={handleRequestSort}
-            rowCount={data.length}
-            onMenuItemClick={handleDeselect}
-          />
+    <div className='w-full flex flex-col min-h-full'>
+      <FuseScrollbars className='grow overflow-x-auto'>
+        <Table stickyHeader className='min-w-xl' aria-labelledby='tableTitle'>
+          <GymTableHead selectedProductIds={selected} order={order} onSelectAllClick={handleSelectAllClick} onRequestSort={handleRequestSort} rowCount={data.length} onMenuItemClick={handleDeselect} />
 
           <TableBody>
             {_.orderBy(
@@ -168,77 +147,46 @@ function ConnectivityTable(props) {
               .map((n) => {
                 const isSelected = selected.indexOf(n.id) !== -1
                 return (
-                  <TableRow
-                    className="h-72 cursor-pointer"
-                    hover
-                    role="checkbox"
-                    aria-checked={isSelected}
-                    tabIndex={-1}
-                    key={n.id}
-                    selected={isSelected}
-                    onClick={(event) => handleClick(n)}
-                  >
-                    <TableCell className="w-40 md:w-64 text-center" padding="none">
-                      <Checkbox
-                        checked={isSelected}
-                        onClick={(event) => event.stopPropagation()}
-                        onChange={(event) => handleCheck(event, n.id)}
-                      />
+                  <TableRow className='h-72 cursor-pointer' hover role='checkbox' aria-checked={isSelected} tabIndex={-1} key={n.id} selected={isSelected} onClick={(event) => handleClick(n)}>
+                    <TableCell className='w-40 md:w-64 text-center' padding='none'>
+                      <Checkbox checked={isSelected} onClick={(event) => event.stopPropagation()} onChange={(event) => handleCheck(event, n.id)} />
                     </TableCell>
 
-                    <TableCell
-                      className="w-52 h-52 px-4 md:px-0"
-                      component="th"
-                      scope="row"
-                      padding="none"
-                    >
-                      <img
-                        className="w-full block rounded"
-                        alt={`${n.name}-${n.description}`}
-                        src={`${process.env.REACT_APP_STORAGE_UTELLS}/gym/thumbnails/${n.image}`}
-                      />
+                    <TableCell className='w-52 h-52 px-4 md:px-0' component='th' scope='row' padding='none'>
+                      <img className='w-full block rounded' alt={`${n.name}-${n.description}`} src={`${process.env.REACT_APP_STORAGE_UTELLS}/gym/thumbnails/${n.image}`} />
                     </TableCell>
 
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                    <TableCell className='p-4 md:p-16 truncate' component='th' scope='row'>
                       {n.name}
                     </TableCell>
 
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.location}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {`${n.description.slice(0, 75)}...`}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.equipements.length}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.staff.length}
-                    </TableCell>
-
-                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                    <TableCell className='p-4 md:p-16 truncate' component='th' scope='row'>
                       {n['timing-open']} {n['timing-close']}
                     </TableCell>
 
-                    <TableCell className="p-4 md:p-16" component="th" scope="row">
+                    <TableCell className='p-4 md:p-16 truncate' component='th' scope='row'>
+                      {n.location}
+                    </TableCell>
+
+                    <TableCell className='p-4 md:p-16 truncate' component='th' scope='row'>
+                      {`${n.description.slice(0, 75)}...`}
+                    </TableCell>
+
+                    <TableCell className='p-4 md:p-16 truncate' component='th' scope='row'>
+                      {n.staff.length}
+                    </TableCell>
+
+                    <TableCell className='p-4 md:p-16 truncate' component='th' scope='row'>
+                      {n.equipements.length}
+                    </TableCell>
+
+                    <TableCell className='p-4 md:p-16' component='th' scope='row'>
                       {n.terms ? (
-                        <Link
-                          component="a"
-                          variant="button"
-                          className="px-8 py-4 rounded"
-                          href={`${process.env.REACT_APP_STORAGE_UTELLS}/pdf/gym/${n.terms}`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
+                        <Link component='a' variant='button' className='px-8 py-4 rounded' href={`${process.env.REACT_APP_STORAGE_UTELLS}/pdf/gym/${n.terms}`} target='_blank' rel='noreferrer'>
                           {n.name} PDF LINK
                         </Link>
                       ) : (
-                        <div className="inline text-12 font-semibold py-4 px-12 rounded-full truncate bg-red-700 text-white">
-                          No Terms Uploaded
-                        </div>
+                        <div className='inline text-12 font-semibold py-4 px-12 rounded-full truncate bg-red-700 text-white'>No Terms Uploaded</div>
                       )}
                     </TableCell>
                   </TableRow>
@@ -249,8 +197,8 @@ function ConnectivityTable(props) {
       </FuseScrollbars>
 
       <TablePagination
-        className="shrink-0 border-t-1"
-        component="div"
+        className='shrink-0 border-t-1'
+        component='div'
         count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}

@@ -8,69 +8,29 @@ function BasicInfoTab(props) {
 
   return (
     <div>
-      <Controller
-        name="name"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            required
-            label="Gym Name"
-            autoFocus
-            id="name"
-            variant="outlined"
-            fullWidth
-          />
-        )}
-      />
+      <Controller name='name' control={control} render={({ field }) => <TextField {...field} className='mt-8 mb-16' required label='Gym Name' autoFocus id='name' variant='outlined' fullWidth />} />
 
-      <Controller
-        name="location"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            required
-            label="Gym Location"
-            autoFocus
-            id="location"
-            variant="outlined"
-            fullWidth
-          />
-        )}
-      />
+      <text>Openig Time</text>
+      <Controller name='timing-open' control={control} render={({ field }) => <TextField {...field} className='mt-8 mb-16' required autoFocus type='time' id='timing-open' variant='outlined' fullWidth />} />
 
-      <Controller
-        name="description"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            required
-            label="Gym Description"
-            autoFocus
-            multiline
-            rows={5}
-            id="description"
-            variant="outlined"
-            fullWidth
-          />
-        )}
-      />
+      <text>Closing Time</text>
+      <Controller name='timing-close' control={control} render={({ field }) => <TextField {...field} className='mt-8 mb-16' required autoFocus type='time' id='timing-close' variant='outlined' fullWidth />} />
 
+      <Controller name='location' control={control} render={({ field }) => <TextField {...field} className='mt-8 mb-16' required label='Gym Location' autoFocus id='location' variant='outlined' fullWidth />} />
+
+      <Controller name='description' control={control} render={({ field }) => <TextField {...field} className='mt-8 mb-16' required label='Gym Description' autoFocus multiline rows={5} id='description' variant='outlined' fullWidth />} />
+
+      <text>Term of use</text>
       <Controller
-        name="terms"
+        name='terms'
         control={control}
         render={({ field: { onChange, value } }) => (
           <TextField
-            id="terms"
-            className="mt-8 mb-16"
-            label="Terms"
+            id='terms'
+            className='mt-8 mb-16'
+            label='Terms'
             fullWidth
-            type="file"
+            type='file'
             onChange={async (e) => {
               function readFileAsync() {
                 return new Promise((resolve, reject) => {
@@ -95,40 +55,6 @@ function BasicInfoTab(props) {
 
               onChange(newImage)
             }}
-          />
-        )}
-      />
-
-      <Controller
-        name="timing-open"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            required
-            autoFocus
-            type="time"
-            id="timing-open"
-            variant="outlined"
-            fullWidth
-          />
-        )}
-      />
-
-      <Controller
-        name="timing-close"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            required
-            autoFocus
-            type="time"
-            id="timing-close"
-            variant="outlined"
-            fullWidth
           />
         )}
       />

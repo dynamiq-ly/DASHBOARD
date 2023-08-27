@@ -33,6 +33,13 @@ const rows = [
     sort: true,
   },
   {
+    id: 'timing',
+    align: 'left',
+    disablePadding: false,
+    label: 'Timing',
+    sort: true,
+  },
+  {
     id: 'Location',
     align: 'left',
     disablePadding: false,
@@ -46,14 +53,6 @@ const rows = [
     label: 'Description',
     sort: true,
   },
-
-  {
-    id: 'equipments',
-    align: 'left',
-    disablePadding: false,
-    label: 'Equipments',
-    sort: true,
-  },
   {
     id: 'staff',
     align: 'left',
@@ -62,13 +61,12 @@ const rows = [
     sort: true,
   },
   {
-    id: 'timing',
+    id: 'equipments',
     align: 'left',
     disablePadding: false,
-    label: 'Timing',
+    label: 'Equipments',
     sort: true,
   },
-
   {
     id: 'terms',
     align: 'left',
@@ -100,55 +98,35 @@ const GymTableHead = (props) => {
 
   return (
     <TableHead>
-      <TableRow className="h-48 sm:h-64">
+      <TableRow className='h-48 sm:h-64'>
         <TableCell
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? lighten(theme.palette.background.default, 0.4)
-                : lighten(theme.palette.background.default, 0.02),
+            backgroundColor: (theme) => (theme.palette.mode === 'light' ? lighten(theme.palette.background.default, 0.4) : lighten(theme.palette.background.default, 0.02)),
           }}
-          padding="none"
-          className="w-40 md:w-64 text-center z-99"
-        >
-          <Checkbox
-            indeterminate={numSelected > 0 && numSelected < props.rowCount}
-            checked={props.rowCount !== 0 && numSelected === props.rowCount}
-            onChange={props.onSelectAllClick}
-          />
+          padding='none'
+          className='w-40 md:w-64 text-center z-99'>
+          <Checkbox indeterminate={numSelected > 0 && numSelected < props.rowCount} checked={props.rowCount !== 0 && numSelected === props.rowCount} onChange={props.onSelectAllClick} />
           {numSelected > 0 && (
             <Box
-              className="flex items-center justify-center absolute w-64 top-0 ltr:left-0 rtl:right-0 mx-56 h-64 z-10 border-b-1"
+              className='flex items-center justify-center absolute w-64 top-0 ltr:left-0 rtl:right-0 mx-56 h-64 z-10 border-b-1'
               sx={{
                 background: (theme) => theme.palette.background.default,
-              }}
-            >
-              <IconButton
-                aria-owns={selectedProductsMenu ? 'selectedProductsMenu' : null}
-                aria-haspopup="true"
-                onClick={openSelectedProductsMenu}
-                size="large"
-              >
+              }}>
+              <IconButton aria-owns={selectedProductsMenu ? 'selectedProductsMenu' : null} aria-haspopup='true' onClick={openSelectedProductsMenu} size='large'>
                 <FuseSvgIcon>heroicons-outline:dots-horizontal</FuseSvgIcon>
               </IconButton>
-              <Menu
-                id="selectedProductsMenu"
-                anchorEl={selectedProductsMenu}
-                open={Boolean(selectedProductsMenu)}
-                onClose={closeSelectedProductsMenu}
-              >
+              <Menu id='selectedProductsMenu' anchorEl={selectedProductsMenu} open={Boolean(selectedProductsMenu)} onClose={closeSelectedProductsMenu}>
                 <MenuList>
                   <MenuItem
                     onClick={() => {
                       dispatch(removeMeasures(selectedProductIds))
                       props.onMenuItemClick()
                       closeSelectedProductsMenu()
-                    }}
-                  >
-                    <ListItemIcon className="min-w-40">
+                    }}>
+                    <ListItemIcon className='min-w-40'>
                       <FuseSvgIcon>heroicons-outline:trash</FuseSvgIcon>
                     </ListItemIcon>
-                    <ListItemText primary="Remove" />
+                    <ListItemText primary='Remove' />
                   </MenuItem>
                 </MenuList>
               </Menu>
@@ -159,29 +137,16 @@ const GymTableHead = (props) => {
           return (
             <TableCell
               sx={{
-                backgroundColor: (theme) =>
-                  theme.palette.mode === 'light'
-                    ? lighten(theme.palette.background.default, 0.4)
-                    : lighten(theme.palette.background.default, 0.02),
+                backgroundColor: (theme) => (theme.palette.mode === 'light' ? lighten(theme.palette.background.default, 0.4) : lighten(theme.palette.background.default, 0.02)),
               }}
-              className="p-4 md:p-16"
+              className='p-4 md:p-16'
               key={row.id}
               align={row.align}
               padding={row.disablePadding ? 'none' : 'normal'}
-              sortDirection={props.order.id === row.id ? props.order.direction : false}
-            >
+              sortDirection={props.order.id === row.id ? props.order.direction : false}>
               {row.sort && (
-                <Tooltip
-                  title="Sort"
-                  placement={row.align === 'right' ? 'bottom-end' : 'bottom-start'}
-                  enterDelay={300}
-                >
-                  <TableSortLabel
-                    active={props.order.id === row.id}
-                    direction={props.order.direction}
-                    onClick={createSortHandler(row.id)}
-                    className="font-semibold"
-                  >
+                <Tooltip title='Sort' placement={row.align === 'right' ? 'bottom-end' : 'bottom-start'} enterDelay={300}>
+                  <TableSortLabel active={props.order.id === row.id} direction={props.order.direction} onClick={createSortHandler(row.id)} className='font-semibold'>
                     {row.label}
                   </TableSortLabel>
                 </Tooltip>
