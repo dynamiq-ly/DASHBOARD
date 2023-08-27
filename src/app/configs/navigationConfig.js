@@ -68,16 +68,7 @@ const navigationConfig = [
     title: 'Facilities',
     subtitle: 'Services & Facilities',
     type: 'group',
-    children: [
-      { ...restuarant },
-      { ...bar },
-      { ...interestPoint },
-      { ...entertainement },
-      { ...excursion },
-      { ...rooms },
-      { ...gym },
-      { ...pools },
-    ],
+    children: [{ ...restuarant }, { ...bar }, { ...interestPoint }, { ...entertainement }, { ...excursion }, { ...rooms }, { ...gym }, { ...pools }],
   },
   {
     id: 'rooms services',
