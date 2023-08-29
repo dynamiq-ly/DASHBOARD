@@ -4,24 +4,33 @@
 export const application = [
   {
     id: 'file-system',
-    title: 'File Storage',
+    title: 'File system',
     type: 'item',
     icon: 'heroicons-outline:folder',
     url: 'file-system',
   },
   {
     id: 'Feature-manager',
-    title: 'Features Manager',
-    type: 'item',
-    icon: 'material-twotone:format_strikethrough',
-    url: 'routing-manager',
-  },
-  {
-    id: 'staff-manager',
-    title: 'Staff Manager',
-    type: 'item',
-    icon: 'heroicons-outline:user-group',
-    url: 'staff-manager',
+    title: 'Features',
+    type: 'collapse',
+    icon: 'heroicons-outline:adjustments',
+    children: [
+      {
+        id: 'staff-manager',
+        title: 'Staff Manager',
+        type: 'item',
+        icon: 'heroicons-outline:user-group',
+        url: 'staff-manager',
+      },
+      {
+        id: 'age-manager',
+        title: 'Age List Manager',
+        subtitle: 'A list for age utilities in features',
+        type: 'item',
+        icon: 'material-twotone:supervised_user_circle',
+        url: 'age-manager',
+      },
+    ],
   },
 ]
 

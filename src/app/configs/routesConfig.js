@@ -1,7 +1,6 @@
+import { Navigate } from 'react-router-dom'
 import FuseUtils from '@fuse/utils'
 import FuseLoading from '@fuse/core/FuseLoading'
-
-import { Navigate } from 'react-router-dom'
 
 /**
  * @description disabled for auth and protected route
@@ -52,6 +51,7 @@ import GymConfig from '../main/apps/gym/GymConfig'
 import PoolConfig from '../main/apps/swimming-pools/PoolConfig'
 import HelpCenterAppConfig from '../main/help-center/HelpCenterAppConfig'
 import FileManagerConfig from '../main/base/file-manager/FileManagerConfig'
+import AgeManagerConfig from '../main/base/age-manger/AgeManagerConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -97,6 +97,7 @@ const routeConfigs = [
   LaundryConfig,
   HelpCenterAppConfig,
   FileManagerConfig,
+  AgeManagerConfig,
 ]
 
 const routes = [
@@ -106,7 +107,7 @@ const routes = [
   ),
   {
     path: '/',
-    element: <Navigate to='/' />,
+    element: <Navigate to="/" />,
   },
   { ...RestaurantConfig.routes },
   { ...BarConfig.routes },
@@ -147,6 +148,7 @@ const routes = [
   { ...HelpCenterAppConfig.routes },
   { ...LaundryConfig.routes },
   { ...FileManagerConfig.routes },
+  { ...AgeManagerConfig.routes },
   {
     path: 'loading',
     element: <FuseLoading />,
@@ -157,7 +159,7 @@ const routes = [
   },
   {
     path: '*',
-    element: <Navigate to='404' />,
+    element: <Navigate to="404" />,
   },
 ]
 
