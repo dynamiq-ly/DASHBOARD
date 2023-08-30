@@ -19,7 +19,6 @@ import { getProduct, newProduct, resetProduct, selectProduct } from '../../store
 import reducer from '../../store'
 
 import BasicInfoTab from './tabs/BasicInfo'
-import ImagesTab from './tabs/ImagesTab'
 import TimingTab from './tabs/TimingTab'
 
 import ElementHeader from './ElementHeader'
@@ -149,23 +148,18 @@ function Element(props) {
               scrollButtons="auto"
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
-              <Tab className="h-64" label="Night Show Image" />
               <Tab className="h-64" label="Night Shows Information" />
               <Tab
                 disabled={routeParams.productId === 'new'}
                 className="h-64"
-                label="Nigh Shows Timings"
+                label="Nigh Shows Properties"
               />
             </Tabs>
-            <div className="p-16">
-              <div className={tabValue !== 0 ? 'hidden' : ''}>
-                <ImagesTab />
-              </div>
-
-              <div className={tabValue !== 1 ? 'hidden' : ''}>
+            <div>
+              <div className={tabValue !== 0 ? 'hidden' : 'p-16'}>
                 <BasicInfoTab />
               </div>
-              <div className={tabValue !== 2 ? 'hidden' : ''}>
+              <div className={tabValue !== 1 ? 'hidden' : ''}>
                 <TimingTab />
               </div>
             </div>

@@ -55,6 +55,7 @@ function AwayImageTab(props) {
 
   return (
     <Root>
+      <p>Host Image Upload</p>
       <div className="flex justify-center sm:justify-start flex-wrap -mx-16">
         <Controller
           name="host_image"

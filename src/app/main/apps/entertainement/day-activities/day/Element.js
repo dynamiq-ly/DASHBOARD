@@ -18,7 +18,6 @@ import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
 import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/daySlice'
 import reducer from '../../store'
 
-import ImagesTab from './tabs/ImagesTab'
 import BasicInfoTab from './tabs/BasicInfo'
 import TimingTab from './tabs/TimingTab'
 
@@ -149,20 +148,19 @@ function Element(props) {
               scrollButtons="auto"
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
-              <Tab className="h-64" label="Day Activity Image" />
               <Tab className="h-64" label="Day Activity Info" />
-              <Tab disabled={routeParams.productId === 'new'} className="h-64" label="Properties" />
+              <Tab
+                disabled={routeParams.productId === 'new'}
+                className="h-64"
+                label="Day Activity Properties"
+              />
             </Tabs>
             <div className="">
               <div className={tabValue !== 0 ? 'hidden' : 'p-16'}>
-                <ImagesTab />
-              </div>
-
-              <div className={tabValue !== 1 ? 'hidden' : 'p-16'}>
                 <BasicInfoTab />
               </div>
 
-              <div className={tabValue !== 2 ? 'hidden' : ''}>
+              <div className={tabValue !== 1 ? 'hidden' : ''}>
                 {routeParams.productId !== 'new' && <TimingTab />}
               </div>
             </div>

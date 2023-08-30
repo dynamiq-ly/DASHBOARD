@@ -2,6 +2,7 @@ import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { Controller, useFormContext } from 'react-hook-form'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
+import ImagesTab from './ImagesTab'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
@@ -9,6 +10,8 @@ function BasicInfoTab(props) {
 
   return (
     <div>
+      <ImagesTab />
+
       <Controller
         name="name"
         control={control}
