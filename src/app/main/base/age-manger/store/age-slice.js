@@ -2,9 +2,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const getProduct = createAsyncThunk(
-  'gyms/gym/getProduct',
-  async (gymId, { dispatch, getState }) => {
-    const response = await axios.get(`/api/gym/${gymId}`)
+  'ages/age/getProduct',
+  async (ageId, { dispatch, getState }) => {
+    const response = await axios.get(`/api/helpers/age-manager/${ageId}`)
     const data = await response.data
 
     return data === undefined ? null : data
@@ -12,35 +12,35 @@ export const getProduct = createAsyncThunk(
 )
 
 export const removeProduct = createAsyncThunk(
-  'gyms/gym/removeProduct',
+  'ages/age/removeProduct',
   async (val, { dispatch, getState }) => {
-    const { id } = getState().gyms.gym
-    await axios.delete(`/api/gym/${id}`)
+    const { id } = getState().ages.age
+    await axios.delete(`/api/helpers/age-manager/${id}`)
     return id
   }
 )
 
 export const saveProduct = createAsyncThunk(
-  'gyms/gym/saveProduct',
+  'ages/age/saveProduct',
   async (productData, { dispatch, getState }) => {
-    const { id } = getState().gyms.gym
+    const { id } = getState().ages.age
 
     if (id) {
-      const response = await axios.post(`/api/gym/${id}`, {
+      const response = await axios.post(`/api/helpers/age-manager/${id}`, {
         ...productData,
         _method: 'PATCH',
       })
       const data = await response.data
       return data
     }
-    const response = await axios.post('/api/gym', productData)
+    const response = await axios.post('/api/helpers/age-manager', productData)
     const data = await response.data
     return data
   }
 )
 
 const productSlice = createSlice({
-  name: 'gyms/gym',
+  name: 'ages/age',
   initialState: null,
   reducers: {
     resetProduct: () => null,
@@ -49,14 +49,8 @@ const productSlice = createSlice({
       prepare: (event) => ({
         payload: {
           //   id: FuseUtils.generateGUID(),
-          name: '',
-          image: '',
-          location: '',
-          terms: null,
-          description: '',
-          'timing-open': '',
-          'timing-close': '',
-          reservation: 0,
+          age: '',
+          age_group: '',
         },
       }),
     },
@@ -70,6 +64,6 @@ const productSlice = createSlice({
 
 export const { newProduct, resetProduct } = productSlice.actions
 
-export const selectProduct = ({ gyms }) => gyms.gym
+export const selectProduct = ({ ages }) => ages.age
 
 export default productSlice.reducer
