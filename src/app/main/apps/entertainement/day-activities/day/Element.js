@@ -151,11 +151,7 @@ function Element(props) {
             >
               <Tab className="h-64" label="Day Activity Image" />
               <Tab className="h-64" label="Day Activity Info" />
-              <Tab
-                disabled={routeParams.productId === 'new'}
-                className="h-64"
-                label="Day Activities Timing"
-              />
+              <Tab disabled={routeParams.productId === 'new'} className="h-64" label="Properties" />
             </Tabs>
             <div className="">
               <div className={tabValue !== 0 ? 'hidden' : 'p-16'}>
