@@ -166,7 +166,7 @@ function Element(props) {
                 <BasicInfoTab />
               </div>
 
-              <div className={tabValue !== 2 ? 'hidden' : 'p-16'}>
+              <div className={tabValue !== 2 ? 'hidden' : ''}>
                 {routeParams.productId !== 'new' && <TimingTab />}
               </div>
             </div>

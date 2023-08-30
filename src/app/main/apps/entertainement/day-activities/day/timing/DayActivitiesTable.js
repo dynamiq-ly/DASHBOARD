@@ -3,6 +3,8 @@ import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 
+import moment from 'moment'
+
 import { useEffect, useState } from 'react'
 
 import axios from 'axios'
@@ -12,6 +14,7 @@ import FuseScrollbars from '@fuse/core/FuseScrollbars'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
 
+import StatusBade from 'app/shared-components/StatusBadge'
 import DayActivitiesTableHead from './DayActivitiesTableHead'
 
 function TimingTable(props) {
@@ -80,11 +83,15 @@ function TimingTable(props) {
                     key={n.id}
                   >
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.age}
+                      <div className="flex flex-wrap items-center gap-4">
+                        {JSON.parse(n.age).map((age) => (
+                          <StatusBade key={age.id} name={age.age} color="bg-blue-700 text-white" />
+                        ))}
+                      </div>
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.day}
+                      {moment(n.day, 'YYYY-MM-DD').format('dddd Do MMMM YYYY')}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">

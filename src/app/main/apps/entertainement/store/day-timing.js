@@ -26,26 +26,14 @@ export const saveProduct = createAsyncThunk(
     const { id } = getState().entertainements.dayTiming
 
     if (id) {
-      const response = await axios.post(
-        `/api/entertainement/day-activities/timing/${id}`,
-        {
-          ...productData,
-          _method: 'PATCH',
-        },
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      )
+      const response = await axios.post(`/api/entertainement/day-activities/timing/${id}`, {
+        ...productData,
+        _method: 'PATCH',
+      })
       const data = await response.data
       return data
     }
-    const response = await axios.post('/api/entertainement/day-activities/timing', productData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    const response = await axios.post('/api/entertainement/day-activities/timing', productData)
     const data = await response.data
     return data
   }

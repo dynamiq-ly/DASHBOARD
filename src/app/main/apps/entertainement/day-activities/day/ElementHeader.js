@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import { motion } from 'framer-motion'
 import { useFormContext } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useHelperContext } from 'src/app/contexts/HelperContext'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
@@ -19,6 +19,7 @@ function ElementHeader(props) {
   const images = watch('image')
   const theme = useTheme()
   const navigate = useNavigate()
+  const routeParams = useParams()
 
   const { fetchWeeklyTimingCount } = useHelperContext()
 
@@ -94,7 +95,7 @@ function ElementHeader(props) {
         </div>
       </div>
       <motion.div
-        className="flex"
+        className="flex flex-1"
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0, transition: { delay: 0.3 } }}
       >
@@ -106,6 +107,16 @@ function ElementHeader(props) {
           startIcon={<FuseSvgIcon className="hidden sm:flex">heroicons-outline:trash</FuseSvgIcon>}
         >
           Remove
+        </Button>
+        <Button
+          className="whitespace-nowrap mx-4"
+          color="primary"
+          variant="contained"
+          component={Link}
+          disabled={routeParams.productId === 'new'}
+          to={`/entertainement/day-activities/${routeParams.productId}/new`}
+        >
+          New Time Schedule
         </Button>
         <Button
           className="whitespace-nowrap mx-4"
