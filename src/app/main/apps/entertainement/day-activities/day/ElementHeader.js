@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { useFormContext } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useHelperContext } from 'src/app/contexts/HelperContext'
+
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { removeProduct, saveProduct } from '../../store/daySlice'
@@ -21,18 +21,14 @@ function ElementHeader(props) {
   const navigate = useNavigate()
   const routeParams = useParams()
 
-  const { fetchWeeklyTimingCount } = useHelperContext()
-
   function handleSaveProduct() {
     dispatch(saveProduct(getValues())).then(() => {
-      fetchWeeklyTimingCount()
       navigate('/entertainement/day-activities')
     })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      fetchWeeklyTimingCount()
       navigate('/entertainement/day-activities')
     })
   }

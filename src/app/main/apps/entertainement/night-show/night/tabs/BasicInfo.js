@@ -1,7 +1,6 @@
 import { Autocomplete, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { Controller, useFormContext } from 'react-hook-form'
-import { useHelperContext } from 'src/app/contexts/HelperContext'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
 import HostTabs from './HostTab'
 import ImagesTab from './ImagesTab'
@@ -9,8 +8,6 @@ import ImagesTab from './ImagesTab'
 function BasicInfoTab(props) {
   const methods = useFormContext()
   const { control } = methods
-
-  const { locations } = useHelperContext()
 
   return (
     <div>
