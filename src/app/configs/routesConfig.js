@@ -52,6 +52,7 @@ import PoolConfig from '../main/apps/swimming-pools/PoolConfig'
 import HelpCenterAppConfig from '../main/help-center/HelpCenterAppConfig'
 import FileManagerConfig from '../main/base/file-manager/FileManagerConfig'
 import AgeManagerConfig from '../main/base/age-manger/AgeManagerConfig'
+import LocationManagerConfig from '../main/base/location-manager/LocationManagerConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -98,6 +99,7 @@ const routeConfigs = [
   HelpCenterAppConfig,
   FileManagerConfig,
   AgeManagerConfig,
+  LocationManagerConfig,
 ]
 
 const routes = [
@@ -149,6 +151,7 @@ const routes = [
   { ...LaundryConfig.routes },
   { ...FileManagerConfig.routes },
   { ...AgeManagerConfig.routes },
+  { ...LocationManagerConfig.routes },
   {
     path: 'loading',
     element: <FuseLoading />,
