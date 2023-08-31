@@ -1,11 +1,21 @@
 import TextField from '@mui/material/TextField'
 import { Controller, useFormContext } from 'react-hook-form'
+import { useState, useLayoutEffect } from 'react'
+import axios from 'axios'
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import { BannerImage } from './ImageTab'
 import TimingTab from './TimingTab'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
   const { control } = methods
+  const [locations, setLocations] = useState([])
+
+  useLayoutEffect(() => {
+    axios
+      .get('/api/helpers/location-manager')
+      .then((res) => res.status === 200 && setLocations(res.data))
+  }, [])
 
   return (
     <div>
@@ -13,16 +23,24 @@ function BasicInfoTab(props) {
         name="location"
         control={control}
         render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            required
-            label="Location"
-            autoFocus
-            id="location"
-            variant="outlined"
-            fullWidth
-          />
+          <FormControl fullWidth className="mt-8 mb-16">
+            <InputLabel id="demo-simple-select-label">Location</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="location"
+              label="Location"
+              placeholder="Select setting"
+              value={field.value}
+              onChange={field.onChange}
+            >
+              {locations &&
+                locations.map((el) => (
+                  <MenuItem key={el.id} value={el.label} className="flex items-center gap-4">
+                    {el.label}
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
         )}
       />
 
