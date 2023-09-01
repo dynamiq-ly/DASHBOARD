@@ -1,40 +1,25 @@
 import Typography from '@mui/material/Typography'
 import { motion } from 'framer-motion'
 import Button from '@mui/material/Button'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { Link } from 'react-router-dom'
 
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getMeasures, selectProducts } from './store/foldersSlice'
-import { getFiles, selectProducts as selectFileProduct } from './store/filesSlice'
+import axios from 'axios'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 
 function FileManagerHeader(props) {
-  const dispatch = useDispatch()
-
-  const products = useSelector(selectProducts)
-  const fileProducts = useSelector(selectFileProduct)
-
-  const [dirLoading, setDirLoading] = useState(true)
-  const [fileLoading, setFileLoading] = useState(true)
-
-  const [data, setData] = useState(products)
-  const [fileData, setFileData] = useState(fileProducts)
+  const [directories, setDirectories] = useState([])
+  const [files, setFiles] = useState([])
 
   useEffect(() => {
-    Promise.all([
-      dispatch(getMeasures()).then(() => setDirLoading(false)),
-      dispatch(getFiles()).then(() => setFileLoading(false)),
-    ])
-  }, [dispatch])
+    axios
+      .get('api/helpers/file-manager/directories')
+      .then((res) => res.status === 200 && setDirectories(res.data))
 
-  useEffect(() => {
-    setData(products)
-  }, [products])
-
-  useEffect(() => {
-    setFileData(fileProducts)
-  }, [fileProducts])
+    axios
+      .get('api/helpers/file-manager/files')
+      .then((res) => res.status === 200 && setFiles(res.data))
+  }, [])
 
   return (
     <div className="p-24 sm:p-32 w-full flex flex-col sm:flex-row space-y-8 sm:space-y-0 items-center justify-between">
@@ -62,8 +47,8 @@ function FileManagerHeader(props) {
           className="text-14 font-medium mx-2"
           color="text.secondary"
         >
-          {!dirLoading && `${data.length} folders`}
-          {!fileLoading && `, ${fileData.length} files.`}
+          {`${directories.length} folders`}
+          {`, ${files.length} files.`}
         </Typography>
       </div>
 

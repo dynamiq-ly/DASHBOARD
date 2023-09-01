@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 
-const FileManager = lazy(() => import('./FileManager'))
+const FileManager = lazy(() => import('./files/FileManager'))
 
 const FileManagerConfig = {
   settings: {
