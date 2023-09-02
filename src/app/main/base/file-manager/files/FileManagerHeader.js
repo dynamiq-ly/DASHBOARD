@@ -8,8 +8,8 @@ import axios from 'axios'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 
 function FileManagerHeader(props) {
-  const [directories, setDirectories] = useState([])
   const [files, setFiles] = useState([])
+  const [directories, setDirectories] = useState([])
 
   useEffect(() => {
     axios
@@ -53,6 +53,16 @@ function FileManagerHeader(props) {
       </div>
 
       <div className="flex items-center -mx-8">
+        <Button
+          component={Link}
+          to="/file-system/search"
+          className="mx-8 whitespace-nowrap"
+          variant="contained"
+          color="primary"
+          startIcon={<FuseSvgIcon size={20}>heroicons-outline:search</FuseSvgIcon>}
+        >
+          Search File
+        </Button>
         <Button
           className="mx-8 whitespace-nowrap"
           variant="contained"

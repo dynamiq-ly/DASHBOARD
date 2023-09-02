@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 const FileManager = lazy(() => import('./files/FileManager'))
+const SearchManager = lazy(() => import('./search/SearchManager'))
 
 const FileManagerConfig = {
   settings: {
@@ -15,6 +16,10 @@ const FileManagerConfig = {
         {
           path: '',
           element: <FileManager />,
+        },
+        {
+          path: 'search',
+          element: <SearchManager />,
         },
       ],
     },
