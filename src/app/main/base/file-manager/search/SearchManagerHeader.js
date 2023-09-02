@@ -20,7 +20,7 @@ function FileManagerHeader(props) {
             className="flex items-center sm:mb-4"
             component={Link}
             role="button"
-            to="/pools/category"
+            to="/file-system"
             color="inherit"
           >
             <FuseSvgIcon size={20}>

@@ -10,7 +10,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
 import ItemIcon from 'app/shared-components/sections/ItemIcon'
 
 const FileManagerFolders = (props) => {
-  const { data, setData, loading, deleteImageFromStorage } = props
+  const { data, setData, loading, deleteImageFromStorage, selectedItem, setSelectedItem } = props
   const [slicedData, setSlicedData] = useState(40) // Initialize slicedData state
 
   if (loading) {
@@ -51,8 +51,11 @@ const FileManagerFolders = (props) => {
               'productImageItem flex items-center justify-center relative w-[150px] h-[150px] rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer outline-none shadow hover:shadow-lg'
             )}
           >
-            <div className="productImage gap-8">
-              <button type="button">
+            <div className="productImage gap-8 z-9999">
+              <button
+                type="button"
+                onClick={() => (selectedItem === el ? setSelectedItem(null) : setSelectedItem(el))}
+              >
                 <FuseSvgIcon className="productImageFeaturedEye">heroicons-solid:eye</FuseSvgIcon>
               </button>
               <button
@@ -66,14 +69,12 @@ const FileManagerFolders = (props) => {
             </div>
 
             {el.dir.toLowerCase().includes('pdf') ? (
-              <div className="flex flex-auto w-full items-center justify-center">
-                <ItemIcon
-                  className=""
-                  name="PDF"
-                  color="red"
-                  type="material-twotone:insert_drive_file"
-                />
-              </div>
+              <ItemIcon
+                className=""
+                name="PDF"
+                color="red"
+                type="material-twotone:insert_drive_file"
+              />
             ) : (
               <img
                 loading="lazy"

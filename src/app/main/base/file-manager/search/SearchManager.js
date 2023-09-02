@@ -6,6 +6,7 @@ import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
 
 import FileManagerHeader from './SearchManagerHeader'
 import FileManagerFolders from './SearchManagerFolders'
+import FileDetails from '../details/FileDetail'
 // import DetailScreenSideBarContent from './FileDetails'
 
 function FileManagerScreen(props) {
@@ -51,13 +52,14 @@ function FileManagerScreen(props) {
       })
       .then((res) => {
         if (res.status === 200) {
+          // eslint-disable-next-line no-alert
           alert('File deleted successfully')
           fetchData()
         }
       })
-    /* */
-    // setData(data.filter((el) => el.filename !== key))
   }
+
+  const [selectedItem, setSelectedItem] = useState(null)
 
   return (
     <FusePageCarded
@@ -68,18 +70,20 @@ function FileManagerScreen(props) {
           setData={setFilteredData}
           loading={loading}
           deleteImageFromStorage={deleteImageFromStorage}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
         />
       }
       scroll={isMobile ? 'normal' : 'content'}
-      // rightSidebarOpen={!!selectedItem}
-      // rightSidebarContent={
-      //   <DetailScreenSideBarContent
-      //     selectedItem={selectedItem}
-      //     setSelectedItem={setSelectedItem}
-      //     directories={directories}
-      //   />
-      // }
-      // rightSidebarWidth={400}
+      rightSidebarOpen={!!selectedItem}
+      rightSidebarContent={
+        <FileDetails
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+          deleteImageFromStorage={deleteImageFromStorage}
+        />
+      }
+      rightSidebarWidth={400}
     />
   )
 }
