@@ -1,7 +1,6 @@
-import { Typography } from '@mui/material'
-
+import { useState } from 'react'
+import { Typography, Button } from '@mui/material'
 import { motion } from 'framer-motion'
-
 import clsx from 'clsx'
 import { styled } from '@mui/material/styles'
 import { red } from '@mui/material/colors'
@@ -11,11 +10,8 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
 import ItemIcon from 'app/shared-components/sections/ItemIcon'
 
 const FileManagerFolders = (props) => {
-  const { data, setData, loading } = props
-
-  const deleteImageFromStorage = (key) => {
-    setData(data.filter((el) => el.filename !== key))
-  }
+  const { data, setData, loading, deleteImageFromStorage } = props
+  const [slicedData, setSlicedData] = useState(40) // Initialize slicedData state
 
   if (loading) {
     return (
@@ -39,10 +35,14 @@ const FileManagerFolders = (props) => {
     )
   }
 
+  const handleSliceData = () => {
+    setSlicedData(slicedData + 40) // Increase the slicedData count by 40
+  }
+
   return (
     <Root>
       <div className="p-32 flex flex-wrap gap-16">
-        {data.slice(0, 50).map((el) => (
+        {data.slice(0, slicedData).map((el) => (
           <div
             role="button"
             key={el.filename}
@@ -51,15 +51,18 @@ const FileManagerFolders = (props) => {
               'productImageItem flex items-center justify-center relative w-[150px] h-[150px] rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer outline-none shadow hover:shadow-lg'
             )}
           >
-            <div className="productImage gap-4">
-              <buttons>
+            <div className="productImage gap-8">
+              <button type="button">
                 <FuseSvgIcon className="productImageFeaturedEye">heroicons-solid:eye</FuseSvgIcon>
-              </buttons>
-              <buttons onClick={() => deleteImageFromStorage(el.filename)}>
+              </button>
+              <button
+                type="button"
+                onClick={() => deleteImageFromStorage(el.url.replace('storage', ''))}
+              >
                 <FuseSvgIcon className="productImageFeaturedStar">
                   heroicons-solid:trash
                 </FuseSvgIcon>
-              </buttons>
+              </button>
             </div>
 
             {el.dir.toLowerCase().includes('pdf') ? (
@@ -81,6 +84,11 @@ const FileManagerFolders = (props) => {
             )}
           </div>
         ))}
+      </div>
+      <div className="flex items-center justify-center mb-64">
+        <Button variant="contained" color="inherit" onClick={handleSliceData}>
+          Load More
+        </Button>
       </div>
     </Root>
   )
@@ -105,10 +113,14 @@ const Root = styled('div')(({ theme }) => ({
 
   '& .productImageFeaturedEye': {
     color: '#fff',
+    width: 32,
+    height: 32,
   },
 
   '& .productImageFeaturedStar': {
     color: red[400],
+    width: 32,
+    height: 32,
   },
 
   '& .productImageItem': {

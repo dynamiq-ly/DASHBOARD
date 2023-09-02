@@ -15,11 +15,15 @@ function FileManagerScreen(props) {
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
 
-  useEffect(() => {
+  const fetchData = () => {
     axios
       .get('api/helpers/file-manager/files')
       .then((res) => res.status === 200 && setData(res.data))
       .finally(() => setLoading(false))
+  }
+
+  useEffect(() => {
+    fetchData()
   }, [])
 
   const [filteredData, setFilteredData] = useState(data)
@@ -39,11 +43,32 @@ function FileManagerScreen(props) {
     }
   }, [data, search])
 
+  const deleteImageFromStorage = (key) => {
+    /* */
+    axios
+      .delete('api/helpers/file-manager/files', {
+        data: { id: key },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          alert('File deleted successfully')
+          fetchData()
+        }
+      })
+    /* */
+    // setData(data.filter((el) => el.filename !== key))
+  }
+
   return (
     <FusePageCarded
       header={<FileManagerHeader search={search} setSearch={setSearch} />}
       content={
-        <FileManagerFolders data={filteredData} setData={setFilteredData} loading={loading} />
+        <FileManagerFolders
+          data={filteredData}
+          setData={setFilteredData}
+          loading={loading}
+          deleteImageFromStorage={deleteImageFromStorage}
+        />
       }
       scroll={isMobile ? 'normal' : 'content'}
       // rightSidebarOpen={!!selectedItem}
