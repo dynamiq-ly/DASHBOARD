@@ -12,7 +12,7 @@ import ItemIcon from 'app/shared-components/sections/ItemIcon'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
 
 const FileManagerFolders = (props) => {
-  const { selectedItem, setSelectedItem } = props
+  const { selectedItem, setSelectedItem, setDirectories } = props
 
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState({})
@@ -68,9 +68,14 @@ const FileManagerFolders = (props) => {
               >
                 <IconButton
                   className="absolute z-20 top-0 right-0 m-6 w-32 h-32 min-h-32"
-                  onClick={() =>
-                    value === selectedItem ? setSelectedItem(null) : setSelectedItem(value)
-                  }
+                  onClick={() => {
+                    if (value === selectedItem) {
+                      setSelectedItem(null)
+                    } else {
+                      setSelectedItem(value)
+                      setDirectories(key)
+                    }
+                  }}
                 >
                   <FuseSvgIcon size={20}>heroicons-solid:information-circle</FuseSvgIcon>
                 </IconButton>
@@ -85,7 +90,7 @@ const FileManagerFolders = (props) => {
                   </div>
                   <div className="flex shrink flex-col justify-center text-center">
                     <Typography className="truncate text-12 font-medium capitalize">
-                      {key}
+                      {key.replaceAll('-', ' ')}
                     </Typography>
 
                     <Typography className="truncate text-12 font-medium" color="text.secondary">
