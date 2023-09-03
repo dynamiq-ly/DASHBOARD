@@ -64,6 +64,8 @@ function FileManagerHeader(props) {
           Search File
         </Button>
         <Button
+          component={Link}
+          to="/file-system/upload"
           className="mx-8 whitespace-nowrap"
           variant="contained"
           color="secondary"
