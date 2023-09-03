@@ -88,8 +88,47 @@ function BasicInfoTab(props) {
           />
         )}
       />
+      {getValues('feature').toLowerCase() === 'pdf' ? (
+        <Controller
+          name="image"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <TextField
+              id="image"
+              className="mt-8 mb-16"
+              label="File"
+              fullWidth
+              type="file"
+              onChange={async (e) => {
+                function readFileAsync() {
+                  return new Promise((resolve, reject) => {
+                    const file = e.target.files[0]
+                    if (!file) {
+                      return
+                    }
 
-      <ImagesTab />
+                    const reader = new FileReader()
+
+                    reader.onload = () => {
+                      resolve(file)
+                    }
+
+                    reader.onerror = reject
+
+                    reader.readAsBinaryString(file)
+                  })
+                }
+
+                const newImage = await readFileAsync()
+
+                onChange(newImage)
+              }}
+            />
+          )}
+        />
+      ) : (
+        <ImagesTab />
+      )}
     </div>
   )
 }
