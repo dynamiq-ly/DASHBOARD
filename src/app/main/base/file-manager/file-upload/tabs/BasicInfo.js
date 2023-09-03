@@ -88,7 +88,7 @@ function BasicInfoTab(props) {
           />
         )}
       />
-      {getValues('feature').toLowerCase() === 'pdf' ? (
+      {getValues('feature') === 'pdf' ? (
         <Controller
           name="image"
           control={control}
