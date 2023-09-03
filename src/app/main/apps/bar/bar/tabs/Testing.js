@@ -6,6 +6,7 @@ import { Button, Typography } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
 import _ from 'lodash'
 import ItemIcon from 'app/shared-components/sections/ItemIcon'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
 
 function Testing(props) {
   const [files, setFiles] = useState(null)
@@ -78,6 +79,17 @@ function Testing(props) {
               )}
               onClick={() => handleImageClick(el)}
             >
+              {_.includes(images, el.url) && (
+                <div className="absolute h-full w-full flex items-center justify-center gap-8 z-9999 bg-black/70">
+                  <button
+                    type="button"
+                    // onClick={() => deleteImageFromStorage(el.url.replace('storage', ''))}
+                  >
+                    <FuseSvgIcon className="text-red-400">heroicons-solid:trash</FuseSvgIcon>
+                  </button>
+                </div>
+              )}
+
               {el.extension.toLowerCase() === 'pdf' ? (
                 <ItemIcon
                   className=""

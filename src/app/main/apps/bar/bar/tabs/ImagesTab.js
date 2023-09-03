@@ -2,6 +2,8 @@ import { orange } from '@mui/material/colors'
 import { styled } from '@mui/material/styles'
 import { useFormContext } from 'react-hook-form'
 import clsx from 'clsx'
+import _ from 'lodash'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
 import Testing from './Testing'
 
 const Root = styled('div')(({ theme }) => ({
@@ -44,7 +46,7 @@ const Root = styled('div')(({ theme }) => ({
 function ImagesTab(props) {
   const methods = useFormContext()
 
-  const { watch } = methods
+  const { watch, setValue, formState } = methods
 
   const images = watch('images')
 
@@ -60,6 +62,18 @@ function ImagesTab(props) {
             )}
             key={index}
           >
+            <div className="absolute w-full h-full flex items-center justify-center z-9999 bg-black/70 opacity-0 hover:opacity-100 ">
+              <button
+                type="button"
+                onClick={() => {
+                  setValue('images', _.without(images, el))
+                  formState.dirtyFields.images = true
+                }}
+              >
+                <FuseSvgIcon className="text-red-400">heroicons-solid:trash</FuseSvgIcon>
+              </button>
+            </div>
+
             {typeof el === 'string' && (
               <img
                 className="max-w-none w-auto h-full object-contain"
