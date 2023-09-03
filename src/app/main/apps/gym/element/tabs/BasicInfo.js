@@ -61,7 +61,7 @@ function BasicInfoTab(props) {
             label="Gym Description"
             autoFocus
             multiline
-            rows={5}
+            rows={7}
             id="description"
             variant="outlined"
             fullWidth

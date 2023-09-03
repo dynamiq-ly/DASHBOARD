@@ -173,7 +173,7 @@ function Element(props) {
                 label="Equipements"
               />
             </Tabs>
-            <div className="p-16  max-w-3xl">
+            <div className="p-16">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
               </div>
