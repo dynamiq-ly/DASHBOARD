@@ -4,7 +4,8 @@ import Typography from '@mui/material/Typography'
 import { motion } from 'framer-motion'
 import { useFormContext } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useLayoutEffect, useState } from 'react'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { removeProduct, saveProduct } from '../store/bar-detail-slice'
@@ -12,7 +13,8 @@ import { removeProduct, saveProduct } from '../store/bar-detail-slice'
 function ElementHeader(props) {
   const dispatch = useDispatch()
   const methods = useFormContext()
-  const { formState, watch, getValues } = methods
+  const { productId } = useParams()
+  const { formState, watch, getValues, setValue } = methods
   const { isValid, dirtyFields } = formState
   const name = watch('title')
   const images = watch('images')
@@ -30,6 +32,17 @@ function ElementHeader(props) {
       navigate(`/bar`)
     })
   }
+
+  const [isImageLoaded, setIsImageLoaded] = useState(false)
+
+  useLayoutEffect(() => {
+    if (productId !== 'new' && images) {
+      setValue('images', null)
+      const newImages = images.map((el) => el.image)
+      setValue('images', newImages)
+      setIsImageLoaded(true)
+    }
+  }, [])
 
   return (
     <div className="flex flex-col sm:flex-row flex-1 w-full items-center justify-between space-y-8 sm:space-y-0 py-32 px-24 md:px-32">
@@ -61,11 +74,17 @@ function ElementHeader(props) {
             animate={{ scale: 1, transition: { delay: 0.3 } }}
           >
             {images.length > 0 ? (
-              <img
-                className="w-32 sm:w-48 rounded"
-                src={`${process.env.REACT_APP_STORAGE_UTELLS}/bars/${images[0].image}`}
-                alt={name}
-              />
+              productId !== 'new' &&
+              isImageLoaded && (
+                <img
+                  className="w-32 sm:w-48 rounded"
+                  src={`${process.env.REACT_APP_STORAGE_UTELLS}/${images[0].replace(
+                    'storage',
+                    ''
+                  )}`}
+                  alt={name}
+                />
+              )
             ) : (
               <img
                 className="w-32 sm:w-48 rounded"
