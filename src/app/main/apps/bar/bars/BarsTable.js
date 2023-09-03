@@ -191,7 +191,7 @@ function RestaurantsTable(props) {
                         <img
                           className="w-full block rounded"
                           alt={`${n.bar_name}`}
-                          src={`${process.env.REACT_APP_URL}/storage/bars/${n.images[0].image}`}
+                          src={`${process.env.REACT_APP_URL}/${n.images[0].image}`}
                         />
                       )}
                     </TableCell>
