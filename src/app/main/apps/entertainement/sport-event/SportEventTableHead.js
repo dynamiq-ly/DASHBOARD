@@ -13,44 +13,30 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { lighten } from '@mui/material/styles'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { removeMeasures } from '../store/sportsSlice'
 
 const rows = [
   {
-    id: 'entertainements_name',
+    id: 'slug',
     align: 'left',
     disablePadding: false,
-    label: 'Title',
+    label: 'Sport Event',
     sort: true,
   },
   {
-    id: 'entertainements_sport-type',
+    id: 'category',
     align: 'left',
     disablePadding: false,
-    label: 'Sport',
+    label: 'Category',
     sort: true,
   },
   {
-    id: 'entertainements_summary',
-    align: 'left',
-    disablePadding: false,
-    label: 'Summery',
-    sort: true,
-  },
-  {
-    id: 'entertainements_location',
+    id: 'location',
     align: 'left',
     disablePadding: false,
     label: 'Location',
-    sort: true,
-  },
-  {
-    id: 'entertainements_sport',
-    align: 'left',
-    disablePadding: false,
-    label: 'Event',
     sort: true,
   },
   {
@@ -68,10 +54,10 @@ const rows = [
     sort: true,
   },
   {
-    id: 'isVisible',
+    id: 'lots_teams',
     align: 'left',
     disablePadding: false,
-    label: 'Status',
+    label: 'Two Teams',
     sort: true,
   },
 ]

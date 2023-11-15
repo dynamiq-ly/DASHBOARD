@@ -1,19 +1,19 @@
-import FuseLoading from '@fuse/core/FuseLoading'
-import FusePageCarded from '@fuse/core/FusePageCarded'
-import { useDeepCompareEffect } from '@fuse/hooks'
 import Button from '@mui/material/Button'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import Typography from '@mui/material/Typography'
-import withReducer from 'app/store/withReducer'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import _ from '@lodash'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import _ from '@lodash'
+import withReducer from 'app/store/withReducer'
+import { useDeepCompareEffect } from '@fuse/hooks'
+import FusePageCarded from '@fuse/core/FusePageCarded'
+import FuseLoading from '@fuse/core/FuseLoading'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
 import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/typeSlice'
 import reducer from '../../store'
@@ -28,7 +28,7 @@ const schema = yup.object().shape({
   name: yup
     .string()
     .required('You must enter a product name')
-    .min(5, 'The product name must be at least 5 characters'),
+    .min(3, 'The product name must be at least 3 characters'),
 })
 
 function Type(props) {

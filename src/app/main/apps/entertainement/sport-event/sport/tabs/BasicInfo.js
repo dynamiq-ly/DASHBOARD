@@ -1,93 +1,86 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { Controller, useFormContext } from 'react-hook-form'
-import { useHelperContext } from 'src/app/contexts/HelperContext'
+import { useState, useLayoutEffect } from 'react'
+import axios from 'axios'
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import { BannerImage } from './ImageTab'
+import TimingTab from './TimingTab'
 
 function BasicInfoTab(props) {
   const methods = useFormContext()
   const { control } = methods
+  const [locations, setLocations] = useState([])
 
-  const { locations } = useHelperContext()
+  useLayoutEffect(() => {
+    axios
+      .get('/api/helpers/location-manager')
+      .then((res) => res.status === 200 && setLocations(res.data))
+  }, [])
 
   return (
     <div>
       <Controller
-        name="entertainement_name"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            required
-            label="Name"
-            autoFocus
-            id="entertainement_name"
-            variant="outlined"
-            fullWidth
-          />
-        )}
-      />
-
-      <Controller
-        name="entertainement_summary"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            id="entertainement_summary"
-            label="Summary"
-            required
-            type="text"
-            variant="outlined"
-            fullWidth
-          />
-        )}
-      />
-
-      <Controller
-        name="entertainement_description"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            id="entertainement_description"
-            label="Description"
-            required
-            type="text"
-            multiline
-            rows={5}
-            variant="outlined"
-            fullWidth
-          />
-        )}
-      />
-
-      <Controller
-        name="entertainement_location"
+        name="location"
         control={control}
         render={({ field }) => (
           <FormControl fullWidth className="mt-8 mb-16">
             <InputLabel id="demo-simple-select-label">Location</InputLabel>
             <Select
               labelId="demo-simple-select-label"
-              id="entertainement_location"
-              label="Age Group"
-              placeholder="Select Location"
+              id="location"
+              label="Location"
+              placeholder="Select setting"
               value={field.value}
               onChange={field.onChange}
             >
-              <MenuItem value="NOT REGISTRED YET">NOT REGISTRED YET</MenuItem>
-              {locations.map((location, index) => (
-                <MenuItem key={index} value={location.location_name}>
-                  {location.location_name}
-                </MenuItem>
-              ))}
+              {locations &&
+                locations.map((el) => (
+                  <MenuItem key={el.id} value={el.label} className="flex items-center gap-4">
+                    {el.label}
+                  </MenuItem>
+                ))}
             </Select>
           </FormControl>
         )}
       />
+
+      <Controller
+        name="category"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            className="mt-8 mb-16"
+            id="category"
+            label="Category"
+            required
+            type="text"
+            variant="outlined"
+            fullWidth
+          />
+        )}
+      />
+
+      <Controller
+        name="slug"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            className="mt-8 mb-16"
+            id="slug"
+            label="Title"
+            required
+            type="text"
+            variant="outlined"
+            fullWidth
+          />
+        )}
+      />
+
+      <BannerImage />
+
+      <TimingTab />
     </div>
   )
 }

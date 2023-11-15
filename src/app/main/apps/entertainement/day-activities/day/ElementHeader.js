@@ -4,10 +4,10 @@ import Typography from '@mui/material/Typography'
 import { motion } from 'framer-motion'
 import { useFormContext } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { useHelperContext } from 'src/app/contexts/HelperContext'
 import { removeProduct, saveProduct } from '../../store/daySlice'
 
 function ElementHeader(props) {
@@ -15,23 +15,20 @@ function ElementHeader(props) {
   const methods = useFormContext()
   const { formState, watch, getValues } = methods
   const { isValid, dirtyFields } = formState
-  const name = watch('entertainement_name')
-  const images = watch('images')
+  const name = watch('name')
+  const images = watch('image')
   const theme = useTheme()
   const navigate = useNavigate()
-
-  const { fetchWeeklyTimingCount } = useHelperContext()
+  const routeParams = useParams()
 
   function handleSaveProduct() {
     dispatch(saveProduct(getValues())).then(() => {
-      fetchWeeklyTimingCount()
       navigate('/entertainement/day-activities')
     })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      fetchWeeklyTimingCount()
       navigate('/entertainement/day-activities')
     })
   }
@@ -68,7 +65,7 @@ function ElementHeader(props) {
             {images.length > 0 ? (
               <img
                 className="w-32 sm:w-48 rounded"
-                src={`${process.env.REACT_APP_URL}/storage/entertainement/day/${images[0].image}`}
+                src={`${process.env.REACT_APP_STORAGE_UTELLS}/entertainment/days/${images}`}
                 alt={name}
               />
             ) : (
@@ -94,7 +91,7 @@ function ElementHeader(props) {
         </div>
       </div>
       <motion.div
-        className="flex"
+        className="flex flex-1"
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0, transition: { delay: 0.3 } }}
       >
@@ -106,6 +103,16 @@ function ElementHeader(props) {
           startIcon={<FuseSvgIcon className="hidden sm:flex">heroicons-outline:trash</FuseSvgIcon>}
         >
           Remove
+        </Button>
+        <Button
+          className="whitespace-nowrap mx-4"
+          color="primary"
+          variant="contained"
+          component={Link}
+          disabled={routeParams.productId === 'new'}
+          to={`/entertainement/day-activities/${routeParams.productId}/new`}
+        >
+          New Time Schedule
         </Button>
         <Button
           className="whitespace-nowrap mx-4"

@@ -1,26 +1,21 @@
-import FuseLoading from '@fuse/core/FuseLoading'
-import FusePageCarded from '@fuse/core/FusePageCarded'
-import { useDeepCompareEffect } from '@fuse/hooks'
 import Button from '@mui/material/Button'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import Typography from '@mui/material/Typography'
-import withReducer from 'app/store/withReducer'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import _ from '@lodash'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import _ from '@lodash'
+import withReducer from 'app/store/withReducer'
+import { useDeepCompareEffect } from '@fuse/hooks'
+import FusePageCarded from '@fuse/core/FusePageCarded'
+import FuseLoading from '@fuse/core/FuseLoading'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
-import {
-  getProduct,
-  newProduct,
-  resetProduct,
-  selectProduct,
-} from '../../store/categorySlice'
+import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/categorySlice'
 import reducer from '../../store'
 
 import RoomCategoryHeader from './RoomCategoryHeader'
@@ -114,17 +109,17 @@ function RoomCategory(props) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { delay: 0.1 } }}
-        className='flex flex-col flex-1 items-center justify-center h-full'
+        className="flex flex-col flex-1 items-center justify-center h-full"
       >
-        <Typography color='text.secondary' variant='h5'>
+        <Typography color="text.secondary" variant="h5">
           There is no such data!
         </Typography>
         <Button
-          className='mt-24'
+          className="mt-24"
           component={Link}
-          variant='outlined'
-          to='/rooms/category'
-          color='inherit'
+          variant="outlined"
+          to="/rooms/category"
+          color="inherit"
         >
           Go to Room Categories Page
         </Button>
@@ -137,9 +132,7 @@ function RoomCategory(props) {
    */
   if (
     _.isEmpty(form) ||
-    (product &&
-      routeParams.productId !== `${product.id}` &&
-      routeParams.productId !== 'new')
+    (product && routeParams.productId !== `${product.id}` && routeParams.productId !== 'new')
   ) {
     return <FuseLoading />
   }
@@ -153,15 +146,15 @@ function RoomCategory(props) {
             <Tabs
               value={tabValue}
               onChange={handleTabChange}
-              indicatorColor='secondary'
-              textColor='secondary'
-              variant='scrollable'
-              scrollButtons='auto'
+              indicatorColor="secondary"
+              textColor="secondary"
+              variant="scrollable"
+              scrollButtons="auto"
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
-              <Tab className='h-64' label='Basic Info' />
+              <Tab className="h-64" label="Room Category" />
             </Tabs>
-            <div className='p-16 sm:p-24 max-w-3xl'>
+            <div className="p-16 sm:p-24 max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
               </div>

@@ -1,21 +1,18 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const getProduct = createAsyncThunk(
-  'rooms/category/getProduct',
-  async (productId) => {
-    const response = await axios.get(`/api/rooms/room-category/${productId}`)
-    const data = await response.data
+export const getProduct = createAsyncThunk('rooms/category/getProduct', async (productId) => {
+  const response = await axios.get(`/api/rooms/categories/${productId}`)
+  const data = await response.data
 
-    return data === undefined ? null : data
-  }
-)
+  return data === undefined ? null : data
+})
 
 export const removeProduct = createAsyncThunk(
   'rooms/category/removeProduct',
   async (val, { dispatch, getState }) => {
     const { id } = getState().rooms.category
-    await axios.delete(`/api/rooms/room-category/${id}`)
+    await axios.delete(`/api/rooms/categories/${id}`)
     return id
   }
 )
@@ -26,14 +23,14 @@ export const saveProduct = createAsyncThunk(
     const { id } = getState().rooms.category
 
     if (id) {
-      const response = await axios.post(`/api/rooms/room-category/${id}`, {
+      const response = await axios.post(`/api/rooms/categories/${id}`, {
         ...productData,
         _method: 'PATCH',
       })
       const data = await response.data
       return data
     }
-    const response = await axios.post('/api/rooms/room-category', productData)
+    const response = await axios.post('/api/rooms/categories', productData)
     const data = await response.data
     return data
   }
@@ -49,8 +46,8 @@ const productSlice = createSlice({
       prepare: (event) => ({
         payload: {
           //   id: FuseUtils.generateGUID(),
-          pool_type: '',
-          pool_image: '',
+          label: '',
+          visible: 1,
         },
       }),
     },

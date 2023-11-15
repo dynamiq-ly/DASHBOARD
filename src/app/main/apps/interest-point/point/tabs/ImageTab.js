@@ -2,8 +2,9 @@ import { orange } from '@mui/material/colors'
 import { lighten, styled } from '@mui/material/styles'
 import clsx from 'clsx'
 import { Controller, useFormContext } from 'react-hook-form'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import Box from '@mui/material/Box'
+import { useParams } from 'react-router-dom'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 
 const Root = styled('div')(({ theme }) => ({
   '& .productImageFeaturedStar': {
@@ -44,6 +45,7 @@ const Root = styled('div')(({ theme }) => ({
 
 function ImagesTab(props) {
   const methods = useFormContext()
+  const { productId } = useParams()
   const { control, watch } = methods
 
   const images = watch('images')
@@ -94,7 +96,7 @@ function ImagesTab(props) {
 
                   const newImage = await readFileAsync()
 
-                  onChange([newImage, ...value])
+                  onChange([...value, newImage])
                 }}
               />
               <FuseSvgIcon size={32} color="action">
@@ -104,13 +106,13 @@ function ImagesTab(props) {
           )}
         />
 
-        {typeof images === 'string' ? (
+        {productId !== 'new' ? (
           <Controller
-            name="images"
+            name="images.image"
             control={control}
             defaultValue=""
             render={({ field: { onChange } }) =>
-              JSON.parse(images).map((media, index) => (
+              images.map((media, index) => (
                 <div
                   onClick={() => onChange(media)}
                   onKeyDown={() => onChange(media)}
@@ -126,7 +128,7 @@ function ImagesTab(props) {
                   </FuseSvgIcon>
                   <img
                     className="max-w-none w-auto h-full"
-                    src={`${process.env.REACT_APP_URL}/storage/points-of-interest/${media}`}
+                    src={`${process.env.REACT_APP_STORAGE_UTELLS}/point-of-interest/${media.image}`}
                     alt="product"
                   />
                 </div>
@@ -145,7 +147,9 @@ function ImagesTab(props) {
                 fileReader.onload = () => {
                   const dataUrl = fileReader.result
                   const imgElement = document.getElementById(`image-${index}`)
-                  imgElement.src = dataUrl
+                  if (imgElement) {
+                    imgElement.src = dataUrl
+                  }
                 }
 
                 fileReader.readAsDataURL(media)

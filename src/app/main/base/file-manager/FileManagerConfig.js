@@ -1,6 +1,8 @@
 import { lazy } from 'react'
 
-const FileManager = lazy(() => import('./FileManager'))
+const FileManager = lazy(() => import('./files/FileManager'))
+const SearchManager = lazy(() => import('./search/SearchManager'))
+const FileUploadManager = lazy(() => import('./file-upload/Element'))
 
 const FileManagerConfig = {
   settings: {
@@ -15,6 +17,14 @@ const FileManagerConfig = {
         {
           path: '',
           element: <FileManager />,
+        },
+        {
+          path: 'search',
+          element: <SearchManager />,
+        },
+        {
+          path: 'upload',
+          element: <FileUploadManager />,
         },
       ],
     },

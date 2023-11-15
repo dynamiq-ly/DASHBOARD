@@ -1,11 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import folders from './foldersSlice'
-import files from './filesSlice'
+import upload from './image-upload-slice'
 
 const reducer = combineReducers({
-  folders,
-  files,
+  upload,
 })
 
 export default reducer

@@ -1,32 +1,27 @@
-import FuseLoading from '@fuse/core/FuseLoading'
-import FusePageCarded from '@fuse/core/FusePageCarded'
-import { useDeepCompareEffect } from '@fuse/hooks'
 import Button from '@mui/material/Button'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import Typography from '@mui/material/Typography'
-import withReducer from 'app/store/withReducer'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import _ from '@lodash'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import _ from '@lodash'
+import withReducer from 'app/store/withReducer'
+import { useDeepCompareEffect } from '@fuse/hooks'
+import FusePageCarded from '@fuse/core/FusePageCarded'
+import FuseLoading from '@fuse/core/FuseLoading'
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery'
 import { getProduct, newProduct, resetProduct, selectProduct } from '../../store/sportSlice'
 import reducer from '../../store'
 
 import BasicInfoTab from './tabs/BasicInfo'
-import DisponibilyTab from './tabs/DisponibilyTab'
+import AwayTeam from './tabs/AwayTeam'
+
 import ElementHeader from './ElementHeader'
-import TimingTab from './tabs/TimingTab'
-import BackgroundTab from './tabs/ThemeBackground'
-import SportTab from './tabs/SportTab'
-import TeamInfoTab from './tabs/TeamInfo'
-import ImageTab from './tabs/ImageTab'
-import AwayImageTab from './tabs/ImageAwayTab'
 
 /**
  * Form Validation Schema
@@ -154,44 +149,15 @@ function Element(props) {
               classes={{ root: 'w-full h-64 border-b-1' }}
             >
               <Tab className="h-64" label="Basic Info" />
-              <Tab className="h-64" label="Sport Info" />
-              <Tab className="h-64" label="Team Info" />
-              <Tab className="h-64" label="Background Theme" />
-              <Tab className="h-64" label="Disponibily" />
-              <Tab className="h-64" label="Images" />
-              {routeParams.productId === 'new' && <Tab className="h-64" label="Timings" />}
+              <Tab className="h-64" label="Team Information" />
             </Tabs>
             <div className="p-16  max-w-3xl">
               <div className={tabValue !== 0 ? 'hidden' : ''}>
                 <BasicInfoTab />
               </div>
-
               <div className={tabValue !== 1 ? 'hidden' : ''}>
-                <SportTab />
+                <AwayTeam />
               </div>
-
-              <div className={tabValue !== 2 ? 'hidden' : ''}>
-                <TeamInfoTab />
-              </div>
-
-              <div className={tabValue !== 3 ? 'hidden' : ''}>
-                <BackgroundTab />
-              </div>
-
-              <div className={tabValue !== 4 ? 'hidden' : ''}>
-                <DisponibilyTab />
-              </div>
-
-              <div className={tabValue !== 5 ? 'hidden' : ''}>
-                <ImageTab />
-                <AwayImageTab />
-              </div>
-
-              {routeParams.productId === 'new' && (
-                <div className={tabValue !== 6 ? 'hidden' : ''}>
-                  <TimingTab />
-                </div>
-              )}
             </div>
           </>
         }

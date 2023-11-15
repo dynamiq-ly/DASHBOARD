@@ -13,8 +13,8 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { lighten } from '@mui/material/styles'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { removeMeasures } from '../store/categoriesSlice'
 
 const rows = [
@@ -26,10 +26,18 @@ const rows = [
     sort: false,
   },
   {
-    id: 'room_type_name',
+    id: 'label',
     align: 'left',
     disablePadding: false,
     label: 'Category',
+    sort: true,
+  },
+
+  {
+    id: 'visible',
+    align: 'left',
+    disablePadding: false,
+    label: 'Status',
     sort: true,
   },
 ]

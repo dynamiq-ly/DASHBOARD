@@ -30,7 +30,6 @@ export const saveProduct = createAsyncThunk(
         `/api/entertainement/night-shows/${id}`,
         {
           ...productData,
-          ...productData.show,
           _method: 'PATCH',
         },
         {
@@ -46,7 +45,6 @@ export const saveProduct = createAsyncThunk(
       '/api/entertainement/night-shows',
       {
         ...productData,
-        ...productData.show,
       },
       {
         headers: {
@@ -69,27 +67,18 @@ const productSlice = createSlice({
       prepare: (event) => ({
         payload: {
           //   id: FuseUtils.generateGUID(),
-          entertainement_name: '',
-          entertainement_summary: '',
-          entertainement_description: '',
-          entertainement_type: 'NIGHT',
-          entertainement_age: '',
-          entertainement_location: '',
-          entertainement_joinable: '',
-          isVisible: 0,
-          images: [],
-          date: '',
-          time_start: '',
-          time_end: '',
-          is_repetetive: 0,
-          show: {
-            night_show_price: 0,
-            night_show_tickets: 0,
-            night_show_link: '',
-            night_show_video: '',
-            night_show_genre: '',
-            night_show_performers: '',
-          },
+          image: '',
+          name: '',
+          description: '',
+          genre: '',
+          visible: 1,
+          joinable: 0,
+          youtube_link: '',
+          website_link: '',
+          host_name: '',
+          host_image: '',
+          host_role: '',
+          host_description: '',
         },
       }),
     },

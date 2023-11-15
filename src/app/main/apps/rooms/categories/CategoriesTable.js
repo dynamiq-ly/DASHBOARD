@@ -1,5 +1,3 @@
-import FuseScrollbars from '@fuse/core/FuseScrollbars'
-import _ from '@lodash'
 import Checkbox from '@mui/material/Checkbox'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -12,8 +10,11 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
+import _ from '@lodash'
+import FuseScrollbars from '@fuse/core/FuseScrollbars'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon'
 import { getMeasures, selectProducts, selectProductsSearchText } from '../store/categoriesSlice'
 
 import CategoriesTableHead from './CategoriesTableHead'
@@ -187,7 +188,19 @@ function CategoryTable(props) {
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.room_type_name}
+                      {n.label}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n.visible ? (
+                        <FuseSvgIcon className="text-green" size={20}>
+                          heroicons-outline:check-circle
+                        </FuseSvgIcon>
+                      ) : (
+                        <FuseSvgIcon className="text-red" size={20}>
+                          heroicons-outline:minus-circle
+                        </FuseSvgIcon>
+                      )}
                     </TableCell>
                   </TableRow>
                 )

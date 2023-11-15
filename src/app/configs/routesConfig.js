@@ -1,7 +1,6 @@
+import { Navigate } from 'react-router-dom'
 import FuseUtils from '@fuse/utils'
 import FuseLoading from '@fuse/core/FuseLoading'
-
-import { Navigate } from 'react-router-dom'
 
 /**
  * @description disabled for auth and protected route
@@ -13,7 +12,7 @@ import SignUpConfig from '../main/sign-up/SignUpConfig'
 import SignOutConfig from '../main/sign-out/SignOutConfig'
 import Error404Page from '../main/404/Error404Page'
 
-import SafetyConfig from '../main/apps/safety/SafetyConfig'
+import SafetyConfig from '../main/apps/policies/SafetyConfig'
 import StatisticsConfig from '../main/apps/statistics/StatisticConfig'
 import RestaurantConfig from '../main/apps/restaurant/RestaurantConfig'
 import BarConfig from '../main/apps/bar/BarConfig'
@@ -52,6 +51,8 @@ import GymConfig from '../main/apps/gym/GymConfig'
 import PoolConfig from '../main/apps/swimming-pools/PoolConfig'
 import HelpCenterAppConfig from '../main/help-center/HelpCenterAppConfig'
 import FileManagerConfig from '../main/base/file-manager/FileManagerConfig'
+import AgeManagerConfig from '../main/base/age-manger/AgeManagerConfig'
+import LocationManagerConfig from '../main/base/location-manager/LocationManagerConfig'
 
 const routeConfigs = [
   SignOutConfig,
@@ -97,6 +98,8 @@ const routeConfigs = [
   LaundryConfig,
   HelpCenterAppConfig,
   FileManagerConfig,
+  AgeManagerConfig,
+  LocationManagerConfig,
 ]
 
 const routes = [
@@ -106,7 +109,7 @@ const routes = [
   ),
   {
     path: '/',
-    element: <Navigate to='/' />,
+    element: <Navigate to="/" />,
   },
   { ...RestaurantConfig.routes },
   { ...BarConfig.routes },
@@ -147,6 +150,8 @@ const routes = [
   { ...HelpCenterAppConfig.routes },
   { ...LaundryConfig.routes },
   { ...FileManagerConfig.routes },
+  { ...AgeManagerConfig.routes },
+  { ...LocationManagerConfig.routes },
   {
     path: 'loading',
     element: <FuseLoading />,
@@ -157,7 +162,7 @@ const routes = [
   },
   {
     path: '*',
-    element: <Navigate to='404' />,
+    element: <Navigate to="404" />,
   },
 ]
 

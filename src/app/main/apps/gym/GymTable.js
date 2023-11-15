@@ -1,5 +1,3 @@
-import FuseScrollbars from '@fuse/core/FuseScrollbars'
-import _ from '@lodash'
 import Checkbox from '@mui/material/Checkbox'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -12,8 +10,11 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from '@mui/material'
 import withRouter from '@fuse/core/withRouter'
 import FuseLoading from '@fuse/core/FuseLoading'
+import _ from '@lodash'
+import FuseScrollbars from '@fuse/core/FuseScrollbars'
 import { getMeasures, selectProducts, selectProductsSearchText } from './store/gymSlice'
 
 import GymTableHead from './GymTableHead'
@@ -40,8 +41,11 @@ function ConnectivityTable(props) {
   useEffect(() => {
     if (searchText.length !== 0) {
       setData(
-        _.filter(products, (item) =>
-          item.phone_title.toLowerCase().includes(searchText.toLowerCase())
+        _.filter(
+          products,
+          (item) =>
+            item.name.toLowerCase().includes(searchText.toLowerCase()) ||
+            item.location.toLowerCase().includes(searchText.toLowerCase())
         )
       )
       setPage(0)
@@ -190,29 +194,52 @@ function ConnectivityTable(props) {
                     >
                       <img
                         className="w-full block rounded"
-                        alt={`${n.gym_name}-${n.gym_description}`}
-                        src={`${process.env.REACT_APP_URL}/storage/gym/${n.gym_image}`}
+                        alt={`${n.name}-${n.description}`}
+                        src={`${process.env.REACT_APP_STORAGE_UTELLS}/gym/thumbnails/${n.image}`}
                       />
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.gym_name}
+                      {n.name}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {`${n.gym_description.slice(0, 50)}...`}
+                      {n.location}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.gym_floor}
+                      {`${n.description.slice(0, 75)}...`}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.gym_timing}
+                      {n.equipements.length}
                     </TableCell>
 
                     <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-                      {n.equipments.length}
+                      {n.staff.length}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
+                      {n['timing-open']} {n['timing-close']}
+                    </TableCell>
+
+                    <TableCell className="p-4 md:p-16" component="th" scope="row">
+                      {n.terms ? (
+                        <Link
+                          component="a"
+                          variant="button"
+                          className="px-8 py-4 rounded"
+                          href={`${process.env.REACT_APP_STORAGE_UTELLS}/pdf/gym/${n.terms}`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {n.name} PDF LINK
+                        </Link>
+                      ) : (
+                        <div className="inline text-12 font-semibold py-4 px-12 rounded-full truncate bg-red-700 text-white">
+                          No Terms Uploaded
+                        </div>
+                      )}
                     </TableCell>
                   </TableRow>
                 )

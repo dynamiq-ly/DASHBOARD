@@ -14,9 +14,8 @@ function PointHeader(props) {
   const methods = useFormContext()
   const { formState, watch, getValues } = methods
   const { isValid, dirtyFields } = formState
-  const featuredImageId = watch('featuredImageId')
   const images = watch('images')
-  const name = watch('point_title')
+  const name = watch('name')
   const theme = useTheme()
   const navigate = useNavigate()
 
@@ -61,12 +60,10 @@ function PointHeader(props) {
             initial={{ scale: 0 }}
             animate={{ scale: 1, transition: { delay: 0.3 } }}
           >
-            {featuredImageId && JSON.parse(images).length > 0 ? (
+            {images.length > 0 ? (
               <img
                 className="w-32 sm:w-48 rounded"
-                src={`${process.env.REACT_APP_URL}/storage/point-of-interest/${
-                  _.find(JSON.parse(images), { id: featuredImageId }).image
-                }`}
+                src={`${process.env.REACT_APP_STORAGE_UTELLS}/point-of-interest/${images[0].image}`}
                 alt={name}
               />
             ) : (
@@ -109,7 +106,7 @@ function PointHeader(props) {
           className="whitespace-nowrap mx-4"
           variant="contained"
           color="secondary"
-          disabled={_.isEmpty(dirtyFields)}
+          disabled={_.isEmpty(dirtyFields) || !isValid}
           onClick={handleSaveProduct}
         >
           Save

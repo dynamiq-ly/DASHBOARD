@@ -13,67 +13,33 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { lighten } from '@mui/material/styles'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { removeMeasures } from '../store/nightsSlice'
 
 const rows = [
   {
-    id: 'entertainements_image',
+    id: 'image',
     align: 'left',
     disablePadding: true,
     label: '',
     sort: false,
   },
   {
-    id: 'entertainements_title',
+    id: 'name',
     align: 'left',
     disablePadding: false,
-    label: 'Title',
+    label: 'Name',
     sort: true,
   },
   {
-    id: 'night_show_leader',
+    id: 'genre',
     align: 'left',
     disablePadding: false,
-    label: 'Performer',
+    label: 'genre',
     sort: true,
   },
-  {
-    id: 'night_show_type',
-    align: 'left',
-    disablePadding: false,
-    label: 'Genre',
-    sort: true,
-  },
-  {
-    id: 'night_show_ticked_price',
-    align: 'left',
-    disablePadding: false,
-    label: 'Ticket Price',
-    sort: true,
-  },
-  {
-    id: 'night_show_tickets',
-    align: 'left',
-    disablePadding: false,
-    label: 'Tickets',
-    sort: true,
-  },
-  {
-    id: 'entertainements_location',
-    align: 'left',
-    disablePadding: false,
-    label: 'Location',
-    sort: true,
-  },
-  {
-    id: 'entertainements_age',
-    align: 'left',
-    disablePadding: false,
-    label: 'Age Group',
-    sort: true,
-  },
+
   {
     id: 'timings',
     align: 'left',
@@ -82,14 +48,14 @@ const rows = [
     sort: true,
   },
   {
-    id: 'entertainement_joinable',
+    id: 'joinable',
     align: 'left',
     disablePadding: false,
     label: 'Joinable',
     sort: true,
   },
   {
-    id: 'entertainements_status',
+    id: 'visible',
     align: 'left',
     disablePadding: false,
     label: 'Status',

@@ -4,24 +4,41 @@
 export const application = [
   {
     id: 'file-system',
-    title: 'File Storage',
+    title: 'File system',
     type: 'item',
     icon: 'heroicons-outline:folder',
     url: 'file-system',
   },
   {
     id: 'Feature-manager',
-    title: 'Features Manager',
-    type: 'item',
-    icon: 'material-twotone:format_strikethrough',
-    url: 'routing-manager',
-  },
-  {
-    id: 'staff-manager',
-    title: 'Staff Manager',
-    type: 'item',
-    icon: 'heroicons-outline:user-group',
-    url: 'staff-manager',
+    title: 'Features',
+    type: 'collapse',
+    icon: 'heroicons-outline:adjustments',
+    children: [
+      {
+        id: 'staff-manager',
+        title: 'Staff Manager',
+        type: 'item',
+        icon: 'heroicons-outline:user-group',
+        url: 'staff-manager',
+      },
+      {
+        id: 'age-manager',
+        title: 'Age List Manager',
+        subtitle: 'A list for age utilities in features',
+        type: 'item',
+        icon: 'material-outline:supervised_user_circle',
+        url: 'age-manager',
+      },
+      {
+        id: 'location-manager',
+        title: 'Location List Manager',
+        subtitle: 'A list for Location utilities in features',
+        type: 'item',
+        icon: 'material-outline:share_location',
+        url: 'location-manager',
+      },
+    ],
   },
 ]
 
@@ -30,11 +47,10 @@ export const application = [
  */
 export const safety = {
   id: 'protocols.safety-measures-component',
-  title: 'Safety',
-  translate: 'SAFETY',
+  title: 'Policies',
   type: 'item',
   icon: 'heroicons-outline:heart',
-  url: 'safety',
+  url: 'policies',
 }
 
 /**
@@ -101,16 +117,6 @@ export const entertainement = {
   type: 'collapse',
   icon: 'material-outline:directions_run',
   children: [
-    {
-      id: 'entertainement-collapse.calendar',
-      title: 'Calendar',
-      type: 'item',
-      url: 'entertainement/calendar',
-      badge: {
-        title: 0,
-        classes: 'w-20 h-20 bg-fuchsia text-white rounded-full',
-      },
-    },
     {
       id: 'entertainement-collapse.day-activities',
       title: 'Day Activities',
@@ -195,6 +201,12 @@ export const rooms = {
       title: 'Category list',
       type: 'item',
       url: './rooms/category',
+    },
+    {
+      id: 'rooms.specials',
+      title: 'Room Features',
+      type: 'item',
+      url: './rooms/add-ons',
     },
     {
       id: 'rooms.list',

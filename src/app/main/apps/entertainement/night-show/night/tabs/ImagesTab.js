@@ -2,9 +2,9 @@ import { orange } from '@mui/material/colors'
 import { lighten, styled } from '@mui/material/styles'
 import clsx from 'clsx'
 import { Controller, useFormContext } from 'react-hook-form'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import Box from '@mui/material/Box'
 import { useParams } from 'react-router-dom'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 
 const Root = styled('div')(({ theme }) => ({
   '& .productImageFeaturedStar': {
@@ -48,13 +48,15 @@ function ImagesTab(props) {
   const { productId } = useParams()
   const { control, watch } = methods
 
-  const images = watch('images')
+  const images = watch('image')
+
+  console.table('images => ', images)
 
   return (
     <Root>
       <div className="flex justify-center sm:justify-start flex-wrap -mx-16">
         <Controller
-          name="images[]"
+          name="image"
           control={control}
           render={({ field: { onChange, value } }) => (
             <Box
@@ -96,7 +98,7 @@ function ImagesTab(props) {
 
                   const newImage = await readFileAsync()
 
-                  onChange([...value, newImage])
+                  onChange(newImage)
                 }}
               />
               <FuseSvgIcon size={32} color="action">
@@ -108,68 +110,100 @@ function ImagesTab(props) {
 
         {productId !== 'new' ? (
           <Controller
-            name="images.image"
+            name="image"
             control={control}
             defaultValue=""
-            render={({ field: { onChange } }) =>
-              images.map((media, index) => (
+            render={({ field: { onChange } }) => {
+              const fileReader = new FileReader()
+
+              if (typeof images !== 'string') {
+                fileReader.onload = () => {
+                  const dataUrl = fileReader.result
+                  const imgElement = document.getElementById(`image-reader-update`)
+                  if (imgElement) {
+                    imgElement.src = dataUrl
+                  }
+                }
+
+                fileReader.readAsDataURL(images)
+              }
+
+              return images && typeof images === 'string' ? (
                 <div
-                  onClick={() => onChange(media)}
-                  onKeyDown={() => onChange(media)}
+                  onClick={() => onChange(images)}
+                  onKeyDown={() => onChange(images)}
                   role="button"
                   tabIndex={0}
                   className={clsx(
                     'productImageItem flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer outline-none shadow hover:shadow-lg'
                   )}
-                  key={index}
                 >
                   <FuseSvgIcon className="productImageFeaturedStar">
                     heroicons-solid:star
                   </FuseSvgIcon>
+
                   <img
                     className="max-w-none w-auto h-full"
-                    src={`${process.env.REACT_APP_URL}/storage/entertainement/day/${media.image}`}
+                    src={`${process.env.REACT_APP_STORAGE_UTELLS}/entertainment/nights/${images}`}
                     alt="product"
                   />
                 </div>
-              ))
-            }
+              ) : (
+                <div
+                  onClick={() => onChange(images)}
+                  onKeyDown={() => onChange(images)}
+                  role="button"
+                  tabIndex={0}
+                  className={clsx(
+                    'productImageItem flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer outline-none shadow hover:shadow-lg'
+                  )}
+                >
+                  <FuseSvgIcon className="productImageFeaturedStar">
+                    heroicons-solid:star
+                  </FuseSvgIcon>
+
+                  <img id="image-reader-update" alt="point interest" />
+                </div>
+              )
+            }}
           />
         ) : (
           <Controller
-            name="images"
+            name="image"
             control={control}
             defaultValue=""
             render={({ field: { onChange } }) => {
-              return images.map((media, index) => {
-                const fileReader = new FileReader()
+              const fileReader = new FileReader()
 
+              if (images) {
                 fileReader.onload = () => {
                   const dataUrl = fileReader.result
-                  const imgElement = document.getElementById(`image-${index}`)
-                  imgElement.src = dataUrl
+                  const imgElement = document.getElementById(`image-reader`)
+                  if (imgElement) {
+                    imgElement.src = dataUrl
+                  }
                 }
 
-                fileReader.readAsDataURL(media)
+                fileReader.readAsDataURL(images)
 
                 return (
                   <div
-                    onClick={() => onChange(media)}
-                    onKeyDown={() => onChange(media)}
+                    onClick={() => onChange(images)}
+                    onKeyDown={() => onChange(images)}
                     role="button"
                     tabIndex={0}
                     className={clsx(
                       'image-reader productImageItem flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer outline-none shadow hover:shadow-lg'
                     )}
-                    key={index}
                   >
                     <FuseSvgIcon className="productImageFeaturedStar">
                       heroicons-solid:x
                     </FuseSvgIcon>
-                    <img id={`image-${index}`} alt="point interest" />
+                    <img id="image-reader" alt="point interest" />
                   </div>
                 )
-              })
+              }
+              return <></>
             }}
           />
         )}

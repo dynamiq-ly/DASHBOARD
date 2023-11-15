@@ -4,7 +4,7 @@ import axios from 'axios'
 export const getMeasures = createAsyncThunk(
   'pointsCategories/pointsCategory/getMeasures',
   async () => {
-    const response = await axios.get('/api/point-of-interest/type')
+    const response = await axios.get('/api/point-of-interest/categories')
     const data = await response.data
     return data
   }
@@ -13,7 +13,7 @@ export const getMeasures = createAsyncThunk(
 export const removeMeasures = createAsyncThunk(
   'pointsCategories/pointsCategory',
   async (productIds, { dispatch, getState }) => {
-    await axios.delete(`/api/point-of-interest/type/${productIds}`, {
+    await axios.delete(`/api/point-of-interest/categories/${productIds}`, {
       data: productIds,
     })
     return productIds

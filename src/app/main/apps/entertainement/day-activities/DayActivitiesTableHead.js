@@ -13,44 +13,30 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Box } from '@mui/system'
 import TableHead from '@mui/material/TableHead'
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { lighten } from '@mui/material/styles'
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
 import { removeMeasures } from '../store/daysSlice'
 
 const rows = [
   {
-    id: 'entertainements_image',
+    id: 'image',
     align: 'left',
     disablePadding: true,
     label: '',
     sort: false,
   },
   {
-    id: 'entertainements_name',
+    id: 'name',
     align: 'left',
     disablePadding: false,
     label: 'Title',
     sort: true,
   },
   {
-    id: 'entertainements_summary',
-    align: 'left',
-    disablePadding: false,
-    label: 'Summery',
-    sort: true,
-  },
-  {
-    id: 'entertainements_location',
+    id: 'location',
     align: 'left',
     disablePadding: false,
     label: 'Location',
-    sort: true,
-  },
-  {
-    id: 'entertainements_age',
-    align: 'left',
-    disablePadding: false,
-    label: 'Age Group',
     sort: true,
   },
   {
@@ -61,7 +47,7 @@ const rows = [
     sort: true,
   },
   {
-    id: 'entertainement_joinable',
+    id: 'joinable',
     align: 'left',
     disablePadding: false,
     label: 'Joinable',
@@ -69,7 +55,7 @@ const rows = [
   },
 
   {
-    id: 'isVisible',
+    id: 'visible',
     align: 'left',
     disablePadding: false,
     label: 'Status',

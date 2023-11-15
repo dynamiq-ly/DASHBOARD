@@ -1,12 +1,12 @@
 import axios from 'axios'
-import BrowserRouter from '@fuse/core/BrowserRouter'
-import FuseLayout from '@fuse/core/FuseLayout'
-import FuseTheme from '@fuse/core/FuseTheme'
 import { SnackbarProvider } from 'notistack'
 import { useSelector } from 'react-redux'
 import rtlPlugin from 'stylis-plugin-rtl'
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
+import FuseTheme from '@fuse/core/FuseTheme'
+import FuseLayout from '@fuse/core/FuseLayout'
+import BrowserRouter from '@fuse/core/BrowserRouter'
 import { selectCurrentLanguageDirection } from 'app/store/i18nSlice'
 import { selectUser } from 'app/store/userSlice'
 import themeLayouts from 'app/theme-layouts/themeLayouts'
@@ -15,13 +15,14 @@ import FuseAuthorization from '@fuse/core/FuseAuthorization'
 import settingsConfig from 'app/configs/settingsConfig'
 import withAppProviders from './withAppProviders'
 import { AuthProvider } from './auth/AuthContext'
-import HelperProvider from './contexts/HelperContext'
 
 /**
  * Axios HTTP Request defaults
  */
 axios.defaults.baseURL =
-  process.env.NODE_ENV === 'production' ? 'https://api.utells.com' : 'http://localhost:8000'
+  process.env.REACT_APP_NODE_ENV === 'production'
+    ? 'https://api.utells.com'
+    : 'http://localhost:8000'
 
 // axios.defaults.withCredentials = true
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
@@ -64,9 +65,7 @@ const App = () => {
                   containerRoot: 'bottom-0 right-0 mb-52 md:mb-68 mr-8 lg:mr-80 z-99',
                 }}
               >
-                <HelperProvider>
-                  <FuseLayout layouts={themeLayouts} />
-                </HelperProvider>
+                <FuseLayout layouts={themeLayouts} />
               </SnackbarProvider>
             </FuseAuthorization>
           </BrowserRouter>

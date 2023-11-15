@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import _ from '@lodash'
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon'
-import { useHelperContext } from 'src/app/contexts/HelperContext'
 import { removeProduct, saveProduct } from '../../store/sportSlice'
 
 function ElementHeader(props) {
@@ -20,18 +19,14 @@ function ElementHeader(props) {
   const theme = useTheme()
   const navigate = useNavigate()
 
-  const { fetchWeeklyTimingCount } = useHelperContext()
-
   function handleSaveProduct() {
     dispatch(saveProduct(getValues())).then(() => {
-      fetchWeeklyTimingCount()
       navigate('/entertainement/sport-event')
     })
   }
 
   function handleRemoveProduct() {
     dispatch(removeProduct()).then(() => {
-      fetchWeeklyTimingCount()
       navigate('/entertainement/sport-event')
     })
   }
@@ -62,21 +57,6 @@ function ElementHeader(props) {
         </motion.div>
 
         <div className="flex items-center max-w-full">
-          <motion.div
-            className="hidden sm:flex"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1, transition: { delay: 0.3 } }}
-          >
-            {images !== 'null' && images !== null ? (
-              <img className="w-32 sm:w-48 rounded" src={images} alt={name} />
-            ) : (
-              <img
-                className="w-32 sm:w-48 rounded"
-                src="assets/images/apps/ecommerce/product-image-placeholder.png"
-                alt={name}
-              />
-            )}
-          </motion.div>
           <motion.div
             className="flex flex-col items-center sm:items-start min-w-0 mx-8 sm:mx-16"
             initial={{ x: -20 }}
